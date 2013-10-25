@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Just Writing
-Version: 1.0
+Version: 2.0
 Plugin URI: http://toolstack.com/just-writing
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -491,6 +491,10 @@ if( !function_exists( 'JustWriting' ) )
 		update_user_meta( $user_id, 'just_writing_undo', just_writing_get_checked_state( $_POST['just_writing_undo'] ) );
 		update_user_meta( $user_id, 'just_writing_redo', just_writing_get_checked_state( $_POST['just_writing_redo'] ) );
 		update_user_meta( $user_id, 'just_writing_help', just_writing_get_checked_state( $_POST['just_writing_help'] ) );
+		update_user_meta( $user_id, 'just_writing_d_fade', just_writing_get_checked_state( $_POST['just_writing_d_fade'] ) );
+		update_user_meta( $user_id, 'just_writing_h_wc', just_writing_get_checked_state( $_POST['just_writing_h_wc'] ) );
+		update_user_meta( $user_id, 'just_writing_h_p', just_writing_get_checked_state( $_POST['just_writing_h_p'] ) );
+		update_user_meta( $user_id, 'just_writing_h_b', just_writing_get_checked_state( $_POST['just_writing_h_b'] ) );
 		}
 
 	/*
@@ -506,6 +510,34 @@ if( !function_exists( 'JustWriting' ) )
 			<td>
 			<input type="checkbox" id="just_writing_enabled" name="just_writing_enabled" <?php if( get_the_author_meta( 'just_writing_enabled', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Check to enable Just Writing");?></span>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="just_writing_options"><?php echo __("Options");?></label></th>
+			<td>
+			<input type="checkbox" id="just_writing_h_p" name="just_writing_h_p" <?php if( get_the_author_meta( 'just_writing_h_p', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<span class="description"><?php echo __("Hide the preview button");?></span>
+			</td>
+			<td>
+			<input type="checkbox" id="just_writing_h_b" name="just_writing_h_b" <?php if( get_the_author_meta( 'just_writing_h_b', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<span class="description"><?php echo __("Hide the border on the subject/body areas");?></span>
+			</td>
+		</tr>
+		<tr>
+			<td></th>
+			<td>
+			<input type="checkbox" id="just_writing_d_fade" name="just_writing_d_fade" <?php if( get_the_author_meta( 'just_writing_d_fade', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<span class="description"><?php echo __("Disable the fade out of the toolbar*");?></span>
+			</td>
+			<td>
+			<input type="checkbox" id="just_writing_h_wc" name="just_writing_h_wc" <?php if( get_the_author_meta( 'just_writing_h_wc', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<span class="description"><?php echo __("Hide the word count");?></span>
+			</td>
+		</tr>
+		<tr>
+			<td></th>
+			<td>
+			<span class="description"><?php echo __("* May have performance impacts");?></span>
 			</td>
 		</tr>
 		<tr>
@@ -713,6 +745,10 @@ if( !function_exists( 'JustWriting' ) )
 		update_user_meta( $user_id, 'just_writing_undo', 'on' );
 		update_user_meta( $user_id, 'just_writing_redo', 'on' );
 		update_user_meta( $user_id, 'just_writing_help', 'off' );
+		update_user_meta( $user_id, 'just_writing_d_fade', 'off' );
+		update_user_meta( $user_id, 'just_writing_h_wc', 'off' );
+		update_user_meta( $user_id, 'just_writing_h_p', 'off' );
+		update_user_meta( $user_id, 'just_writing_h_b', 'off' );
 		}
 		
 	// First find out if we're in a post/page list, in a post/page edit page or somewhere we don't care about.
@@ -741,8 +777,18 @@ if( !function_exists( 'JustWriting' ) )
 			wp_register_style( 'justwriting_style', plugins_url( '', __FILE__ ) . '/just-writing.css' );
 			wp_enqueue_style( 'justwriting_style' ); 
 
+			// Get the options to pass to the javascript code
+			$DisableFade = 0;
+			if( get_the_author_meta( 'just_writing_d_fade', $cuid ) == 'on' ) { $DisableFade = 1; } 
+			$HideWordCount = 0;
+			if( get_the_author_meta( 'just_writing_h_wc', $cuid ) == 'on' ) { $HideWordCount = 1; } 
+			$HidePreview = 0;
+			if( get_the_author_meta( 'just_writing_h_p', $cuid ) == 'on' ) { $HidePreview = 1; } 
+			$HideBorder = 0;
+			if( get_the_author_meta( 'just_writing_h_b', $cuid ) == 'on' ) { $HideBorder = 1; } 
+			
 			// Register and enqueue the javascript.
-			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/just-writing.js' );
+			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/just-writing.js?disablefade=' . $DisableFade . '&hidewordcount=' . $HideWordCount . '&hidepreview=' . $HidePreview . '&hideborder=' . $HideBorder );
 			wp_enqueue_script( 'justwriting_js' );
 	
 			add_filter( 'wp_fullscreen_buttons', 'JustWriting' );

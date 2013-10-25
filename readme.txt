@@ -4,8 +4,8 @@ Plugin URI: http://toolstack.com/just-writing
 Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
-Tested up to: 3.6.1
-Stable tag: 1.0
+Tested up to: 3.7
+Stable tag: 2.0
 
 Adds buttons to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -68,6 +68,15 @@ Try it and find out, the javascript is pretty basic so it should work in just ab
 	* Opera 11.6+
 	* FireFox 10+
 
+= I've disabled the fade effect and now the browser is running slowly, what's wrong? =
+
+The fade effect is triggered by WordPress when no mouse movement is executed for 2 seconds, the only (without changing some of the WordPress sources files at least) is to execute a mousemove event every 1.4 seconds.  This shouldn't be an issue in any modern browser, but if your having performance issues, simply re-enable the fade effect.
+
+= I've disabled the fade effect but there is a 'flicker' when DFWM comes up, what's wrong? =
+
+If you start DFWM without moving the mouse you might hit right between when WordPress starts fading but before Just Writing fires off a mousemove event, this shouldn't be an issue after the first start of DFWM.
+
+
 == Screenshots ==
 
 1. Pre installation DFWM.
@@ -76,6 +85,9 @@ Try it and find out, the javascript is pretty basic so it should work in just ab
 4. A read DFWM!
 
 == Changelog ==
+= 2.0 =
+* Added options to remove the fade effect, hide the border, word count and preview button.
+
 = 1.0 =
 * Released on WordPress.org
 
@@ -90,6 +102,9 @@ Try it and find out, the javascript is pretty basic so it should work in just ab
 * Initial release.
 
 == Upgrade Notice ==
+= 2.0 =
+* Disabling the fade effect will force javascript to execute a mousemove event every 1.5 seconds, this could have a performance impact on some browsers.
+
 = 1.0 =
 * None.
 
@@ -104,6 +119,5 @@ Initial release, no updates as everything is new!
 
 == Roadmap ==
 
-* Add option to remove the tool bar fade
 * Replace individual paragraph styles with a drop down
 

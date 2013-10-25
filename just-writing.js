@@ -1,3 +1,59 @@
+function GetScriptIndex(name)
+{
+	// Loop through all the scripts in the current document to find the one we want.
+	for( i = 0; i < document.scripts.length; i++) 
+		{
+		// Make a temporary copy of the URI and find out where the query string starts.
+		var tmp_src = String(document.scripts[i].src);
+		var qs_index = tmp_src.indexOf('?');
+
+		// Check if the script is the script we are looking for and if it has a QS, if so return the current index.
+		if( tmp_src.indexOf(name) >= 0 && qs_index >= 0)
+			{
+			return i;
+			}
+		}
+		
+	return -1;
+}
+
+function GetScriptVariable(index, name, vardef)
+{
+	// If a negitive index has been passed in it's because we didn't find any matching script with a query
+	// string, so just return the default value.
+	if( index < 0 )
+		{
+		return vardef;
+		}
+
+	// Make a temporary copy of the URI and find out where the query string starts.
+	var tmp_src = String(document.scripts[index].src);
+	var qs_index = tmp_src.indexOf('?');
+
+	// Split the query string ino var/value pairs.  ie: 'var1=value1', 'var2=value2', ...
+	var params_raw = tmp_src.substr(qs_index + 1).split('&');
+
+	// Now look for the one we want.
+	for( j = 0; j < params_raw.length; j++)
+		{
+		// Split names from the values.
+		var pp_raw = params_raw[j].split('=');
+
+		// If this is the one we're looking for, simply return it.
+		if( pp_raw[0] == name )
+			{
+			// Check to make sure a value was actualy passed in, otherwise we should return the default later on.
+			if( typeof(pp_raw[1]) != 'undefined' )
+				{
+				return pp_raw[1];
+				}
+			}
+		}
+
+	// If we fell through the loop and didn't find ANY matching variable, simply return the default value.
+	return vardef;
+}
+
 function JustWriting()
 {
 	// Find the TopBar <div> in the current page.
@@ -25,9 +81,36 @@ function JustWriting()
 
 		// Hide the default exit link
 		ExitBar.style.display = 'none';
-		}
-		
-		// Add Preview and Exit buttons
+
+		// Time to get the options the user has selected from the script call
+		var GSI = GetScriptIndex('just-writing.js');
+		var DisableFade = GetScriptVariable(GSI, 'disablefade', 0);
+		var HideWordCount = GetScriptVariable(GSI, 'hidewordcount', 0);
+		var HidePreview = GetScriptVariable(GSI, 'hidepreview', 0);
+		var HideBorder = GetScriptVariable(GSI, 'hideborder', 0);
+
+		if( DisableFade == 1 )
+			{
+			setInterval( JustWritingMoveMouse, 1500 );
+			}
+
+		if( HideWordCount == 1 )
+			{
+			var WordCount = document.getElementById('wp-fullscreen-count');
+			
+			WordCount.style.display = 'none';
+			}
+			
+		if( HideBorder == 1 )
+			{
+			var SubjectBorder = document.getElementById('wp-fullscreen-title');
+			var BodyBorder = document.getElementById('wp-fullscreen-container');
+			
+			SubjectBorder.style.border = 'none';
+			BodyBorder.style.border = 'none';
+			}
+
+		// Add exit button
 		(	function($) 
 				{
 				var $preview = $('#post-preview');
@@ -43,16 +126,37 @@ function JustWriting()
 						})
 					.html('Exit')
 					.insertBefore('#wp-fullscreen-save input.button-primary');
+				}(jQuery)
+		);
 
-				$preview.clone()
-					.removeAttr('id').removeClass('preview').addClass('right')
-					.css('margin-left', '5px')
-					.click(function(e) 
-						{
-						$preview.click();
-						e.preventDefault();
-						})
-					.insertBefore('#wp-fullscreen-save input.button-primary');
+		// Add preview button
+		if( HidePreview == 0 )
+			{
+			(	function($) 
+					{
+					var $preview = $('#post-preview');
+
+					$preview.clone()
+						.removeAttr('id').removeClass('preview').addClass('right')
+						.css('margin-left', '5px')
+						.click(function(e) 
+							{
+							$preview.click();
+							e.preventDefault();
+							})
+						.insertBefore('#wp-fullscreen-save input.button-primary');
+					}(jQuery)
+			);
+			}	
+
+		}
+}
+
+function JustWritingMoveMouse()
+{
+		(	function($) 
+				{
+				$(document).trigger('mousemove');
 				}(jQuery)
 		);
 }
