@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 3.7
-Stable tag: 2.0
+Stable tag: 2.1
 
 Adds buttons to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -85,6 +85,9 @@ If you start DFWM without moving the mouse you might hit right between when Word
 4. A read DFWM!
 
 == Changelog ==
+= 2.1 =
+* Minor bug fix, if a user for the first time went to their user preferences before editing a post the defaults would not be set.
+
 = 2.0 =
 * Added options to remove the fade effect, hide the border, word count and preview button.
 
@@ -102,6 +105,9 @@ If you start DFWM without moving the mouse you might hit right between when Word
 * Initial release.
 
 == Upgrade Notice ==
+= 2.1 =
+* None.
+
 = 2.0 =
 * Disabling the fade effect will force javascript to execute a mousemove event every 1.5 seconds, this could have a performance impact on some browsers.
 

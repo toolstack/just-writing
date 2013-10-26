@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Just Writing
-Version: 2.0
+Version: 2.1
 Plugin URI: http://toolstack.com/just-writing
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -501,7 +501,15 @@ if( !function_exists( 'JustWriting' ) )
 	 *	This function is called to draw the user settings page for Just Writing.
 	 */
 	function just_writing_user_profile_fields( $user ) 
-		{ ?>
+		{ 
+		// Check to see if this is the first time we've run for this user and no config
+		// has been written yet, so let's do that now.
+		if( get_the_author_meta( 'just_writing_enabled', $user->ID ) == "" )
+			{
+			Just_Writing_User_Setup( $user->ID );
+			}
+
+		?>
 	<h3>Just Writing</h3>
 	 
 	<table class="form-table">
