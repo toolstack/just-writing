@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 3.7
-Stable tag: 2.1
+Stable tag: 2.2
 
 Adds buttons to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -86,6 +86,11 @@ If you start DFWM without moving the mouse you might hit right between when Word
 4. A real DFWM!
 
 == Changelog ==
+= 2.2 =
+* Minor readme.txt updates.
+* Added option to disable editor mode bar.
+* Added brief description to the plugin in the user option panel.
+
 = 2.1 =
 * Minor bug fix, if a user for the first time went to their user preferences before editing a post the defaults would not be set.
 
@@ -106,6 +111,9 @@ If you start DFWM without moving the mouse you might hit right between when Word
 * Initial release.
 
 == Upgrade Notice ==
+= 2.2 =
+* None.
+
 = 2.1 =
 * None.
 

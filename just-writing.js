@@ -88,6 +88,7 @@ function JustWriting()
 		var HideWordCount = GetScriptVariable(GSI, 'hidewordcount', 0);
 		var HidePreview = GetScriptVariable(GSI, 'hidepreview', 0);
 		var HideBorder = GetScriptVariable(GSI, 'hideborder', 0);
+		var HideModeBar = GetScriptVariable(GSI, 'hidemodebar', 0);
 
 		if( DisableFade == 1 )
 			{
@@ -108,6 +109,13 @@ function JustWriting()
 			
 			SubjectBorder.style.border = 'none';
 			BodyBorder.style.border = 'none';
+			}
+			
+		if( HideModeBar == 1 )
+			{
+			var ModeBar = document.getElementById('wp-fullscreen-mode-bar');
+			
+			ModeBar.style.display = 'none';
 			}
 
 		// Add exit button

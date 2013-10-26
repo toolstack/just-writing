@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Just Writing
-Version: 2.1
+Version: 2.2
 Plugin URI: http://toolstack.com/just-writing
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -495,6 +495,7 @@ if( !function_exists( 'JustWriting' ) )
 		update_user_meta( $user_id, 'just_writing_h_wc', just_writing_get_checked_state( $_POST['just_writing_h_wc'] ) );
 		update_user_meta( $user_id, 'just_writing_h_p', just_writing_get_checked_state( $_POST['just_writing_h_p'] ) );
 		update_user_meta( $user_id, 'just_writing_h_b', just_writing_get_checked_state( $_POST['just_writing_h_b'] ) );
+		update_user_meta( $user_id, 'just_writing_h_mb', just_writing_get_checked_state( $_POST['just_writing_h_mb'] ) );
 		}
 
 	/*
@@ -513,6 +514,12 @@ if( !function_exists( 'JustWriting' ) )
 	<h3>Just Writing</h3>
 	 
 	<table class="form-table">
+		<tr>
+			<th></th>
+			<td colspan=3>
+			<span class="description"><?php echo __("Just Writing allows you to customize the Distraction Free Writing Mode in WordPress in several different ways to enable you to write the way you want to.  To find out more, please visit the ") . "<a href='http://wordpress.org/plugins/just-writing/' target=_blank>WordPress Plugin Directory page</a> " . __("or plugin home page on") . " <a href='http://toolstack.com/just-writing' target=_blank>ToolStack.com</a>";?></span>
+			</td>
+		</tr>
 		<tr>
 			<th><label for="just_writing_enabled"><?php echo __("Enable Just Writing");?></label></th>
 			<td>
@@ -534,18 +541,19 @@ if( !function_exists( 'JustWriting' ) )
 		<tr>
 			<td></th>
 			<td>
-			<input type="checkbox" id="just_writing_d_fade" name="just_writing_d_fade" <?php if( get_the_author_meta( 'just_writing_d_fade', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Disable the fade out of the toolbar*");?></span>
-			</td>
-			<td>
 			<input type="checkbox" id="just_writing_h_wc" name="just_writing_h_wc" <?php if( get_the_author_meta( 'just_writing_h_wc', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Hide the word count");?></span>
+			</td>
+			<td>
+			<input type="checkbox" id="just_writing_h_mb" name="just_writing_h_mb" <?php if( get_the_author_meta( 'just_writing_h_mb', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<span class="description"><?php echo __("Hide the visual editor mode selector");?></span>
 			</td>
 		</tr>
 		<tr>
 			<td></th>
-			<td>
-			<span class="description"><?php echo __("* May have performance impacts");?></span>
+			<td colspan=3>
+			<input type="checkbox" id="just_writing_d_fade" name="just_writing_d_fade" <?php if( get_the_author_meta( 'just_writing_d_fade', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<span class="description"><?php echo __("Disable the fade out of the toolbar *May have performance impacts*");?></span>
 			</td>
 		</tr>
 		<tr>
@@ -757,6 +765,7 @@ if( !function_exists( 'JustWriting' ) )
 		update_user_meta( $user_id, 'just_writing_h_wc', 'off' );
 		update_user_meta( $user_id, 'just_writing_h_p', 'off' );
 		update_user_meta( $user_id, 'just_writing_h_b', 'off' );
+		update_user_meta( $user_id, 'just_writing_h_mb', 'off' );
 		}
 		
 	// First find out if we're in a post/page list, in a post/page edit page or somewhere we don't care about.
@@ -794,9 +803,11 @@ if( !function_exists( 'JustWriting' ) )
 			if( get_the_author_meta( 'just_writing_h_p', $cuid ) == 'on' ) { $HidePreview = 1; } 
 			$HideBorder = 0;
 			if( get_the_author_meta( 'just_writing_h_b', $cuid ) == 'on' ) { $HideBorder = 1; } 
+			$HideModeBar = 0;
+			if( get_the_author_meta( 'just_writing_h_mb', $cuid ) == 'on' ) { $HideModeBar = 1; } 
 			
 			// Register and enqueue the javascript.
-			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/just-writing.js?disablefade=' . $DisableFade . '&hidewordcount=' . $HideWordCount . '&hidepreview=' . $HidePreview . '&hideborder=' . $HideBorder );
+			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/just-writing.js?disablefade=' . $DisableFade . '&hidewordcount=' . $HideWordCount . '&hidepreview=' . $HidePreview . '&hideborder=' . $HideBorder . '&hidemodebar=' . $HideModeBar );
 			wp_enqueue_script( 'justwriting_js' );
 	
 			add_filter( 'wp_fullscreen_buttons', 'JustWriting' );
