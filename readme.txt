@@ -45,7 +45,8 @@ This plugin adds the following commands to the toolbar in DFWM:
 And there's more!
 
 	* Adds a Preview button to the right of the Save button
-	* Moves the exit link to the right of the new Preview button as a real button
+	* Moves the exit link to the right of the new Preview 
+	  button as a real button
 	* Re-orders the button list to make more sense
 	* Per-user preferences for enabling Just Writing
 	* Per-user preferences for which buttons to display
@@ -62,15 +63,15 @@ This code is released under the GPL v2, see license.txt for details.
 
 = What browsers are supported? =
 
-Try it and find out, the javascript is pretty basic so it should work in just about any browser (note even without javascript the buttons will be added, except the preview and exit buttons):
+Try it and find out, the javascript is pretty basic so it should work in just about any browser (note even without javascript the buttons will be added, however the the preview and exit buttons along with the fade disable and border and word count hiding options will not be available).  I've successfully run it on:
 
-	* IE9 (note, do NOT use compatibility mode)
-	* Opera 11.6+
-	* FireFox 10+
+	* IE 11
+	* Opera 12.16
+	* FireFox 24
 
 = I've disabled the fade effect and now the browser is running slowly, what's wrong? =
 
-The fade effect is triggered by WordPress when no mouse movement is executed for 2 seconds, the only (without changing some of the WordPress sources files at least) is to execute a mousemove event every 1.4 seconds.  This shouldn't be an issue in any modern browser, but if your having performance issues, simply re-enable the fade effect.
+The fade effect is triggered by WordPress when no mouse movement is executed for 2 seconds, the only (without changing some of the WordPress sources files at least) way to disable it is to execute a mousemove event every 1.5 seconds.  This shouldn't be an issue in any modern browser, but if your having performance issues, simply re-enable the fade effect.
 
 = I've disabled the fade effect but there is a 'flicker' when DFWM comes up, what's wrong? =
 
@@ -82,7 +83,7 @@ If you start DFWM without moving the mouse you might hit right between when Word
 1. Pre installation DFWM.
 2. Post installation DFWM.
 3. User preferences screen.
-4. A read DFWM!
+4. A real DFWM!
 
 == Changelog ==
 = 2.1 =
