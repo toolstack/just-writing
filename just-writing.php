@@ -523,10 +523,12 @@ if( !function_exists( 'JustWriting' ) )
 		<tr>
 			<th><label for="just_writing_enabled"><?php echo __("Enable Just Writing");?></label></th>
 			<td>
-			<input type="checkbox" id="just_writing_enabled" name="just_writing_enabled" <?php if( get_the_author_meta( 'just_writing_enabled', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<input type="checkbox" id="just_writing_enabled" name="just_writing_enabled" <?php if( get_the_author_meta( 'just_writing_enabled', $user->ID ) == "on" ) { echo "CHECKED"; } ?> onClick="if(!just_writing_enabled.checked){ just_writing_options_table.style.display='none'}else{just_writing_options_table.style.display=''}">
 			<span class="description"><?php echo __("Check to enable Just Writing");?></span>
 			</td>
 		</tr>
+	</table>
+	<table class="form-table" id='just_writing_options_table' <?php if( get_the_author_meta( 'just_writing_enabled', $user->ID ) != "on" ) { echo "style='display:none;'"; } ?>>	
 		<tr>
 			<th><label for="just_writing_options"><?php echo __("Options");?></label></th>
 			<td>

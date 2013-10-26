@@ -90,6 +90,7 @@ If you start DFWM without moving the mouse you might hit right between when Word
 * Minor readme.txt updates.
 * Added option to disable editor mode bar.
 * Added brief description to the plugin in the user option panel.
+* Added code to hide the options list in the user panel when disabled.
 
 = 2.1 =
 * Minor bug fix, if a user for the first time went to their user preferences before editing a post the defaults would not be set.
