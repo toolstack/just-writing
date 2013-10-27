@@ -44,12 +44,19 @@ This plugin adds the following commands to the toolbar in DFWM:
 
 And there's more!
 
-	* Adds a Preview button to the right of the Save button
+	* Option to remove the fade effect and keep the toolbar visiable
+	* Option to hide the border on the title/body areas
+	* Option to hide the word count
+	* Adds an optional Preview button to the right of the Save button
 	* Moves the exit link to the right of the new Preview 
 	  button as a real button
 	* Re-orders the button list to make more sense
 	* Per-user preferences for enabling Just Writing
 	* Per-user preferences for which buttons to display
+	* Option to start in DFWM for new posts
+	* Option to start in DFWM when editing posts
+	* 'lighter' border option for title/body area
+	* Option to disable editor mode bar.
 
 This code is released under the GPL v2, see license.txt for details.
 
