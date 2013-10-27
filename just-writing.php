@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Just Writing
-Version: 2.3
+Version: 2.4
 Plugin URI: http://toolstack.com/just-writing
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -210,7 +210,7 @@ if( !function_exists( 'JustWriting' ) )
 										);
 			}
 			
-		if( get_the_author_meta( 'just_writing_p', $cuid ) == 'on' )
+		if( get_the_author_meta( 'just_writing_p', $cuid ) == 'on' || get_the_author_meta( 'just_writing_f_lb', $cuid ) == 'on' )
 			{
 			$buttons['Paragraph'] = array(
 											// Title of the button
@@ -222,112 +222,115 @@ if( !function_exists( 'JustWriting' ) )
 										);
 			}
 			
-		if( get_the_author_meta( 'just_writing_h1', $cuid ) == 'on' )
+		if( get_the_author_meta( 'just_writing_f_lb', $cuid ) != 'on' )
 			{
-			$buttons['H1'] = array(
-											// Title of the button
-											'title' => __('H1'),
-											// Command to execute
-											'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'h1');",
-											// Show on visual AND html mode
-											'both' => false
-										);
-			}
-			
-		if( get_the_author_meta( 'just_writing_h2', $cuid ) == 'on' )
-			{
-			$buttons['H2'] = array(
-											// Title of the button
-											'title' => __('H2'),
-											// Command to execute
-											'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'h2');",
-											// Show on visual AND html mode
-											'both' => false
-										);
-			}
-			
-		if( get_the_author_meta( 'just_writing_h3', $cuid ) == 'on' )
-			{
-			$buttons['H3'] = array(
-											// Title of the button
-											'title' => __('H3'),
-											// Command to execute
-											'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'h3');",
-											// Show on visual AND html mode
-											'both' => false
-										);
-			}
-			
-		if( get_the_author_meta( 'just_writing_h4', $cuid ) == 'on' )
-			{
-			$buttons['H4'] = array(
-											// Title of the button
-											'title' => __('H4'),
-											// Command to execute
-											'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'h4');",
-											// Show on visual AND html mode
-											'both' => false
-										);
-			}
-			
-		if( get_the_author_meta( 'just_writing_h5', $cuid ) == 'on' )
-			{
-			$buttons['H5'] = array(
-											// Title of the button
-											'title' => __('H5'),
-											// Command to execute
-											'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'h5');",
-											// Show on visual AND html mode
-											'both' => false
-										);
-			}
-			
-		if( get_the_author_meta( 'just_writing_h6', $cuid ) == 'on' )
-			{
-			$buttons['H6'] = array(
-											// Title of the button
-											'title' => __('H6'),
-											// Command to execute
-											'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'h6');",
-											// Show on visual AND html mode
-											'both' => false
-										);
-			}
-			
-		if( get_the_author_meta( 'just_writing_quotes', $cuid ) == 'on' )
-			{
-			$buttons['blockquote'] = array( 
-											// Title of the button
-											'title' => __('Blockquote (Alt + Shift + Q)'), 
-											// Command to execute
-											'onclick' => 'fullscreen.blockquote();', 
-											// Show on visual AND html mode
-											'both' => false 
-							);
-			}
-							
-		if( get_the_author_meta( 'just_writing_address', $cuid ) == 'on' )
-			{
-			$buttons['Address'] = array(
-											// Title of the button
-											'title' => __('Address'),
-											// Command to execute
-											'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'address');",
-											// Show on visual AND html mode
-											'both' => false
-										);
-			}
-			
-		if( get_the_author_meta( 'just_writing_pf', $cuid ) == 'on' )
-			{
-			$buttons['Preformatted'] = array(
-											// Title of the button
-											'title' => __('Preformatted'),
-											// Command to execute
-											'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'pre');",
-											// Show on visual AND html mode
-											'both' => false
-										);
+			if( get_the_author_meta( 'just_writing_h1', $cuid ) == 'on' )
+				{
+				$buttons['H1'] = array(
+												// Title of the button
+												'title' => __('H1'),
+												// Command to execute
+												'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'h1');",
+												// Show on visual AND html mode
+												'both' => false
+											);
+				}
+				
+			if( get_the_author_meta( 'just_writing_h2', $cuid ) == 'on' )
+				{
+				$buttons['H2'] = array(
+												// Title of the button
+												'title' => __('H2'),
+												// Command to execute
+												'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'h2');",
+												// Show on visual AND html mode
+												'both' => false
+											);
+				}
+				
+			if( get_the_author_meta( 'just_writing_h3', $cuid ) == 'on' )
+				{
+				$buttons['H3'] = array(
+												// Title of the button
+												'title' => __('H3'),
+												// Command to execute
+												'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'h3');",
+												// Show on visual AND html mode
+												'both' => false
+											);
+				}
+				
+			if( get_the_author_meta( 'just_writing_h4', $cuid ) == 'on' )
+				{
+				$buttons['H4'] = array(
+												// Title of the button
+												'title' => __('H4'),
+												// Command to execute
+												'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'h4');",
+												// Show on visual AND html mode
+												'both' => false
+											);
+				}
+				
+			if( get_the_author_meta( 'just_writing_h5', $cuid ) == 'on' )
+				{
+				$buttons['H5'] = array(
+												// Title of the button
+												'title' => __('H5'),
+												// Command to execute
+												'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'h5');",
+												// Show on visual AND html mode
+												'both' => false
+											);
+				}
+				
+			if( get_the_author_meta( 'just_writing_h6', $cuid ) == 'on' )
+				{
+				$buttons['H6'] = array(
+												// Title of the button
+												'title' => __('H6'),
+												// Command to execute
+												'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'h6');",
+												// Show on visual AND html mode
+												'both' => false
+											);
+				}
+				
+			if( get_the_author_meta( 'just_writing_quotes', $cuid ) == 'on' )
+				{
+				$buttons['blockquote'] = array( 
+												// Title of the button
+												'title' => __('Blockquote (Alt + Shift + Q)'), 
+												// Command to execute
+												'onclick' => 'fullscreen.blockquote();', 
+												// Show on visual AND html mode
+												'both' => false 
+								);
+				}
+								
+			if( get_the_author_meta( 'just_writing_address', $cuid ) == 'on' )
+				{
+				$buttons['Address'] = array(
+												// Title of the button
+												'title' => __('Address'),
+												// Command to execute
+												'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'address');",
+												// Show on visual AND html mode
+												'both' => false
+											);
+				}
+				
+			if( get_the_author_meta( 'just_writing_pf', $cuid ) == 'on' )
+				{
+				$buttons['Preformatted'] = array(
+												// Title of the button
+												'title' => __('Preformatted'),
+												// Command to execute
+												'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'pre');",
+												// Show on visual AND html mode
+												'both' => false
+											);
+				}
 			}
 			
 		if( get_the_author_meta( 'just_writing_spell', $cuid ) == 'on' )
@@ -498,10 +501,10 @@ if( !function_exists( 'JustWriting' ) )
 		update_user_meta( $user_id, 'just_writing_h_mb', just_writing_get_checked_state( $_POST['just_writing_h_mb'] ) );
 		update_user_meta( $user_id, 'just_writing_al_new', just_writing_get_checked_state( $_POST['just_writing_al_new'] ) );
 		update_user_meta( $user_id, 'just_writing_al_edit', just_writing_get_checked_state( $_POST['just_writing_al_edit'] ) );
+		update_user_meta( $user_id, 'just_writing_f_lb', just_writing_get_checked_state( $_POST['just_writing_f_lb'] ) );
 
-		echo "here: '" . $_POST['just_writing_border_setting'] . "'";
 		//Deal with the border options
-		if( $_POST['just_writing_border_settings'] == 'hide' )
+		if( $_POST['just_writing_border_setting'] == 'hide' )
 			{
 			update_user_meta( $user_id, 'just_writing_h_b', 'on' );
 			update_user_meta( $user_id, 'just_writing_l_b', 'off' );
@@ -603,6 +606,13 @@ if( !function_exists( 'JustWriting' ) )
 		</tr>
 		<tr>
 			<th><label for="just_writing_buttons"><?php echo __("Buttons");?></label></th>
+			<td colspan=3>
+			<input type="checkbox" id="just_writing_f_lb" name="just_writing_f_lb" <?php if( get_the_author_meta( 'just_writing_f_lb', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<span class="description"><?php echo __("Enable formats dropdown instead of buttons (this will show all formats and hide all associated buttons, ignoring the options below).");?></span>
+			</td>
+		</tr>
+		<tr>
+			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_bold" name="just_writing_bold" <?php if( get_the_author_meta( 'just_writing_bold', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Bold");?></span>
@@ -814,6 +824,7 @@ if( !function_exists( 'JustWriting' ) )
 		update_user_meta( $user_id, 'just_writing_h_mb', 'off' );
 		update_user_meta( $user_id, 'just_writing_al_edit', 'off' );
 		update_user_meta( $user_id, 'just_writing_al_new', 'off' );
+		update_user_meta( $user_id, 'just_writing_f_lb', 'on' );
 		}
 		
 	// First find out if we're in a post/page list, in a post/page edit page or somewhere we don't care about.
@@ -854,6 +865,8 @@ if( !function_exists( 'JustWriting' ) )
 			if( get_the_author_meta( 'just_writing_l_b', $cuid ) == 'on' ) { $HideBorder = 1; } 
 			$HideModeBar = 0;
 			if( get_the_author_meta( 'just_writing_h_mb', $cuid ) == 'on' ) { $HideModeBar = 1; } 
+			$FormatLB = 0;
+			if( get_the_author_meta( 'just_writing_f_lb', $cuid ) == 'on' ) { $FormatLB = 1; } 
 
 			$AutoLoad = 0;
 			
@@ -868,7 +881,7 @@ if( !function_exists( 'JustWriting' ) )
 				}
 				
 			// Register and enqueue the javascript.
-			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/just-writing.js?disablefade=' . $DisableFade . '&hidewordcount=' . $HideWordCount . '&hidepreview=' . $HidePreview . '&hideborder=' . $HideBorder . '&hidemodebar=' . $HideModeBar . '&autoload=' . $AutoLoad );
+			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/just-writing.js?disablefade=' . $DisableFade . '&hidewordcount=' . $HideWordCount . '&hidepreview=' . $HidePreview . '&hideborder=' . $HideBorder . '&hidemodebar=' . $HideModeBar . '&autoload=' . $AutoLoad . '&formatlistbox=' . $FormatLB );
 			wp_enqueue_script( 'justwriting_js' );
 	
 			add_filter( 'wp_fullscreen_buttons', 'JustWriting' );

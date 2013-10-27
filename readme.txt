@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 3.7
-Stable tag: 2.3
+Stable tag: 2.4
 
 Adds buttons to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -93,6 +93,10 @@ If you start DFWM without moving the mouse you might hit right between when Word
 4. A real DFWM!
 
 == Changelog ==
+= 2.4 =
+* Added option to use a listbox instead of individual buttons
+* Fixed bug in border option selector which would not allow you to save the hide option
+ 
 = 2.3 =
 * Added rate and review reminder in the user profile page
 * Added reminder to make sure the Visual Editor is enabled in the user profile page
@@ -128,6 +132,9 @@ If you start DFWM without moving the mouse you might hit right between when Word
 * Initial release.
 
 == Upgrade Notice ==
+= 2.4 =
+* New option for the format listbox will not be enabled until a user selections the option for existing users.  New users will have the opiton enabled by default.
+
 = 2.3 =
 * None.
 
@@ -154,5 +161,4 @@ Initial release, no updates as everything is new!
 
 == Roadmap ==
 
-* Replace individual paragraph styles with a drop down
 * Add dividers for button groups

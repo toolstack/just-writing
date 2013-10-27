@@ -92,6 +92,7 @@ function JustWriting()
 		var HideBorder = GetScriptVariable(GSI, 'hideborder', 0);
 		var HideModeBar = GetScriptVariable(GSI, 'hidemodebar', 0);
 		var AutoLoad = GetScriptVariable(GSI, 'autoload', 0);
+		var FormatLB = GetScriptVariable(GSI, 'formatlistbox', 0);
 
 		if( DisableFade == 1 )
 			{
@@ -129,6 +130,16 @@ function JustWriting()
 			ModeBar.style.display = 'none';
 			}
 
+		// Add the format listbox
+		if( FormatLB == 1 )
+			{
+			(	function($) 
+					{
+					$('#wp_fs_Paragraph').replaceWith( '<select name=JustWritingFormats id=JustWritingFormats onchange=JustWritingFormatSelectChange()><option>Paragraph</option><option>Address</option><option>Block Quotes</option><option>Preformatted</option><option>Heading 1</option><option>Heading 2</option><option>Heading 3</option><option>Heading 4</option><option>Heading 5</option><option>Heading 6</option></select>' );
+					}(jQuery)
+			);
+			}
+			
 		// Add exit button
 		(	function($) 
 				{
@@ -169,6 +180,24 @@ function JustWriting()
 			}	
 
 		}
+}
+
+function JustWritingFormatSelectChange()
+{
+	var FormatListbox = document.getElementById('JustWritingFormats');
+	var index = FormatListbox.selectedIndex;
+	
+	if( index == 0 ) { tinyMCE.execCommand('FormatBlock', false, 'p'); }
+	if( index == 1 ) { tinyMCE.execCommand('FormatBlock', false, 'address'); }
+	if( index == 2 ) { fullscreen.blockquote(); }
+	if( index == 3 ) { tinyMCE.execCommand('FormatBlock', false, 'pre'); }
+	if( index == 4 ) { tinyMCE.execCommand('FormatBlock', false, 'h1'); }
+	if( index == 5 ) { tinyMCE.execCommand('FormatBlock', false, 'h2'); }
+	if( index == 6 ) { tinyMCE.execCommand('FormatBlock', false, 'h3'); }
+	if( index == 7 ) { tinyMCE.execCommand('FormatBlock', false, 'h4'); }
+	if( index == 8 ) { tinyMCE.execCommand('FormatBlock', false, 'h5'); }
+	if( index == 9 ) { tinyMCE.execCommand('FormatBlock', false, 'h6'); }
+	
 }
 
 function JustWritingMoveMouse()
