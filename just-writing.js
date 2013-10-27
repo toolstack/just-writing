@@ -1,3 +1,5 @@
+var JustWritingAutoLoadIntervalID;
+
 function GetScriptIndex(name)
 {
 	// Loop through all the scripts in the current document to find the one we want.
@@ -89,12 +91,18 @@ function JustWriting()
 		var HidePreview = GetScriptVariable(GSI, 'hidepreview', 0);
 		var HideBorder = GetScriptVariable(GSI, 'hideborder', 0);
 		var HideModeBar = GetScriptVariable(GSI, 'hidemodebar', 0);
+		var AutoLoad = GetScriptVariable(GSI, 'autoload', 0);
 
 		if( DisableFade == 1 )
 			{
 			setInterval( JustWritingMoveMouse, 1500 );
 			}
 
+		if( AutoLoad == 1 )
+			{
+			JustWritingAutoLoadIntervalID = setInterval( JustWritingAutoLoad, 100 );
+			}
+			
 		if( HideWordCount == 1 )
 			{
 			var WordCount = document.getElementById('wp-fullscreen-count');
@@ -102,13 +110,16 @@ function JustWriting()
 			WordCount.style.display = 'none';
 			}
 			
-		if( HideBorder == 1 )
+		if( HideBorder > 0 )
 			{
 			var SubjectBorder = document.getElementById('wp-fullscreen-title');
 			var BodyBorder = document.getElementById('wp-fullscreen-container');
+			var BorderStyle = 'none';
 			
-			SubjectBorder.style.border = 'none';
-			BodyBorder.style.border = 'none';
+			if( HideBorder == 1 ) { BorderStyle = '1px dotted #CCCCCC'; }
+			
+			SubjectBorder.style.border = BorderStyle;
+			BodyBorder.style.border = BorderStyle;
 			}
 			
 		if( HideModeBar == 1 )
@@ -169,5 +180,15 @@ function JustWritingMoveMouse()
 		);
 }
 
-// Use an event listener to add the calendar on a page load instead of .OnLoad as we might otherwise get overwritten by another plugin.
+function JustWritingAutoLoad()
+{
+		var FSButton = document.getElementById('content_wp_fullscreen');
+		if( FSButton != null ) 
+			{ 
+			FSButton.click(); 
+			clearInterval(JustWritingAutoLoadIntervalID);
+			}
+}
+
+// Use an event listener to add the Just Writing function on a page load instead of .OnLoad as we might otherwise get overwritten by another plugin.
 window.addEventListener ? window.addEventListener("load",JustWriting,false) : window.attachEvent && window.attachEvent("onload",JustWriting);

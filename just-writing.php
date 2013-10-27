@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Just Writing
-Version: 2.2
+Version: 2.3
 Plugin URI: http://toolstack.com/just-writing
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -425,8 +425,9 @@ if( !function_exists( 'JustWriting' ) )
 			switch( $pagename )
 				{
 				case "post":
+					return "edit";
 				case "post-new":
-					return "schedule_posts_calendar";
+					return "new";
 				default:
 					return "";
 				}
@@ -494,8 +495,28 @@ if( !function_exists( 'JustWriting' ) )
 		update_user_meta( $user_id, 'just_writing_d_fade', just_writing_get_checked_state( $_POST['just_writing_d_fade'] ) );
 		update_user_meta( $user_id, 'just_writing_h_wc', just_writing_get_checked_state( $_POST['just_writing_h_wc'] ) );
 		update_user_meta( $user_id, 'just_writing_h_p', just_writing_get_checked_state( $_POST['just_writing_h_p'] ) );
-		update_user_meta( $user_id, 'just_writing_h_b', just_writing_get_checked_state( $_POST['just_writing_h_b'] ) );
 		update_user_meta( $user_id, 'just_writing_h_mb', just_writing_get_checked_state( $_POST['just_writing_h_mb'] ) );
+		update_user_meta( $user_id, 'just_writing_al_new', just_writing_get_checked_state( $_POST['just_writing_al_new'] ) );
+		update_user_meta( $user_id, 'just_writing_al_edit', just_writing_get_checked_state( $_POST['just_writing_al_edit'] ) );
+
+		echo "here: '" . $_POST['just_writing_border_setting'] . "'";
+		//Deal with the border options
+		if( $_POST['just_writing_border_settings'] == 'hide' )
+			{
+			update_user_meta( $user_id, 'just_writing_h_b', 'on' );
+			update_user_meta( $user_id, 'just_writing_l_b', 'off' );
+			}
+		elseif( $_POST['just_writing_border_setting'] == 'light' )
+			{
+			update_user_meta( $user_id, 'just_writing_h_b', 'off' );
+			update_user_meta( $user_id, 'just_writing_l_b', 'on' );
+			}
+		else
+			{
+			update_user_meta( $user_id, 'just_writing_h_b', 'off' );
+			update_user_meta( $user_id, 'just_writing_l_b', 'off' );
+			}
+
 		}
 
 	/*
@@ -509,6 +530,9 @@ if( !function_exists( 'JustWriting' ) )
 			{
 			Just_Writing_User_Setup( $user->ID );
 			}
+		
+		wp_register_script( 'justwritingoptions_js', plugins_url( '', __FILE__ )  . '/just-writing-options.js' );
+		wp_enqueue_script( 'justwritingoptions_js' );
 
 		?>
 	<h3>Just Writing</h3>
@@ -516,39 +540,44 @@ if( !function_exists( 'JustWriting' ) )
 	<table class="form-table">
 		<tr>
 			<th></th>
-			<td colspan=3>
-			<span class="description"><?php echo __("Just Writing allows you to customize the Distraction Free Writing Mode in WordPress in several different ways to enable you to write the way you want to.  To find out more, please visit the ") . "<a href='http://wordpress.org/plugins/just-writing/' target=_blank>WordPress Plugin Directory page</a> " . __("or plugin home page on") . " <a href='http://toolstack.com/just-writing' target=_blank>ToolStack.com</a>";?></span>
+			<td>
+			<span class="description"><?php echo __("Just Writing allows you to customize the Distraction Free Writing Mode in WordPress in several different ways to enable you to write the way you want to.  To find out more, please visit the ") . "<a href='http://wordpress.org/plugins/just-writing/' target=_blank>WordPress Plugin Directory page</a> " . __("or plugin home page on") . " <a href='http://toolstack.com/just-writing' target=_blank>ToolStack.com</a>.<br><br>" . __("And don't forget to ") . "<a href='http://wordpress.org/plugins/just-writing/' target=_blank>" . __("rate") . "</a>" . __(" and ") . "<a href='http://wordpress.org/support/view/plugin-reviews/just-writing' target=_blank>" . __("review") . "</a>" . __(" it too!");?></span>
 			</td>
 		</tr>
 		<tr>
-			<th><label for="just_writing_enabled"><?php echo __("Enable Just Writing");?></label></th>
+			<th><label for="just_writing_enabled"><?php echo __("Enable");?></label></th>
 			<td>
 			<input type="checkbox" id="just_writing_enabled" name="just_writing_enabled" <?php if( get_the_author_meta( 'just_writing_enabled', $user->ID ) == "on" ) { echo "CHECKED"; } ?> onClick="if(!just_writing_enabled.checked){ just_writing_options_table.style.display='none'}else{just_writing_options_table.style.display=''}">
-			<span class="description"><?php echo __("Check to enable Just Writing");?></span>
+			<span class="description"><?php echo __("Check to enable Just Writing (don't forget to make sure the visual editor is enabled at the top of this page)");?></span>
 			</td>
 		</tr>
 	</table>
 	<table class="form-table" id='just_writing_options_table' <?php if( get_the_author_meta( 'just_writing_enabled', $user->ID ) != "on" ) { echo "style='display:none;'"; } ?>>	
 		<tr>
 			<th><label for="just_writing_options"><?php echo __("Options");?></label></th>
-			<td>
-			<input type="checkbox" id="just_writing_h_p" name="just_writing_h_p" <?php if( get_the_author_meta( 'just_writing_h_p', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Hide the preview button");?></span>
-			</td>
-			<td>
-			<input type="checkbox" id="just_writing_h_b" name="just_writing_h_b" <?php if( get_the_author_meta( 'just_writing_h_b', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Hide the border on the subject/body areas");?></span>
+			<td colspan=3>
+			<span class="description"><?php echo __("Border on the title/body areas options:");?></span><br>
+			<input type="radio" id="just_writing_s_b" name="just_writing_border_setting" value="show" <?php if( get_the_author_meta( 'just_writing_l_b', $user->ID ) != "on" && get_the_author_meta( 'just_writing_h_b', $user->ID ) != "on" ) { echo "CHECKED"; } ?>>
+			<span class="description"><?php echo __("Show");?></span><br>
+			<input type="radio" id="just_writing_l_b" name="just_writing_border_setting" value="light" <?php if( get_the_author_meta( 'just_writing_l_b', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<span class="description"><?php echo __("Lighten");?></span><br>
+			<input type="radio" id="just_writing_h_b" name="just_writing_border_setting" value="hide" <?php if( get_the_author_meta( 'just_writing_h_b', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<span class="description"><?php echo __("Hide");?></span>
 			</td>
 		</tr>
 		<tr>
 			<td></th>
+			<td>
+			<input type="checkbox" id="just_writing_h_p" name="just_writing_h_p" <?php if( get_the_author_meta( 'just_writing_h_p', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<span class="description"><?php echo __("Hide the preview button");?></span>
+			</td>
 			<td>
 			<input type="checkbox" id="just_writing_h_wc" name="just_writing_h_wc" <?php if( get_the_author_meta( 'just_writing_h_wc', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Hide the word count");?></span>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_h_mb" name="just_writing_h_mb" <?php if( get_the_author_meta( 'just_writing_h_mb', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Hide the visual editor mode selector");?></span>
+			<span class="description"><?php echo __("Hide the editor mode selector");?></span>
 			</td>
 		</tr>
 		<tr>
@@ -559,7 +588,21 @@ if( !function_exists( 'JustWriting' ) )
 			</td>
 		</tr>
 		<tr>
-			<th><label for="just_writing_buttons"><?php echo __("Just Writing Buttons");?></label></th>
+			<td></th>
+			<td colspan=3>
+			<input type="checkbox" id="just_writing_al_new" name="just_writing_al_new" <?php if( get_the_author_meta( 'just_writing_al_new', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<span class="description"><?php echo __("Go directly to Distraction Free Writing Mode for new posts *May have performance impacts*");?></span>
+			</td>
+		</tr>
+		<tr>
+			<td></th>
+			<td colspan=3>
+			<input type="checkbox" id="just_writing_al_edit" name="just_writing_al_edit" <?php if( get_the_author_meta( 'just_writing_al_edit', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<span class="description"><?php echo __("Go directly to Distraction Free Writing Mode when editing a post *May have performance impacts*");?></span>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="just_writing_buttons"><?php echo __("Buttons");?></label></th>
 			<td>
 			<input type="checkbox" id="just_writing_bold" name="just_writing_bold" <?php if( get_the_author_meta( 'just_writing_bold', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Bold");?></span>
@@ -715,10 +758,10 @@ if( !function_exists( 'JustWriting' ) )
 			<span class="description"><?php echo __("Help");?></span>
 			</td>
 			<td>
-			<span class="description"><a onClick='just_writing_bold.checked=true;just_writing_italics.checked=true;just_writing_ul.checked=true;just_writing_nl.checked=true;just_writing_quotes.checked=true;just_writing_media.checked=true;just_writing_link.checked=true;just_writing_unlink.checked=true;just_writing_strike.checked=true;just_writing_under.checked=true;just_writing_remove.checked=true;just_writing_left.checked=true;just_writing_center.checked=true;just_writing_right.checked=true;just_writing_outdent.checked=true;just_writing_indent.checked=true;just_writing_p.checked=true;just_writing_h1.checked=true;just_writing_h2.checked=true;just_writing_h3.checked=true;just_writing_h4.checked=true;just_writing_h5.checked=true;just_writing_h6.checked=true;just_writing_address.checked=true;just_writing_pf.checked=true;just_writing_spell.checked=true;just_writing_more.checked=true;just_writing_char.checked=true;just_writing_undo.checked=true;just_writing_redo.checked=true;just_writing_help.checked=true;'><?php echo __("Select All");?></a></span>
+			<span class="description"><a onClick='JustWritingSelectAll()'><?php echo __("Select All");?></a></span>
 			</td>
 			<td>
-			<span class="description"><a onClick='just_writing_bold.checked=false;just_writing_italics.checked=false;just_writing_ul.checked=false;just_writing_nl.checked=false;just_writing_quotes.checked=false;just_writing_media.checked=false;just_writing_link.checked=false;just_writing_unlink.checked=false;just_writing_strike.checked=false;just_writing_under.checked=false;just_writing_remove.checked=false;just_writing_left.checked=false;just_writing_center.checked=false;just_writing_right.checked=false;just_writing_outdent.checked=false;just_writing_indent.checked=false;just_writing_p.checked=false;just_writing_h1.checked=false;just_writing_h2.checked=false;just_writing_h3.checked=false;just_writing_h4.checked=false;just_writing_h5.checked=false;just_writing_h6.checked=false;just_writing_address.checked=false;just_writing_pf.checked=false;just_writing_spell.checked=false;just_writing_more.checked=false;just_writing_char.checked=false;just_writing_undo.checked=false;just_writing_redo.checked=false;just_writing_help.checked=false;'><?php echo __("Deselect All");?></a></span>
+			<span class="description"><a onClick='JustWritingDeSelectAll()'><?php echo __("Deselect All");?></a></span>
 			</td>
 		</tr>
 	</table>
@@ -767,7 +810,10 @@ if( !function_exists( 'JustWriting' ) )
 		update_user_meta( $user_id, 'just_writing_h_wc', 'off' );
 		update_user_meta( $user_id, 'just_writing_h_p', 'off' );
 		update_user_meta( $user_id, 'just_writing_h_b', 'off' );
+		update_user_meta( $user_id, 'just_writing_l_b', 'off' );
 		update_user_meta( $user_id, 'just_writing_h_mb', 'off' );
+		update_user_meta( $user_id, 'just_writing_al_edit', 'off' );
+		update_user_meta( $user_id, 'just_writing_al_new', 'off' );
 		}
 		
 	// First find out if we're in a post/page list, in a post/page edit page or somewhere we don't care about.
@@ -804,12 +850,25 @@ if( !function_exists( 'JustWriting' ) )
 			$HidePreview = 0;
 			if( get_the_author_meta( 'just_writing_h_p', $cuid ) == 'on' ) { $HidePreview = 1; } 
 			$HideBorder = 0;
-			if( get_the_author_meta( 'just_writing_h_b', $cuid ) == 'on' ) { $HideBorder = 1; } 
+			if( get_the_author_meta( 'just_writing_h_b', $cuid ) == 'on' ) { $HideBorder = 2; } 
+			if( get_the_author_meta( 'just_writing_l_b', $cuid ) == 'on' ) { $HideBorder = 1; } 
 			$HideModeBar = 0;
 			if( get_the_author_meta( 'just_writing_h_mb', $cuid ) == 'on' ) { $HideModeBar = 1; } 
+
+			$AutoLoad = 0;
 			
+			if( $fname == "new" )
+				{
+				if( get_the_author_meta( 'just_writing_al_new', $cuid ) == 'on' ) { $AutoLoad = 1; } 
+				}
+
+			if( $fname == "edit" )
+				{
+				if( get_the_author_meta( 'just_writing_al_edit', $cuid ) == 'on' ) { $AutoLoad = 1; } 
+				}
+				
 			// Register and enqueue the javascript.
-			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/just-writing.js?disablefade=' . $DisableFade . '&hidewordcount=' . $HideWordCount . '&hidepreview=' . $HidePreview . '&hideborder=' . $HideBorder . '&hidemodebar=' . $HideModeBar );
+			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/just-writing.js?disablefade=' . $DisableFade . '&hidewordcount=' . $HideWordCount . '&hidepreview=' . $HidePreview . '&hideborder=' . $HideBorder . '&hidemodebar=' . $HideModeBar . '&autoload=' . $AutoLoad );
 			wp_enqueue_script( 'justwriting_js' );
 	
 			add_filter( 'wp_fullscreen_buttons', 'JustWriting' );
