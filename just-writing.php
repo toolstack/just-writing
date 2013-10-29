@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Just Writing
-Version: 2.4
+Version: 2.5
 Plugin URI: http://toolstack.com/just-writing
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -409,39 +409,6 @@ if( !function_exists( 'JustWriting' ) )
 		}
 
 	/*
-	 *	This function is called to check if we need to add the above .css and .js files
-	 *	on this page.  ONLY the posts pages need to include the files, all other admin pages
-	 *	don't need them.
-	 */
-	function Just_Writing_Includes()
-		{
-		// First check to make sure we have a server variable set to the script name, if we
-		// don't fall back to including the .css and .js files on all admin pages.
-		if(isset($_SERVER['SCRIPT_NAME']) )
-			{
-			// Grab the lower case base name of the script file.
-			$pagename = strtolower(basename($_SERVER['SCRIPT_NAME'], ".php"));
-			
-			// There are only two pages we really need to include the files on, so
-			// use a switch to make it easier for later if we need to add more page
-			// names to the list.
-			switch( $pagename )
-				{
-				case "post":
-					return "edit";
-				case "post-new":
-					return "new";
-				default:
-					return "";
-				}
-			}
-		else
-			{
-			return true;
-			}
-		}
-
-	/*
 	 *	This function returns either on or off depending on the state of an HTML checkbox 
 	 *  input field returned from a post command.
 	 */
@@ -826,15 +793,19 @@ if( !function_exists( 'JustWriting' ) )
 		update_user_meta( $user_id, 'just_writing_al_new', 'off' );
 		update_user_meta( $user_id, 'just_writing_f_lb', 'on' );
 		}
-		
-	// First find out if we're in a post/page list, in a post/page edit page or somewhere we don't care about.
-	$fname = Just_Writing_Includes();
 
-	if( $fname )
+	Function JustWritingLoadEdit()
 		{
-		// We have to force pluggable.php to load before we can call get_current_user_id();
-		if( !function_exists( 'wp_get_current_user' ) ) { include( ABSPATH . "wp-includes/pluggable.php" ); }
+		JustWritingLoad( 'edit' );
+		}
+		
+	Function JustWritingLoadNew()
+		{
+		JustWritingLoad( 'new' );
+		}
 
+	Function JustWritingLoad( $fname )
+		{
 		// Get the user option to see if we're enabled
 		$cuid = get_current_user_id();
 		$JustWritingEnabled = get_the_author_meta( 'just_writing_enabled', $cuid );
@@ -850,9 +821,6 @@ if( !function_exists( 'JustWriting' ) )
 		// If we're enabled, setup as required.
 		if( $JustWritingEnabled == "on" )
 			{
-			wp_register_style( 'justwriting_style', plugins_url( '', __FILE__ ) . '/just-writing.css' );
-			wp_enqueue_style( 'justwriting_style' ); 
-
 			// Get the options to pass to the javascript code
 			$DisableFade = 0;
 			if( get_the_author_meta( 'just_writing_d_fade', $cuid ) == 'on' ) { $DisableFade = 1; } 
@@ -881,13 +849,17 @@ if( !function_exists( 'JustWriting' ) )
 				}
 				
 			// Register and enqueue the javascript.
-			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/just-writing.js?disablefade=' . $DisableFade . '&hidewordcount=' . $HideWordCount . '&hidepreview=' . $HidePreview . '&hideborder=' . $HideBorder . '&hidemodebar=' . $HideModeBar . '&autoload=' . $AutoLoad . '&formatlistbox=' . $FormatLB );
+			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/just-writing.js?rtl=' . is_rtl() . '&disablefade=' . $DisableFade . '&hidewordcount=' . $HideWordCount . '&hidepreview=' . $HidePreview . '&hideborder=' . $HideBorder . '&hidemodebar=' . $HideModeBar . '&autoload=' . $AutoLoad . '&formatlistbox=' . $FormatLB );
 			wp_enqueue_script( 'justwriting_js' );
 	
 			add_filter( 'wp_fullscreen_buttons', 'JustWriting' );
 			}
 		}
-	}	 
+	}
+	
+	// Handle the post screens
+	add_action('admin_head-post-new.php', 'JustWritingLoadNew');
+	add_action('admin_head-post.php', 'JustWritingLoadEdit');
 	
 	// Handle the user profile items
 	add_action( 'show_user_profile', 'just_writing_user_profile_fields' );

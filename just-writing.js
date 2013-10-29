@@ -93,6 +93,7 @@ function JustWriting()
 		var HideModeBar = GetScriptVariable(GSI, 'hidemodebar', 0);
 		var AutoLoad = GetScriptVariable(GSI, 'autoload', 0);
 		var FormatLB = GetScriptVariable(GSI, 'formatlistbox', 0);
+		var rtl = GetScriptVariable(GSI, 'rtl', 0);
 
 		if( DisableFade == 1 )
 			{
@@ -139,7 +140,13 @@ function JustWriting()
 					}(jQuery)
 			);
 			}
-			
+		
+		var marginside = 'margin-left';
+		if( rtl == 1 )
+			{
+			marginside = 'margin-right';
+			}
+		
 		// Add exit button
 		(	function($) 
 				{
@@ -147,7 +154,7 @@ function JustWriting()
 
 				$preview.clone()
 					.removeAttr('id').removeClass('preview').addClass('right')
-					.css('margin-left', '5px')
+					.css(marginside, '5px')
 					.css('margin-bottom', '8px')
 					.click(function(e) 
 						{ 
@@ -168,7 +175,7 @@ function JustWriting()
 
 					$preview.clone()
 						.removeAttr('id').removeClass('preview').addClass('right')
-						.css('margin-left', '5px')
+						.css( marginside, '5px')
 						.click(function(e) 
 							{
 							$preview.click();
