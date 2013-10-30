@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Just Writing
-Version: 2.6
+Version: 2.7
 Plugin URI: http://toolstack.com/just-writing
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -30,6 +30,66 @@ if( !function_exists( 'JustWriting' ) )
 		// clear out the default buttons
 		$buttons = array();
 		
+		if( get_the_author_meta( 'just_writing_cut', $cuid ) == 'on' )
+			{
+			$buttons['cut'] = array( 
+												// Title of the button
+												'title' => __('Cut (Ctrl + X)'), 
+												// Command to execute
+												'onclick' => "tinyMCE.execCommand('cut');", 
+												// Show on visual AND html mode
+												'both' => true 
+								);
+			}
+			
+		if( get_the_author_meta( 'just_writing_copy', $cuid ) == 'on' )
+			{
+			$buttons['copy'] = array( 
+												// Title of the button
+												'title' => __('Copy (Ctrl + C)'), 
+												// Command to execute
+												'onclick' => "tinyMCE.execCommand('copy');", 
+												// Show on visual AND html mode
+												'both' => true 
+								);
+			}
+			
+		if( get_the_author_meta( 'just_writing_paste', $cuid ) == 'on' )
+			{
+			$buttons['paste'] = array( 
+												// Title of the button
+												'title' => __('Paste (Ctrl + V)'), 
+												// Command to execute
+												'onclick' => "tinyMCE.execCommand('paste');", 
+												// Show on visual AND html mode
+												'both' => true 
+								);
+			}
+
+		if( get_the_author_meta( 'just_writing_pastetext', $cuid ) == 'on' )
+			{
+			$buttons['pastetext'] = array( 
+												// Title of the button
+												'title' => __('Paste as Text'), 
+												// Command to execute
+												'onclick' => "tinyMCE.execCommand('mcePasteText');", 
+												// Show on visual AND html mode
+												'both' => false
+								);
+			}
+
+		if( get_the_author_meta( 'just_writing_pasteword', $cuid ) == 'on' )
+			{
+			$buttons['pasteword'] = array( 
+												// Title of the button
+												'title' => __('Paste as Text'), 
+												// Command to execute
+												'onclick' => "tinyMCE.execCommand('mcePasteWord');", 
+												// Show on visual AND html mode
+												'both' => false
+								);
+			}
+
 		if( get_the_author_meta( 'just_writing_bold', $cuid ) == 'on' )
 			{
 			$buttons['bold'] = array( 
@@ -495,6 +555,11 @@ if( !function_exists( 'JustWriting' ) )
 		update_user_meta( $user_id, 'just_writing_f_lb', just_writing_get_checked_state( $_POST['just_writing_f_lb'] ) );
 		update_user_meta( $user_id, 'just_writing_superscript', just_writing_get_checked_state( $_POST['just_writing_superscript'] ) );
 		update_user_meta( $user_id, 'just_writing_subscript', just_writing_get_checked_state( $_POST['just_writing_subscript'] ) );
+		update_user_meta( $user_id, 'just_writing_cut', just_writing_get_checked_state( $_POST['just_writing_cut'] ) );
+		update_user_meta( $user_id, 'just_writing_copy', just_writing_get_checked_state( $_POST['just_writing_copy'] ) );
+		update_user_meta( $user_id, 'just_writing_paste', just_writing_get_checked_state( $_POST['just_writing_paste'] ) );
+		update_user_meta( $user_id, 'just_writing_pastetext', just_writing_get_checked_state( $_POST['just_writing_pastetext'] ) );
+		update_user_meta( $user_id, 'just_writing_pasteword', just_writing_get_checked_state( $_POST['just_writing_pasteword'] ) );
 
 		//Deal with the border options
 		if( $_POST['just_writing_border_setting'] == 'hide' )
@@ -544,7 +609,7 @@ if( !function_exists( 'JustWriting' ) )
 			<th><label for="just_writing_enabled"><?php echo __("Enable");?></label></th>
 			<td>
 			<input type="checkbox" id="just_writing_enabled" name="just_writing_enabled" <?php if( get_the_author_meta( 'just_writing_enabled', $user->ID ) == "on" ) { echo "CHECKED"; } ?> onClick="if(!just_writing_enabled.checked){ just_writing_options_table.style.display='none'}else{just_writing_options_table.style.display=''}">
-			<span class="description"><?php echo __("Check to enable Just Writing (don't forget to make sure the visual editor is enabled at the top of this page)");?></span>
+			<?php echo __("Check to enable Just Writing (don't forget to make sure the visual editor is enabled at the top of this page)");?>
 			</td>
 		</tr>
 	</table>
@@ -552,232 +617,301 @@ if( !function_exists( 'JustWriting' ) )
 		<tr>
 			<th><label for="just_writing_options"><?php echo __("Options");?></label></th>
 			<td colspan=3>
-			<span class="description"><?php echo __("Border on the title/body areas options:");?></span><br>
+			<?php echo __("Border on the title/body areas options:");?><br>
 			<input type="radio" id="just_writing_s_b" name="just_writing_border_setting" value="show" <?php if( get_the_author_meta( 'just_writing_l_b', $user->ID ) != "on" && get_the_author_meta( 'just_writing_h_b', $user->ID ) != "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Show");?></span><br>
+			<?php echo __("Show");?><br>
 			<input type="radio" id="just_writing_l_b" name="just_writing_border_setting" value="light" <?php if( get_the_author_meta( 'just_writing_l_b', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Lighten");?></span><br>
+			<?php echo __("Lighten");?><br>
 			<input type="radio" id="just_writing_h_b" name="just_writing_border_setting" value="hide" <?php if( get_the_author_meta( 'just_writing_h_b', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Hide");?></span>
+			<?php echo __("Hide");?>
 			</td>
 		</tr>
 		<tr>
 			<td></th>
 			<td>
 			<input type="checkbox" id="just_writing_h_p" name="just_writing_h_p" <?php if( get_the_author_meta( 'just_writing_h_p', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Hide the preview button");?></span>
+			<?php echo __("Hide the preview button");?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_h_wc" name="just_writing_h_wc" <?php if( get_the_author_meta( 'just_writing_h_wc', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Hide the word count");?></span>
+			<?php echo __("Hide the word count");?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_h_mb" name="just_writing_h_mb" <?php if( get_the_author_meta( 'just_writing_h_mb', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Hide the editor mode selector");?></span>
+			<?php echo __("Hide the editor mode selector");?>
 			</td>
 		</tr>
 		<tr>
 			<td></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_d_fade" name="just_writing_d_fade" <?php if( get_the_author_meta( 'just_writing_d_fade', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Disable the fade out of the toolbar *May have performance impacts*");?></span>
+			<?php echo __("Disable the fade out of the toolbar *May have performance impacts*");?>
 			</td>
 		</tr>
 		<tr>
 			<td></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_al_new" name="just_writing_al_new" <?php if( get_the_author_meta( 'just_writing_al_new', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Go directly to Distraction Free Writing Mode for new posts *May have performance impacts*");?></span>
+			<?php echo __("Go directly to Distraction Free Writing Mode for new posts *May have performance impacts*");?>
 			</td>
 		</tr>
 		<tr>
 			<td></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_al_edit" name="just_writing_al_edit" <?php if( get_the_author_meta( 'just_writing_al_edit', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Go directly to Distraction Free Writing Mode when editing a post *May have performance impacts*");?></span>
+			<?php echo __("Go directly to Distraction Free Writing Mode when editing a post *May have performance impacts*");?>
 			</td>
 		</tr>
 		<tr>
 			<th><label for="just_writing_buttons"><?php echo __("Buttons");?></label></th>
 			<td colspan=3>
-			<input type="checkbox" id="just_writing_f_lb" name="just_writing_f_lb" <?php if( get_the_author_meta( 'just_writing_f_lb', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Enable formats dropdown instead of buttons (this will show all formats and hide all associated buttons, ignoring the options below).");?></span>
+			<b><?php echo __("Cut/Copy/Paste *Will not work in all browsers*");?></b>
+			</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td>
+			<input type="checkbox" id="just_writing_cut" name="just_writing_cut" <?php if( get_the_author_meta( 'just_writing_cut', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<?php echo __("Cut");?>
+			</td>
+			<td>
+			<input type="checkbox" id="just_writing_copy" name="just_writing_copy" <?php if( get_the_author_meta( 'just_writing_copy', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<?php echo __("Copy");?>
+			</td>
+			<td>
+			<input type="checkbox" id="just_writing_paste" name="just_writing_paste" <?php if( get_the_author_meta( 'just_writing_paste', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<?php echo __("Paste");?>
+			</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td>
+			<input type="checkbox" id="just_writing_pastetext" name="just_writing_pastetext" <?php if( get_the_author_meta( 'just_writing_pastetext', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<?php echo __("Paste as Text");?>
+			</td>
+			<td colspan=2>
+			<input type="checkbox" id="just_writing_pasteword" name="just_writing_pasteword" <?php if( get_the_author_meta( 'just_writing_pasteword', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<?php echo __("Paste from Word");?>
+			</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td colspan=3>
+			<b><?php echo __("Text Decorations");?></b>
 			</td>
 		</tr>
 		<tr>
 			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_bold" name="just_writing_bold" <?php if( get_the_author_meta( 'just_writing_bold', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Bold");?></span>
+			<?php echo __("Bold");?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_italics" name="just_writing_italics" <?php if( get_the_author_meta( 'just_writing_italics', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Italics");?></span>
+			<?php echo __("Italics");?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_strike" name="just_writing_strike" <?php if( get_the_author_meta( 'just_writing_strike', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Strikethrough");?></span>
+			<?php echo __("Strikethrough");?>
 			</td>
 		</tr>
 		<tr>
 			<td></th>
 			<td>
 			<input type="checkbox" id="just_writing_under" name="just_writing_under" <?php if( get_the_author_meta( 'just_writing_under', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Underline");?></span>
+			<?php echo __("Underline");?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_superscript" name="just_writing_superscript" <?php if( get_the_author_meta( 'just_writing_superscript', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Superscript");?></span>
+			<?php echo __("Superscript");?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_subscript" name="just_writing_subscript" <?php if( get_the_author_meta( 'just_writing_subscript', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Subscript");?></span>
+			<?php echo __("Subscript");?>
+			</td>
+		</tr>
+		<tr>
+			<td></th>
+			<td colspan=3>
+			<input type="checkbox" id="just_writing_remove" name="just_writing_remove" <?php if( get_the_author_meta( 'just_writing_remove', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<?php echo __("Remove Formating");?>
+			</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td colspan=3>
+			<b><?php echo __("Lists, Media and Links");?></b>
 			</td>
 		</tr>
 		<tr>
 			<td></th>
 			<td>
-			<input type="checkbox" id="just_writing_remove" name="just_writing_remove" <?php if( get_the_author_meta( 'just_writing_remove', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Remove Formating");?></span>
-			</td>
-			<td>
 			<input type="checkbox" id="just_writing_ul" name="just_writing_ul" <?php if( get_the_author_meta( 'just_writing_ul', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Unordered List");?></span>
+			<?php echo __("Unordered List");?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_nl" name="just_writing_nl" <?php if( get_the_author_meta( 'just_writing_nl', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Ordered List");?></span>
+			<?php echo __("Ordered List");?>
+			</td>
+			<td>
+			<input type="checkbox" id="just_writing_media" name="just_writing_media" <?php if( get_the_author_meta( 'just_writing_media', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<?php echo __("Add Media");?>
 			</td>
 		</tr>
 		<tr>
 			<td></th>
 			<td>
-			<input type="checkbox" id="just_writing_media" name="just_writing_media" <?php if( get_the_author_meta( 'just_writing_media', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Add Media");?></span>
-			</td>
-			<td>
 			<input type="checkbox" id="just_writing_link" name="just_writing_link" <?php if( get_the_author_meta( 'just_writing_link', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Link");?></span>
+			<?php echo __("Link");?>
 			</td>
-			<td>
+			<td colspan=2>
 			<input type="checkbox" id="just_writing_unlink" name="just_writing_unlink" <?php if( get_the_author_meta( 'just_writing_unlink', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Unlink");?></span>
+			<?php echo __("Unlink");?>
+			</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td colspan=3>
+			<b><?php echo __("Alignment");?></b>
 			</td>
 		</tr>
 		<tr>
 			<td></th>
 			<td>
 			<input type="checkbox" id="just_writing_left" name="just_writing_left" <?php if( get_the_author_meta( 'just_writing_left', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Align Left");?></span>
+			<?php echo __("Align Left");?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_center" name="just_writing_center" <?php if( get_the_author_meta( 'just_writing_center', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Align Center");?></span>
+			<?php echo __("Align Center");?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_right" name="just_writing_right" <?php if( get_the_author_meta( 'just_writing_right', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Align Right");?></span>
+			<?php echo __("Align Right");?>
 			</td>
 		</tr>
 		<tr>
 			<td></th>
 			<td>
 			<input type="checkbox" id="just_writing_outdent" name="just_writing_outdent" <?php if( get_the_author_meta( 'just_writing_outdent', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Outdent");?></span>
+			<?php echo __("Outdent");?>
 			</td>
-			<td>
+			<td colspan=2>
 			<input type="checkbox" id="just_writing_indent" name="just_writing_indent" <?php if( get_the_author_meta( 'just_writing_indent', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Indent");?></span>
+			<?php echo __("Indent");?>
 			</td>
-			<td>
-			<input type="checkbox" id="just_writing_p" name="just_writing_p" <?php if( get_the_author_meta( 'just_writing_p', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Paragraph");?></span>
+		</tr>
+		<tr>
+			<th></th>
+			<td colspan=3>
+			<b><?php echo __("Paragraph Formats");?></b>
+			</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td colspan=3>
+			<input type="checkbox" id="just_writing_f_lb" name="just_writing_f_lb" <?php if( get_the_author_meta( 'just_writing_f_lb', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<?php echo __("Enable formats dropdown instead of buttons (this will show all formats and hide all associated buttons, ignoring the options below).");?>
 			</td>
 		</tr>
 		<tr>
 			<td></th>
 			<td>
+			<input type="checkbox" id="just_writing_p" name="just_writing_p" <?php if( get_the_author_meta( 'just_writing_p', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<?php echo __("Paragraph");?>
+			</td>
+			<td>
 			<input type="checkbox" id="just_writing_h1" name="just_writing_h1" <?php if( get_the_author_meta( 'just_writing_h1', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("h1");?></span>
+			<?php echo __("h1");?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_h2" name="just_writing_h2" <?php if( get_the_author_meta( 'just_writing_h2', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("h2");?></span>
-			</td>
-			<td>
-			<input type="checkbox" id="just_writing_h3" name="just_writing_h3" <?php if( get_the_author_meta( 'just_writing_h3', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("h3");?></span>
+			<?php echo __("h2");?>
 			</td>
 		</tr>
 		<tr>
 			<td></th>
 			<td>
+			<input type="checkbox" id="just_writing_h3" name="just_writing_h3" <?php if( get_the_author_meta( 'just_writing_h3', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<?php echo __("h3");?>
+			</td>
+			<td>
 			<input type="checkbox" id="just_writing_h4" name="just_writing_h4" <?php if( get_the_author_meta( 'just_writing_h4', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("h4");?></span>
+			<?php echo __("h4");?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_h5" name="just_writing_h5" <?php if( get_the_author_meta( 'just_writing_h5', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("h5");?></span>
-			</td>
-			<td>
-			<input type="checkbox" id="just_writing_h6" name="just_writing_h6" <?php if( get_the_author_meta( 'just_writing_h6', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("h6");?></span>
+			<?php echo __("h5");?>
 			</td>
 		</tr>
 		<tr>
 			<td></th>
 			<td>
+			<input type="checkbox" id="just_writing_h6" name="just_writing_h6" <?php if( get_the_author_meta( 'just_writing_h6', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<?php echo __("h6");?>
+			</td>
+			<td>
 			<input type="checkbox" id="just_writing_quotes" name="just_writing_quotes" <?php if( get_the_author_meta( 'just_writing_quotes', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Block Quotes");?></span>
+			<?php echo __("Block Quotes");?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_address" name="just_writing_address" <?php if( get_the_author_meta( 'just_writing_address', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Address");?></span>
+			<?php echo __("Address");?>
 			</td>
-			<td>
+		</tr>
+		<tr>
+			<td></th>
+			<td colspan=3>
 			<input type="checkbox" id="just_writing_pf" name="just_writing_pf" <?php if( get_the_author_meta( 'just_writing_pf', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Preformatted");?></span>
+			<?php echo __("Preformatted");?>
+			</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td colspan=3>
+			<b><?php echo __("Actions");?></b>
 			</td>
 		</tr>
 		<tr>
 			<td></th>
 			<td>
 			<input type="checkbox" id="just_writing_spell" name="just_writing_spell" <?php if( get_the_author_meta( 'just_writing_spell', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Spellcheck");?></span>
+			<?php echo __("Spellcheck");?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_more" name="just_writing_more" <?php if( get_the_author_meta( 'just_writing_more', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Insert More Tag");?></span>
+			<?php echo __("Insert More Tag");?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_char" name="just_writing_char" <?php if( get_the_author_meta( 'just_writing_char', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Insert custom character");?></span>
+			<?php echo __("Insert custom character");?>
 			</td>
 		</tr>
 		<tr>
 			<td></th>
 			<td>
 			<input type="checkbox" id="just_writing_undo" name="just_writing_undo" <?php if( get_the_author_meta( 'just_writing_undo', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Undo");?></span>
+			<?php echo __("Undo");?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_redo" name="just_writing_redo" <?php if( get_the_author_meta( 'just_writing_redo', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Redo");?></span>
+			<?php echo __("Redo");?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_help" name="just_writing_help" <?php if( get_the_author_meta( 'just_writing_help', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<span class="description"><?php echo __("Help");?></span>
+			<?php echo __("Help");?>
 			</td>
 		</tr>
 		<tr>
 			<td></th>
 			<td>
-			<span class="description"><a onClick='JustWritingSelectAll()'><?php echo __("Select All");?></a></span>
+			<a onClick='JustWritingSelectAll()'><?php echo __("Select All");?></a>
 			</td>
 			<td>
-			<span class="description"><a onClick='JustWritingDeSelectAll()'><?php echo __("Deselect All");?></a></span>
+			<a onClick='JustWritingDeSelectAll()'><?php echo __("Deselect All");?></a>
 			</td>
 			<td>
+			<a onClick='JustWritingSelectDefaults()'><?php echo __("Select Defaults");?></a>
 			</td>
 		</tr>
 	</table>
@@ -833,6 +967,11 @@ if( !function_exists( 'JustWriting' ) )
 		update_user_meta( $user_id, 'just_writing_f_lb', 'on' );
 		update_user_meta( $user_id, 'just_writing_superscript', 'on' );
 		update_user_meta( $user_id, 'just_writing_subscript', 'on' );
+		update_user_meta( $user_id, 'just_writing_cut', 'off' );
+		update_user_meta( $user_id, 'just_writing_copy', 'off' );
+		update_user_meta( $user_id, 'just_writing_paste', 'off' );
+		update_user_meta( $user_id, 'just_writing_pastetext', 'off' );
+		update_user_meta( $user_id, 'just_writing_pasteword', 'off' );
 		}
 
 	Function JustWritingLoadEdit()

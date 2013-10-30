@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 3.7.1
-Stable tag: 2.6
+Stable tag: 2.7
 
 Adds buttons to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -95,6 +95,11 @@ If you start DFWM without moving the mouse you might hit right between when Word
 4. A real DFWM!
 
 == Changelog ==
+= 2.7 =
+* Added Cut/Copy/Paste buttons
+* Cleaned up the preferences screen
+* Added 'Select Defaults' to the preferences screen
+
 = 2.6 =
 * Fixed missing css file that caused the P, H1-H6, etc. buttons to not display an image
 * Added Superscript and Subscript buttons
@@ -141,6 +146,9 @@ If you start DFWM without moving the mouse you might hit right between when Word
 * Initial release.
 
 == Upgrade Notice ==
+= 2.7 =
+* None.
+
 = 2.6 =
 * None.
 
@@ -176,4 +184,8 @@ Initial release, no updates as everything is new!
 
 == Roadmap ==
 
-* Add dividers for button groups
+* Version 2.8  - add separators, handle translation of exit button
+* Version 2.9  - continue restructure preferences 
+* Version 2.10 - add style plugin for font options
+* Version 3.0  - add second row to toolbar, remove individual style buttons
+
