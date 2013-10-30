@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 3.7
-Stable tag: 2.5
+Stable tag: 2.6
 
 Adds buttons to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -41,6 +41,8 @@ This plugin adds the following commands to the toolbar in DFWM:
 	* Undo
 	* Redo
 	* Preview
+	* Superscript
+	* Subscript
 
 And there's more!
 
@@ -93,6 +95,10 @@ If you start DFWM without moving the mouse you might hit right between when Word
 4. A real DFWM!
 
 == Changelog ==
+= 2.6 =
+* Fixed missing css file that caused the P, H1-H6, etc. buttons to not display an image
+* Added Superscript and Subscript buttons
+
 = 2.5 =
 * Added support for Right-to-Left languages
 
@@ -135,6 +141,9 @@ If you start DFWM without moving the mouse you might hit right between when Word
 * Initial release.
 
 == Upgrade Notice ==
+= 2.6 =
+* None.
+
 = 2.5 =
 * None.
 

@@ -31,6 +31,8 @@ function JustWritingSelectAll()
 	document.getElementById('just_writing_undo').checked=true;
 	document.getElementById('just_writing_redo').checked=true;
 	document.getElementById('just_writing_help').checked=true;
+	document.getElementById('just_writing_superscript').checked=true;
+	document.getElementById('just_writing_subscript').checked=true;
 }
 
 function JustWritingDeSelectAll()
@@ -66,4 +68,6 @@ function JustWritingDeSelectAll()
 	document.getElementById('just_writing_undo').checked=false;
 	document.getElementById('just_writing_redo').checked=false;
 	document.getElementById('just_writing_help').checked=false;
+	document.getElementById('just_writing_superscript').checked=false;
+	document.getElementById('just_writing_subscript').checked=false;
 }

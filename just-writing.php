@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Just Writing
-Version: 2.5
+Version: 2.6
 Plugin URI: http://toolstack.com/just-writing
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -73,6 +73,30 @@ if( !function_exists( 'JustWriting' ) )
 											'title' => __('Underline (Alt + Shift + U)'),
 											// Command to execute
 											'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'underline');",
+											// Show on visual AND html mode
+											'both' => false
+										);
+			}
+
+		if( get_the_author_meta( 'just_writing_subscript', $cuid ) == 'on' )
+			{
+			$buttons['subscript'] = array(
+											// Title of the button
+											'title' => __('Subscript'),
+											// Command to execute
+											'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'subscript');",
+											// Show on visual AND html mode
+											'both' => false
+										);
+			}
+
+		if( get_the_author_meta( 'just_writing_superscript', $cuid ) == 'on' )
+			{
+			$buttons['superscript'] = array(
+											// Title of the button
+											'title' => __('Superscript'),
+											// Command to execute
+											'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'superscript');",
 											// Show on visual AND html mode
 											'both' => false
 										);
@@ -469,6 +493,8 @@ if( !function_exists( 'JustWriting' ) )
 		update_user_meta( $user_id, 'just_writing_al_new', just_writing_get_checked_state( $_POST['just_writing_al_new'] ) );
 		update_user_meta( $user_id, 'just_writing_al_edit', just_writing_get_checked_state( $_POST['just_writing_al_edit'] ) );
 		update_user_meta( $user_id, 'just_writing_f_lb', just_writing_get_checked_state( $_POST['just_writing_f_lb'] ) );
+		update_user_meta( $user_id, 'just_writing_superscript', just_writing_get_checked_state( $_POST['just_writing_superscript'] ) );
+		update_user_meta( $user_id, 'just_writing_subscript', just_writing_get_checked_state( $_POST['just_writing_subscript'] ) );
 
 		//Deal with the border options
 		if( $_POST['just_writing_border_setting'] == 'hide' )
@@ -600,6 +626,17 @@ if( !function_exists( 'JustWriting' ) )
 			<span class="description"><?php echo __("Underline");?></span>
 			</td>
 			<td>
+			<input type="checkbox" id="just_writing_superscript" name="just_writing_superscript" <?php if( get_the_author_meta( 'just_writing_superscript', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<span class="description"><?php echo __("Superscript");?></span>
+			</td>
+			<td>
+			<input type="checkbox" id="just_writing_subscript" name="just_writing_subscript" <?php if( get_the_author_meta( 'just_writing_subscript', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<span class="description"><?php echo __("Subscript");?></span>
+			</td>
+		</tr>
+		<tr>
+			<td></th>
+			<td>
 			<input type="checkbox" id="just_writing_remove" name="just_writing_remove" <?php if( get_the_author_meta( 'just_writing_remove', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Remove Formating");?></span>
 			</td>
@@ -607,13 +644,13 @@ if( !function_exists( 'JustWriting' ) )
 			<input type="checkbox" id="just_writing_ul" name="just_writing_ul" <?php if( get_the_author_meta( 'just_writing_ul', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Unordered List");?></span>
 			</td>
-		</tr>
-		<tr>
-			<td></th>
 			<td>
 			<input type="checkbox" id="just_writing_nl" name="just_writing_nl" <?php if( get_the_author_meta( 'just_writing_nl', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Ordered List");?></span>
 			</td>
+		</tr>
+		<tr>
+			<td></th>
 			<td>
 			<input type="checkbox" id="just_writing_media" name="just_writing_media" <?php if( get_the_author_meta( 'just_writing_media', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Add Media");?></span>
@@ -622,13 +659,13 @@ if( !function_exists( 'JustWriting' ) )
 			<input type="checkbox" id="just_writing_link" name="just_writing_link" <?php if( get_the_author_meta( 'just_writing_link', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Link");?></span>
 			</td>
-		</tr>
-		<tr>
-			<td></th>
 			<td>
 			<input type="checkbox" id="just_writing_unlink" name="just_writing_unlink" <?php if( get_the_author_meta( 'just_writing_unlink', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Unlink");?></span>
 			</td>
+		</tr>
+		<tr>
+			<td></th>
 			<td>
 			<input type="checkbox" id="just_writing_left" name="just_writing_left" <?php if( get_the_author_meta( 'just_writing_left', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Align Left");?></span>
@@ -637,13 +674,13 @@ if( !function_exists( 'JustWriting' ) )
 			<input type="checkbox" id="just_writing_center" name="just_writing_center" <?php if( get_the_author_meta( 'just_writing_center', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Align Center");?></span>
 			</td>
-		</tr>
-		<tr>
-			<td></th>
 			<td>
 			<input type="checkbox" id="just_writing_right" name="just_writing_right" <?php if( get_the_author_meta( 'just_writing_right', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Align Right");?></span>
 			</td>
+		</tr>
+		<tr>
+			<td></th>
 			<td>
 			<input type="checkbox" id="just_writing_outdent" name="just_writing_outdent" <?php if( get_the_author_meta( 'just_writing_outdent', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Outdent");?></span>
@@ -652,13 +689,13 @@ if( !function_exists( 'JustWriting' ) )
 			<input type="checkbox" id="just_writing_indent" name="just_writing_indent" <?php if( get_the_author_meta( 'just_writing_indent', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Indent");?></span>
 			</td>
-		</tr>
-		<tr>
-			<td></th>
 			<td>
 			<input type="checkbox" id="just_writing_p" name="just_writing_p" <?php if( get_the_author_meta( 'just_writing_p', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Paragraph");?></span>
 			</td>
+		</tr>
+		<tr>
+			<td></th>
 			<td>
 			<input type="checkbox" id="just_writing_h1" name="just_writing_h1" <?php if( get_the_author_meta( 'just_writing_h1', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("h1");?></span>
@@ -667,13 +704,13 @@ if( !function_exists( 'JustWriting' ) )
 			<input type="checkbox" id="just_writing_h2" name="just_writing_h2" <?php if( get_the_author_meta( 'just_writing_h2', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("h2");?></span>
 			</td>
-		</tr>
-		<tr>
-			<td></th>
 			<td>
 			<input type="checkbox" id="just_writing_h3" name="just_writing_h3" <?php if( get_the_author_meta( 'just_writing_h3', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("h3");?></span>
 			</td>
+		</tr>
+		<tr>
+			<td></th>
 			<td>
 			<input type="checkbox" id="just_writing_h4" name="just_writing_h4" <?php if( get_the_author_meta( 'just_writing_h4', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("h4");?></span>
@@ -682,13 +719,13 @@ if( !function_exists( 'JustWriting' ) )
 			<input type="checkbox" id="just_writing_h5" name="just_writing_h5" <?php if( get_the_author_meta( 'just_writing_h5', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("h5");?></span>
 			</td>
-		</tr>
-		<tr>
-			<td></th>
 			<td>
 			<input type="checkbox" id="just_writing_h6" name="just_writing_h6" <?php if( get_the_author_meta( 'just_writing_h6', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("h6");?></span>
 			</td>
+		</tr>
+		<tr>
+			<td></th>
 			<td>
 			<input type="checkbox" id="just_writing_quotes" name="just_writing_quotes" <?php if( get_the_author_meta( 'just_writing_quotes', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Block Quotes");?></span>
@@ -697,13 +734,13 @@ if( !function_exists( 'JustWriting' ) )
 			<input type="checkbox" id="just_writing_address" name="just_writing_address" <?php if( get_the_author_meta( 'just_writing_address', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Address");?></span>
 			</td>
-		</tr>
-		<tr>
-			<td></th>
 			<td>
 			<input type="checkbox" id="just_writing_pf" name="just_writing_pf" <?php if( get_the_author_meta( 'just_writing_pf', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Preformatted");?></span>
 			</td>
+		</tr>
+		<tr>
+			<td></th>
 			<td>
 			<input type="checkbox" id="just_writing_spell" name="just_writing_spell" <?php if( get_the_author_meta( 'just_writing_spell', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Spellcheck");?></span>
@@ -712,13 +749,13 @@ if( !function_exists( 'JustWriting' ) )
 			<input type="checkbox" id="just_writing_more" name="just_writing_more" <?php if( get_the_author_meta( 'just_writing_more', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Insert More Tag");?></span>
 			</td>
-		</tr>
-		<tr>
-			<td></th>
 			<td>
 			<input type="checkbox" id="just_writing_char" name="just_writing_char" <?php if( get_the_author_meta( 'just_writing_char', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Insert custom character");?></span>
 			</td>
+		</tr>
+		<tr>
+			<td></th>
 			<td>
 			<input type="checkbox" id="just_writing_undo" name="just_writing_undo" <?php if( get_the_author_meta( 'just_writing_undo', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Undo");?></span>
@@ -727,18 +764,20 @@ if( !function_exists( 'JustWriting' ) )
 			<input type="checkbox" id="just_writing_redo" name="just_writing_redo" <?php if( get_the_author_meta( 'just_writing_redo', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Redo");?></span>
 			</td>
-		</tr>
-		<tr>
-			<td></th>
 			<td>
 			<input type="checkbox" id="just_writing_help" name="just_writing_help" <?php if( get_the_author_meta( 'just_writing_help', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<span class="description"><?php echo __("Help");?></span>
 			</td>
+		</tr>
+		<tr>
+			<td></th>
 			<td>
 			<span class="description"><a onClick='JustWritingSelectAll()'><?php echo __("Select All");?></a></span>
 			</td>
 			<td>
 			<span class="description"><a onClick='JustWritingDeSelectAll()'><?php echo __("Deselect All");?></a></span>
+			</td>
+			<td>
 			</td>
 		</tr>
 	</table>
@@ -792,6 +831,8 @@ if( !function_exists( 'JustWriting' ) )
 		update_user_meta( $user_id, 'just_writing_al_edit', 'off' );
 		update_user_meta( $user_id, 'just_writing_al_new', 'off' );
 		update_user_meta( $user_id, 'just_writing_f_lb', 'on' );
+		update_user_meta( $user_id, 'just_writing_superscript', 'on' );
+		update_user_meta( $user_id, 'just_writing_subscript', 'on' );
 		}
 
 	Function JustWritingLoadEdit()
@@ -821,6 +862,9 @@ if( !function_exists( 'JustWriting' ) )
 		// If we're enabled, setup as required.
 		if( $JustWritingEnabled == "on" )
 			{
+			wp_register_style( 'justwriting_style', plugins_url( '', __FILE__ ) . '/just-writing.css' );
+			wp_enqueue_style( 'justwriting_style' ); 
+
 			// Get the options to pass to the javascript code
 			$DisableFade = 0;
 			if( get_the_author_meta( 'just_writing_d_fade', $cuid ) == 'on' ) { $DisableFade = 1; } 

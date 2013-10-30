@@ -43,3 +43,13 @@
 .wp_themeSkin .mceButtonEnabled:hover span.mce_Preformatted,
 .wp_themeSkin .mceButtonActive span.mce_Preformatted,
 .wp_themeSkin .mceSplitButton:hover span.mce_Preformatted {background-position:-160px 0}
+
+.wp_themeSkin span.mce_subscript { background-position:-180px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce_subscript,
+.wp_themeSkin .mceButtonActive span.mce_subscript,
+.wp_themeSkin .mceSplitButton:hover span.mce_subscript {background-position:-180px 0}
+
+.wp_themeSkin span.mce_superscript { background-position:-200px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce_superscript,
+.wp_themeSkin .mceButtonActive span.mce_superscript,
+.wp_themeSkin .mceSplitButton:hover span.mce_superscript {background-position:-200px 0}
