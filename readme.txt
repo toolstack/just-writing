@@ -43,6 +43,11 @@ This plugin adds the following commands to the toolbar in DFWM:
 	* Preview
 	* Superscript
 	* Subscript
+	* Cut
+	* Copy
+	* Paste
+	* Paste as Text
+	* Paste from Word
 
 And there's more!
 
