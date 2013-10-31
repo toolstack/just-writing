@@ -237,7 +237,19 @@ function JustWritingMoveMouse()
 
 function JustWritingAutoLoad()
 {
+		var UpdateBanner = document.getElementById('message');
+
+		if( UpdateBanner != null )
+			{
+			if( UpdateBanner.hidden == false) 
+				{ 
+				clearInterval(JustWritingAutoLoadIntervalID);
+				return;
+				}
+			}
+			
 		var FSButton = document.getElementById('content_wp_fullscreen');
+
 		if( FSButton != null ) 
 			{ 
 			FSButton.click(); 

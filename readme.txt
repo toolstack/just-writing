@@ -86,6 +86,9 @@ If you start DFWM without moving the mouse you might hit right between when Word
 4. A real DFWM!
 
 == Changelog ==
+= 2.9 =
+* Fixed issue with auto load of DFWM being triggered every time a post was updated or published
+
 = 2.8 =
 * Add support for visual separators between button groups
 * Modularized the code as the primary PHP file was getting large
