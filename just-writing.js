@@ -165,7 +165,9 @@ function JustWriting()
 		(	function($) 
 				{
 				var $preview = $('#post-preview');
-
+				var $exit = $('#wp_fs_JustWritingExit');
+				var $label = $exit.attr('title');
+				
 				$preview.clone()
 					.removeAttr('id').removeClass('preview').addClass('right')
 					.css(marginside, '5px')
@@ -175,8 +177,11 @@ function JustWriting()
 						fullscreen.off(); 
 						return false; 
 						})
-					.html('Exit')
+					.html($label)
 					.insertBefore('#wp-fullscreen-save input.button-primary');
+
+				// Hide the temporary button we added to get the property exit text.	
+				$exit.hide();
 				}(jQuery)
 		);
 

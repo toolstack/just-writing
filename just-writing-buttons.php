@@ -560,6 +560,16 @@
 										);
 			}
 
+		$buttons['JustWritingExit'] = array( 
+										// Title of the button
+										'title' => __('Exit'), 
+										// Command to execute
+										'onclick' => "",
+										// Show on visual AND html mode
+										'both' => false
+									);
+			
+			
 		return $buttons;
 		}
 

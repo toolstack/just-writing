@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 3.7.1
-Stable tag: 2.7
+Stable tag: 2.8
 
 Adds buttons to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -89,6 +89,7 @@ If you start DFWM without moving the mouse you might hit right between when Word
 = 2.8 =
 * Add support for visual separators between button groups
 * Modularized the code as the primary PHP file was getting large
+* Added support for translation of the 'Exit' button
 
 = 2.7 =
 * Added Cut/Copy/Paste buttons
@@ -182,7 +183,6 @@ Initial release, no updates as everything is new!
 
 == Roadmap ==
 
-* Version 2.8  - add separators, handle translation of exit button
 * Version 2.9  - continue restructuring preferences 
 * Version 2.10 - add style plugin for font options
 * Version 3.0  - add second row to toolbar, remove individual style buttons
