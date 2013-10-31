@@ -19,39 +19,25 @@ Just Writing takes DFWM from a great way to write to a great way of writing post
 
 This plugin adds the following commands to the toolbar in DFWM:
 
-	* Strikethrough
-	* Underline
-	* RemoveFormat
-	* Align Left
-	* Align Full
-	* Align Right
-	* Indent
-	* Paragraph
-	* H1
-	* H2
-	* H3
-	* H4
-	* H5
-	* H6
+	* Strikethrough         * Preformatted
+	* Underline             * Proofread Writing
+	* RemoveFormat          * Insert More Tag
+	* Align Left            * Insert custom character
+	* Align Full            * Undo
+	* Align Right           * Redo
+	* Indent                * Preview
+	* Paragraph             * Superscript
+	* H1                    * Subscript
+	* H2                    * Cut
+	* H3                    * Copy
+	* H4                    * Paste
+	* H5                    * Paste as Text
+	* H6                    * Paste from Word
 	* Address
-	* Preformatted
-	* Proofread Writing
-	* Insert More Tag
-	* Insert custom character
-	* Undo
-	* Redo
-	* Preview
-	* Superscript
-	* Subscript
-	* Cut
-	* Copy
-	* Paste
-	* Paste as Text
-	* Paste from Word
-
+	
 And there's more!
 
-	* Option to remove the fade effect and keep the toolbar visiable
+	* Option to remove the fade effect and keep the toolbar visible
 	* Option to hide the border on the title/body areas
 	* Option to hide the word count
 	* Adds an optional Preview button to the right of the Save button
@@ -100,6 +86,10 @@ If you start DFWM without moving the mouse you might hit right between when Word
 4. A real DFWM!
 
 == Changelog ==
+= 2.8 =
+* Add support for visual separators between button groups
+* Modularized the code as the primary PHP file was getting large
+
 = 2.7 =
 * Added Cut/Copy/Paste buttons
 * Cleaned up the preferences screen
@@ -151,6 +141,9 @@ If you start DFWM without moving the mouse you might hit right between when Word
 * Initial release.
 
 == Upgrade Notice ==
+= 2.8 =
+* New separators are disabled by default for existing users until they enable them in the user preferences page
+
 = 2.7 =
 * None.
 
@@ -190,7 +183,7 @@ Initial release, no updates as everything is new!
 == Roadmap ==
 
 * Version 2.8  - add separators, handle translation of exit button
-* Version 2.9  - continue restructure preferences 
+* Version 2.9  - continue restructuring preferences 
 * Version 2.10 - add style plugin for font options
 * Version 3.0  - add second row to toolbar, remove individual style buttons
 

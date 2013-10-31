@@ -136,7 +136,7 @@ function JustWriting()
 			{
 			(	function($) 
 					{
-					$('#wp_fs_Paragraph').replaceWith( '<select name=JustWritingFormats id=JustWritingFormats onchange=JustWritingFormatSelectChange()><option>Paragraph</option><option>Address</option><option>Block Quotes</option><option>Preformatted</option><option>Heading 1</option><option>Heading 2</option><option>Heading 3</option><option>Heading 4</option><option>Heading 5</option><option>Heading 6</option></select>' );
+					$('#wp_fs_Paragraph').replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingFormats id=JustWritingFormats onchange=JustWritingFormatSelectChange()><option>Paragraph</option><option>Address</option><option>Block Quotes</option><option>Preformatted</option><option>Heading 1</option><option>Heading 2</option><option>Heading 3</option><option>Heading 4</option><option>Heading 5</option><option>Heading 6</option></select>" );
 					}(jQuery)
 			);
 			}
@@ -146,6 +146,20 @@ function JustWriting()
 			{
 			marginside = 'margin-right';
 			}
+		
+		// Deal with the Separators
+		(  	function($)
+				{
+				$('#wp_fs_JustWritingSeparatorOne').removeClass('mceButton').removeClass('mceButtonEnabled');
+				$('#wp_fs_JustWritingSeparatorTwo').removeClass('mceButton').removeClass('mceButtonEnabled');
+				$('#wp_fs_JustWritingSeparatorThree').removeClass('mceButton').removeClass('mceButtonEnabled');
+				$('#wp_fs_JustWritingSeparatorFour').removeClass('mceButton').removeClass('mceButtonEnabled');
+				$('#wp_fs_JustWritingSeparatorFive').removeClass('mceButton').removeClass('mceButtonEnabled');
+				$('#wp_fs_JustWritingSeparatorSix').removeClass('mceButton').removeClass('mceButtonEnabled');
+				$('#wp_fs_JustWritingSeparatorSeven').removeClass('mceButton').removeClass('mceButtonEnabled');
+				$('#wp_fs_JustWritingSeparatorEight').removeClass('mceButton').removeClass('mceButtonEnabled');
+				}(jQuery)
+		);
 		
 		// Add exit button
 		(	function($) 

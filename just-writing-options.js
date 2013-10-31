@@ -38,6 +38,14 @@ function JustWritingSelectAll()
 	document.getElementById('just_writing_paste').checked=true;
 	document.getElementById('just_writing_pastetext').checked=true;
 	document.getElementById('just_writing_pasteword').checked=true;
+	document.getElementById('just_writing_separatorone').checked=true;
+	document.getElementById('just_writing_separatortwo').checked=true;
+	document.getElementById('just_writing_separatorthree').checked=true;
+	document.getElementById('just_writing_separatorfour').checked=true;
+	document.getElementById('just_writing_separatorfive').checked=true;
+	document.getElementById('just_writing_separatorsix').checked=true;
+	document.getElementById('just_writing_separatorseven').checked=true;
+	document.getElementById('just_writing_separatoreight').checked=true;
 }
 
 function JustWritingDeSelectAll()
@@ -80,6 +88,14 @@ function JustWritingDeSelectAll()
 	document.getElementById('just_writing_paste').checked=false;
 	document.getElementById('just_writing_pastetext').checked=false;
 	document.getElementById('just_writing_pasteword').checked=false;
+	document.getElementById('just_writing_separatorone').checked=false;
+	document.getElementById('just_writing_separatortwo').checked=false;
+	document.getElementById('just_writing_separatorthree').checked=false;
+	document.getElementById('just_writing_separatorfour').checked=false;
+	document.getElementById('just_writing_separatorfive').checked=false;
+	document.getElementById('just_writing_separatorsix').checked=false;
+	document.getElementById('just_writing_separatorseven').checked=false;
+	document.getElementById('just_writing_separatoreight').checked=false;
 }
 
 function JustWritingSelectDefaults()
@@ -122,4 +138,12 @@ function JustWritingSelectDefaults()
 	document.getElementById('just_writing_paste').checked=false;
 	document.getElementById('just_writing_pastetext').checked=false;
 	document.getElementById('just_writing_pasteword').checked=false;
+	document.getElementById('just_writing_separatorone').checked=false;
+	document.getElementById('just_writing_separatortwo').checked=true;
+	document.getElementById('just_writing_separatorthree').checked=true;
+	document.getElementById('just_writing_separatorfour').checked=true;
+	document.getElementById('just_writing_separatorfive').checked=true;
+	document.getElementById('just_writing_separatorsix').checked=true;
+	document.getElementById('just_writing_separatorseven').checked=true;
+	document.getElementById('just_writing_separatoreight').checked=false;
 }

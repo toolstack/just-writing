@@ -1,3 +1,11 @@
+.wp_themeSkin span.mce_JustWritingSeparatorOne,
+.wp_themeSkin span.mce_JustWritingSeparatorTwo,
+.wp_themeSkin span.mce_JustWritingSeparatorThree,
+.wp_themeSkin span.mce_JustWritingSeparatorFour,
+.wp_themeSkin span.mce_JustWritingSeparatorFive,
+.wp_themeSkin span.mce_JustWritingSeparatorSix,
+.wp_themeSkin span.mce_JustWritingSeparatorSeven,
+.wp_themeSkin span.mce_JustWritingSeparatorEight { background-position:-226px 0px; background-image: url('./just-writing-icons.png?ver=20131018'); width:9px !important; height:28px !important;}
 
 .wp_themeSkin span.mce_H1 { background-position:0px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
 .wp_themeSkin .mceButtonEnabled:hover span.mce_H1,
