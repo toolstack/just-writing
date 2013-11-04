@@ -146,6 +146,9 @@ If you start DFWM without moving the mouse you might hit right between when Word
 * Initial release.
 
 == Upgrade Notice ==
+= 2.9 =
+* None.
+
 = 2.8 =
 * New separators are disabled by default for existing users until they enable them in the user preferences page
 

@@ -16,6 +16,7 @@ function JustWritingSelectAll()
 	document.getElementById('just_writing_right').checked=true;
 	document.getElementById('just_writing_outdent').checked=true;
 	document.getElementById('just_writing_indent').checked=true;
+	document.getElementById('just_writing_f_lb').checked=true;
 	document.getElementById('just_writing_p').checked=true;
 	document.getElementById('just_writing_h1').checked=true;
 	document.getElementById('just_writing_h2').checked=true;
@@ -46,6 +47,9 @@ function JustWritingSelectAll()
 	document.getElementById('just_writing_separatorsix').checked=true;
 	document.getElementById('just_writing_separatorseven').checked=true;
 	document.getElementById('just_writing_separatoreight').checked=true;
+	document.getElementById('just_writing_f_n').checked=true;
+	document.getElementById('just_writing_f_s').checked=true;
+	document.getElementById('just_writing_f_c').checked=true;
 }
 
 function JustWritingDeSelectAll()
@@ -66,6 +70,7 @@ function JustWritingDeSelectAll()
 	document.getElementById('just_writing_right').checked=false;
 	document.getElementById('just_writing_outdent').checked=false;
 	document.getElementById('just_writing_indent').checked=false;
+	document.getElementById('just_writing_f_lb').checked=false;
 	document.getElementById('just_writing_p').checked=false;
 	document.getElementById('just_writing_h1').checked=false;
 	document.getElementById('just_writing_h2').checked=false;
@@ -96,6 +101,9 @@ function JustWritingDeSelectAll()
 	document.getElementById('just_writing_separatorsix').checked=false;
 	document.getElementById('just_writing_separatorseven').checked=false;
 	document.getElementById('just_writing_separatoreight').checked=false;
+	document.getElementById('just_writing_f_n').checked=false;
+	document.getElementById('just_writing_f_s').checked=false;
+	document.getElementById('just_writing_f_c').checked=false;
 }
 
 function JustWritingSelectDefaults()
@@ -116,6 +124,7 @@ function JustWritingSelectDefaults()
 	document.getElementById('just_writing_right').checked=true;
 	document.getElementById('just_writing_outdent').checked=true;
 	document.getElementById('just_writing_indent').checked=true;
+	document.getElementById('just_writing_f_lb').checked=true;
 	document.getElementById('just_writing_p').checked=true;
 	document.getElementById('just_writing_h1').checked=true;
 	document.getElementById('just_writing_h2').checked=true;
@@ -146,4 +155,7 @@ function JustWritingSelectDefaults()
 	document.getElementById('just_writing_separatorsix').checked=true;
 	document.getElementById('just_writing_separatorseven').checked=true;
 	document.getElementById('just_writing_separatoreight').checked=false;
+	document.getElementById('just_writing_f_n').checked=false;
+	document.getElementById('just_writing_f_s').checked=false;
+	document.getElementById('just_writing_f_c').checked=false;
 }

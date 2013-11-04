@@ -90,6 +90,42 @@
 							);
 			}
 			
+		if( get_the_author_meta( 'just_writing_f_n', $cuid ) == 'on' )
+			{
+			$buttons['fontselect'] = array( 
+									// Title of the button
+									'title' => __('Font'), 
+									// Command to execute
+									'onclick' => "tinyMCE.execCommand('FontName', false, 'Arial Black');",
+									// Show on visual AND html mode
+									'both' => false
+								);
+			}
+			
+		if( get_the_author_meta( 'just_writing_f_s', $cuid ) == 'on' )
+			{
+			$buttons['fontsize'] = array( 
+									// Title of the button
+									'title' => __('Font size'), 
+									// Command to execute
+									'onclick' => "tinyMCE.execCommand('FontSize', false, '32');",
+									// Show on visual AND html mode
+									'both' => false
+								);
+			}
+
+		if( get_the_author_meta( 'just_writing_f_c', $cuid ) == 'on' )
+			{
+			$buttons['fontcolor'] = array( 
+									// Title of the button
+									'title' => __('Font color'), 
+									// Command to execute
+									'onclick' => "tinyMCE.execCommand('ForeColor', false, '#FF0000');",
+									// Show on visual AND html mode
+									'both' => false
+								);
+			}
+
 		if( get_the_author_meta( 'just_writing_bold', $cuid ) == 'on' )
 			{
 			$buttons['bold'] = array( 
@@ -568,7 +604,6 @@
 										// Show on visual AND html mode
 										'both' => false
 									);
-			
 			
 		return $buttons;
 		}

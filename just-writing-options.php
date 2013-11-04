@@ -81,6 +81,9 @@ function just_writing_save_user_profile_fields( $user_id )
 	update_user_meta( $user_id, 'just_writing_separatorsix', just_writing_get_checked_state( $_POST['just_writing_separatorsix'] ) );
 	update_user_meta( $user_id, 'just_writing_separatorseven', just_writing_get_checked_state( $_POST['just_writing_separatorseven'] ) );
 	update_user_meta( $user_id, 'just_writing_separatoreight', just_writing_get_checked_state( $_POST['just_writing_separatoreight'] ) );
+	update_user_meta( $user_id, 'just_writing_f_n', just_writing_get_checked_state( $_POST['just_writing_f_n'] ) );
+	update_user_meta( $user_id, 'just_writing_f_s', just_writing_get_checked_state( $_POST['just_writing_f_s'] ) );
+	update_user_meta( $user_id, 'just_writing_f_c', just_writing_get_checked_state( $_POST['just_writing_f_c'] ) );
 
 	//Deal with the border options
 	if( $_POST['just_writing_border_setting'] == 'hide' )
@@ -234,6 +237,21 @@ function just_writing_save_user_profile_fields( $user_id )
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_separatortwo" name="just_writing_separatortwo" <?php if( get_the_author_meta( 'just_writing_separatortwo', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Add a separator before this group");?>
+			</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td>
+			<input type="checkbox" id="just_writing_f_n" name="just_writing_f_n" <?php if( get_the_author_meta( 'just_writing_f_n', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<?php echo __("Font");?>
+			</td>
+			<td>
+			<input type="checkbox" id="just_writing_f_s" name="just_writing_f_s" <?php if( get_the_author_meta( 'just_writing_f_s', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<?php echo __("Font Size");?>
+			</td>
+			<td>
+			<input type="checkbox" id="just_writing_f_c" name="just_writing_f_c" <?php if( get_the_author_meta( 'just_writing_f_c', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<?php echo __("Font Color");?>
 			</td>
 		</tr>
 		<tr>
