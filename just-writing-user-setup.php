@@ -5,7 +5,7 @@ Copyright (c) 2013 by Greg Ross
 This software is released under the GPL v2.0, see license.txt for details
 */
 
-if( !function_exists( 'JustWriting' ) )
+if( !function_exists( 'Just_Writing_User_Setup' ) )
 	{
 	/*
 	 *	This function is called to setup the user preferences for the first time.

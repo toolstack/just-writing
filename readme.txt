@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 3.7.1
-Stable tag: 2.8
+Stable tag: 2.9
 
 Adds buttons to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -88,6 +88,7 @@ If you start DFWM without moving the mouse you might hit right between when Word
 == Changelog ==
 = 2.9 =
 * Fixed issue with auto load of DFWM being triggered every time a post was updated or published
+* Fixed issue with new installs, users would get a blank screen if they did not save their profile settings before editing a post
 
 = 2.8 =
 * Add support for visual separators between button groups
@@ -186,7 +187,7 @@ Initial release, no updates as everything is new!
 
 == Roadmap ==
 
-* Version 2.9  - continue restructuring preferences 
 * Version 2.10 - add style plugin for font options
+* Version 2.11  - continue restructuring preferences 
 * Version 3.0  - add second row to toolbar, remove individual style buttons
 

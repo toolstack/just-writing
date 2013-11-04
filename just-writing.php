@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Just Writing
-Version: 2.8
+Version: 2.9
 Plugin URI: http://toolstack.com/just-writing
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -16,7 +16,7 @@ Copyright (c) 2013 by Greg Ross
 This software is released under the GPL v2.0, see license.txt for details
 */
 
-if( !function_exists( 'JustWriting' ) )
+if( !function_exists( 'JustWritingLoad' ) )
 	{
 	/*
 	 *	This function is called to add the new buttons to the distraction free
