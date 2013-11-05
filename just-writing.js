@@ -134,40 +134,20 @@ function JustWriting()
 		// Add the format listbox
 		if( FormatLB == 1 )
 			{
-			(	function($) 
-					{
-					$('#wp_fs_Paragraph').replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingFormats id=JustWritingFormats onchange=JustWritingFormatSelectChange()><option>[Style]</option><option>Paragraph</option><option>Address</option><option>Block Quotes</option><option>Preformatted</option><option>Heading 1</option><option>Heading 2</option><option>Heading 3</option><option>Heading 4</option><option>Heading 5</option><option>Heading 6</option></select>" );
-					}(jQuery)
-			);
+			jQuery('#wp_fs_Paragraph').replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingFormats id=JustWritingFormats onchange=JustWritingFormatSelectChange()><option>[Style]</option><option>Paragraph</option><option>Address</option><option>Block Quotes</option><option>Preformatted</option><option>Heading 1</option><option>Heading 2</option><option>Heading 3</option><option>Heading 4</option><option>Heading 5</option><option>Heading 6</option></select>" );
 			}
 		
 		// Add the font listbox
-		(	function($) 
-				{
-				$('#wp_fs_fontselect').replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingFonts id=JustWritingFonts onchange=JustWritingFontSelectChange()><option>[Font]</option><option>Andale Mono</option><option>Arial</option><option>Arial Black</option><option>Book Antiqua</option><option>Comic Sans MS</option><option>Courier New</option><option>Georgia</option><option>Helvetica</option><option>Impact</option><option>Symbol</option><option>Tahoma</option><option>Terminal</option><option>Times New Roman</option><option>Trebuchet MS</option><option>Verdana</option><option>Webdings</option><option>Wingdings</option></select>" );
-				}(jQuery)
-		);
+		jQuery('#wp_fs_fontselect').replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingFonts id=JustWritingFonts onchange=JustWritingFontSelectChange()><option>[Font]</option><option>Andale Mono</option><option>Arial</option><option>Arial Black</option><option>Book Antiqua</option><option>Comic Sans MS</option><option>Courier New</option><option>Georgia</option><option>Helvetica</option><option>Impact</option><option>Symbol</option><option>Tahoma</option><option>Terminal</option><option>Times New Roman</option><option>Trebuchet MS</option><option>Verdana</option><option>Webdings</option><option>Wingdings</option></select>" );
 		
 		// Add the font size listbox
-		(	function($) 
-				{
-				$('#wp_fs_fontsize').replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingFontSize id=JustWritingFontSize onchange=JustWritingFontSizeSelectChange()><option>[Font Size]</option><option>6</option><option>8</option><option>10</option><option>12</option><option>14</option><option>16</option><option>18</option><option>20</option><option>22</option><option>24</option><option>28</option><option>32</option><option>36</option><option>40</option><option>44</option><option>48</option><option>52</option><option>62</option><option>72</option></select>" );
-				}(jQuery)
-		);
+		jQuery('#wp_fs_fontsize').replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingFontSize id=JustWritingFontSize onchange=JustWritingFontSizeSelectChange()><option>[Font Size]</option><option>6</option><option>8</option><option>10</option><option>12</option><option>14</option><option>16</option><option>18</option><option>20</option><option>22</option><option>24</option><option>28</option><option>32</option><option>36</option><option>40</option><option>44</option><option>48</option><option>52</option><option>62</option><option>72</option></select>" );
 
 		// Add the font color listbox
-		(	function($) 
-				{
-				$('#wp_fs_fontcolor').replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingFontColor id=JustWritingFontColor onchange=JustWritingFontColorSelectChange()><option>[Font Color]</option><option>Black</option><option>Blue</option><option>Blue (Dark)</option><option>Blue (Light)</option><option>Brown</option><option>Cyan</option><option>Green</option><option>Grey</option><option>Lime</option><option>Magenta</option><option>Maroon</option><option>Olive</option><option>Orange</option><option>Purple</option><option>Red</option><option>Silver</option><option>White</option><option>Yellow</option></select>" );
-				}(jQuery)
-		);
+		jQuery('#wp_fs_fontcolor').replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingFontColor id=JustWritingFontColor onchange=JustWritingFontColorSelectChange()><option>[Font Color]</option><option>Black</option><option>Blue</option><option>Blue (Dark)</option><option>Blue (Light)</option><option>Brown</option><option>Cyan</option><option>Green</option><option>Grey</option><option>Lime</option><option>Magenta</option><option>Maroon</option><option>Olive</option><option>Orange</option><option>Purple</option><option>Red</option><option>Silver</option><option>White</option><option>Yellow</option></select>" );
 
 		// Add the background color listbox
-		(	function($) 
-				{
-				$('#wp_fs_backgroundcolor').replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingBackgroundColor id=JustWritingBackgroundColor onchange=JustWritingBackgroundColorSelectChange()><option>[BG Color]</option><option>Black</option><option>Blue</option><option>Blue (Dark)</option><option>Blue (Light)</option><option>Brown</option><option>Cyan</option><option>Green</option><option>Grey</option><option>Lime</option><option>Magenta</option><option>Maroon</option><option>Olive</option><option>Orange</option><option>Purple</option><option>Red</option><option>Silver</option><option>White</option><option>Yellow</option></select>" );
-				}(jQuery)
-		);
+		jQuery('#wp_fs_backgroundcolor').replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingBackgroundColor id=JustWritingBackgroundColor onchange=JustWritingBackgroundColorSelectChange()><option>[BG Color]</option><option>Black</option><option>Blue</option><option>Blue (Dark)</option><option>Blue (Light)</option><option>Brown</option><option>Cyan</option><option>Green</option><option>Grey</option><option>Lime</option><option>Magenta</option><option>Maroon</option><option>Olive</option><option>Orange</option><option>Purple</option><option>Red</option><option>Silver</option><option>White</option><option>Yellow</option></select>" );
 		
 		var marginside = 'margin-left';
 		if( rtl == 1 )
@@ -176,63 +156,48 @@ function JustWriting()
 			}
 		
 		// Deal with the Separators
-		(  	function($)
-				{
-				$('#wp_fs_JustWritingSeparatorOne').removeClass('mceButton').removeClass('mceButtonEnabled');
-				$('#wp_fs_JustWritingSeparatorTwo').removeClass('mceButton').removeClass('mceButtonEnabled');
-				$('#wp_fs_JustWritingSeparatorThree').removeClass('mceButton').removeClass('mceButtonEnabled');
-				$('#wp_fs_JustWritingSeparatorFour').removeClass('mceButton').removeClass('mceButtonEnabled');
-				$('#wp_fs_JustWritingSeparatorFive').removeClass('mceButton').removeClass('mceButtonEnabled');
-				$('#wp_fs_JustWritingSeparatorSix').removeClass('mceButton').removeClass('mceButtonEnabled');
-				$('#wp_fs_JustWritingSeparatorSeven').removeClass('mceButton').removeClass('mceButtonEnabled');
-				$('#wp_fs_JustWritingSeparatorEight').removeClass('mceButton').removeClass('mceButtonEnabled');
-				}(jQuery)
-		);
+		jQuery('#wp_fs_JustWritingSeparatorOne').removeClass('mceButton').removeClass('mceButtonEnabled');
+		jQuery('#wp_fs_JustWritingSeparatorTwo').removeClass('mceButton').removeClass('mceButtonEnabled');
+		jQuery('#wp_fs_JustWritingSeparatorThree').removeClass('mceButton').removeClass('mceButtonEnabled');
+		jQuery('#wp_fs_JustWritingSeparatorFour').removeClass('mceButton').removeClass('mceButtonEnabled');
+		jQuery('#wp_fs_JustWritingSeparatorFive').removeClass('mceButton').removeClass('mceButtonEnabled');
+		jQuery('#wp_fs_JustWritingSeparatorSix').removeClass('mceButton').removeClass('mceButtonEnabled');
+		jQuery('#wp_fs_JustWritingSeparatorSeven').removeClass('mceButton').removeClass('mceButtonEnabled');
+		jQuery('#wp_fs_JustWritingSeparatorEight').removeClass('mceButton').removeClass('mceButtonEnabled');
 		
 		// Add exit button
-		(	function($) 
-				{
-				var $preview = $('#post-preview');
-				var $exit = $('#wp_fs_JustWritingExit');
-				var $label = $exit.attr('title');
+		var preview = jQuery('#post-preview');
+		var exit = jQuery('#wp_fs_JustWritingExit');
+		var label = exit.attr('title');
 				
-				$preview.clone()
-					.removeAttr('id').removeClass('preview').addClass('right')
-					.css(marginside, '5px')
-					.css('margin-bottom', '8px')
-					.click(function(e) 
-						{ 
-						fullscreen.off(); 
-						return false; 
-						})
-					.html($label)
-					.insertBefore('#wp-fullscreen-save input.button-primary');
+		preview.clone()
+				.removeAttr('id').removeClass('preview').addClass('right')
+				.css(marginside, '5px')
+				.css('margin-bottom', '8px')
+				.click(function(e) 
+					{ 
+					fullscreen.off(); 
+					return false; 
+					})
+				.html(label)
+				.insertBefore('#wp-fullscreen-save input.button-primary');
 
-				// Hide the temporary button we added to get the property exit text.	
-				$exit.hide();
-				}(jQuery)
-		);
+		// Hide the temporary button we added to get the property exit text.	
+		exit.hide();
 
 		// Add preview button
 		if( HidePreview == 0 )
 			{
-			(	function($) 
-					{
-					var $preview = $('#post-preview');
-
-					$preview.clone()
-						.removeAttr('id').removeClass('preview').addClass('right')
-						.css( marginside, '5px')
-						.click(function(e) 
-							{
-							$preview.click();
-							e.preventDefault();
-							})
-						.insertBefore('#wp-fullscreen-save input.button-primary');
-					}(jQuery)
-			);
+			preview.clone()
+					.removeAttr('id').removeClass('preview').addClass('right')
+					.css( marginside, '5px')
+					.click(function(e) 
+						{
+						$preview.click();
+						e.preventDefault();
+						})
+					.insertBefore('#wp-fullscreen-save input.button-primary');
 			}	
-
 		}
 }
 
@@ -365,11 +330,7 @@ function JustWritingBackgroundColorSelectChange()
 
 function JustWritingMoveMouse()
 {
-		(	function($) 
-				{
-				$(document).trigger('mousemove');
-				}(jQuery)
-		);
+	jQuery(document).trigger('mousemove');
 }
 
 function JustWritingAutoLoad()
