@@ -49,7 +49,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 	Function JustWritingLoad( $source )
 		{
 		// Load the buttons array 
-		include_once( "just-writing-buttons.php");
+		include_once( "just-writing-buttons.php" );
 
 		// Get the user option to see if we're enabled
 		$cuid = get_current_user_id();
@@ -59,7 +59,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 		// has been written yet, so let's do that now.
 		if( $JustWritingEnabled == "" )
 			{
-			include_once( "just-writing-user-setup.php");
+			include_once( "just-writing-user-setup.php" );
 			Just_Writing_User_Setup( $cuid );
 			$JustWritingEnabled = "on";
 			}
@@ -107,8 +107,8 @@ if( !function_exists( 'JustWritingLoad' ) )
 	}
 	
 	// Handle the post screens
-	add_action('admin_head-post-new.php', 'JustWritingLoadNew');
-	add_action('admin_head-post.php', 'JustWritingLoadEdit');
+	add_action( 'admin_head-post-new.php', 'JustWritingLoadNew' );
+	add_action( 'admin_head-post.php', 'JustWritingLoadEdit' );
 	
 	// Handle the user profile items
 	add_action( 'show_user_profile', 'JustWritingLoadProfile' );
