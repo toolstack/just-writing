@@ -50,6 +50,7 @@ function JustWritingSelectAll()
 	document.getElementById('just_writing_f_n').checked=true;
 	document.getElementById('just_writing_f_s').checked=true;
 	document.getElementById('just_writing_f_c').checked=true;
+	document.getElementById('just_writing_b_c').checked=true;
 }
 
 function JustWritingDeSelectAll()
@@ -104,6 +105,7 @@ function JustWritingDeSelectAll()
 	document.getElementById('just_writing_f_n').checked=false;
 	document.getElementById('just_writing_f_s').checked=false;
 	document.getElementById('just_writing_f_c').checked=false;
+	document.getElementById('just_writing_b_c').checked=false;
 }
 
 function JustWritingSelectDefaults()
@@ -158,4 +160,5 @@ function JustWritingSelectDefaults()
 	document.getElementById('just_writing_f_n').checked=false;
 	document.getElementById('just_writing_f_s').checked=false;
 	document.getElementById('just_writing_f_c').checked=false;
+	document.getElementById('just_writing_b_c').checked=false;
 }

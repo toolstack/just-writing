@@ -126,6 +126,18 @@
 								);
 			}
 
+		if( get_the_author_meta( 'just_writing_b_c', $cuid ) == 'on' )
+			{
+			$buttons['backgroundcolor'] = array( 
+									// Title of the button
+									'title' => __('Background Color'), 
+									// Command to execute
+									'onclick' => "tinyMCE.execCommand('BackColor', false, '#FFFFFF');",
+									// Show on visual AND html mode
+									'both' => false
+								);
+			}
+
 		if( get_the_author_meta( 'just_writing_bold', $cuid ) == 'on' )
 			{
 			$buttons['bold'] = array( 

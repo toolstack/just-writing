@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 3.7.1
-Stable tag: 2.9
+Stable tag: 2.10
 
 Adds buttons to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -33,7 +33,9 @@ This plugin adds the following commands to the toolbar in DFWM:
 	* H4                    * Paste
 	* H5                    * Paste as Text
 	* H6                    * Paste from Word
-	* Address
+	* Address               * Font
+	* Font Color			* Font Color
+	* Background Color
 	
 And there's more!
 
@@ -63,7 +65,7 @@ This code is released under the GPL v2, see license.txt for details.
 
 = What browsers are supported? =
 
-Try it and find out, the javascript is pretty basic so it should work in just about any browser (note even without javascript the buttons will be added, however the the preview and exit buttons along with the fade disable and border and word count hiding options will not be available).  I've successfully run it on:
+Try it and find out, the JavaScript is pretty basic so it should work in just about any browser.  I've successfully run it on:
 
 	* IE 11
 	* Opera 12.16
@@ -86,6 +88,9 @@ If you start DFWM without moving the mouse you might hit right between when Word
 4. A real DFWM!
 
 == Changelog ==
+= 2.10 =
+* Added Font, Font Size, Font Color and Background Color selector options
+
 = 2.9 =
 * Fixed issue with auto load of DFWM being triggered every time a post was updated or published
 * Fixed issue with new installs, users would get a blank screen if they did not save their profile settings before editing a post
@@ -146,6 +151,9 @@ If you start DFWM without moving the mouse you might hit right between when Word
 * Initial release.
 
 == Upgrade Notice ==
+= 2.10 =
+* New font/color options are disabled by default for existing users until they enable them in the user preferences page
+
 = 2.9 =
 * None.
 
@@ -162,7 +170,7 @@ If you start DFWM without moving the mouse you might hit right between when Word
 * None.
 
 = 2.4 =
-* New option for the format listbox will not be enabled until a user selections the option for existing users.  New users will have the opiton enabled by default.
+* New option for the format listbox will not be enabled until a user selections the option for existing users.  New users will have the option enabled by default.
 
 = 2.3 =
 * None.
@@ -174,7 +182,7 @@ If you start DFWM without moving the mouse you might hit right between when Word
 * None.
 
 = 2.0 =
-* Disabling the fade effect will force javascript to execute a mousemove event every 1.5 seconds, this could have a performance impact on some browsers.
+* Disabling the fade effect will force JavaScript to execute a mousemove event every 1.5 seconds, this could have a performance impact on some browsers.
 
 = 1.0 =
 * None.
@@ -190,7 +198,7 @@ Initial release, no updates as everything is new!
 
 == Roadmap ==
 
-* Version 2.10 - add style plugin for font options
-* Version 2.11  - continue restructuring preferences 
+* Version 2.11 - finish restructuring preferences
+* Version 2.12 - implement JavaScript color picker for font/background color options
 * Version 3.0  - add second row to toolbar, remove individual style buttons
 

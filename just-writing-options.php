@@ -84,6 +84,7 @@ function just_writing_save_user_profile_fields( $user_id )
 	update_user_meta( $user_id, 'just_writing_f_n', just_writing_get_checked_state( $_POST['just_writing_f_n'] ) );
 	update_user_meta( $user_id, 'just_writing_f_s', just_writing_get_checked_state( $_POST['just_writing_f_s'] ) );
 	update_user_meta( $user_id, 'just_writing_f_c', just_writing_get_checked_state( $_POST['just_writing_f_c'] ) );
+	update_user_meta( $user_id, 'just_writing_b_c', just_writing_get_checked_state( $_POST['just_writing_b_c'] ) );
 
 	//Deal with the border options
 	if( $_POST['just_writing_border_setting'] == 'hide' )
@@ -252,6 +253,13 @@ function just_writing_save_user_profile_fields( $user_id )
 			<td>
 			<input type="checkbox" id="just_writing_f_c" name="just_writing_f_c" <?php if( get_the_author_meta( 'just_writing_f_c', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Font Color");?>
+			</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td colspan=3>
+			<input type="checkbox" id="just_writing_b_c" name="just_writing_b_c" <?php if( get_the_author_meta( 'just_writing_b_c', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<?php echo __("Background Color");?>
 			</td>
 		</tr>
 		<tr>
