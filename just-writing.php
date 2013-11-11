@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Just Writing
-Version: 2.11
+Version: 2.12
 Plugin URI: http://toolstack.com/just-writing
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -98,6 +98,11 @@ if( !function_exists( 'JustWritingLoad' ) )
 				{
 				if( get_the_author_meta( 'just_writing_al_edit', $cuid ) == 'on' ) { $AutoLoad = 1; } 
 				}
+				
+			if( $_GET['JustWritingAutoLoad'] == 1 )
+				{
+				$AutoLoad = 1;
+				}
 	
 			// Register and enqueue the javascript.
 			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/just-writing.js?rtl=' . is_rtl() . '&disablefade=' . $DisableFade . '&hidewordcount=' . $HideWordCount . '&hidepreview=' . $HidePreview . '&hideborder=' . $HideBorder . '&hidemodebar=' . $HideModeBar . '&autoload=' . $AutoLoad . '&formatlistbox=' . $FormatLB . '&centertb=' . $CenterTB );
@@ -105,6 +110,23 @@ if( !function_exists( 'JustWritingLoad' ) )
 	
 			add_filter( 'wp_fullscreen_buttons', 'JustWriting' );
 			}
+		}
+
+	function JustWritingLinkRow( $actions, $post )
+		{
+		$new_actions = array();
+		
+		foreach( $actions as $key => $value )
+			{
+			$new_actions[$key] = $value;
+
+			if( $key == 'edit' )
+				{
+				$new_actions['JustWriting'] = '<a href="post.php?post=' . $post->ID . '&action=edit&JustWritingAutoLoad=1" title="Edit this item in Distraction Free Writing Mode">DFWM</a>';
+				}
+			}
+		
+		return $new_actions;
 		}
 	}
 	
@@ -117,4 +139,9 @@ if( !function_exists( 'JustWritingLoad' ) )
 	add_action( 'edit_user_profile', 'JustWritingLoadProfile' );
 	add_action( 'personal_options_update', 'JustWritingSaveProfile' );
 	add_action( 'edit_user_profile_update', 'JustWritingSaveProfile' );
+	
+	// Handle adding DFWM to the post/page rows
+	add_filter('post_row_actions', 'JustWritingLinkRow',10,2);
+	add_filter('page_row_actions', 'JustWritingLinkRow',10,2);
+
 ?>

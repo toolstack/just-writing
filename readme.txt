@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 3.7.1
-Stable tag: 2.11
+Stable tag: 2.12
 
 Adds buttons to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -88,6 +88,10 @@ If you start DFWM without moving the mouse you might hit right between when Word
 4. A real DFWM!
 
 == Changelog ==
+= 2.12 =
+* Fixed a bug between the center toolbar and autoload code.
+* Added option to add a DFWM link to the post and pages list.
+
 = 2.11 =
 * Added option to center the toolbar on screen.
 
@@ -159,7 +163,6 @@ If you start DFWM without moving the mouse you might hit right between when Word
 
 == Roadmap ==
 
-* Version 2.12 - add Just Writing option to the quick menu on post/page lists
 * Version 2.13 - implement JavaScript color picker for font/background color options
 * Version 3.0  - add second row to toolbar, remove individual style buttons
 

@@ -86,6 +86,7 @@ function just_writing_save_user_profile_fields( $user_id )
 	update_user_meta( $user_id, 'just_writing_f_c', just_writing_get_checked_state( $_POST['just_writing_f_c'] ) );
 	update_user_meta( $user_id, 'just_writing_b_c', just_writing_get_checked_state( $_POST['just_writing_b_c'] ) );
 	update_user_meta( $user_id, 'just_writing_c_tb', just_writing_get_checked_state( $_POST['just_writing_c_tb'] ) );
+	update_user_meta( $user_id, 'just_writing_a_l', just_writing_get_checked_state( $_POST['just_writing_a_l'] ) );
 
 	//Deal with the border options
 	if( $_POST['just_writing_border_setting'] == 'hide' )
@@ -170,9 +171,13 @@ function just_writing_save_user_profile_fields( $user_id )
 		</tr>
 		<tr>
 			<th></th>
-			<td colspan=3>
+			<td>
 			<input type="checkbox" id="just_writing_c_tb" name="just_writing_c_tb" <?php if( get_the_author_meta( 'just_writing_c_tb', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Center the ToolBar on screen");?>
+			</td>
+			<td colspan=2>
+			<input type="checkbox" id="just_writing_a_l" name="just_writing_a_l" <?php if( get_the_author_meta( 'just_writing_a_l', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<?php echo __("Add DFWM link to the Post/Pages lists");?>
 			</td>
 		</tr>
 		<tr>
