@@ -1,5 +1,5 @@
-var JustWritingAutoLoadIntervalID;
-var JustWritingToolbarCenterID;
+var JustWritingAutoLoadIntervalID = null;
+var JustWritingToolbarCenterID = null;
 
 function GetScriptIndex( name )
 	{
@@ -222,6 +222,7 @@ function JustWritingToolbarCenter()
 		
 		FSButton.onclick = function() { JustWritingToolbarCenterID = setInterval( JustWritingToolbarCenterMove, 100 ); oldclick; };
 		clearInterval( JustWritingToolbarCenterID );
+		JustWritingToolbarCenterID = null;
 		}
 	}
 
@@ -242,14 +243,14 @@ function JustWritingToolBarResize()
 	
 function JustWritingToolbarCenterMove()
 	{
-	var CentralBar = document.getElementById( 'wp-fullscreen-central-toolbar' );
-	var CentralBarWidth = CentralBar.clientWidth;
+	var ButtonBarWidth = document.getElementById( 'wp-fullscreen-button-bar' ).clientWidth;
 	
-	if( CentralBarWidth != 0 ) 
+	if( ButtonBarWidth != 0 ) 
 		{
 		JustWritingToolBarResize();
 		
 		clearInterval( JustWritingToolbarCenterID );
+		JustWritingToolbarCenterID = null;
 		
 		window.addEventListener ? window.addEventListener( "resize", JustWritingOnResizeDocument, false ) : window.attachEvent && window.attachEvent( "onresize", JustWritingOnResizeDocument );			
 		}
@@ -408,7 +409,8 @@ function JustWritingAutoLoad()
 		
 	var FSButton = document.getElementById( 'content_wp_fullscreen' );
 
-	if( FSButton != null ) 
+	// Make sure we don't conflict with the toolbar centering code
+	if( FSButton != null && JustWritingToolbarCenterID == null ) 
 		{ 
 		FSButton.click(); 
 		clearInterval( JustWritingAutoLoadIntervalID );

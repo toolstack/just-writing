@@ -170,13 +170,16 @@ function just_writing_save_user_profile_fields( $user_id )
 		</tr>
 		<tr>
 			<th></th>
-			<td>
-			<input type="checkbox" id="just_writing_d_fade" name="just_writing_d_fade" <?php if( get_the_author_meta( 'just_writing_d_fade', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Disable the fade out of the toolbar *May have performance impacts*");?>
-			</td>
-			<td colspan=2>
+			<td colspan=3>
 			<input type="checkbox" id="just_writing_c_tb" name="just_writing_c_tb" <?php if( get_the_author_meta( 'just_writing_c_tb', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Center the ToolBar on screen");?>
+			</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td colspan=3>
+			<input type="checkbox" id="just_writing_d_fade" name="just_writing_d_fade" <?php if( get_the_author_meta( 'just_writing_d_fade', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<?php echo __("Disable the fade out of the toolbar *May have performance impacts*");?>
 			</td>
 		</tr>
 		<tr>
