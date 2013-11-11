@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 3.7.1
-Stable tag: 2.10
+Stable tag: 2.11
 
 Adds buttons to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -88,6 +88,9 @@ If you start DFWM without moving the mouse you might hit right between when Word
 4. A real DFWM!
 
 == Changelog ==
+= 2.11 =
+* Added option to center the toolbar on screen.
+
 = 2.10 =
 * Added Font, Font Size, Font Color and Background Color selector options
 
@@ -151,54 +154,12 @@ If you start DFWM without moving the mouse you might hit right between when Word
 * Initial release.
 
 == Upgrade Notice ==
-= 2.10 =
-* New font/color options are disabled by default for existing users until they enable them in the user preferences page
-
-= 2.9 =
-* None.
-
-= 2.8 =
-* New separators are disabled by default for existing users until they enable them in the user preferences page
-
-= 2.7 =
-* None.
-
-= 2.6 =
-* None.
-
-= 2.5 =
-* None.
-
-= 2.4 =
-* New option for the format listbox will not be enabled until a user selections the option for existing users.  New users will have the option enabled by default.
-
-= 2.3 =
-* None.
-
-= 2.2 =
-* None.
-
-= 2.1 =
-* None.
-
-= 2.0 =
-* Disabling the fade effect will force JavaScript to execute a mousemove event every 1.5 seconds, this could have a performance impact on some browsers.
-
-= 1.0 =
-* None.
-
-= 0.3 =
-* None.
-
-= 0.2 =
-* None.
-
-= 0.1 =
-Initial release, no updates as everything is new!
+= 2.11 =
+* New center toolbar option is disabled by default for existing users until they enable it in the user preferences page
 
 == Roadmap ==
 
-* Version 2.11 - finish restructuring preferences
-* Version 2.12 - implement JavaScript color picker for font/background color options
+* Version 2.12 - add Just Writing option to the quick menu on post/page lists
+* Version 2.13 - implement JavaScript color picker for font/background color options
 * Version 3.0  - add second row to toolbar, remove individual style buttons
 

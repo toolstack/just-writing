@@ -1,4 +1,5 @@
 var JustWritingAutoLoadIntervalID;
+var JustWritingToolbarCenterID;
 
 function GetScriptIndex( name )
 	{
@@ -94,6 +95,7 @@ function JustWriting()
 		var AutoLoad = GetScriptVariable( GSI, 'autoload', 0 );
 		var FormatLB = GetScriptVariable( GSI, 'formatlistbox', 0 );
 		var rtl = GetScriptVariable( GSI, 'rtl', 0 );
+		var CenterToolbar = GetScriptVariable( GSI, 'centertb', 0 );
 
 		if( DisableFade == 1 )
 			{
@@ -198,9 +200,67 @@ function JustWriting()
 						} )
 					.insertBefore( '#wp-fullscreen-save input.button-primary' );
 			}	
+			
+		if( CenterToolbar == 1)
+			{
+			// Add a spacer to center the toolbar
+			var CentralBar = document.getElementById( 'wp-fullscreen-central-toolbar' );
+			CentralBar.style.styleFloat = 'right';
+			
+			JustWritingToolbarCenterID = setInterval( JustWritingToolbarCenter, 500 );
+			}
 		}
 	}
 
+function JustWritingToolbarCenter()
+	{
+	var FSButton = document.getElementById( 'content_wp_fullscreen' );
+
+	if( FSButton != null ) 
+		{ 
+		var oldclick = FSButton.onclick;
+		
+		FSButton.onclick = function() { JustWritingToolbarCenterID = setInterval( JustWritingToolbarCenterMove, 100 ); oldclick; };
+		clearInterval( JustWritingToolbarCenterID );
+		}
+	}
+
+function JustWritingToolBarResize()
+	{
+	var ModeBarWidth = document.getElementById( 'wp-fullscreen-mode-bar' ).clientWidth;
+	var ButtonBarWidth = document.getElementById( 'wp-fullscreen-button-bar' ).clientWidth;
+	var WindowSize = document.body.clientWidth;
+	var SaveSize = document.getElementById( 'wp-fullscreen-save' ).clientWidth;
+	
+	// Note: the 'extra' 10px in this calculation is for the padding in the parent div 
+	var IdealBorder = ( WindowSize / 2 ) - ( ( ModeBarWidth + ButtonBarWidth ) / 2 ) - SaveSize - 10;
+	
+	if( IdealBorder < 1 ) { IdealBorder = 0; }
+	
+	document.getElementById( 'wp-fullscreen-button-bar' ).style.marginRight = IdealBorder + "px";
+	}
+	
+function JustWritingToolbarCenterMove()
+	{
+	var CentralBar = document.getElementById( 'wp-fullscreen-central-toolbar' );
+	var CentralBarWidth = CentralBar.clientWidth;
+	
+	if( CentralBarWidth != 0 ) 
+		{
+		JustWritingToolBarResize();
+		
+		clearInterval( JustWritingToolbarCenterID );
+		
+		window.addEventListener ? window.addEventListener( "resize", JustWritingOnResizeDocument, false ) : window.attachEvent && window.attachEvent( "onresize", JustWritingOnResizeDocument );			
+		}
+		
+	}
+
+function JustWritingOnResizeDocument()
+	{
+	JustWritingToolBarResize();
+	}
+	
 function JustWritingFormatSelectChange()
 	{
 	var Listbox = document.getElementById( 'JustWritingFormats' );

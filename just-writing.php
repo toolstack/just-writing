@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Just Writing
-Version: 2.10
+Version: 2.11
 Plugin URI: http://toolstack.com/just-writing
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -84,6 +84,8 @@ if( !function_exists( 'JustWritingLoad' ) )
 			if( get_the_author_meta( 'just_writing_h_mb', $cuid ) == 'on' ) { $HideModeBar = 1; } 
 			$FormatLB = 0;
 			if( get_the_author_meta( 'just_writing_f_lb', $cuid ) == 'on' ) { $FormatLB = 1; } 
+			$CenterTB = 0;
+			if( get_the_author_meta( 'just_writing_c_tb', $cuid ) == 'on' ) { $CenterTB = 1; } 
 
 			$AutoLoad = 0;
 			
@@ -98,7 +100,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 				}
 	
 			// Register and enqueue the javascript.
-			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/just-writing.js?rtl=' . is_rtl() . '&disablefade=' . $DisableFade . '&hidewordcount=' . $HideWordCount . '&hidepreview=' . $HidePreview . '&hideborder=' . $HideBorder . '&hidemodebar=' . $HideModeBar . '&autoload=' . $AutoLoad . '&formatlistbox=' . $FormatLB );
+			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/just-writing.js?rtl=' . is_rtl() . '&disablefade=' . $DisableFade . '&hidewordcount=' . $HideWordCount . '&hidepreview=' . $HidePreview . '&hideborder=' . $HideBorder . '&hidemodebar=' . $HideModeBar . '&autoload=' . $AutoLoad . '&formatlistbox=' . $FormatLB . '&centertb=' . $CenterTB );
 			wp_enqueue_script( 'justwriting_js' );
 	
 			add_filter( 'wp_fullscreen_buttons', 'JustWriting' );

@@ -85,6 +85,7 @@ function just_writing_save_user_profile_fields( $user_id )
 	update_user_meta( $user_id, 'just_writing_f_s', just_writing_get_checked_state( $_POST['just_writing_f_s'] ) );
 	update_user_meta( $user_id, 'just_writing_f_c', just_writing_get_checked_state( $_POST['just_writing_f_c'] ) );
 	update_user_meta( $user_id, 'just_writing_b_c', just_writing_get_checked_state( $_POST['just_writing_b_c'] ) );
+	update_user_meta( $user_id, 'just_writing_c_tb', just_writing_get_checked_state( $_POST['just_writing_c_tb'] ) );
 
 	//Deal with the border options
 	if( $_POST['just_writing_border_setting'] == 'hide' )
@@ -153,7 +154,7 @@ function just_writing_save_user_profile_fields( $user_id )
 			</td>
 		</tr>
 		<tr>
-			<td></th>
+			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_h_p" name="just_writing_h_p" <?php if( get_the_author_meta( 'just_writing_h_p', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Hide the preview button");?>
@@ -168,21 +169,25 @@ function just_writing_save_user_profile_fields( $user_id )
 			</td>
 		</tr>
 		<tr>
-			<td></th>
-			<td colspan=3>
+			<th></th>
+			<td>
 			<input type="checkbox" id="just_writing_d_fade" name="just_writing_d_fade" <?php if( get_the_author_meta( 'just_writing_d_fade', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Disable the fade out of the toolbar *May have performance impacts*");?>
 			</td>
+			<td colspan=2>
+			<input type="checkbox" id="just_writing_c_tb" name="just_writing_c_tb" <?php if( get_the_author_meta( 'just_writing_c_tb', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<?php echo __("Center the ToolBar on screen");?>
+			</td>
 		</tr>
 		<tr>
-			<td></th>
+			<th></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_al_new" name="just_writing_al_new" <?php if( get_the_author_meta( 'just_writing_al_new', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Go directly to Distraction Free Writing Mode for new posts *May have performance impacts*");?>
 			</td>
 		</tr>
 		<tr>
-			<td></th>
+			<th></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_al_edit" name="just_writing_al_edit" <?php if( get_the_author_meta( 'just_writing_al_edit', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Go directly to Distraction Free Writing Mode when editing a post *May have performance impacts*");?>
@@ -278,7 +283,7 @@ function just_writing_save_user_profile_fields( $user_id )
 			</td>
 		</tr>
 		<tr>
-			<td></th>
+			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_under" name="just_writing_under" <?php if( get_the_author_meta( 'just_writing_under', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Underline");?>
@@ -293,7 +298,7 @@ function just_writing_save_user_profile_fields( $user_id )
 			</td>
 		</tr>
 		<tr>
-			<td></th>
+			<th></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_remove" name="just_writing_remove" <?php if( get_the_author_meta( 'just_writing_remove', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Remove Formating");?>
@@ -313,7 +318,7 @@ function just_writing_save_user_profile_fields( $user_id )
 			</td>
 		</tr>
 		<tr>
-			<td></th>
+			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_ul" name="just_writing_ul" <?php if( get_the_author_meta( 'just_writing_ul', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Unordered List");?>
@@ -328,7 +333,7 @@ function just_writing_save_user_profile_fields( $user_id )
 			</td>
 		</tr>
 		<tr>
-			<td></th>
+			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_link" name="just_writing_link" <?php if( get_the_author_meta( 'just_writing_link', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Link");?>
@@ -352,7 +357,7 @@ function just_writing_save_user_profile_fields( $user_id )
 			</td>
 		</tr>
 		<tr>
-			<td></th>
+			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_left" name="just_writing_left" <?php if( get_the_author_meta( 'just_writing_left', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Align Left");?>
@@ -367,7 +372,7 @@ function just_writing_save_user_profile_fields( $user_id )
 			</td>
 		</tr>
 		<tr>
-			<td></th>
+			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_outdent" name="just_writing_outdent" <?php if( get_the_author_meta( 'just_writing_outdent', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Outdent");?>
@@ -398,7 +403,7 @@ function just_writing_save_user_profile_fields( $user_id )
 			</td>
 		</tr>
 		<tr>
-			<td></th>
+			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_p" name="just_writing_p" <?php if( get_the_author_meta( 'just_writing_p', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Paragraph");?>
@@ -413,7 +418,7 @@ function just_writing_save_user_profile_fields( $user_id )
 			</td>
 		</tr>
 		<tr>
-			<td></th>
+			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_h3" name="just_writing_h3" <?php if( get_the_author_meta( 'just_writing_h3', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("h3");?>
@@ -428,7 +433,7 @@ function just_writing_save_user_profile_fields( $user_id )
 			</td>
 		</tr>
 		<tr>
-			<td></th>
+			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_h6" name="just_writing_h6" <?php if( get_the_author_meta( 'just_writing_h6', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("h6");?>
@@ -443,7 +448,7 @@ function just_writing_save_user_profile_fields( $user_id )
 			</td>
 		</tr>
 		<tr>
-			<td></th>
+			<th></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_pf" name="just_writing_pf" <?php if( get_the_author_meta( 'just_writing_pf', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Preformatted");?>
@@ -463,7 +468,7 @@ function just_writing_save_user_profile_fields( $user_id )
 			</td>
 		</tr>
 		<tr>
-			<td></th>
+			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_spell" name="just_writing_spell" <?php if( get_the_author_meta( 'just_writing_spell', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Spellcheck");?>
@@ -485,7 +490,7 @@ function just_writing_save_user_profile_fields( $user_id )
 			</td>
 		</tr>
 		<tr>
-			<td></th>
+			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_undo" name="just_writing_undo" <?php if( get_the_author_meta( 'just_writing_undo', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Undo");?>
@@ -507,7 +512,7 @@ function just_writing_save_user_profile_fields( $user_id )
 			</td>
 		</tr>
 		<tr>
-			<td></th>
+			<th></th>
 			<td>
 			<a onClick='JustWritingSelectAll()'><?php echo __("Select All");?></a>
 			</td>
