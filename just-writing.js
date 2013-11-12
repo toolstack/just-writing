@@ -203,10 +203,11 @@ function JustWriting()
 			
 		if( CenterToolbar == 1)
 			{
-			// Add a spacer to center the toolbar
-			var CentralBar = document.getElementById( 'wp-fullscreen-central-toolbar' );
-			CentralBar.style.styleFloat = 'right';
-			
+			// Add a spacer to center the toolbar, we have to do this in two stages.
+			// First create a hook for the Full Screen button (which isn't created until 
+			// later, hence the setInterval to check every .5 second) and then create
+			// a second setInterval once that is complete so we can calculate the size
+			// of the toolbar after it has become visible.
 			JustWritingToolbarCenterID = setInterval( JustWritingToolbarCenter, 500 );
 			}
 		}
@@ -233,12 +234,17 @@ function JustWritingToolBarResize()
 	var WindowSize = document.body.clientWidth;
 	var SaveSize = document.getElementById( 'wp-fullscreen-save' ).clientWidth;
 	
+	var BarsWidth = ModeBarWidth + ButtonBarWidth;
 	// Note: the 'extra' 10px in this calculation is for the padding in the parent div 
-	var IdealBorder = ( WindowSize / 2 ) - ( ( ModeBarWidth + ButtonBarWidth ) / 2 ) - SaveSize - 10;
+	var IdealBorder = Math.floor( ( WindowSize / 2 ) - ( BarsWidth / 2 ) - 10 );
 	
-	if( IdealBorder < 1 ) { IdealBorder = 0; }
+	// Note: the 'extra' 20px in this calculation is for the padding in the parent div 
+	var Remainder = WindowSize - ( BarsWidth + IdealBorder ) - SaveSize - 20;
+
+	// If the IdealBorder is 0 or less OR there's no space left with in the window, reset the IdealBorder back to 0 and let the browser wrap the toolbar
+	if( IdealBorder < 1 || Remainder < 0 ) { IdealBorder = 0; }
 	
-	document.getElementById( 'wp-fullscreen-button-bar' ).style.marginRight = IdealBorder + "px";
+	document.getElementById( 'wp-fullscreen-mode-bar' ).style.marginLeft = IdealBorder + "px";
 	}
 	
 function JustWritingToolbarCenterMove()

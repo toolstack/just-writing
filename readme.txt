@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 3.7.1
-Stable tag: 2.12.1
+Stable tag: 2.12.2
 
 Adds buttons to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -87,6 +87,10 @@ If you start DFWM without moving the mouse you might hit right between when Word
 4. A real DFWM!
 
 == Changelog ==
+= 2.12.2 =
+* Fixed issue with Chrome not centering the toolbar correctly
+* Prettied up the font/color listboxes.  Only works on some browsers.
+
 = 2.12.1 =
 * Fixed a bug in the DFWM link code which ALWAYS included the linked regardless of the user preference setting.
 
@@ -160,7 +164,7 @@ If you start DFWM without moving the mouse you might hit right between when Word
 * Initial release.
 
 == Upgrade Notice ==
-= 2.12.1 =
+= 2.12.2 =
 * None.
 
 == Roadmap ==
