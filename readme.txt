@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 3.7.1
-Stable tag: 2.12
+Stable tag: 2.12.1
 
 Adds buttons to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -79,7 +79,6 @@ The fade effect is triggered by WordPress when no mouse movement is executed for
 
 If you start DFWM without moving the mouse you might hit right between when WordPress starts fading but before Just Writing fires off a mousemove event, this shouldn't be an issue after the first start of DFWM.
 
-
 == Screenshots ==
 
 1. Pre installation DFWM.
@@ -88,6 +87,9 @@ If you start DFWM without moving the mouse you might hit right between when Word
 4. A real DFWM!
 
 == Changelog ==
+= 2.12.1 =
+* Fixed a bug in the DFWM link code which ALWAYS included the linked regardless of the user preference setting.
+
 = 2.12 =
 * Fixed a bug between the center toolbar and autoload code.
 * Added option to add a DFWM link to the post and pages list.
@@ -158,8 +160,8 @@ If you start DFWM without moving the mouse you might hit right between when Word
 * Initial release.
 
 == Upgrade Notice ==
-= 2.11 =
-* New center toolbar option is disabled by default for existing users until they enable it in the user preferences page
+= 2.12.1 =
+* None.
 
 == Roadmap ==
 

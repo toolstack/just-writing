@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Just Writing
-Version: 2.12
+Version: 2.12.1
 Plugin URI: http://toolstack.com/just-writing
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -115,18 +115,29 @@ if( !function_exists( 'JustWritingLoad' ) )
 	function JustWritingLinkRow( $actions, $post )
 		{
 		$new_actions = array();
-		
-		foreach( $actions as $key => $value )
-			{
-			$new_actions[$key] = $value;
 
-			if( $key == 'edit' )
-				{
-				$new_actions['JustWriting'] = '<a href="post.php?post=' . $post->ID . '&action=edit&JustWritingAutoLoad=1" title="Edit this item in Distraction Free Writing Mode">DFWM</a>';
-				}
-			}
+		$cuid = get_current_user_id();
+		$JustWritingEnabled = get_the_author_meta( 'just_writing_enabled', $cuid );
+		$JustWritingAddLinks = get_the_author_meta( 'just_writing_a_l', $cuid );
 		
-		return $new_actions;
+		if( $JustWritingEnabled == "on" AND $JustWritingAddLinks == "on" )
+			{
+			foreach( $actions as $key => $value )
+				{
+				$new_actions[$key] = $value;
+
+				if( $key == 'edit' )
+					{
+					$new_actions['JustWriting'] = '<a href="post.php?post=' . $post->ID . '&action=edit&JustWritingAutoLoad=1" title="Edit this item in Distraction Free Writing Mode">DFWM</a>';
+					}
+				}
+
+			return $new_actions;
+			}
+		else
+			{
+			return $actions;
+			}
 		}
 	}
 	
