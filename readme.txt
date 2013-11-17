@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 3.7.1
-Stable tag: 2.12.2
+Stable tag: 2.13
 
 Adds buttons to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -69,7 +69,8 @@ Try it and find out, the JavaScript is pretty basic so it should work in just ab
 
 	* IE 11
 	* Opera 12.16
-	* FireFox 24
+	* FireFox 24/25
+	* Chrome 31
 
 = I've disabled the fade effect and now the browser is running slowly, what's wrong? =
 
@@ -79,6 +80,10 @@ The fade effect is triggered by WordPress when no mouse movement is executed for
 
 If you start DFWM without moving the mouse you might hit right between when WordPress starts fading but before Just Writing fires off a mousemove event, this shouldn't be an issue after the first start of DFWM.
 
+= I'm using the Javascript color picker and when I click on a color it deselects the text and doesn't set the color, what's wrong? =
+
+There's a bug between TinyMCE and some browsers (so far IE 11 for sure) I haven't found any solution other than to disable the Javascript color pickers in the Just Writing options.
+
 == Screenshots ==
 
 1. Pre installation DFWM.
@@ -87,6 +92,11 @@ If you start DFWM without moving the mouse you might hit right between when Word
 4. A real DFWM!
 
 == Changelog ==
+= 2.13 =
+* Added Javascript color pickers for font color and background color.
+* Added option to disable Javascript color pickers (they may not work in some browsers).
+* Collapsed the user options and button options by default to make the user preferences screen cleaner.
+
 = 2.12.2 =
 * Fixed issue with Chrome not centering the toolbar correctly
 * Prettied up the font/color listboxes.  Only works on some browsers.
@@ -164,11 +174,11 @@ If you start DFWM without moving the mouse you might hit right between when Word
 * Initial release.
 
 == Upgrade Notice ==
-= 2.12.2 =
+= 2.13 =
 * None.
 
 == Roadmap ==
 
-* Version 2.13 - implement JavaScript color picker for font/background color options
+* Version 2.14 - implement JavaScript font/font size picker
 * Version 3.0  - add second row to toolbar, remove individual style buttons
 

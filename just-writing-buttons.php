@@ -120,7 +120,7 @@ function JustWriting( $oldbuttons )
 								// Title of the button
 								'title' => __('Font color'), 
 								// Command to execute
-								'onclick' => "tinyMCE.execCommand('ForeColor', false, '#FF0000');",
+								'onclick' => "",
 								// Show on visual AND html mode
 								'both' => false
 							);
@@ -132,7 +132,7 @@ function JustWriting( $oldbuttons )
 								// Title of the button
 								'title' => __('Background Color'), 
 								// Command to execute
-								'onclick' => "tinyMCE.execCommand('BackColor', false, '#FFFFFF');",
+								'onclick' => "",
 								// Show on visual AND html mode
 								'both' => false
 							);

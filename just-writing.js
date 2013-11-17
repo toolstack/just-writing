@@ -96,6 +96,7 @@ function JustWriting()
 		var FormatLB = GetScriptVariable( GSI, 'formatlistbox', 0 );
 		var rtl = GetScriptVariable( GSI, 'rtl', 0 );
 		var CenterToolbar = GetScriptVariable( GSI, 'centertb', 0 );
+		var DisableJSColorPicker = GetScriptVariable( GSI, 'disablejscp', 0 );
 
 		if( DisableFade == 1 )
 			{
@@ -146,10 +147,26 @@ function JustWriting()
 		jQuery( '#wp_fs_fontsize' ).replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingFontSize id=JustWritingFontSize onchange=JustWritingFontSizeSelectChange()><option>[Font Size]</option><option style='font-size: 6px'>6</option><option style='font-size: 8px'>8</option><option style='font-size: 10px'>10</option><option style='font-size: 12px'>12</option><option style='font-size: 14px'>14</option><option style='font-size: 16px'>16</option><option style='font-size: 18px'>18</option><option style='font-size: 20px'>20</option><option style='font-size: 22px'>22</option><option style='font-size: 24px'>24</option><option style='font-size: 28px'>28</option><option style='font-size: 32px'>32</option><option style='font-size: 36px'>36</option><option style='font-size: 40px'>40</option><option style='font-size: 44px'>44</option><option style='font-size: 48px'>48</option><option style='font-size: 52px'>52</option><option style='font-size: 62px'>62</option><option style='font-size: 72px'>72</option></select>" );
 
 		// Add the font color listbox
-		jQuery( '#wp_fs_fontcolor' ).replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingFontColor id=JustWritingFontColor onchange=JustWritingFontColorSelectChange()><option>[Font Color]</option><option style='font-size: 125%; background-color: #000000; color: white;'>Black</option><option style='font-size: 125%; background-color: #0000FF; color: white;'>Blue</option><option style='font-size: 125%; background-color: #0000A0; color: white;'>Blue (Dark)</option><option style='font-size: 125%; background-color: #ADD8E6; color: white;'>Blue (Light)</option><option style='font-size: 125%; background-color: #A52A2A; color: white;'>Brown</option><option style='font-size: 125%; background-color: #00FFFF; color: white;'>Cyan</option><option style='font-size: 125%; background-color: #008000; color: white;'>Green</option><option style='font-size: 125%; background-color: #808080; color: white;'>Grey</option><option style='font-size: 125%; background-color: #00FF00; color: white;'>Lime</option><option style='font-size: 125%; background-color: #FF00FF; color: white;'>Magenta</option><option style='font-size: 125%; background-color: #800000; color: white;'>Maroon</option><option style='font-size: 125%; background-color: #808000; color: white;'>Olive</option><option style='font-size: 125%; background-color: #FFA500; color: white;'>Orange</option><option style='font-size: 125%; background-color: #800080; color: white;'>Purple</option><option style='font-size: 125%; background-color: #FF0000; color: white;'>Red</option><option style='font-size: 125%; background-color: #C0C0C0; color: white;'>Silver</option><option style='font-size: 125%; background-color: #FFFFFF; color: black;'>White</option><option style='font-size: 125%; background-color: #FFFF00; color: black;'>Yellow</option></select>" );
+		if( DisableJSColorPicker == 1 )
+			{
+			jQuery( '#wp_fs_fontcolor' ).replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingFontColor id=JustWritingFontColor onchange=JustWritingFontColorSelectChange()><option>[Font Color]</option><option style='font-size: 125%; background-color: #000000; color: white;'>Black</option><option style='font-size: 125%; background-color: #0000FF; color: white;'>Blue</option><option style='font-size: 125%; background-color: #0000A0; color: white;'>Blue (Dark)</option><option style='font-size: 125%; background-color: #ADD8E6; color: white;'>Blue (Light)</option><option style='font-size: 125%; background-color: #A52A2A; color: white;'>Brown</option><option style='font-size: 125%; background-color: #00FFFF; color: white;'>Cyan</option><option style='font-size: 125%; background-color: #008000; color: white;'>Green</option><option style='font-size: 125%; background-color: #808080; color: white;'>Grey</option><option style='font-size: 125%; background-color: #00FF00; color: white;'>Lime</option><option style='font-size: 125%; background-color: #FF00FF; color: white;'>Magenta</option><option style='font-size: 125%; background-color: #800000; color: white;'>Maroon</option><option style='font-size: 125%; background-color: #808000; color: white;'>Olive</option><option style='font-size: 125%; background-color: #FFA500; color: white;'>Orange</option><option style='font-size: 125%; background-color: #800080; color: white;'>Purple</option><option style='font-size: 125%; background-color: #FF0000; color: white;'>Red</option><option style='font-size: 125%; background-color: #C0C0C0; color: white;'>Silver</option><option style='font-size: 125%; background-color: #FFFFFF; color: black;'>White</option><option style='font-size: 125%; background-color: #FFFF00; color: black;'>Yellow</option></select>" );
+			}
+		else
+			{
+			jQuery( 'body' ).append('<div class=\'JustWritingColorPopup\' id=\'JustWritingFontColorPopup\'><div class="JustWritingColorSwatch" style="background-color: #000000;" onclick="JustWritingFontColorSelect(\'#000000\')"></div> <div class="JustWritingColorSwatch" style="background-color: #0000FF;" onclick="JustWritingFontColorSelect(\'#0000FF\')"></div> <div class="JustWritingColorSwatch" style="background-color: #0000A0;" onclick="JustWritingFontColorSelect(\'#0000A0\')"></div> <div class="JustWritingColorSwatch" style="background-color: #ADD8E6;" onclick="JustWritingFontColorSelect(\'#ADD8E6\')"></div> <div class="JustWritingColorSwatch" style="background-color: #A52A2A;" onclick="JustWritingFontColorSelect(\'#A52A2A\')"></div> <div class="JustWritingColorSwatch" style="background-color: #00FFFF;" onclick="JustWritingFontColorSelect(\'#00FFFF\')"></div> <div class="JustWritingColorSwatch" style="background-color: #008000;" onclick="JustWritingFontColorSelect(\'#008000\')"></div> <div class="JustWritingColorSwatch" style="background-color: #808080;" onclick="JustWritingFontColorSelect(\'#808080\')"></div> <div class="JustWritingColorSwatch" style="background-color: #00FF00;" onclick="JustWritingFontColorSelect(\'#00FF00\')"></div> <div class="JustWritingColorSwatch" style="background-color: #FF00FF;" onclick="JustWritingFontColorSelect(\'#FF00FF\')"></div> <div class="JustWritingColorSwatch" style="background-color: #800000;" onclick="JustWritingFontColorSelect(\'#800000\')"></div> <div class="JustWritingColorSwatch" style="background-color: #808000;" onclick="JustWritingFontColorSelect(\'#808000\')"></div> <div class="JustWritingColorSwatch" style="background-color: #FFA500;" onclick="JustWritingFontColorSelect(\'#FFA500\')"></div> <div class="JustWritingColorSwatch" style="background-color: #800080;" onclick="JustWritingFontColorSelect(\'#800080\')"></div> <div class="JustWritingColorSwatch" style="background-color: #FF0000;" onclick="JustWritingFontColorSelect(\'#FF0000\')"></div> <div class="JustWritingColorSwatch" style="background-color: #C0C0C0;" onclick="JustWritingFontColorSelect(\'#C0C0C0\')"></div> <div class="JustWritingColorSwatch" style="background-color: #FFFFFF;" onclick="JustWritingFontColorSelect(\'#FFFFFF\')"></div> <div class="JustWritingColorSwatch" style="background-color: #FFFF00;" onclick="JustWritingFontColorSelect(\'#FFFF00\')"></div> </div>')
+			jQuery( '#wp_fs_fontcolor' ).on( "click", JustWritingFontColor);
+			}
 
 		// Add the background color listbox
-		jQuery( '#wp_fs_backgroundcolor' ).replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingBackgroundColor id=JustWritingBackgroundColor onchange=JustWritingBackgroundColorSelectChange()><option>[BG Color]</option><option style='font-size: 125%; background-color: #000000; color: white;'>Black</option><option style='font-size: 125%; background-color: #0000FF; color: white;'>Blue</option><option style='font-size: 125%; background-color: #0000A0; color: white;'>Blue (Dark)</option><option style='font-size: 125%; background-color: #ADD8E6; color: white;'>Blue (Light)</option><option style='font-size: 125%; background-color: #A52A2A; color: white;'>Brown</option><option style='font-size: 125%; background-color: #00FFFF; color: white;'>Cyan</option><option style='font-size: 125%; background-color: #008000; color: white;'>Green</option><option style='font-size: 125%; background-color: #808080; color: white;'>Grey</option><option style='font-size: 125%; background-color: #00FF00; color: white;'>Lime</option><option style='font-size: 125%; background-color: #FF00FF; color: white;'>Magenta</option><option style='font-size: 125%; background-color: #800000; color: white;'>Maroon</option><option style='font-size: 125%; background-color: #808000; color: white;'>Olive</option><option style='font-size: 125%; background-color: #FFA500; color: white;'>Orange</option><option style='font-size: 125%; background-color: #800080; color: white;'>Purple</option><option style='font-size: 125%; background-color: #FF0000; color: white;'>Red</option><option style='font-size: 125%; background-color: #C0C0C0; color: white;'>Silver</option><option style='font-size: 125%; background-color: #FFFFFF; color: black;'>White</option><option style='font-size: 125%; background-color: #FFFF00; color: black;'>Yellow</option></select>" );
+		if( DisableJSColorPicker == 1 )
+			{
+			jQuery( '#wp_fs_backgroundcolor' ).replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingBackgroundColor id=JustWritingBackgroundColor onchange=JustWritingBackgroundColorSelectChange()><option>[BG Color]</option><option style='font-size: 125%; background-color: #000000; color: white;'>Black</option><option style='font-size: 125%; background-color: #0000FF; color: white;'>Blue</option><option style='font-size: 125%; background-color: #0000A0; color: white;'>Blue (Dark)</option><option style='font-size: 125%; background-color: #ADD8E6; color: white;'>Blue (Light)</option><option style='font-size: 125%; background-color: #A52A2A; color: white;'>Brown</option><option style='font-size: 125%; background-color: #00FFFF; color: white;'>Cyan</option><option style='font-size: 125%; background-color: #008000; color: white;'>Green</option><option style='font-size: 125%; background-color: #808080; color: white;'>Grey</option><option style='font-size: 125%; background-color: #00FF00; color: white;'>Lime</option><option style='font-size: 125%; background-color: #FF00FF; color: white;'>Magenta</option><option style='font-size: 125%; background-color: #800000; color: white;'>Maroon</option><option style='font-size: 125%; background-color: #808000; color: white;'>Olive</option><option style='font-size: 125%; background-color: #FFA500; color: white;'>Orange</option><option style='font-size: 125%; background-color: #800080; color: white;'>Purple</option><option style='font-size: 125%; background-color: #FF0000; color: white;'>Red</option><option style='font-size: 125%; background-color: #C0C0C0; color: white;'>Silver</option><option style='font-size: 125%; background-color: #FFFFFF; color: black;'>White</option><option style='font-size: 125%; background-color: #FFFF00; color: black;'>Yellow</option></select>" );
+			}
+		else
+			{
+			jQuery( 'body' ).append('<div class=\'JustWritingColorPopup\' id=\'JustWritingBackgroundColorPopup\'><div class="JustWritingColorSwatch" style="background-color: #000000;" onclick="JustWritingBackgroundColorSelect(\'#000000\')"></div> <div class="JustWritingColorSwatch" style="background-color: #0000FF;" onclick="JustWritingBackgroundColorSelect(\'#0000FF\')"></div> <div class="JustWritingColorSwatch" style="background-color: #0000A0;" onclick="JustWritingBackgroundColorSelect(\'#0000A0\')"></div> <div class="JustWritingColorSwatch" style="background-color: #ADD8E6;" onclick="JustWritingBackgroundColorSelect(\'#ADD8E6\')"></div> <div class="JustWritingColorSwatch" style="background-color: #A52A2A;" onclick="JustWritingBackgroundColorSelect(\'#A52A2A\')"></div> <div class="JustWritingColorSwatch" style="background-color: #00FFFF;" onclick="JustWritingBackgroundColorSelect(\'#00FFFF\')"></div> <div class="JustWritingColorSwatch" style="background-color: #008000;" onclick="JustWritingBackgroundColorSelect(\'#008000\')"></div> <div class="JustWritingColorSwatch" style="background-color: #808080;" onclick="JustWritingBackgroundColorSelect(\'#808080\')"></div> <div class="JustWritingColorSwatch" style="background-color: #00FF00;" onclick="JustWritingBackgroundColorSelect(\'#00FF00\')"></div> <div class="JustWritingColorSwatch" style="background-color: #FF00FF;" onclick="JustWritingBackgroundColorSelect(\'#FF00FF\')"></div> <div class="JustWritingColorSwatch" style="background-color: #800000;" onclick="JustWritingBackgroundColorSelect(\'#800000\')"></div> <div class="JustWritingColorSwatch" style="background-color: #808000;" onclick="JustWritingBackgroundColorSelect(\'#808000\')"></div> <div class="JustWritingColorSwatch" style="background-color: #FFA500;" onclick="JustWritingBackgroundColorSelect(\'#FFA500\')"></div> <div class="JustWritingColorSwatch" style="background-color: #800080;" onclick="JustWritingBackgroundColorSelect(\'#800080\')"></div> <div class="JustWritingColorSwatch" style="background-color: #FF0000;" onclick="JustWritingBackgroundColorSelect(\'#FF0000\')"></div> <div class="JustWritingColorSwatch" style="background-color: #C0C0C0;" onclick="JustWritingBackgroundColorSelect(\'#C0C0C0\')"></div> <div class="JustWritingColorSwatch" style="background-color: #FFFFFF;" onclick="JustWritingBackgroundColorSelect(\'#FFFFFF\')"></div> <div class="JustWritingColorSwatch" style="background-color: #FFFF00;" onclick="JustWritingBackgroundColorSelect(\'#FFFF00\')"></div></div>')
+			jQuery( '#wp_fs_backgroundcolor' ).on( "click", JustWritingBackgroundColor);
+			}
 		
 		var marginside = 'margin-left';
 		if( rtl == 1 )
@@ -213,6 +230,40 @@ function JustWriting()
 		}
 	}
 
+function JustWritingFontColor()
+	{
+	var FCButton = document.getElementById( 'wp_fs_fontcolor' );
+	var FCPopup = document.getElementById( 'JustWritingFontColorPopup' );
+	
+	FCPopup.style.top = ( FCButton.offsetTop + 23 ) + "px";
+	FCPopup.style.left = FCButton.offsetLeft + "px";
+		
+	jQuery('#JustWritingFontColorPopup').toggle();
+	}
+
+function JustWritingBackgroundColor()
+	{
+	var FCButton = document.getElementById( 'wp_fs_backgroundcolor' );
+	var BCPopup = document.getElementById( 'JustWritingBackgroundColorPopup' );
+	
+	BCPopup.style.top = ( FCButton.offsetTop + 23 ) + "px";
+	BCPopup.style.left = FCButton.offsetLeft + "px";
+		
+	jQuery('#JustWritingBackgroundColorPopup').toggle();
+	}
+	
+function JustWritingFontColorSelect( color )
+	{
+	tinyMCE.execCommand( 'ForeColor', false, color );
+	document.getElementById( 'JustWritingFontColorPopup' ).style.display = 'none';
+	}
+
+function JustWritingBackgroundColorSelect( color )
+	{
+	tinyMCE.execCommand( 'hiliteColor', false, color );
+	document.getElementById( 'JustWritingBackgroundColorPopup' ).style.display = 'none';
+	}
+	
 function JustWritingToolbarCenter()
 	{
 	var FSButton = document.getElementById( 'content_wp_fullscreen' );

@@ -162,3 +162,13 @@ function JustWritingSelectDefaults()
 	document.getElementById( 'just_writing_f_c' ).checked = false;
 	document.getElementById( 'just_writing_b_c' ).checked = false;
 }
+
+function JustWritingToggleOptionGroups()
+	{
+	jQuery('[id^="JustWritingOptionGroup"]').toggle();
+	}
+	
+function JustWritingToggleButtonGroups()
+	{
+	jQuery('[id^="JustWritingButtonGroup"]').toggle();
+	}
