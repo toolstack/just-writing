@@ -194,7 +194,10 @@ function JustWriting()
 				.css( marginside, '5px' )
 				.css( 'margin-bottom', '8px' )
 				.click( function(e) 
-					{ 
+					{
+					jQuery('#JustWritingBackgroundColorPopup').hide();
+					jQuery('#JustWritingFontColorPopup').hide();
+					
 					fullscreen.off(); 
 					return false; 
 					} )
@@ -238,6 +241,7 @@ function JustWritingFontColor()
 	FCPopup.style.top = ( FCButton.offsetTop + 23 ) + "px";
 	FCPopup.style.left = FCButton.offsetLeft + "px";
 		
+	jQuery('#JustWritingBackgroundColorPopup').hide();
 	jQuery('#JustWritingFontColorPopup').toggle();
 	}
 
@@ -249,6 +253,7 @@ function JustWritingBackgroundColor()
 	BCPopup.style.top = ( FCButton.offsetTop + 23 ) + "px";
 	BCPopup.style.left = FCButton.offsetLeft + "px";
 		
+	jQuery('#JustWritingFontColorPopup').hide();
 	jQuery('#JustWritingBackgroundColorPopup').toggle();
 	}
 	
