@@ -141,8 +141,75 @@ if( !function_exists( 'JustWritingLoad' ) )
 			return $actions;
 			}
 		}
-	}
+
+	function JustWritingAdminPage()
+		{
+		global $wpdb;
+
+		if( isset( $_GET['JustWritingRemoveAction'] ) )
+			{
+			$TableName = $wpdb->prefix . "usermeta";
+
+			$wpdb->get_results( "DELETE FROM " . $TableName . " WHERE meta_key LIKE 'just_writing_%'" );
+			
+			update_option( 'Just_Writing_Removed', "true" );
+			
+			print "<div class='updated settings-error'><p><strong>User preferences removed and Just Writing disabled!</strong></p></div>\n";
+			}
+
+		if( isset( $_GET['JustWritingReenableAction'] ) )
+			{
+			delete_option( 'Just_Writing_Removed' );
+			}
+	?>
+<div class="wrap">
 	
+	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
+		<legend><span style="font-size: 24px; font-weight: 700;">&nbsp;Uninstall Actions&nbsp;</span></legend>
+
+<?php if( get_option( "Just_Writing_Removed" ) != 'true' )
+		{ 
+?>
+		<div style="font-size: 16px;">**WARNING** No further confirmation will be given after you press the delete button, make sure you REALLY want to delete all user preferences and disable Just Writing!</div>
+		<div>&nbsp;</div>
+		<div><?php _e('Remove the user preferences and disable:')?>&nbsp;<input type="button" id="JustWritingRemoveAction" name="JustWritingRemoveAction" value="<?php _e('Remove') ?> &raquo;" onclick="if( confirm('Ok, last chance, really remove the user preferences and disable?') ) { window.location = 'options-general.php?page=just-writing.php&JustWritingRemoveAction=TRUE'}"/>
+<?php
+		}
+	else
+		{
+?>
+		<div><?php _e('Re-enable Just Writing:')?>&nbsp;<input type="button" id="JustWritingReenableAction" name="JustWritingReenableAction" value="<?php _e('Re-enable') ?> &raquo;" onclick="window.location = 'options-general.php?page=just-writing.php&JustWritingReenableAction=TRUE'"/>
+<?php 
+		}
+?>
+		
+	</fieldset>
+	
+	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
+		<legend><span style="font-size: 24px; font-weight: 700;">&nbsp;About&nbsp;</span></legend>
+		<p>Just Writing</p>
+		<p>by Greg Ross</p>
+		<p>&nbsp;</p>
+		<p>Licenced under the <a href="http://www.gnu.org/licenses/gpl-2.0.html" target=_blank>GPL Version 2</a></p>
+		<p>To find out more, please visit the <a href='http://wordpress.org/plugins/just-writing/' target=_blank>WordPress Plugin Directory page</a> or the plugin home page on <a href='http://toolstack.com/just-writing' target=_blank>ToolStack.com</a></p> 
+		<p>&nbsp;</p>
+		<p>Don't forget to <a href='http://wordpress.org/support/view/plugin-reviews/just-writing' target=_blank>rate and review</a> it too!</p>
+
+</fieldset>
+</div>
+	<?php
+		}
+		
+	function JustWritingAddSettingsMenu()
+		{
+		add_options_page( 'Just Writing', 'Just Writing', 9, basename( __FILE__ ), 'JustWritingAdminPage');
+		}
+	}
+
+add_action( 'admin_menu', 'JustWritingAddSettingsMenu', 1 );
+
+if( get_option( 'Just_Writing_Removed' ) != 'true' )
+	{
 	// Handle the post screens
 	add_action( 'admin_head-post-new.php', 'JustWritingLoadNew' );
 	add_action( 'admin_head-post.php', 'JustWritingLoadEdit' );
@@ -156,5 +223,5 @@ if( !function_exists( 'JustWritingLoad' ) )
 	// Handle adding DFWM to the post/page rows
 	add_filter('post_row_actions', 'JustWritingLinkRow',10,2);
 	add_filter('page_row_actions', 'JustWritingLinkRow',10,2);
-
+	}
 ?>

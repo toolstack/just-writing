@@ -130,7 +130,7 @@ function just_writing_save_user_profile_fields( $user_id )
 		<tr>
 			<th></th>
 			<td>
-			<span class="description"><?php echo __("Just Writing allows you to customize the Distraction Free Writing Mode in WordPress in several different ways to enable you to write the way you want to.  To find out more, please visit the ") . "<a href='http://wordpress.org/plugins/just-writing/' target=_blank>WordPress Plugin Directory page</a> " . __("or plugin home page on") . " <a href='http://toolstack.com/just-writing' target=_blank>ToolStack.com</a>.<br><br>" . __("And don't forget to ") . "<a href='http://wordpress.org/plugins/just-writing/' target=_blank>" . __("rate") . "</a>" . __(" and ") . "<a href='http://wordpress.org/support/view/plugin-reviews/just-writing' target=_blank>" . __("review") . "</a>" . __(" it too!");?></span>
+			<span class="description"><?php echo __("Just Writing allows you to customize the Distraction Free Writing Mode in WordPress in several different ways to enable you to write the way you want to.  To find out more, please visit the ") . "<a href='http://wordpress.org/plugins/just-writing/' target=_blank>WordPress Plugin Directory page</a> " . __("or plugin home page on") . " <a href='http://toolstack.com/just-writing' target=_blank>ToolStack.com</a>.<br><br>" . __("And don't forget to ") . "<a href='http://wordpress.org/support/view/plugin-reviews/just-writing' target=_blank>" . __("rate and review") . "</a>" . __(" it too!");?></span>
 			</td>
 		</tr>
 		<tr>
