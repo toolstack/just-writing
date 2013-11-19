@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Just Writing
-Version: 2.13.1
+Version: 2.13.2
 Plugin URI: http://toolstack.com/just-writing
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -148,13 +148,20 @@ if( !function_exists( 'JustWritingLoad' ) )
 
 		if( isset( $_GET['JustWritingRemoveAction'] ) )
 			{
-			$TableName = $wpdb->prefix . "usermeta";
+			if( current_user_can( 'delete_plugins' ) ) 
+				{
+				$TableName = $wpdb->prefix . "usermeta";
 
-			$wpdb->get_results( "DELETE FROM " . $TableName . " WHERE meta_key LIKE 'just_writing_%'" );
-			
-			update_option( 'Just_Writing_Removed', "true" );
-			
-			print "<div class='updated settings-error'><p><strong>User preferences removed and Just Writing disabled!</strong></p></div>\n";
+				$wpdb->get_results( "DELETE FROM " . $TableName . " WHERE meta_key LIKE 'just_writing_%'" );
+				
+				update_option( 'Just_Writing_Removed', "true" );
+				
+				print "<div class='updated settings-error'><p><strong>User preferences removed and Just Writing disabled!</strong></p></div>\n";
+				}
+			else
+				{
+				print "<div class='updated settings-error'><p><strong>Sorry, you don't have the rights to remove the plugin!</strong></p></div>\n";
+				}
 			}
 
 		if( isset( $_GET['JustWritingReenableAction'] ) )
@@ -167,19 +174,27 @@ if( !function_exists( 'JustWritingLoad' ) )
 	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
 		<legend><span style="font-size: 24px; font-weight: 700;">&nbsp;Uninstall Actions&nbsp;</span></legend>
 
-<?php if( get_option( "Just_Writing_Removed" ) != 'true' )
-		{ 
+<?php 
+	if( current_user_can( 'delete_plugins' ) ) 
+		{
+		if( get_option( "Just_Writing_Removed" ) != 'true' )
+			{ 
 ?>
 		<div style="font-size: 16px;">**WARNING** No further confirmation will be given after you press the delete button, make sure you REALLY want to delete all user preferences and disable Just Writing!</div>
 		<div>&nbsp;</div>
 		<div><?php _e('Remove the user preferences and disable:')?>&nbsp;<input type="button" id="JustWritingRemoveAction" name="JustWritingRemoveAction" value="<?php _e('Remove') ?> &raquo;" onclick="if( confirm('Ok, last chance, really remove the user preferences and disable?') ) { window.location = 'options-general.php?page=just-writing.php&JustWritingRemoveAction=TRUE'}"/>
 <?php
-		}
-	else
-		{
+			}
+		else
+			{
 ?>
 		<div><?php _e('Re-enable Just Writing:')?>&nbsp;<input type="button" id="JustWritingReenableAction" name="JustWritingReenableAction" value="<?php _e('Re-enable') ?> &raquo;" onclick="window.location = 'options-general.php?page=just-writing.php&JustWritingReenableAction=TRUE'"/>
 <?php 
+			}
+		}
+	else
+		{
+		_e("Sorry, you don't have the rights to delete the plugin!");
 		}
 ?>
 		

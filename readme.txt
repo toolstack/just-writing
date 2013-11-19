@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 3.7.1
-Stable tag: 2.13.1
+Stable tag: 2.13.2
 
 Adds buttons to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -92,6 +92,9 @@ There's a bug between TinyMCE and some browsers (so far IE 11 for sure) I haven'
 4. A real DFWM!
 
 == Changelog ==
+= 2.13.2 =
+* Added permissions check to the uninstall code.
+
 = 2.13.1 =
 * Fixed several bugs with the new Javascript color pickers staying on screen when they shouldn't.
 
@@ -177,7 +180,7 @@ There's a bug between TinyMCE and some browsers (so far IE 11 for sure) I haven'
 * Initial release.
 
 == Upgrade Notice ==
-= 2.13.1 =
+= 2.13.2 =
 * None.
 
 == Roadmap ==
