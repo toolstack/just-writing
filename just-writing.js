@@ -1,8 +1,11 @@
 var JustWritingAutoLoadIntervalID = null;
 var JustWritingToolbarCenterID = null;
+var JustWritingTinyMCECurrentSelection = null;
 
 function GetScriptIndex( name )
 	{
+	var i;
+	
 	// Loop through all the scripts in the current document to find the one we want.
 	for( i = 0; i < document.scripts.length; i++ ) 
 		{
@@ -35,7 +38,8 @@ function GetScriptVariable( index, name, vardef )
 
 	// Split the query string ino var/value pairs.  ie: 'var1=value1', 'var2=value2', ...
 	var params_raw = tmp_src.substr( qs_index + 1 ).split( '&' );
-
+	var j;
+	
 	// Now look for the one we want.
 	for( j = 0; j < params_raw.length; j++ )
 		{
@@ -80,7 +84,7 @@ function JustWriting()
 		ButtonBar.style.width = 'auto';
 
 		// Replace the 'Just Write.' tagline :)
-		TagLine.innerHTML = 'Just Writing.'
+		TagLine.innerHTML = 'Just Writing.';
 
 		// Hide the default exit link
 		ExitBar.style.display = 'none';
@@ -153,7 +157,7 @@ function JustWriting()
 			}
 		else
 			{
-			jQuery( 'body' ).append('<div class=\'JustWritingColorPopup\' id=\'JustWritingFontColorPopup\'><div class="JustWritingColorSwatch" style="background-color: #000000;" onclick="JustWritingFontColorSelect(\'#000000\')"></div> <div class="JustWritingColorSwatch" style="background-color: #0000FF;" onclick="JustWritingFontColorSelect(\'#0000FF\')"></div> <div class="JustWritingColorSwatch" style="background-color: #0000A0;" onclick="JustWritingFontColorSelect(\'#0000A0\')"></div> <div class="JustWritingColorSwatch" style="background-color: #ADD8E6;" onclick="JustWritingFontColorSelect(\'#ADD8E6\')"></div> <div class="JustWritingColorSwatch" style="background-color: #A52A2A;" onclick="JustWritingFontColorSelect(\'#A52A2A\')"></div> <div class="JustWritingColorSwatch" style="background-color: #00FFFF;" onclick="JustWritingFontColorSelect(\'#00FFFF\')"></div> <div class="JustWritingColorSwatch" style="background-color: #008000;" onclick="JustWritingFontColorSelect(\'#008000\')"></div> <div class="JustWritingColorSwatch" style="background-color: #808080;" onclick="JustWritingFontColorSelect(\'#808080\')"></div> <div class="JustWritingColorSwatch" style="background-color: #00FF00;" onclick="JustWritingFontColorSelect(\'#00FF00\')"></div> <div class="JustWritingColorSwatch" style="background-color: #FF00FF;" onclick="JustWritingFontColorSelect(\'#FF00FF\')"></div> <div class="JustWritingColorSwatch" style="background-color: #800000;" onclick="JustWritingFontColorSelect(\'#800000\')"></div> <div class="JustWritingColorSwatch" style="background-color: #808000;" onclick="JustWritingFontColorSelect(\'#808000\')"></div> <div class="JustWritingColorSwatch" style="background-color: #FFA500;" onclick="JustWritingFontColorSelect(\'#FFA500\')"></div> <div class="JustWritingColorSwatch" style="background-color: #800080;" onclick="JustWritingFontColorSelect(\'#800080\')"></div> <div class="JustWritingColorSwatch" style="background-color: #FF0000;" onclick="JustWritingFontColorSelect(\'#FF0000\')"></div> <div class="JustWritingColorSwatch" style="background-color: #C0C0C0;" onclick="JustWritingFontColorSelect(\'#C0C0C0\')"></div> <div class="JustWritingColorSwatch" style="background-color: #FFFFFF;" onclick="JustWritingFontColorSelect(\'#FFFFFF\')"></div> <div class="JustWritingColorSwatch" style="background-color: #FFFF00;" onclick="JustWritingFontColorSelect(\'#FFFF00\')"></div> </div>')
+			jQuery( 'body' ).append('<div class=\'JustWritingColorPopup\' id=\'JustWritingFontColorPopup\'><div class="JustWritingColorSwatch" style="background-color: #000000;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect(\'#000000\')"></div><div class="JustWritingColorSwatch" style="background-color: #0000FF;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect(\'#0000FF\')"></div><div class="JustWritingColorSwatch" style="background-color: #0000A0;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect(\'#0000A0\')"></div><div class="JustWritingColorSwatch" style="background-color: #ADD8E6;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect(\'#ADD8E6\')"></div><div class="JustWritingColorSwatch" style="background-color: #A52A2A;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect(\'#A52A2A\')"></div><div class="JustWritingColorSwatch" style="background-color: #00FFFF;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect(\'#00FFFF\')"></div><div class="JustWritingColorSwatch" style="background-color: #008000;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect(\'#008000\')"></div><div class="JustWritingColorSwatch" style="background-color: #808080;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect(\'#808080\')"></div><div class="JustWritingColorSwatch" style="background-color: #00FF00;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect(\'#00FF00\')"></div><div class="JustWritingColorSwatch" style="background-color: #FF00FF;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect(\'#FF00FF\')"></div><div class="JustWritingColorSwatch" style="background-color: #800000;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect(\'#800000\')"></div><div class="JustWritingColorSwatch" style="background-color: #808000;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect(\'#808000\')"></div><div class="JustWritingColorSwatch" style="background-color: #FFA500;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect(\'#FFA500\')"></div><div class="JustWritingColorSwatch" style="background-color: #800080;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect(\'#800080\')"></div><div class="JustWritingColorSwatch" style="background-color: #FF0000;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect(\'#FF0000\')"></div><div class="JustWritingColorSwatch" style="background-color: #C0C0C0;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect(\'#C0C0C0\')"></div><div class="JustWritingColorSwatch" style="background-color: #FFFFFF;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect(\'#FFFFFF\')"></div><div class="JustWritingColorSwatch" style="background-color: #FFFF00;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect(\'#FFFF00\')"></div></div>');
 			jQuery( '#wp_fs_fontcolor' ).on( "click", JustWritingFontColor);
 			}
 
@@ -164,7 +168,7 @@ function JustWriting()
 			}
 		else
 			{
-			jQuery( 'body' ).append('<div class=\'JustWritingColorPopup\' id=\'JustWritingBackgroundColorPopup\'><div class="JustWritingColorSwatch" style="background-color: #000000;" onclick="JustWritingBackgroundColorSelect(\'#000000\')"></div> <div class="JustWritingColorSwatch" style="background-color: #0000FF;" onclick="JustWritingBackgroundColorSelect(\'#0000FF\')"></div> <div class="JustWritingColorSwatch" style="background-color: #0000A0;" onclick="JustWritingBackgroundColorSelect(\'#0000A0\')"></div> <div class="JustWritingColorSwatch" style="background-color: #ADD8E6;" onclick="JustWritingBackgroundColorSelect(\'#ADD8E6\')"></div> <div class="JustWritingColorSwatch" style="background-color: #A52A2A;" onclick="JustWritingBackgroundColorSelect(\'#A52A2A\')"></div> <div class="JustWritingColorSwatch" style="background-color: #00FFFF;" onclick="JustWritingBackgroundColorSelect(\'#00FFFF\')"></div> <div class="JustWritingColorSwatch" style="background-color: #008000;" onclick="JustWritingBackgroundColorSelect(\'#008000\')"></div> <div class="JustWritingColorSwatch" style="background-color: #808080;" onclick="JustWritingBackgroundColorSelect(\'#808080\')"></div> <div class="JustWritingColorSwatch" style="background-color: #00FF00;" onclick="JustWritingBackgroundColorSelect(\'#00FF00\')"></div> <div class="JustWritingColorSwatch" style="background-color: #FF00FF;" onclick="JustWritingBackgroundColorSelect(\'#FF00FF\')"></div> <div class="JustWritingColorSwatch" style="background-color: #800000;" onclick="JustWritingBackgroundColorSelect(\'#800000\')"></div> <div class="JustWritingColorSwatch" style="background-color: #808000;" onclick="JustWritingBackgroundColorSelect(\'#808000\')"></div> <div class="JustWritingColorSwatch" style="background-color: #FFA500;" onclick="JustWritingBackgroundColorSelect(\'#FFA500\')"></div> <div class="JustWritingColorSwatch" style="background-color: #800080;" onclick="JustWritingBackgroundColorSelect(\'#800080\')"></div> <div class="JustWritingColorSwatch" style="background-color: #FF0000;" onclick="JustWritingBackgroundColorSelect(\'#FF0000\')"></div> <div class="JustWritingColorSwatch" style="background-color: #C0C0C0;" onclick="JustWritingBackgroundColorSelect(\'#C0C0C0\')"></div> <div class="JustWritingColorSwatch" style="background-color: #FFFFFF;" onclick="JustWritingBackgroundColorSelect(\'#FFFFFF\')"></div> <div class="JustWritingColorSwatch" style="background-color: #FFFF00;" onclick="JustWritingBackgroundColorSelect(\'#FFFF00\')"></div></div>')
+			jQuery( 'body' ).append('<div class=\'JustWritingColorPopup\' id=\'JustWritingBackgroundColorPopup\'><div class="JustWritingColorSwatch" style="background-color: #000000;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect(\'#000000\')"></div><div class="JustWritingColorSwatch" style="background-color: #0000FF;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect(\'#0000FF\')"></div><div class="JustWritingColorSwatch" style="background-color: #0000A0;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect(\'#0000A0\')"></div><div class="JustWritingColorSwatch" style="background-color: #ADD8E6;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect(\'#ADD8E6\')"></div><div class="JustWritingColorSwatch" style="background-color: #A52A2A;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect(\'#A52A2A\')"></div><div class="JustWritingColorSwatch" style="background-color: #00FFFF;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect(\'#00FFFF\')"></div><div class="JustWritingColorSwatch" style="background-color: #008000;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect(\'#008000\')"></div><div class="JustWritingColorSwatch" style="background-color: #808080;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect(\'#808080\')"></div><div class="JustWritingColorSwatch" style="background-color: #00FF00;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect(\'#00FF00\')"></div><div class="JustWritingColorSwatch" style="background-color: #FF00FF;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect(\'#FF00FF\')"></div><div class="JustWritingColorSwatch" style="background-color: #800000;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect(\'#800000\')"></div><div class="JustWritingColorSwatch" style="background-color: #808000;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect(\'#808000\')"></div><div class="JustWritingColorSwatch" style="background-color: #FFA500;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect(\'#FFA500\')"></div><div class="JustWritingColorSwatch" style="background-color: #800080;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect(\'#800080\')"></div><div class="JustWritingColorSwatch" style="background-color: #FF0000;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect(\'#FF0000\')"></div><div class="JustWritingColorSwatch" style="background-color: #C0C0C0;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect(\'#C0C0C0\')"></div><div class="JustWritingColorSwatch" style="background-color: #FFFFFF;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect(\'#FFFFFF\')"></div><div class="JustWritingColorSwatch" style="background-color: #FFFF00;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect(\'#FFFF00\')"></div></div>');
 			jQuery( '#wp_fs_backgroundcolor' ).on( "click", JustWritingBackgroundColor);
 			}
 		
@@ -208,7 +212,7 @@ function JustWriting()
 		exit.hide();
 
 		// Add preview button
-		if( HidePreview == 0 )
+		if( HidePreview === 0 )
 			{
 			preview.clone()
 					.removeAttr( 'id' ).removeClass( 'preview' ).addClass( 'right' )
@@ -259,21 +263,28 @@ function JustWritingBackgroundColor()
 	
 function JustWritingFontColorSelect( color )
 	{
+	tinyMCE.activeEditor.selection.moveToBookmark( JustWritingTinyMCECurrentSelection );
 	tinyMCE.execCommand( 'ForeColor', false, color );
 	document.getElementById( 'JustWritingFontColorPopup' ).style.display = 'none';
 	}
 
 function JustWritingBackgroundColorSelect( color )
 	{
+	tinyMCE.activeEditor.selection.moveToBookmark( JustWritingTinyMCECurrentSelection );
 	tinyMCE.execCommand( 'hiliteColor', false, color );
 	document.getElementById( 'JustWritingBackgroundColorPopup' ).style.display = 'none';
+	}
+
+function JustWritingColorHover()
+	{
+	JustWritingTinyMCECurrentSelection = tinyMCE.activeEditor.selection.getBookmark();
 	}
 	
 function JustWritingToolbarCenter()
 	{
 	var FSButton = document.getElementById( 'content_wp_fullscreen' );
 
-	if( FSButton != null ) 
+	if( FSButton !== null ) 
 		{ 
 		var oldclick = FSButton.onclick;
 		
@@ -307,14 +318,14 @@ function JustWritingToolbarCenterMove()
 	{
 	var ButtonBarWidth = document.getElementById( 'wp-fullscreen-button-bar' ).clientWidth;
 	
-	if( ButtonBarWidth != 0 ) 
+	if( ButtonBarWidth !== 0 ) 
 		{
 		JustWritingToolBarResize();
 		
 		clearInterval( JustWritingToolbarCenterID );
 		JustWritingToolbarCenterID = null;
 		
-		window.addEventListener ? window.addEventListener( "resize", JustWritingOnResizeDocument, false ) : window.attachEvent && window.attachEvent( "onresize", JustWritingOnResizeDocument );			
+		window.addEventListener ? window.addEventListener( "resize", JustWritingOnResizeDocument, false ) : window.attachEvent && window.attachEvent( "onresize", JustWritingOnResizeDocument );
 		}
 		
 	}
@@ -460,9 +471,9 @@ function JustWritingAutoLoad()
 	{
 	var UpdateBanner = document.getElementById( 'message' );
 
-	if( UpdateBanner != null )
+	if( UpdateBanner !== null )
 		{
-		if( UpdateBanner.hidden == false ) 
+		if( UpdateBanner.hidden === false ) 
 			{ 
 			clearInterval( JustWritingAutoLoadIntervalID );
 			return;
@@ -472,7 +483,7 @@ function JustWritingAutoLoad()
 	var FSButton = document.getElementById( 'content_wp_fullscreen' );
 
 	// Make sure we don't conflict with the toolbar centering code
-	if( FSButton != null && JustWritingToolbarCenterID == null ) 
+	if( FSButton !== null && JustWritingToolbarCenterID === null ) 
 		{ 
 		FSButton.click(); 
 		clearInterval( JustWritingAutoLoadIntervalID );
