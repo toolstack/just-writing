@@ -245,7 +245,7 @@ function JustWriting()
 		exit.hide();
 
 		// Add preview button
-		if( HidePreview === 0 )
+		if( HidePreview == 0 )
 			{
 			preview.clone()
 					.removeAttr( 'id' ).removeClass( 'preview' ).addClass( 'right' )
@@ -421,7 +421,7 @@ function JustWritingToolbarCenter()
 	{
 	var FSButton = document.getElementById( 'content_wp_fullscreen' );
 
-	if( FSButton !== null ) 
+	if( FSButton != null ) 
 		{ 
 		var oldclick = FSButton.onclick;
 		
@@ -455,7 +455,7 @@ function JustWritingToolbarCenterMove()
 	{
 	var ButtonBarWidth = document.getElementById( 'wp-fullscreen-button-bar' ).clientWidth;
 	
-	if( ButtonBarWidth !== 0 ) 
+	if( ButtonBarWidth != 0 ) 
 		{
 		JustWritingToolBarResize();
 		
@@ -608,9 +608,9 @@ function JustWritingAutoLoad()
 	{
 	var UpdateBanner = document.getElementById( 'message' );
 
-	if( UpdateBanner !== null )
+	if( UpdateBanner != null )
 		{
-		if( UpdateBanner.hidden === false ) 
+		if( UpdateBanner.hidden == false ) 
 			{ 
 			clearInterval( JustWritingAutoLoadIntervalID );
 			return;
@@ -620,7 +620,7 @@ function JustWritingAutoLoad()
 	var FSButton = document.getElementById( 'content_wp_fullscreen' );
 
 	// Make sure we don't conflict with the toolbar centering code
-	if( FSButton !== null && JustWritingToolbarCenterID === null ) 
+	if( FSButton != null && JustWritingToolbarCenterID == null ) 
 		{ 
 		FSButton.click(); 
 		clearInterval( JustWritingAutoLoadIntervalID );
