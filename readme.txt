@@ -93,9 +93,10 @@ There's a bug between TinyMCE and some browsers (so far IE 11 for sure) I haven'
 
 == Changelog ==
 = 2.14 =
-* Added JavaScript Font/Size/Style selectors
-* Added "out of bounds" click detection to the JavaScript popups
+* Added JavaScript Font/Size/Style selectors.
+* Added "out of bounds" click detection to the JavaScript popups.
 * Fixed issue with the JavaScript color selector and IE losing the selection when clicking a color.
+* Updated the profile page to support "quick" settings.
 
 = 2.13.2 =
 * Added permissions check to the uninstall code.
@@ -189,6 +190,4 @@ There's a bug between TinyMCE and some browsers (so far IE 11 for sure) I haven'
 * None.
 
 == Roadmap ==
-
 * Version 3.0  - add second row to toolbar, remove individual style buttons
-

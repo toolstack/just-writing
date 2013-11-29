@@ -229,11 +229,11 @@ function JustWriting()
 				.css( 'margin-bottom', '8px' )
 				.click( function(e) 
 					{
-					document.getElementById('JustWritingBackgroundColorPopup').style.display = 'none';
-					document.getElementById('JustWritingFontColorPopup').style.display = 'none';
-					document.getElementById('just_writing_formatselect_menu').style.display = 'none';
-					document.getElementById('just_writing_fontselect_menu').style.display = 'none';
-					document.getElementById('just_writing_fontsizeselect_menu').style.display = 'none';
+					JustWritingPopupHide( 'JustWritingBackgroundColorPopup' );
+					JustWritingPopupHide( 'JustWritingFontColorPopup' );
+					JustWritingPopupHide( 'just_writing_formatselect_menu' );
+					JustWritingPopupHide( 'just_writing_fontselect_menu' );
+					JustWritingPopupHide( 'just_writing_fontsizeselect_menu' );
 					
 					fullscreen.off(); 
 					return false; 
@@ -270,6 +270,12 @@ function JustWriting()
 		}
 	}
 
+function JustWritingPopupHide( PopupID )
+	{
+	Popup = document.getElementById('JustWritingBackgroundColorPopup');
+	if( Popup != null ) { Popup.style.display = 'none'; }
+	}
+	
 function JustWritingPopupClickHandler( PopupID, ButtonID )
 	{
 	var Popup = document.getElementById( PopupID );
@@ -315,10 +321,10 @@ function JustWritingFormatDropDown()
 	Popup.style.top = ( Button.offsetTop + Button.offsetHeight ) + "px";
 	Popup.style.left = Button.offsetLeft + "px";
 
-	document.getElementById('JustWritingBackgroundColorPopup').style.display = 'none';
-	document.getElementById('JustWritingFontColorPopup').style.display = 'none';
-	document.getElementById('just_writing_fontselect_menu').style.display = 'none';
-	document.getElementById('just_writing_fontsizeselect_menu').style.display = 'none';
+	JustWritingPopupHide('JustWritingBackgroundColorPopup');
+	JustWritingPopupHide('JustWritingFontColorPopup');
+	JustWritingPopupHide('just_writing_fontselect_menu');
+	JustWritingPopupHide('just_writing_fontsizeselect_menu');
 
 	jQuery( 'body' ).on( 'click', function () { JustWritingPopupClickHandler('just_writing_formatselect_menu','wp_fs_Paragraph'); } );
 	jQuery('#just_writing_formatselect_menu').toggle();
@@ -332,10 +338,10 @@ function JustWritingFontDropDown()
 	Popup.style.top = ( Button.offsetTop + Button.offsetHeight ) + "px";
 	Popup.style.left = Button.offsetLeft + "px";
 
-	document.getElementById('JustWritingBackgroundColorPopup').style.display = 'none';
-	document.getElementById('JustWritingFontColorPopup').style.display = 'none';
-	document.getElementById('just_writing_formatselect_menu').style.display = 'none';
-	document.getElementById('just_writing_fontsizeselect_menu').style.display = 'none';
+	JustWritingPopupHide('JustWritingBackgroundColorPopup');
+	JustWritingPopupHide('JustWritingFontColorPopup');
+	JustWritingPopupHide('just_writing_formatselect_menu');
+	JustWritingPopupHide('just_writing_fontsizeselect_menu');
 
 	jQuery( 'body' ).on( 'click', function () { JustWritingPopupClickHandler('just_writing_fontselect_menu','wp_fs_fontselector'); } );
 	jQuery('#just_writing_fontselect_menu').toggle();
@@ -349,10 +355,10 @@ function JustWritingFontSizeDropDown()
 	Popup.style.top = ( Button.offsetTop + Button.offsetHeight ) + "px";
 	Popup.style.left = Button.offsetLeft + "px";
 
-	document.getElementById('JustWritingBackgroundColorPopup').style.display = 'none';
-	document.getElementById('JustWritingFontColorPopup').style.display = 'none';
-	document.getElementById('just_writing_formatselect_menu').style.display = 'none';
-	document.getElementById('just_writing_fontselect_menu').style.display = 'none';
+	JustWritingPopupHide('JustWritingBackgroundColorPopup');
+	JustWritingPopupHide('JustWritingFontColorPopup');
+	JustWritingPopupHide('just_writing_formatselect_menu');
+	JustWritingPopupHide('just_writing_fontselect_menu');
 
 	jQuery( 'body' ).on( 'click', function () { JustWritingPopupClickHandler('just_writing_fontsizeselect_menu','wp_fs_fontsize'); } );
 	jQuery('#just_writing_fontsizeselect_menu').toggle();
@@ -366,10 +372,10 @@ function JustWritingFontColor()
 	FCPopup.style.top = ( FCButton.offsetTop + FCButton.offsetHeight ) + "px";
 	FCPopup.style.left = FCButton.offsetLeft + "px";
 
-	document.getElementById('JustWritingBackgroundColorPopup').style.display = 'none';
-	document.getElementById('just_writing_formatselect_menu').style.display = 'none';
-	document.getElementById('just_writing_fontselect_menu').style.display = 'none';
-	document.getElementById('just_writing_fontsizeselect_menu').style.display = 'none';
+	JustWritingPopupHide('JustWritingBackgroundColorPopup');
+	JustWritingPopupHide('just_writing_formatselect_menu');
+	JustWritingPopupHide('just_writing_fontselect_menu');
+	JustWritingPopupHide('just_writing_fontsizeselect_menu');
 	
 	jQuery( 'body' ).on( 'click', function () { JustWritingPopupClickHandler('JustWritingFontColorPopup','wp_fs_fontcolor'); } );
 	jQuery('#JustWritingFontColorPopup').toggle();
@@ -383,10 +389,10 @@ function JustWritingBackgroundColor()
 	BCPopup.style.top = ( FCButton.offsetTop + 23 ) + "px";
 	BCPopup.style.left = FCButton.offsetLeft + "px";
 
-	document.getElementById('JustWritingFontColorPopup').style.display = 'none';
-	document.getElementById('just_writing_formatselect_menu').style.display = 'none';
-	document.getElementById('just_writing_fontselect_menu').style.display = 'none';
-	document.getElementById('just_writing_fontsizeselect_menu').style.display = 'none';
+	JustWritingPopupHide('JustWritingFontColorPopup');
+	JustWritingPopupHide('just_writing_formatselect_menu');
+	JustWritingPopupHide('just_writing_fontselect_menu');
+	JustWritingPopupHide('just_writing_fontsizeselect_menu');
 	
 	jQuery( 'body' ).on( 'click', function () { JustWritingPopupClickHandler('JustWritingBackgroundColorPopup','wp_fs_backgroundcolor'); } );
 	jQuery('#JustWritingBackgroundColorPopup').toggle();

@@ -89,7 +89,7 @@ function just_writing_save_user_profile_fields( $user_id )
 	update_user_meta( $user_id, 'just_writing_a_l', just_writing_get_checked_state( $_POST['just_writing_a_l'] ) );
 	update_user_meta( $user_id, 'just_writing_d_jscp', just_writing_get_checked_state( $_POST['just_writing_d_jscp'] ) );
 
-	//Deal with the border options
+	// Deal with the border options
 	if( $_POST['just_writing_border_setting'] == 'hide' )
 		{
 		update_user_meta( $user_id, 'just_writing_h_b', 'on' );
@@ -104,6 +104,27 @@ function just_writing_save_user_profile_fields( $user_id )
 		{
 		update_user_meta( $user_id, 'just_writing_h_b', 'off' );
 		update_user_meta( $user_id, 'just_writing_l_b', 'off' );
+		}
+
+	switch( $_POST['just_writing_quick_setting'] )
+		{
+		case 'minimal':
+			update_user_meta( $user_id, 'just_writing_quick_setting', 'minimal' );
+			break;
+		case 'wpdefault':
+			update_user_meta( $user_id, 'just_writing_quick_setting', 'wpdefault' );
+			break;
+		case 'jwdefault':
+			update_user_meta( $user_id, 'just_writing_quick_setting', 'jwdefault' );
+			break;
+		case 'advanced':
+			update_user_meta( $user_id, 'just_writing_quick_setting', 'advanced' );
+			break;
+		case 'full':
+			update_user_meta( $user_id, 'just_writing_quick_setting', 'full' );
+			break;
+		default:
+			update_user_meta( $user_id, 'just_writing_quick_setting', 'custom' );
 		}
 	}
 
@@ -141,9 +162,29 @@ function just_writing_save_user_profile_fields( $user_id )
 			</td>
 		</tr>
 	</table>
+	<table class="form-table">
+		<tr>
+			<th>Quick Options</th>
+			<td>
+			<?php echo __("Use the following quick settings:");?><br>
+			<input type="radio" onclick="JustWritingSetQuickOptions('minimal')" id="just_writing_qs_mininal" name="just_writing_quick_setting" value="minimal" <?php if( get_the_author_meta( 'just_writing_quick_setting', $user->ID ) == "minimal" ) { echo "CHECKED"; } ?>>
+			<?php echo __("Minimal");?><br>
+			<input type="radio" onclick="JustWritingSetQuickOptions('wpdefault')" id="just_writing_qs_wpdefault" name="just_writing_quick_setting" value="wpdefault" <?php if( get_the_author_meta( 'just_writing_quick_setting', $user->ID ) == "wpdefault" ) { echo "CHECKED"; } ?>>
+			<?php echo __("WordPress Default");?><br>
+			<input type="radio" onclick="JustWritingSetQuickOptions('jwdefault')" id="just_writing_qs_jwdefault" name="just_writing_quick_setting" value="jwdefault" <?php if( get_the_author_meta( 'just_writing_quick_setting', $user->ID ) == "jwdefault" ) { echo "CHECKED"; } ?>>
+			<?php echo __("Just Writing Default");?><br>
+			<input type="radio" onclick="JustWritingSetQuickOptions('advanced')" id="just_writing_qs_advanced" name="just_writing_quick_setting" value="advanced" <?php if( get_the_author_meta( 'just_writing_quick_setting', $user->ID ) == "advanced" ) { echo "CHECKED"; } ?>>
+			<?php echo __("Advanced");?><br>
+			<input type="radio" onclick="JustWritingSetQuickOptions('full')" id="just_writing_qs_advanced" name="just_writing_quick_setting" value="full" <?php if( get_the_author_meta( 'just_writing_quick_setting', $user->ID ) == "full" ) { echo "CHECKED"; } ?>>
+			<?php echo __("Full");?><br>
+			<input type="radio" onclick="JustWritingSetQuickOptions('custom')" id="just_writing_qs_custom" name="just_writing_quick_setting" value="custom" <?php if( get_the_author_meta( 'just_writing_quick_setting', $user->ID ) == "custom" ) { echo "CHECKED"; } ?>>
+			<?php echo __("Custom - select your options below:");?>
+			</td>
+		</tr>
+	</table>
 	<table class="form-table" id='just_writing_options_table' <?php if( get_the_author_meta( 'just_writing_enabled', $user->ID ) != "on" ) { echo "style='display:none;'"; } ?>>	
 		<tr>
-			<th><label for="just_writing_options"><?php echo __("Options");?></label></th>
+			<th><label for="just_writing_options"><?php echo __("Advanced Options");?></label></th>
 			<td colspan=3>
 			<span class='description' style='font-size: 75%;'><a href=#JustWriting onClick="JustWritingToggleOptionGroups()">Show/Hide</a></span>
 			</td>
@@ -187,7 +228,7 @@ function just_writing_save_user_profile_fields( $user_id )
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_d_jscp" name="just_writing_d_jscp" <?php if( get_the_author_meta( 'just_writing_d_jscp', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Disable the Javascript Color Picker");?>
+			<?php echo __("Disable the Javascript Pickers");?>
 			</td>
 		</tr>
 		<tr id=JustWritingOptionGroup style='display: none;'>
@@ -212,7 +253,7 @@ function just_writing_save_user_profile_fields( $user_id )
 			</td>
 		</tr>
 		<tr>
-			<th><label for="just_writing_options"><?php echo __("Buttons");?></label></th>
+			<th><label for="just_writing_options"><?php echo __("Advanced Buttons");?></label></th>
 			<td colspan=3>
 			<span class='description' style='font-size: 75%;'><a href=#JustWriting onClick="JustWritingToggleButtonGroups()">Show/Hide</a></span>
 			</td>
