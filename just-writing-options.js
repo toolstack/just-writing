@@ -108,61 +108,6 @@ function JustWritingDeSelectAll()
 	document.getElementById( 'just_writing_b_c' ).checked = false;
 }
 
-function JustWritingSelectDefaults()
-{
-	document.getElementById( 'just_writing_bold' ).checked = true;
-	document.getElementById( 'just_writing_italics' ).checked = true;
-	document.getElementById( 'just_writing_ul' ).checked = true;
-	document.getElementById( 'just_writing_nl' ).checked = true;
-	document.getElementById( 'just_writing_quotes' ).checked = true;
-	document.getElementById( 'just_writing_media' ).checked = true;
-	document.getElementById( 'just_writing_link' ).checked = true;
-	document.getElementById( 'just_writing_unlink' ).checked = true;
-	document.getElementById( 'just_writing_strike' ).checked = true;
-	document.getElementById( 'just_writing_under' ).checked = true;
-	document.getElementById( 'just_writing_remove' ).checked = true;
-	document.getElementById( 'just_writing_left' ).checked = true;
-	document.getElementById( 'just_writing_center' ).checked = true;
-	document.getElementById( 'just_writing_right' ).checked = true;
-	document.getElementById( 'just_writing_outdent' ).checked = true;
-	document.getElementById( 'just_writing_indent' ).checked = true;
-	document.getElementById( 'just_writing_f_lb' ).checked = true;
-	document.getElementById( 'just_writing_p' ).checked = true;
-	document.getElementById( 'just_writing_h1' ).checked = true;
-	document.getElementById( 'just_writing_h2' ).checked = true;
-	document.getElementById( 'just_writing_h3' ).checked = true;
-	document.getElementById( 'just_writing_h4' ).checked = true;
-	document.getElementById( 'just_writing_h5' ).checked = true;
-	document.getElementById( 'just_writing_h6' ).checked = true;
-	document.getElementById( 'just_writing_address' ).checked = true;
-	document.getElementById( 'just_writing_pf' ).checked = true;
-	document.getElementById( 'just_writing_spell' ).checked = true;
-	document.getElementById( 'just_writing_more' ).checked = true;
-	document.getElementById( 'just_writing_char' ).checked = true;
-	document.getElementById( 'just_writing_undo' ).checked = true;
-	document.getElementById( 'just_writing_redo' ).checked = true;
-	document.getElementById( 'just_writing_help' ).checked = false;
-	document.getElementById( 'just_writing_superscript' ).checked = true;
-	document.getElementById( 'just_writing_subscript' ).checked = true;
-	document.getElementById( 'just_writing_cut' ).checked = false;
-	document.getElementById( 'just_writing_copy' ).checked = false;
-	document.getElementById( 'just_writing_paste' ).checked = false;
-	document.getElementById( 'just_writing_pastetext' ).checked = false;
-	document.getElementById( 'just_writing_pasteword' ).checked = false;
-	document.getElementById( 'just_writing_separatorone' ).checked = false;
-	document.getElementById( 'just_writing_separatortwo' ).checked = true;
-	document.getElementById( 'just_writing_separatorthree' ).checked = true;
-	document.getElementById( 'just_writing_separatorfour' ).checked = true;
-	document.getElementById( 'just_writing_separatorfive' ).checked = true;
-	document.getElementById( 'just_writing_separatorsix' ).checked = true;
-	document.getElementById( 'just_writing_separatorseven' ).checked = true;
-	document.getElementById( 'just_writing_separatoreight' ).checked = false;
-	document.getElementById( 'just_writing_f_n' ).checked = false;
-	document.getElementById( 'just_writing_f_s' ).checked = false;
-	document.getElementById( 'just_writing_f_c' ).checked = false;
-	document.getElementById( 'just_writing_b_c' ).checked = false;
-}
-
 function JustWritingToggleOptionGroups()
 	{
 	jQuery('[id^="JustWritingOptionGroup"]').toggle();
@@ -189,7 +134,7 @@ function JustWritingSetQuickOptions( optiontype )
 	{
 	if( optiontype == 'minimal' )
 		{
-		document.getElementById( 'just_writing_h_b' ).checked = false;
+		document.getElementById( 'just_writing_h_b' ).checked = true;
 		document.getElementById( 'just_writing_l_b' ).checked = false;
 		document.getElementById( 'just_writing_h_p' ).checked = true;
 		document.getElementById( 'just_writing_h_wc' ).checked = true;
@@ -319,7 +264,7 @@ function JustWritingSetQuickOptions( optiontype )
 		}
 	else if( optiontype == 'jwdefault' )
 		{
-		document.getElementById( 'just_writing_h_b' ).checked = true;
+		document.getElementById( 'just_writing_h_b' ).checked = false;
 		document.getElementById( 'just_writing_l_b' ).checked = true;
 		document.getElementById( 'just_writing_h_p' ).checked = false;
 		document.getElementById( 'just_writing_h_wc' ).checked = false;
@@ -384,7 +329,7 @@ function JustWritingSetQuickOptions( optiontype )
 		}
 	else if( optiontype == 'advanced' )
 		{
-		document.getElementById( 'just_writing_h_b' ).checked = true;
+		document.getElementById( 'just_writing_h_b' ).checked = false;
 		document.getElementById( 'just_writing_l_b' ).checked = true;
 		document.getElementById( 'just_writing_h_p' ).checked = false;
 		document.getElementById( 'just_writing_h_wc' ).checked = false;
@@ -449,7 +394,7 @@ function JustWritingSetQuickOptions( optiontype )
 		}
 	else if( optiontype == 'full' )
 		{
-		document.getElementById( 'just_writing_h_b' ).checked = true;
+		document.getElementById( 'just_writing_h_b' ).checked = false;
 		document.getElementById( 'just_writing_l_b' ).checked = true;
 		document.getElementById( 'just_writing_h_p' ).checked = false;
 		document.getElementById( 'just_writing_h_wc' ).checked = false;

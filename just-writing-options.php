@@ -585,7 +585,6 @@ function just_writing_save_user_profile_fields( $user_id )
 			<a onClick='JustWritingDeSelectAll()'><?php echo __("Deselect All");?></a>
 			</td>
 			<td>
-			<a onClick='JustWritingSelectDefaults()'><?php echo __("Select Defaults");?></a>
 			</td>
 		</tr>
 	</table>

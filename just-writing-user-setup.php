@@ -14,6 +14,7 @@ if( !function_exists( 'Just_Writing_User_Setup' ) )
 		{
 		if ( !current_user_can( 'edit_user', $user_id ) ) { return false; }
 		update_user_meta( $user_id, 'just_writing_enabled', 'on' );
+		update_user_meta( $user_id, 'just_writing_quick_setting', 'jwdefault' );
 		update_user_meta( $user_id, 'just_writing_bold', 'on' );
 		update_user_meta( $user_id, 'just_writing_italics', 'on' );
 		update_user_meta( $user_id, 'just_writing_ul', 'on' );
@@ -41,7 +42,7 @@ if( !function_exists( 'Just_Writing_User_Setup' ) )
 		update_user_meta( $user_id, 'just_writing_pf', 'on' );
 		update_user_meta( $user_id, 'just_writing_spell', 'on' );
 		update_user_meta( $user_id, 'just_writing_more', 'on' );
-		update_user_meta( $user_id, 'just_writing_char', 'on' );
+		update_user_meta( $user_id, 'just_writing_char', 'off' );
 		update_user_meta( $user_id, 'just_writing_undo', 'on' );
 		update_user_meta( $user_id, 'just_writing_redo', 'on' );
 		update_user_meta( $user_id, 'just_writing_help', 'off' );
@@ -49,26 +50,26 @@ if( !function_exists( 'Just_Writing_User_Setup' ) )
 		update_user_meta( $user_id, 'just_writing_h_wc', 'off' );
 		update_user_meta( $user_id, 'just_writing_h_p', 'off' );
 		update_user_meta( $user_id, 'just_writing_h_b', 'off' );
-		update_user_meta( $user_id, 'just_writing_l_b', 'off' );
+		update_user_meta( $user_id, 'just_writing_l_b', 'on' );
 		update_user_meta( $user_id, 'just_writing_h_mb', 'off' );
 		update_user_meta( $user_id, 'just_writing_al_edit', 'off' );
 		update_user_meta( $user_id, 'just_writing_al_new', 'off' );
 		update_user_meta( $user_id, 'just_writing_f_lb', 'on' );
-		update_user_meta( $user_id, 'just_writing_superscript', 'on' );
-		update_user_meta( $user_id, 'just_writing_subscript', 'on' );
+		update_user_meta( $user_id, 'just_writing_superscript', 'off' );
+		update_user_meta( $user_id, 'just_writing_subscript', 'off' );
 		update_user_meta( $user_id, 'just_writing_cut', 'off' );
 		update_user_meta( $user_id, 'just_writing_copy', 'off' );
 		update_user_meta( $user_id, 'just_writing_paste', 'off' );
 		update_user_meta( $user_id, 'just_writing_pastetext', 'off' );
 		update_user_meta( $user_id, 'just_writing_pasteword', 'off' );
-		update_user_meta( $user_id, 'just_writing_separatorone', 'off' );
-		update_user_meta( $user_id, 'just_writing_separatortwo', 'on' );
+		update_user_meta( $user_id, 'just_writing_separatorone', 'on' );
+		update_user_meta( $user_id, 'just_writing_separatortwo', 'off' );
 		update_user_meta( $user_id, 'just_writing_separatorthree', 'on' );
 		update_user_meta( $user_id, 'just_writing_separatorfour', 'on' );
 		update_user_meta( $user_id, 'just_writing_separatorfive', 'on' );
 		update_user_meta( $user_id, 'just_writing_separatorsix', 'on' );
 		update_user_meta( $user_id, 'just_writing_separatorseven', 'on' );
-		update_user_meta( $user_id, 'just_writing_separatoreight', 'off' );
+		update_user_meta( $user_id, 'just_writing_separatoreight', 'on' );
 		update_user_meta( $user_id, 'just_writing_f_n', 'off' );
 		update_user_meta( $user_id, 'just_writing_f_s', 'off' );
 		update_user_meta( $user_id, 'just_writing_f_c', 'off' );

@@ -93,8 +93,8 @@ There's a bug between TinyMCE and some browsers (so far IE 11 for sure) I haven'
 
 == Changelog ==
 = 2.14 =
-* Added JavaScript Font/Size/Style selectors.
-* Added "out of bounds" click detection to the JavaScript popups.
+* Added JavaScript Font/Size/Style selectors
+* Added "out of bounds" click detection to the JavaScript popups
 * Fixed issue with the JavaScript color selector and IE losing the selection when clicking a color.
 * Updated the profile page to support "quick" settings.
 
