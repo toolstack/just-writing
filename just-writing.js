@@ -272,7 +272,7 @@ function JustWriting()
 
 function JustWritingPopupHide( PopupID )
 	{
-	Popup = document.getElementById('JustWritingBackgroundColorPopup');
+	Popup = document.getElementById(PopupID);
 	if( Popup != null ) { Popup.style.display = 'none'; }
 	}
 	
