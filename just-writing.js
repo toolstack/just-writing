@@ -100,7 +100,7 @@ function JustWriting()
 		var FormatLB = GetScriptVariable( GSI, 'formatlistbox', 0 );
 		var rtl = GetScriptVariable( GSI, 'rtl', 0 );
 		var CenterToolbar = GetScriptVariable( GSI, 'centertb', 0 );
-		var DisableJSColorPicker = GetScriptVariable( GSI, 'disablejscp', 0 );
+		var DisableJSPickers = GetScriptVariable( GSI, 'disablejscp', 0 );
 
 		if( DisableFade == 1 )
 			{
@@ -139,19 +139,49 @@ function JustWriting()
 			}
 
 		// Add the format listbox
-		if( FormatLB == 1 )
+		if( DisableJSPickers == 1 )
 			{
-			jQuery( '#wp_fs_Paragraph' ).replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingFormats id=JustWritingFormats onchange=JustWritingFormatSelectChange()><option>[Style]</option><option>Paragraph</option><option>Address</option><option>Block Quotes</option><option>Preformatted</option><option>Heading 1</option><option>Heading 2</option><option>Heading 3</option><option>Heading 4</option><option>Heading 5</option><option>Heading 6</option></select>" );
+			if( FormatLB == 1 )
+				{
+				jQuery( '#wp_fs_Paragraph' ).replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingFormats id=JustWritingFormats onchange=JustWritingFormatSelectChange()><option>[Style]</option><option>Paragraph</option><option>Address</option><option>Block Quotes</option><option>Preformatted</option><option>Heading 1</option><option>Heading 2</option><option>Heading 3</option><option>Heading 4</option><option>Heading 5</option><option>Heading 6</option></select>" );
+				}
+			}
+		else
+			{
+			if( FormatLB == 1 )
+				{
+				document.getElementById( 'wp_fs_Paragraph' ).onclick = JustWritingFormatDropDown;
+				
+				jQuery( 'body' ).append( '<div role="listbox" id="just_writing_formatselect_menu" class="mceListBoxMenu mceNoIcons wp_themeSkin" style="position: absolute; z-index: 300000; outline-color: currentColor; outline-width: 0px; outline-style: none; display: none; width: 131px; left: 24px; top: 295px;"><div role="presentation" id="just_writing_formatselect_menu_co" class="mceMenu mceListBoxMenu mceNoIcons wp_themeSkin" style="width: 131px;"><span class="mceMenuLine"></span><table role="presentation" id="just_writing_formatselect_menu_tbl" border="0" cellpadding="0" cellspacing="0"><tbody><tr class="mceMenuItem mceMenuItemEnabled mceFirst"><td class="mceMenuItemTitle"><a role="option" href="javascript:;" onclick="return false;"><span class="mceText" title="Format">Format</span></a></td> </tr><tr class="mceMenuItem mceMenuItemEnabled"><td class="mce_formatPreview mce_p"><a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FormatBlock\', false, \'p\' ); document.getElementById(\'just_writing_formatselect_menu\').style.display=\'none\';" aria-disabled="false" aria-pressed="false" aria-checked="true"><span class="mceText" title="Paragraph" style="font-family:Arial;font-weight:400;text-decoration:none;text-transform:none;">Paragraph</span></a></td> </tr><tr class="mceMenuItem mceMenuItemEnabled"><td class="mce_formatPreview mce_address"><a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FormatBlock\', false, \'address\' ); document.getElementById(\'just_writing_formatselect_menu\').style.display=\'none\';" aria-disabled="false" aria-pressed="false" aria-checked="false"><span class="mceText" title="Address" style="font-family:Arial;font-weight:400;text-decoration:none;text-transform:none;">Address</span></a></td> </tr><tr class="mceMenuItem mceMenuItemEnabled"><td class="mce_formatPreview mce_block"><a  role="option" href="javascript:;" onclick="fullscreen.blockquote(); document.getElementById(\'just_writing_formatselect_menu\').style.display=\'none\';" aria-disabled="false" aria-pressed="false" aria-checked="false"><span class="mceText" title="BlockQuote"><blockquote>Block Quote</blockquote></span></a></td> </tr><tr class="mceMenuItem mceMenuItemEnabled"><td class="mce_formatPreview mce_pre"><a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FormatBlock\', false, \'pre\' ); document.getElementById(\'just_writing_formatselect_menu\').style.display=\'none\';" aria-disabled="false" aria-pressed="false" aria-checked="false"><span class="mceText" title="Preformatted" style="font-family:Courier;font-weight:400;text-decoration:none;text-transform:none;">Preformatted</span></a></td> </tr><tr class="mceMenuItem mceMenuItemEnabled"><td class="mce_formatPreview mce_h1"><a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FormatBlock\', false, \'h1\' ); document.getElementById(\'just_writing_formatselect_menu\').style.display=\'none\';" aria-disabled="false" aria-pressed="false" aria-checked="false"><span class="mceText" title="Heading 1" style="font-family:&quot;Times New Roman&quot;;font-weight:700;text-decoration:none;text-transform:none;">Heading 1</span></a></td> </tr><tr class="mceMenuItem mceMenuItemEnabled"><td class="mce_formatPreview mce_h2"><a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FormatBlock\', false, \'h2\' ); document.getElementById(\'just_writing_formatselect_menu\').style.display=\'none\';" aria-disabled="false" aria-pressed="false" aria-checked="false"><span class="mceText" title="Heading 2" style="font-family:&quot;Times New Roman&quot;;font-weight:700;text-decoration:none;text-transform:none;">Heading 2</span></a></td> </tr><tr class="mceMenuItem mceMenuItemEnabled"><td class="mce_formatPreview mce_h3"><a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FormatBlock\', false, \'h3\' ); document.getElementById(\'just_writing_formatselect_menu\').style.display=\'none\';" aria-disabled="false" aria-pressed="false" aria-checked="false"><span class="mceText" title="Heading 3" style="font-family:&quot;Times New Roman&quot;;font-weight:700;text-decoration:none;text-transform:none;">Heading 3</span></a></td> </tr><tr class="mceMenuItem mceMenuItemEnabled"><td class="mce_formatPreview mce_h4"><a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FormatBlock\', false, \'h4\' ); document.getElementById(\'just_writing_formatselect_menu\').style.display=\'none\';" aria-disabled="false" aria-pressed="false" aria-checked="false"><span class="mceText" title="Heading 4" style="font-family:&quot;Times New Roman&quot;;font-weight:700;text-decoration:none;text-transform:none;">Heading 4</span></a></td> </tr><tr class="mceMenuItem mceMenuItemEnabled"><td class="mce_formatPreview mce_h5"><a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FormatBlock\', false, \'h5\' ); document.getElementById(\'just_writing_formatselect_menu\').style.display=\'none\';" aria-disabled="false" aria-pressed="false" aria-checked="false"><span class="mceText" title="Heading 5" style="font-family:&quot;Times New Roman&quot;;font-weight:700;text-decoration:none;text-transform:none;">Heading 5</span></a></td> </tr><tr class="mceMenuItem mceMenuItemEnabled mceLast"><td class="mce_formatPreview mce_h6"><a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FormatBlock\', false, \'h6\' ); document.getElementById(\'just_writing_formatselect_menu\').style.display=\'none\';" aria-disabled="false" aria-pressed="false" aria-checked="false"><span class="mceText" title="Heading 6" style="font-family:&quot;Times New Roman&quot;;font-weight:700;text-decoration:none;text-transform:none;">Heading 6</span></a></td> </tr></tbody></table></div></div>  ' );
+				}
+			}
+			
+		// Add the font listbox
+		if( DisableJSPickers == 1 )
+			{
+			jQuery( '#wp_fs_fontselector' ).replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingFonts id=JustWritingFonts onchange=JustWritingFontSelectChange()><option>[Font]</option><option style='font-size: 125%; font-family: Andale Mono'>Andale Mono</option><option style='font-size: 125%; font-family: Arial'>Arial</option><option style='font-size: 125%; font-family: Arial Black'>Arial Black</option><option style='font-size: 125%; font-family: Book Antiqua'>Book Antiqua</option><option style='font-size: 125%; font-family: Comic Sans MS'>Comic Sans MS</option><option style='font-size: 125%; font-family: Courier New'>Courier New</option><option style='font-size: 125%; font-family: Georgia'>Georgia</option><option style='font-size: 125%; font-family: Helvetica'>Helvetica</option><option style='font-size: 125%; font-family: Imapct'>Impact</option><option style='font-size: 125%;'>Symbol</option><option style='font-size: 125%; font-family: Tahoma'>Tahoma</option><option style='font-size: 125%; font-family: Terminal'>Terminal</option><option style='font-size: 125%; font-family: Times New Roman'>Times New Roman</option><option style='font-size: 125%; font-family: Trebuchet MS'>Trebuchet MS</option><option style='font-size: 125%; font-family: Verdana'>Verdana</option><option style='font-size: 125%;'>Webdings</option><option style='font-size: 125%;'>Wingdings</option></select>" );
+			}
+		else
+			{
+			document.getElementById( 'wp_fs_fontselector' ).onclick = JustWritingFontDropDown;
+
+			jQuery( 'body' ).append( '<div role="listbox" id="just_writing_fontselect_menu" class="mceListBoxMenu mceNoIcons wp_themeSkin" style="position: absolute; z-index: 300000; outline-color: currentColor; outline-width: 0px; outline-style: none; display: none; width: 128px; left: 24px; top: 302px;"> <div role="presentation" id="just_writing_fontselect_menu_co" class="mceMenu mceListBoxMenu mceNoIcons wp_themeSkin" style="width: 128px;"> <span class="mceMenuLine"></span> <table role="presentation" id="just_writing_fontselect_menu_tbl" border="0" cellpadding="0" cellspacing="0"> <tbody> <tr id="mce_25" class="mceMenuItem mceMenuItemEnabled mceFirst"> <td class="mceMenuItemTitle"> <a id="mce_25_aria" role="option" href="javascript:;" onclick="return false;"> <span class="mceIcon"></span> <span class="mceText" title="Font family">Font family</span> </a> </td>  </tr> <tr class="mceMenuItem mceMenuItemEnabled"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontName\', false, \'Andale Mono\' ); document.getElementById(\'just_writing_fontselect_menu\').style.display=\'none\';"> <span class="mceIcon"></span> <span class="mceText" title="Andale Mono" style="font-family:andale mono,times">Andale Mono</span> </a> </td>  </tr> <tr class="mceMenuItem mceMenuItemEnabled"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontName\', false, \'Arial\' ); document.getElementById(\'just_writing_fontselect_menu\').style.display=\'none\';"> <span class="mceIcon"></span> <span class="mceText" title="Arial" style="font-family:arial,helvetica,sans-serif">Arial</span> </a> </td>  </tr> <tr class="mceMenuItem mceMenuItemEnabled"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontName\', false, \'Arial Black\' ); document.getElementById(\'just_writing_fontselect_menu\').style.display=\'none\';"> <span class="mceIcon"></span> <span class="mceText" title="Arial Black" style="font-family:arial black,avant garde">Arial Black</span> </a> </td>  </tr> <tr class="mceMenuItem mceMenuItemEnabled"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontName\', false, \'Book Antiqua\' ); document.getElementById(\'just_writing_fontselect_menu\').style.display=\'none\';"> <span class="mceIcon"></span> <span class="mceText" title="Book Antiqua" style="font-family:book antiqua,palatino">Book Antiqua</span> </a> </td>  </tr> <tr class="mceMenuItem mceMenuItemEnabled"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontName\', false, \'Comic Sans MS\' ); document.getElementById(\'just_writing_fontselect_menu\').style.display=\'none\';"> <span class="mceIcon"></span> <span class="mceText" title="Comic Sans MS" style="font-family:comic sans ms,sans-serif">Comic Sans MS</span> </a> </td>  </tr> <tr class="mceMenuItem mceMenuItemEnabled"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontName\', false, \'Courier New\' ); document.getElementById(\'just_writing_fontselect_menu\').style.display=\'none\';"> <span class="mceIcon"></span> <span class="mceText" title="Courier New" style="font-family:courier new,courier">Courier New</span> </a> </td>  </tr> <tr class="mceMenuItem mceMenuItemEnabled"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontName\', false, \'Georgia\' ); document.getElementById(\'just_writing_fontselect_menu\').style.display=\'none\';"> <span class="mceIcon"></span> <span class="mceText" title="Georgia" style="font-family:georgia,palatino">Georgia</span> </a> </td>  </tr> <tr class="mceMenuItem mceMenuItemEnabled"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontName\', false, \'Helvetica\' ); document.getElementById(\'just_writing_fontselect_menu\').style.display=\'none\';"> <span class="mceIcon"></span> <span class="mceText" title="Helvetica" style="font-family:helvetica">Helvetica</span> </a> </td>  </tr> <tr class="mceMenuItem mceMenuItemEnabled"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontName\', false, \'Impact\' ); document.getElementById(\'just_writing_fontselect_menu\').style.display=\'none\';"> <span class="mceIcon"></span> <span class="mceText" title="Impact" style="font-family:impact,chicago">Impact</span> </a> </td>  </tr> <tr class="mceMenuItem mceMenuItemEnabled"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontName\', false, \'Symbol\' ); document.getElementById(\'just_writing_fontselect_menu\').style.display=\'none\';"> <span class="mceIcon"></span> <span class="mceText" title="Symbol" style="font-family:symbol">Symbol</span> </a> </td>  </tr> <tr class="mceMenuItem mceMenuItemEnabled"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontName\', false, \'Tahoma\' ); document.getElementById(\'just_writing_fontselect_menu\').style.display=\'none\';"> <span class="mceIcon"></span> <span class="mceText" title="Tahoma" style="font-family:tahoma,arial,helvetica,sans-serif">Tahoma</span> </a> </td>  </tr> <tr class="mceMenuItem mceMenuItemEnabled"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontName\', false, \'Terminal\' ); document.getElementById(\'just_writing_fontselect_menu\').style.display=\'none\';"> <span class="mceIcon"></span> <span class="mceText" title="Terminal" style="font-family:terminal,monaco">Terminal</span> </a> </td>  </tr> <tr class="mceMenuItem mceMenuItemEnabled"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontName\', false, \'Times New Roman\' ); document.getElementById(\'just_writing_fontselect_menu\').style.display=\'none\';"> <span class="mceIcon"></span> <span class="mceText" title="Times New Roman" style="font-family:times new roman,times">Times New Roman</span> </a> </td>  </tr> <tr class="mceMenuItem mceMenuItemEnabled"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontName\', false, \'Trebuchet MS\' ); document.getElementById(\'just_writing_fontselect_menu\').style.display=\'none\';"> <span class="mceIcon"></span> <span class="mceText" title="Trebuchet MS" style="font-family:trebuchet ms,geneva">Trebuchet MS</span> </a> </td>  </tr> <tr class="mceMenuItem mceMenuItemEnabled"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontName\', false, \'Verdana\' ); document.getElementById(\'just_writing_fontselect_menu\').style.display=\'none\';"> <span class="mceIcon"></span> <span class="mceText" title="Verdana" style="font-family:verdana,geneva">Verdana</span> </a> </td>  </tr> <tr class="mceMenuItem mceMenuItemEnabled"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontName\', false, \'Webdings\' ); document.getElementById(\'just_writing_fontselect_menu\').style.display=\'none\';"> <span class="mceIcon"></span> <span class="mceText" title="Webdings">Webdings</span> </a> </td>  </tr> <tr class="mceMenuItem mceMenuItemEnabled mceLast"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontName\', false, \'Wingdings\' ); document.getElementById(\'just_writing_fontselect_menu\').style.display=\'none\';"> <span class="mceIcon"></span> <span class="mceText" title="Wingdings">Wingdings</span> </a> </td>  </tr> </tbody> </table> </div> </div> ' );
 			}
 		
-		// Add the font listbox
-		jQuery( '#wp_fs_fontselect' ).replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingFonts id=JustWritingFonts onchange=JustWritingFontSelectChange()><option>[Font]</option><option style='font-size: 125%; font-family: Andale Mono'>Andale Mono</option><option style='font-size: 125%; font-family: Arial'>Arial</option><option style='font-size: 125%; font-family: Arial Black'>Arial Black</option><option style='font-size: 125%; font-family: Book Antiqua'>Book Antiqua</option><option style='font-size: 125%; font-family: Comic Sans MS'>Comic Sans MS</option><option style='font-size: 125%; font-family: Courier New'>Courier New</option><option style='font-size: 125%; font-family: Georgia'>Georgia</option><option style='font-size: 125%; font-family: Helvetica'>Helvetica</option><option style='font-size: 125%; font-family: Imapct'>Impact</option><option style='font-size: 125%;'>Symbol</option><option style='font-size: 125%; font-family: Tahoma'>Tahoma</option><option style='font-size: 125%; font-family: Terminal'>Terminal</option><option style='font-size: 125%; font-family: Times New Roman'>Times New Roman</option><option style='font-size: 125%; font-family: Trebuchet MS'>Trebuchet MS</option><option style='font-size: 125%; font-family: Verdana'>Verdana</option><option style='font-size: 125%;'>Webdings</option><option style='font-size: 125%;'>Wingdings</option></select>" );
-		
 		// Add the font size listbox
-		jQuery( '#wp_fs_fontsize' ).replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingFontSize id=JustWritingFontSize onchange=JustWritingFontSizeSelectChange()><option>[Font Size]</option><option style='font-size: 6px'>6</option><option style='font-size: 8px'>8</option><option style='font-size: 10px'>10</option><option style='font-size: 12px'>12</option><option style='font-size: 14px'>14</option><option style='font-size: 16px'>16</option><option style='font-size: 18px'>18</option><option style='font-size: 20px'>20</option><option style='font-size: 22px'>22</option><option style='font-size: 24px'>24</option><option style='font-size: 28px'>28</option><option style='font-size: 32px'>32</option><option style='font-size: 36px'>36</option><option style='font-size: 40px'>40</option><option style='font-size: 44px'>44</option><option style='font-size: 48px'>48</option><option style='font-size: 52px'>52</option><option style='font-size: 62px'>62</option><option style='font-size: 72px'>72</option></select>" );
+		if( DisableJSPickers == 1 )
+			{
+			jQuery( '#wp_fs_fontsize' ).replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingFontSize id=JustWritingFontSize onchange=JustWritingFontSizeSelectChange()><option>[Font Size]</option><option style='font-size: 6px'>6</option><option style='font-size: 8px'>8</option><option style='font-size: 10px'>10</option><option style='font-size: 12px'>12</option><option style='font-size: 14px'>14</option><option style='font-size: 16px'>16</option><option style='font-size: 18px'>18</option><option style='font-size: 20px'>20</option><option style='font-size: 22px'>22</option><option style='font-size: 24px'>24</option><option style='font-size: 28px'>28</option><option style='font-size: 32px'>32</option><option style='font-size: 36px'>36</option><option style='font-size: 40px'>40</option><option style='font-size: 44px'>44</option><option style='font-size: 48px'>48</option><option style='font-size: 52px'>52</option><option style='font-size: 62px'>62</option><option style='font-size: 72px'>72</option></select>" );
+			}
+		else
+			{
+			document.getElementById( 'wp_fs_fontsize' ).onclick = JustWritingFontSizeDropDown;
+
+			jQuery( 'body' ).append( '<div role="listbox" id="just_writing_fontsizeselect_menu" class="mceListBoxMenu mceNoIcons wp_themeSkin" style="position: absolute; z-index: 300000; outline-color: currentColor; outline-width: 0px; outline-style: none; display: none; height: 450px; width: 220px; left: 24px; top: 272px;"> <div role="presentation" id="just_writing_fontsizeselect_menu_co" class="mceMenu mceListBoxMenu mceNoIcons wp_themeSkin" style="height: 450px; width: 220px;"> <span class="mceMenuLine"></span> <table role="presentation" id="just_writing_fontsizeselect_menu_tbl" border="0" cellpadding="0" cellspacing="0"> <tbody> <tr class="mceMenuItem mceMenuItemEnabled mceFirst"> <td class="mceMenuItemTitle" style="width: 220px"> <a role="option" href="javascript:;" onclick="return false;"> <span class="mceText" title="Font size">Font size</span> </a> </td> </tr> <tr class="mceMenuItem mceMenuItemEnabled" style="height: 6pt"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontSize\', false, \'6pt\' ); document.getElementById(\'just_writing_fontsizeselect_menu\').style.display=\'none\';"> <span class="mceText" title="6pt" style="font-size: 6pt">6pt</span> </a> </td> </tr> <tr class="mceMenuItem mceMenuItemEnabled" style="height: 8pt"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontSize\', false, \'8pt\' ); document.getElementById(\'just_writing_fontsizeselect_menu\').style.display=\'none\';"> <span class="mceText" title="8pt" style="font-size: 8pt">8pt</span> </a> </td> </tr> <tr class="mceMenuItem mceMenuItemEnabled" style="height: 10pt"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontSize\', false, \'10pt\' ); document.getElementById(\'just_writing_fontsizeselect_menu\').style.display=\'none\';"> <span class="mceText" title="10pt" style="font-size: 10pt">10pt</span> </a> </td> </tr> <tr class="mceMenuItem mceMenuItemEnabled" style="height: 12pt"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontSize\', false, \'12pt\' ); document.getElementById(\'just_writing_fontsizeselect_menu\').style.display=\'none\';"> <span class="mceText" title="12pt" style="font-size: 12pt">12pt</span> </a> </td> </tr> <tr class="mceMenuItem mceMenuItemEnabled" style="height: 14pt"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontSize\', false, \'14pt\' ); document.getElementById(\'just_writing_fontsizeselect_menu\').style.display=\'none\';"> <span class="mceText" title="14pt" style="font-size: 14pt">14pt</span> </a> </td> </tr> <tr class="mceMenuItem mceMenuItemEnabled" style="height: 16pt"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontSize\', false, \'16pt\' ); document.getElementById(\'just_writing_fontsizeselect_menu\').style.display=\'none\';"> <span class="mceText" title="16pt" style="font-size: 14pt">16pt</span> </a> </td> </tr> <tr class="mceMenuItem mceMenuItemEnabled" style="height: 18pt"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontSize\', false, \'18pt\' ); document.getElementById(\'just_writing_fontsizeselect_menu\').style.display=\'none\';"> <span class="mceText" title="18pt" style="font-size: 18pt">18pt</span> </a> </td> </tr> <tr class="mceMenuItem mceMenuItemEnabled" style="height: 20pt"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontSize\', false, \'20pt\' ); document.getElementById(\'just_writing_fontsizeselect_menu\').style.display=\'none\';"> <span class="mceText" title="20pt" style="font-size: 20pt">20pt</span> </a> </td> </tr> <tr class="mceMenuItem mceMenuItemEnabled" style="height: 22pt"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontSize\', false, \'22pt\' ); document.getElementById(\'just_writing_fontsizeselect_menu\').style.display=\'none\';"> <span class="mceText" title="22pt" style="font-size: 22pt">22pt</span> </a> </td> </tr> <tr class="mceMenuItem mceMenuItemEnabled" style="height: 24pt"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontSize\', false, \'24pt\' ); document.getElementById(\'just_writing_fontsizeselect_menu\').style.display=\'none\';"> <span class="mceText" title="24pt" style="font-size: 24pt">24pt</span> </a> </td> </tr> <tr class="mceMenuItem mceMenuItemEnabled" style="height: 28pt"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontSize\', false, \'28pt\' ); document.getElementById(\'just_writing_fontsizeselect_menu\').style.display=\'none\';"> <span class="mceText" title="28pt" style="font-size: 28pt">28pt</span> </a> </td> </tr> <tr class="mceMenuItem mceMenuItemEnabled" style="height: 32pt"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontSize\', false, \'32pt\' ); document.getElementById(\'just_writing_fontsizeselect_menu\').style.display=\'none\';"> <span class="mceText" title="32pt" style="font-size: 32pt">32pt</span> </a> </td> </tr> <tr class="mceMenuItem mceMenuItemEnabled mceLast" style="height: 36pt"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontSize\', false, \'36pt\' ); document.getElementById(\'just_writing_fontsizeselect_menu\').style.display=\'none\';"> <span class="mceText" title="36pt" style="font-size: 36pt;">36pt</span> </a> </td> </tr> <tr class="mceMenuItem mceMenuItemEnabled mceLast" style="height: 40pt"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontSize\', false, \'40pt\' ); document.getElementById(\'just_writing_fontsizeselect_menu\').style.display=\'none\';"> <span class="mceText" title="40pt" style="font-size: 40pt;">40pt</span> </a> </td> </tr> <tr class="mceMenuItem mceMenuItemEnabled mceLast" style="height: 44pt"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontSize\', false, \'44pt\' ); document.getElementById(\'just_writing_fontsizeselect_menu\').style.display=\'none\';"> <span class="mceText" title="44pt" style="font-size: 44pt;">44pt</span> </a> </td> </tr> <tr class="mceMenuItem mceMenuItemEnabled mceLast" style="height: 48pt"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontSize\', false, \'48pt\' ); document.getElementById(\'just_writing_fontsizeselect_menu\').style.display=\'none\';"> <span class="mceText" title="48pt" style="font-size: 48pt;">48pt</span> </a> </td> </tr> <tr class="mceMenuItem mceMenuItemEnabled mceLast" style="height: 52pt"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontSize\', false, \'52pt\' ); document.getElementById(\'just_writing_fontsizeselect_menu\').style.display=\'none\';"> <span class="mceText" title="52pt" style="font-size: 52pt;">52pt</span> </a> </td> </tr> <tr class="mceMenuItem mceMenuItemEnabled mceLast" style="height: 62pt"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontSize\', false, \'62pt\' ); document.getElementById(\'just_writing_fontsizeselect_menu\').style.display=\'none\';"> <span class="mceText" title="62pt" style="font-size: 62pt;">62pt</span> </a> </td> </tr> <tr class="mceMenuItem mceMenuItemEnabled mceLast" style="height: 72pt"> <td> <a role="option" href="javascript:;" onclick="tinyMCE.execCommand( \'FontSize\', false, \'72pt\' ); document.getElementById(\'just_writing_fontsizeselect_menu\').style.display=\'none\';"> <span class="mceText" title="72pt" style="font-size: 72pt;">72pt</span> </a> </td> </tr> </tbody> </table> </div> </div>' );
+			}
 
 		// Add the font color listbox
-		if( DisableJSColorPicker == 1 )
+		if( DisableJSPickers == 1 )
 			{
 			jQuery( '#wp_fs_fontcolor' ).replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingFontColor id=JustWritingFontColor onchange=JustWritingFontColorSelectChange()><option>[Font Color]</option><option style='font-size: 125%; background-color: #000000; color: white;'>Black</option><option style='font-size: 125%; background-color: #0000FF; color: white;'>Blue</option><option style='font-size: 125%; background-color: #0000A0; color: white;'>Blue (Dark)</option><option style='font-size: 125%; background-color: #ADD8E6; color: white;'>Blue (Light)</option><option style='font-size: 125%; background-color: #A52A2A; color: white;'>Brown</option><option style='font-size: 125%; background-color: #00FFFF; color: white;'>Cyan</option><option style='font-size: 125%; background-color: #008000; color: white;'>Green</option><option style='font-size: 125%; background-color: #808080; color: white;'>Grey</option><option style='font-size: 125%; background-color: #00FF00; color: white;'>Lime</option><option style='font-size: 125%; background-color: #FF00FF; color: white;'>Magenta</option><option style='font-size: 125%; background-color: #800000; color: white;'>Maroon</option><option style='font-size: 125%; background-color: #808000; color: white;'>Olive</option><option style='font-size: 125%; background-color: #FFA500; color: white;'>Orange</option><option style='font-size: 125%; background-color: #800080; color: white;'>Purple</option><option style='font-size: 125%; background-color: #FF0000; color: white;'>Red</option><option style='font-size: 125%; background-color: #C0C0C0; color: white;'>Silver</option><option style='font-size: 125%; background-color: #FFFFFF; color: black;'>White</option><option style='font-size: 125%; background-color: #FFFF00; color: black;'>Yellow</option></select>" );
 			}
@@ -162,7 +192,7 @@ function JustWriting()
 			}
 
 		// Add the background color listbox
-		if( DisableJSColorPicker == 1 )
+		if( DisableJSPickers == 1 )
 			{
 			jQuery( '#wp_fs_backgroundcolor' ).replaceWith( "<select style='margin-left: 5px; margin-right: 5px;' name=JustWritingBackgroundColor id=JustWritingBackgroundColor onchange=JustWritingBackgroundColorSelectChange()><option>[BG Color]</option><option style='font-size: 125%; background-color: #000000; color: white;'>Black</option><option style='font-size: 125%; background-color: #0000FF; color: white;'>Blue</option><option style='font-size: 125%; background-color: #0000A0; color: white;'>Blue (Dark)</option><option style='font-size: 125%; background-color: #ADD8E6; color: white;'>Blue (Light)</option><option style='font-size: 125%; background-color: #A52A2A; color: white;'>Brown</option><option style='font-size: 125%; background-color: #00FFFF; color: white;'>Cyan</option><option style='font-size: 125%; background-color: #008000; color: white;'>Green</option><option style='font-size: 125%; background-color: #808080; color: white;'>Grey</option><option style='font-size: 125%; background-color: #00FF00; color: white;'>Lime</option><option style='font-size: 125%; background-color: #FF00FF; color: white;'>Magenta</option><option style='font-size: 125%; background-color: #800000; color: white;'>Maroon</option><option style='font-size: 125%; background-color: #808000; color: white;'>Olive</option><option style='font-size: 125%; background-color: #FFA500; color: white;'>Orange</option><option style='font-size: 125%; background-color: #800080; color: white;'>Purple</option><option style='font-size: 125%; background-color: #FF0000; color: white;'>Red</option><option style='font-size: 125%; background-color: #C0C0C0; color: white;'>Silver</option><option style='font-size: 125%; background-color: #FFFFFF; color: black;'>White</option><option style='font-size: 125%; background-color: #FFFF00; color: black;'>Yellow</option></select>" );
 			}
@@ -199,8 +229,11 @@ function JustWriting()
 				.css( 'margin-bottom', '8px' )
 				.click( function(e) 
 					{
-					jQuery('#JustWritingBackgroundColorPopup').hide();
-					jQuery('#JustWritingFontColorPopup').hide();
+					document.getElementById('JustWritingBackgroundColorPopup').style.display = 'none';
+					document.getElementById('JustWritingFontColorPopup').style.display = 'none';
+					document.getElementById('just_writing_formatselect_menu').style.display = 'none';
+					document.getElementById('just_writing_fontselect_menu').style.display = 'none';
+					document.getElementById('just_writing_fontsizeselect_menu').style.display = 'none';
 					
 					fullscreen.off(); 
 					return false; 
@@ -224,7 +257,7 @@ function JustWriting()
 						} )
 					.insertBefore( '#wp-fullscreen-save input.button-primary' );
 			}	
-			
+
 		if( CenterToolbar == 1)
 			{
 			// Add a spacer to center the toolbar, we have to do this in two stages.
@@ -237,15 +270,108 @@ function JustWriting()
 		}
 	}
 
+function JustWritingPopupClickHandler( PopupID, ButtonID )
+	{
+	var Popup = document.getElementById( PopupID );
+
+	if( Popup.style.display != 'none' )
+		{
+		var Button = document.getElementById( ButtonID );
+
+		posx = window.event.clientX;
+        posy = window.event.clientY;
+		
+		if( posx < Popup.offsetLeft || posx > Popup.offsetLeft + Popup.offsetWidth )
+			{
+			if( posx < Button.offsetLeft || posx > Button.offsetLeft + Button.offsetWidth )
+				{
+				Popup.style.display = 'none';
+				
+				jQuery( 'body' ).unbind( 'click' );
+				
+				return;
+				}
+			}
+			
+		if( posy < Popup.offsetTop || posy > Popup.offset.top + Popup.offsetHeight )
+			{
+			if( posy < Button.offsetTop || posy > Button.offsetTop + Button.offsetHeight )
+				{
+				Popup.style.display = 'none';
+
+				jQuery( 'body' ).unbind( 'click' );
+				
+				return;
+				}
+			}
+		}
+	}
+	
+function JustWritingFormatDropDown()
+	{
+	var Button = document.getElementById( 'wp_fs_Paragraph' );
+	var Popup = document.getElementById( 'just_writing_formatselect_menu' );
+	
+	Popup.style.top = ( Button.offsetTop + Button.offsetHeight ) + "px";
+	Popup.style.left = Button.offsetLeft + "px";
+
+	document.getElementById('JustWritingBackgroundColorPopup').style.display = 'none';
+	document.getElementById('JustWritingFontColorPopup').style.display = 'none';
+	document.getElementById('just_writing_fontselect_menu').style.display = 'none';
+	document.getElementById('just_writing_fontsizeselect_menu').style.display = 'none';
+
+	jQuery( 'body' ).on( 'click', function () { JustWritingPopupClickHandler('just_writing_formatselect_menu','wp_fs_Paragraph'); } );
+	jQuery('#just_writing_formatselect_menu').toggle();
+	}
+
+function JustWritingFontDropDown()
+	{
+	var Button = document.getElementById( 'wp_fs_fontselector' );
+	var Popup = document.getElementById( 'just_writing_fontselect_menu' );
+	
+	Popup.style.top = ( Button.offsetTop + Button.offsetHeight ) + "px";
+	Popup.style.left = Button.offsetLeft + "px";
+
+	document.getElementById('JustWritingBackgroundColorPopup').style.display = 'none';
+	document.getElementById('JustWritingFontColorPopup').style.display = 'none';
+	document.getElementById('just_writing_formatselect_menu').style.display = 'none';
+	document.getElementById('just_writing_fontsizeselect_menu').style.display = 'none';
+
+	jQuery( 'body' ).on( 'click', function () { JustWritingPopupClickHandler('just_writing_fontselect_menu','wp_fs_fontselector'); } );
+	jQuery('#just_writing_fontselect_menu').toggle();
+	}
+	
+function JustWritingFontSizeDropDown()
+	{
+	var Button = document.getElementById( 'wp_fs_fontsize' );
+	var Popup = document.getElementById( 'just_writing_fontsizeselect_menu' );
+	
+	Popup.style.top = ( Button.offsetTop + Button.offsetHeight ) + "px";
+	Popup.style.left = Button.offsetLeft + "px";
+
+	document.getElementById('JustWritingBackgroundColorPopup').style.display = 'none';
+	document.getElementById('JustWritingFontColorPopup').style.display = 'none';
+	document.getElementById('just_writing_formatselect_menu').style.display = 'none';
+	document.getElementById('just_writing_fontselect_menu').style.display = 'none';
+
+	jQuery( 'body' ).on( 'click', function () { JustWritingPopupClickHandler('just_writing_fontsizeselect_menu','wp_fs_fontsize'); } );
+	jQuery('#just_writing_fontsizeselect_menu').toggle();
+	}
+	
 function JustWritingFontColor()
 	{
 	var FCButton = document.getElementById( 'wp_fs_fontcolor' );
 	var FCPopup = document.getElementById( 'JustWritingFontColorPopup' );
 	
-	FCPopup.style.top = ( FCButton.offsetTop + 23 ) + "px";
+	FCPopup.style.top = ( FCButton.offsetTop + FCButton.offsetHeight ) + "px";
 	FCPopup.style.left = FCButton.offsetLeft + "px";
-		
-	jQuery('#JustWritingBackgroundColorPopup').hide();
+
+	document.getElementById('JustWritingBackgroundColorPopup').style.display = 'none';
+	document.getElementById('just_writing_formatselect_menu').style.display = 'none';
+	document.getElementById('just_writing_fontselect_menu').style.display = 'none';
+	document.getElementById('just_writing_fontsizeselect_menu').style.display = 'none';
+	
+	jQuery( 'body' ).on( 'click', function () { JustWritingPopupClickHandler('JustWritingFontColorPopup','wp_fs_fontcolor'); } );
 	jQuery('#JustWritingFontColorPopup').toggle();
 	}
 
@@ -256,8 +382,13 @@ function JustWritingBackgroundColor()
 	
 	BCPopup.style.top = ( FCButton.offsetTop + 23 ) + "px";
 	BCPopup.style.left = FCButton.offsetLeft + "px";
-		
-	jQuery('#JustWritingFontColorPopup').hide();
+
+	document.getElementById('JustWritingFontColorPopup').style.display = 'none';
+	document.getElementById('just_writing_formatselect_menu').style.display = 'none';
+	document.getElementById('just_writing_fontselect_menu').style.display = 'none';
+	document.getElementById('just_writing_fontsizeselect_menu').style.display = 'none';
+	
+	jQuery( 'body' ).on( 'click', function () { JustWritingPopupClickHandler('JustWritingBackgroundColorPopup','wp_fs_backgroundcolor'); } );
 	jQuery('#JustWritingBackgroundColorPopup').toggle();
 	}
 	
@@ -385,25 +516,25 @@ function JustWritingFontSizeSelectChange()
 	var Listbox = document.getElementById( 'JustWritingFontSize' );
 	var index = Listbox.selectedIndex;
 	
-	if( index == 1 ) { tinyMCE.execCommand( 'FontSize', false, '6' ); }
-	if( index == 2 ) { tinyMCE.execCommand( 'FontSize', false, '8' ); }
-	if( index == 3 ) { tinyMCE.execCommand( 'FontSize', false, '10' ); }
-	if( index == 4 ) { tinyMCE.execCommand( 'FontSize', false, '12' ); }
-	if( index == 5 ) { tinyMCE.execCommand( 'FontSize', false, '14' ); }
-	if( index == 6 ) { tinyMCE.execCommand( 'FontSize', false, '16' ); }
-	if( index == 7 ) { tinyMCE.execCommand( 'FontSize', false, '18' ); }
-	if( index == 8 ) { tinyMCE.execCommand( 'FontSize', false, '20' ); }
-	if( index == 9 ) { tinyMCE.execCommand( 'FontSize', false, '22' ); }
-	if( index == 10 ) { tinyMCE.execCommand( 'FontSize', false, '24' ); }
-	if( index == 11 ) { tinyMCE.execCommand( 'FontSize', false, '28' ); }
-	if( index == 12 ) { tinyMCE.execCommand( 'FontSize', false, '32' ); }
-	if( index == 13 ) { tinyMCE.execCommand( 'FontSize', false, '36' ); }
-	if( index == 14 ) { tinyMCE.execCommand( 'FontSize', false, '40' ); }
-	if( index == 15 ) { tinyMCE.execCommand( 'FontSize', false, '44' ); }
-	if( index == 16 ) { tinyMCE.execCommand( 'FontSize', false, '48' ); }
-	if( index == 17 ) { tinyMCE.execCommand( 'FontSize', false, '52' ); }
-	if( index == 18 ) { tinyMCE.execCommand( 'FontSize', false, '62' ); }
-	if( index == 19 ) { tinyMCE.execCommand( 'FontSize', false, '72' ); }
+	if( index == 1 ) { tinyMCE.execCommand( 'FontSize', false, '6pt' ); }
+	if( index == 2 ) { tinyMCE.execCommand( 'FontSize', false, '8pt' ); }
+	if( index == 3 ) { tinyMCE.execCommand( 'FontSize', false, '10pt' ); }
+	if( index == 4 ) { tinyMCE.execCommand( 'FontSize', false, '12pt' ); }
+	if( index == 5 ) { tinyMCE.execCommand( 'FontSize', false, '14pt' ); }
+	if( index == 6 ) { tinyMCE.execCommand( 'FontSize', false, '16pt' ); }
+	if( index == 7 ) { tinyMCE.execCommand( 'FontSize', false, '18pt' ); }
+	if( index == 8 ) { tinyMCE.execCommand( 'FontSize', false, '20pt' ); }
+	if( index == 9 ) { tinyMCE.execCommand( 'FontSize', false, '22pt' ); }
+	if( index == 10 ) { tinyMCE.execCommand( 'FontSize', false, '24pt' ); }
+	if( index == 11 ) { tinyMCE.execCommand( 'FontSize', false, '28pt' ); }
+	if( index == 12 ) { tinyMCE.execCommand( 'FontSize', false, '32pt' ); }
+	if( index == 13 ) { tinyMCE.execCommand( 'FontSize', false, '36pt' ); }
+	if( index == 14 ) { tinyMCE.execCommand( 'FontSize', false, '40pt' ); }
+	if( index == 15 ) { tinyMCE.execCommand( 'FontSize', false, '44pt' ); }
+	if( index == 16 ) { tinyMCE.execCommand( 'FontSize', false, '48pt' ); }
+	if( index == 17 ) { tinyMCE.execCommand( 'FontSize', false, '52pt' ); }
+	if( index == 18 ) { tinyMCE.execCommand( 'FontSize', false, '62pt' ); }
+	if( index == 19 ) { tinyMCE.execCommand( 'FontSize', false, '72pt' ); }
 
 	Listbox.selectedIndex = 0;	
 	}

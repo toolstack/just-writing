@@ -92,7 +92,7 @@ function JustWriting( $oldbuttons )
 		
 	if( get_the_author_meta( 'just_writing_f_n', $cuid ) == 'on' )
 		{
-		$buttons['fontselect'] = array( 
+		$buttons['fontselector'] = array( 
 								// Title of the button
 								'title' => __('Font'), 
 								// Command to execute
