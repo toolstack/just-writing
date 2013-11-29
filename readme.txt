@@ -92,6 +92,11 @@ There's a bug between TinyMCE and some browsers (so far IE 11 for sure) I haven'
 4. A real DFWM!
 
 == Changelog ==
+= 2.14 =
+* Added JavaScript Font/Size/Style selectors
+* Added "out of bounds" click detection to the JavaScript popups
+* Fixed issue with the JavaScript color selector and IE losing the selection when clicking a color.
+
 = 2.13.2 =
 * Added permissions check to the uninstall code.
 
@@ -180,11 +185,10 @@ There's a bug between TinyMCE and some browsers (so far IE 11 for sure) I haven'
 * Initial release.
 
 == Upgrade Notice ==
-= 2.13.2 =
+= 2.14 =
 * None.
 
 == Roadmap ==
 
-* Version 2.14 - implement JavaScript font/font size picker
 * Version 3.0  - add second row to toolbar, remove individual style buttons
 
