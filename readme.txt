@@ -89,7 +89,9 @@ There's a bug between TinyMCE and some browsers (so far IE 11 for sure) I haven'
 1. Pre installation DFWM.
 2. Post installation DFWM.
 3. User preferences screen.
-4. A real DFWM!
+4. Advanced user prefrences options.
+5. A real DFWM!
+6. Administration screen.
 
 == Changelog ==
 = 2.14 =
