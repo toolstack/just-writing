@@ -165,19 +165,19 @@ function just_writing_save_user_profile_fields( $user_id )
 	<table class="form-table">
 		<tr>
 			<th>Quick Options</th>
-			<td>
-			<?php echo __("Use the following quick settings:");?><br>
-			<input type="radio" onclick="JustWritingSetQuickOptions('minimal')" id="just_writing_qs_mininal" name="just_writing_quick_setting" value="minimal" <?php if( get_the_author_meta( 'just_writing_quick_setting', $user->ID ) == "minimal" ) { echo "CHECKED"; } ?>>
+			<td>			
+			<?php echo __("Use the following quick settings:"); $QuickSettings = get_the_author_meta( 'just_writing_quick_setting', $user->ID ); if( $QuickSettings == "" ) { $QuickSettings = "custom"; }?><br>
+			<input type="radio" onclick="JustWritingSetQuickOptions('minimal')" id="just_writing_qs_mininal" name="just_writing_quick_setting" value="minimal" <?php if( $QuickSettings == "minimal" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Minimal");?><br>
-			<input type="radio" onclick="JustWritingSetQuickOptions('wpdefault')" id="just_writing_qs_wpdefault" name="just_writing_quick_setting" value="wpdefault" <?php if( get_the_author_meta( 'just_writing_quick_setting', $user->ID ) == "wpdefault" ) { echo "CHECKED"; } ?>>
+			<input type="radio" onclick="JustWritingSetQuickOptions('wpdefault')" id="just_writing_qs_wpdefault" name="just_writing_quick_setting" value="wpdefault" <?php if( $QuickSettings == "wpdefault" ) { echo "CHECKED"; } ?>>
 			<?php echo __("WordPress Default");?><br>
-			<input type="radio" onclick="JustWritingSetQuickOptions('jwdefault')" id="just_writing_qs_jwdefault" name="just_writing_quick_setting" value="jwdefault" <?php if( get_the_author_meta( 'just_writing_quick_setting', $user->ID ) == "jwdefault" ) { echo "CHECKED"; } ?>>
+			<input type="radio" onclick="JustWritingSetQuickOptions('jwdefault')" id="just_writing_qs_jwdefault" name="just_writing_quick_setting" value="jwdefault" <?php if( $QuickSettings == "jwdefault" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Just Writing Default");?><br>
-			<input type="radio" onclick="JustWritingSetQuickOptions('advanced')" id="just_writing_qs_advanced" name="just_writing_quick_setting" value="advanced" <?php if( get_the_author_meta( 'just_writing_quick_setting', $user->ID ) == "advanced" ) { echo "CHECKED"; } ?>>
+			<input type="radio" onclick="JustWritingSetQuickOptions('advanced')" id="just_writing_qs_advanced" name="just_writing_quick_setting" value="advanced" <?php if( $QuickSettings == "advanced" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Advanced");?><br>
-			<input type="radio" onclick="JustWritingSetQuickOptions('full')" id="just_writing_qs_advanced" name="just_writing_quick_setting" value="full" <?php if( get_the_author_meta( 'just_writing_quick_setting', $user->ID ) == "full" ) { echo "CHECKED"; } ?>>
+			<input type="radio" onclick="JustWritingSetQuickOptions('full')" id="just_writing_qs_advanced" name="just_writing_quick_setting" value="full" <?php if( $QuickSettings == "full" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Full");?><br>
-			<input type="radio" onclick="JustWritingSetQuickOptions('custom')" id="just_writing_qs_custom" name="just_writing_quick_setting" value="custom" <?php if( get_the_author_meta( 'just_writing_quick_setting', $user->ID ) == "custom" ) { echo "CHECKED"; } ?>>
+			<input type="radio" onclick="JustWritingSetQuickOptions('custom')" id="just_writing_qs_custom" name="just_writing_quick_setting" value="custom" <?php if( $QuickSettings == "custom" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Custom - select your options below:");?>
 			</td>
 		</tr>
