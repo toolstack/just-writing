@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 3.7.1
-Stable tag: 2.13.2
+Stable tag: 2.14
 
 Adds buttons to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -79,10 +79,6 @@ The fade effect is triggered by WordPress when no mouse movement is executed for
 = I've disabled the fade effect but there is a 'flicker' when DFWM comes up, what's wrong? =
 
 If you start DFWM without moving the mouse you might hit right between when WordPress starts fading but before Just Writing fires off a mousemove event, this shouldn't be an issue after the first start of DFWM.
-
-= I'm using the JavaScript color picker and when I click on a color it deselects the text and doesn't set the color, what's wrong? =
-
-There's a bug between TinyMCE and some browsers (so far IE 11 for sure) I haven't found any solution other than to disable the JavaScript color pickers in the Just Writing options.
 
 == Screenshots ==
 
@@ -193,3 +189,4 @@ There's a bug between TinyMCE and some browsers (so far IE 11 for sure) I haven'
 
 == Roadmap ==
 * Version 3.0  - add second row to toolbar, remove individual style buttons
+               - update how preferences are stored to reduce database calls
