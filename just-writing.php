@@ -19,33 +19,48 @@ This software is released under the GPL v2.0, see license.txt for details
 if( !function_exists( 'JustWritingLoad' ) )
 	{
 	/*
-	 *	This function is called to add the new buttons to the distraction free
-	 *  writing mode.
-	 *	It's registered at the end of the file with an add_action() call.
-	 */
-	
+	 	This function is called during a page/post page load that we're editing.
+	*/
 	Function JustWritingLoadEdit()
 		{
 		JustWritingLoad( 'edit' );
 		}
 		
+	/*
+	 	This function is called during a new page/post page.
+	*/
 	Function JustWritingLoadNew()
 		{
 		JustWritingLoad( 'new' );
 		}
 		
+	/*
+	 	This function is called when a user edits their profile and creates the Just Writing section.
+		
+		$user = the user who's profile we're viewing
+	*/
 	Function JustWritingLoadProfile( $user )
 		{
 		include_once( "just-writing-options.php" );
 		just_writing_user_profile_fields( $user );
 		}
 		
+	/*
+	 	This function is called when a user edits their profile and saves the Just Writing preferences.
+		
+		$user = the user who's settings we're saving
+	*/
 	Function JustWritingSaveProfile( $user )
 		{
 		include_once( "just-writing-options.php" );
 		just_writing_save_user_profile_fields( $user );
 		}
 
+	/*
+	 	This function is called to add the new buttons to the distraction free writing mode.
+		
+	 	It's registered at the end of the file with an add_action() call.
+	 */
 	Function JustWritingLoad( $source )
 		{
 		// Load the buttons array 
@@ -89,18 +104,23 @@ if( !function_exists( 'JustWritingLoad' ) )
 			$DisableJSCP = 0;
 			if( get_the_author_meta( 'just_writing_d_jscp', $cuid ) == 'on' ) { $DisableJSCP = 1; } 
 			
+			// By default, assume we're not autoloading DFWM.
 			$AutoLoad = 0;
 			
 			if( $source == "new" )
 				{
+				// Check to see if we're supposed to autoload DFWM if we're creating a new post.
 				if( get_the_author_meta( 'just_writing_al_new', $cuid ) == 'on' ) { $AutoLoad = 1; } 
 				}
 
 			if( $source == "edit" )
 				{
+				// Check to see if we're supposed to autoload DFWM if we're editing a post.
 				if( get_the_author_meta( 'just_writing_al_edit', $cuid ) == 'on' ) { $AutoLoad = 1; } 
 				}
 				
+			// Finally, check to see if we were passed an autoload variable on the URL, which happens if the user has
+			// clicked DFWM in the post/pages list.
 			if( $_GET['JustWritingAutoLoad'] == 1 )
 				{
 				$AutoLoad = 1;
@@ -110,10 +130,14 @@ if( !function_exists( 'JustWritingLoad' ) )
 			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/just-writing.js?rtl=' . is_rtl() . '&disablefade=' . $DisableFade . '&hidewordcount=' . $HideWordCount . '&hidepreview=' . $HidePreview . '&hideborder=' . $HideBorder . '&hidemodebar=' . $HideModeBar . '&autoload=' . $AutoLoad . '&formatlistbox=' . $FormatLB . '&centertb=' . $CenterTB . '&disablejscp=' . $DisableJSCP );
 			wp_enqueue_script( 'justwriting_js' );
 	
+			// Time to add our buttons to the DFWM toolbar.
 			add_filter( 'wp_fullscreen_buttons', 'JustWriting' );
 			}
 		}
 
+	/*
+	 	This function is called for each post/page in the post/page list to add the DFWM link to the quick actions.
+	 */
 	function JustWritingLinkRow( $actions, $post )
 		{
 		$new_actions = array();
@@ -121,7 +145,8 @@ if( !function_exists( 'JustWritingLoad' ) )
 		$cuid = get_current_user_id();
 		$JustWritingEnabled = get_the_author_meta( 'just_writing_enabled', $cuid );
 		$JustWritingAddLinks = get_the_author_meta( 'just_writing_a_l', $cuid );
-		
+
+		// Only add the link if we're enabled and the user has selected the option.
 		if( $JustWritingEnabled == "on" AND $JustWritingAddLinks == "on" )
 			{
 			foreach( $actions as $key => $value )
@@ -142,6 +167,9 @@ if( !function_exists( 'JustWritingLoad' ) )
 			}
 		}
 
+	/*
+	 	This function generates the Just Writing settings page and handles the actions assocaited with it.
+	 */
 	function JustWritingAdminPage()
 		{
 		global $wpdb;
@@ -152,8 +180,10 @@ if( !function_exists( 'JustWritingLoad' ) )
 				{
 				$TableName = $wpdb->prefix . "usermeta";
 
+				// Remove any user meta settings we've created, the LIKE clause will delete anything starting with "just_writing_".
 				$wpdb->get_results( "DELETE FROM " . $TableName . " WHERE meta_key LIKE 'just_writing_%'" );
 				
+				// Store a temporary option to let us know we're been removed, this option will get deleted when Just Writing is uninstalled.
 				update_option( 'Just_Writing_Removed', "true" );
 				
 				print "<div class='updated settings-error'><p><strong>User preferences removed and Just Writing disabled!</strong></p></div>\n";
@@ -166,6 +196,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 
 		if( isset( $_GET['JustWritingReenableAction'] ) )
 			{
+			// If the user wants to reenabled Just Writing, get rid of the removed flag.
 			delete_option( 'Just_Writing_Removed' );
 			}
 	?>
@@ -215,14 +246,19 @@ if( !function_exists( 'JustWritingLoad' ) )
 	<?php
 		}
 		
+	/*
+	 	This function adds the admin page to the settings menu.
+	 */
 	function JustWritingAddSettingsMenu()
 		{
 		add_options_page( 'Just Writing', 'Just Writing', 9, basename( __FILE__ ), 'JustWritingAdminPage');
 		}
 	}
 
+// Add the admin page to the settings menu.
 add_action( 'admin_menu', 'JustWritingAddSettingsMenu', 1 );
 
+// If we've been removed, don't do anything else
 if( get_option( 'Just_Writing_Removed' ) != 'true' )
 	{
 	// Handle the post screens

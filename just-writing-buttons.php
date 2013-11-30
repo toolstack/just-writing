@@ -1,4 +1,9 @@
 <?php
+/*
+	This function modifies the button list for the DFWM.  We don't use the button array passed by WordPress at all so it's just a throw away variable.
+	
+	$oldbuttons = the button array passed to us by WordPress.
+ */
 function JustWriting( $oldbuttons )
 	{
 	$cuid = get_current_user_id();
@@ -608,6 +613,7 @@ function JustWriting( $oldbuttons )
 									);
 		}
 
+	// This is a 'fake' button we're use during the JavaScript code to get the current translation of "Exit".
 	$buttons['JustWritingExit'] = array( 
 									// Title of the button
 									'title' => __('Exit'), 
@@ -616,7 +622,7 @@ function JustWriting( $oldbuttons )
 									// Show on visual AND html mode
 									'both' => false
 								);
-		
+
 	return $buttons;
 	}
 ?>

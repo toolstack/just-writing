@@ -80,9 +80,9 @@ The fade effect is triggered by WordPress when no mouse movement is executed for
 
 If you start DFWM without moving the mouse you might hit right between when WordPress starts fading but before Just Writing fires off a mousemove event, this shouldn't be an issue after the first start of DFWM.
 
-= I'm using the Javascript color picker and when I click on a color it deselects the text and doesn't set the color, what's wrong? =
+= I'm using the JavaScript color picker and when I click on a color it deselects the text and doesn't set the color, what's wrong? =
 
-There's a bug between TinyMCE and some browsers (so far IE 11 for sure) I haven't found any solution other than to disable the Javascript color pickers in the Just Writing options.
+There's a bug between TinyMCE and some browsers (so far IE 11 for sure) I haven't found any solution other than to disable the JavaScript color pickers in the Just Writing options.
 
 == Screenshots ==
 
@@ -102,11 +102,11 @@ There's a bug between TinyMCE and some browsers (so far IE 11 for sure) I haven'
 * Added permissions check to the uninstall code.
 
 = 2.13.1 =
-* Fixed several bugs with the new Javascript color pickers staying on screen when they shouldn't.
+* Fixed several bugs with the new JavaScript color pickers staying on screen when they shouldn't.
 
 = 2.13 =
-* Added Javascript color pickers for font color and background color.
-* Added option to disable Javascript color pickers (they may not work in some browsers).
+* Added JavaScript color pickers for font color and background color.
+* Added option to disable JavaScript color pickers (they may not work in some browsers).
 * Collapsed the user options and button options by default to make the user preferences screen cleaner.
 
 = 2.12.2 =

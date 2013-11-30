@@ -6,9 +6,9 @@ This software is released under the GPL v2.0, see license.txt for details
 */
 
 /*
- *	This function returns either on or off depending on the state of an HTML checkbox 
- *  input field returned from a post command.
- */
+ 	This function returns either on or off depending on the state of an HTML checkbox 
+    input field returned from a post command.
+*/
 function just_writing_get_checked_state( $value )
 	{
 	if( $value == 'on' ) 
@@ -22,8 +22,8 @@ function just_writing_get_checked_state( $value )
 	}
 
 /*
- *	This function is called to save the user profile settings for Just Writing.
- */
+ 	This function is called to save the user profile settings for Just Writing.
+*/
 function just_writing_save_user_profile_fields( $user_id )
 	{
 	if ( !current_user_can( 'edit_user', $user_id ) ) { return false; }
@@ -89,7 +89,7 @@ function just_writing_save_user_profile_fields( $user_id )
 	update_user_meta( $user_id, 'just_writing_a_l', just_writing_get_checked_state( $_POST['just_writing_a_l'] ) );
 	update_user_meta( $user_id, 'just_writing_d_jscp', just_writing_get_checked_state( $_POST['just_writing_d_jscp'] ) );
 
-	// Deal with the border options
+	// Deal with the border options radio group
 	if( $_POST['just_writing_border_setting'] == 'hide' )
 		{
 		update_user_meta( $user_id, 'just_writing_h_b', 'on' );
@@ -106,6 +106,7 @@ function just_writing_save_user_profile_fields( $user_id )
 		update_user_meta( $user_id, 'just_writing_l_b', 'off' );
 		}
 
+	// Deal with the quick settings option radio group
 	switch( $_POST['just_writing_quick_setting'] )
 		{
 		case 'minimal':
@@ -128,23 +129,23 @@ function just_writing_save_user_profile_fields( $user_id )
 		}
 	}
 
-	/*
-	 *	This function is called to draw the user settings page for Just Writing.
-	 */
-	function just_writing_user_profile_fields( $user ) 
-		{ 
-		// Check to see if this is the first time we've run for this user and no config
-		// has been written yet, so let's do that now.
-		if( get_the_author_meta( 'just_writing_enabled', $user->ID ) == "" )
-			{
-			include_once( "just-writing-user-setup.php" );
-			Just_Writing_User_Setup( $user->ID );
-			}
-		
-		wp_register_script( 'justwritingoptions_js', plugins_url( '', __FILE__ )  . '/just-writing-options.js' );
-		wp_enqueue_script( 'justwritingoptions_js' );
+/*
+ 	This function is called to draw the user settings page for Just Writing.
+*/
+function just_writing_user_profile_fields( $user ) 
+	{ 
+	// Check to see if this is the first time we've run for this user and no config
+	// has been written yet, so let's do that now.
+	if( get_the_author_meta( 'just_writing_enabled', $user->ID ) == "" )
+		{
+		include_once( "just-writing-user-setup.php" );
+		Just_Writing_User_Setup( $user->ID );
+		}
+	
+	wp_register_script( 'justwritingoptions_js', plugins_url( '', __FILE__ )  . '/just-writing-options.js' );
+	wp_enqueue_script( 'justwritingoptions_js' );
 
-		?>
+	?>
 	<h3 id=JustWriting>Just Writing</h3>
 	 
 	<table class="form-table">
