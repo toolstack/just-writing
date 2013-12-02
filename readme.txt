@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 3.7.1
-Stable tag: 2.14
+Stable tag: 2.14.1
 
 Adds buttons to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -72,6 +72,12 @@ Try it and find out, the JavaScript is pretty basic so it should work in just ab
 	* FireFox 24/25
 	* Chrome 31
 
+= I can't find the Just Writing options, where are they? =
+
+For standard users (aka non-admin users), they can go to their WordPress settings page and select "Profile", scroll down to the bottom and your see the Just Writing section.
+
+For admin users it can be found under "Users"->"Your Profile".
+
 = I've disabled the fade effect and now the browser is running slowly, what's wrong? =
 
 The fade effect is triggered by WordPress when no mouse movement is executed for 2 seconds, the only (without changing some of the WordPress sources files at least) way to disable it is to execute a mousemove event every 1.5 seconds.  This shouldn't be an issue in any modern browser, but if your having performance issues, simply re-enable the fade effect.
@@ -85,11 +91,15 @@ If you start DFWM without moving the mouse you might hit right between when Word
 1. Pre installation DFWM.
 2. Post installation DFWM.
 3. User preferences screen.
-4. Advanced user prefrences options.
+4. Advanced user preferences options.
 5. A real DFWM!
 6. Administration screen.
 
 == Changelog ==
+= 2.14.1 =
+* Bug fix for when JavaScript popups were selected but the associated button was not selected to be added to the toolbar.
+* Added some descriptive text to the quick settings options.
+
 = 2.14 =
 * Added JavaScript Font/Size/Style selectors
 * Added "out of bounds" click detection to the JavaScript popups
@@ -184,7 +194,7 @@ If you start DFWM without moving the mouse you might hit right between when Word
 * Initial release.
 
 == Upgrade Notice ==
-= 2.14 =
+= 2.14.1 =
 * None.
 
 == Roadmap ==

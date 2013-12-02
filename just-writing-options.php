@@ -169,17 +169,17 @@ function just_writing_user_profile_fields( $user )
 			<td>			
 			<?php echo __("Use the following quick settings:"); $QuickSettings = get_the_author_meta( 'just_writing_quick_setting', $user->ID ); if( $QuickSettings == "" ) { $QuickSettings = "custom"; }?><br>
 			<input type="radio" onclick="JustWritingSetQuickOptions('minimal')" id="just_writing_qs_mininal" name="just_writing_quick_setting" value="minimal" <?php if( $QuickSettings == "minimal" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Minimal");?><br>
+			<?php echo __("Minimal") . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("Nothing but Save and Exit and real DFWM!");?></span><br>
 			<input type="radio" onclick="JustWritingSetQuickOptions('wpdefault')" id="just_writing_qs_wpdefault" name="just_writing_quick_setting" value="wpdefault" <?php if( $QuickSettings == "wpdefault" ) { echo "CHECKED"; } ?>>
-			<?php echo __("WordPress Default");?><br>
+			<?php echo __("WordPress Default") . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("Just center the toolbar and move the exit button to the right hand side.");?></span><br>
 			<input type="radio" onclick="JustWritingSetQuickOptions('jwdefault')" id="just_writing_qs_jwdefault" name="just_writing_quick_setting" value="jwdefault" <?php if( $QuickSettings == "jwdefault" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Just Writing Default");?><br>
+			<?php echo __("Just Writing Default") . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("A balanced toolbar that should work on all browsers.");?></span><br>
 			<input type="radio" onclick="JustWritingSetQuickOptions('advanced')" id="just_writing_qs_advanced" name="just_writing_quick_setting" value="advanced" <?php if( $QuickSettings == "advanced" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Advanced");?><br>
+			<?php echo __("Advanced") . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("Unlock the real power of DFWM!");?></span><br>
 			<input type="radio" onclick="JustWritingSetQuickOptions('full')" id="just_writing_qs_advanced" name="just_writing_quick_setting" value="full" <?php if( $QuickSettings == "full" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Full");?><br>
+			<?php echo __("Full") . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("All buttons and many of the options enabled.");?></span><br>
 			<input type="radio" onclick="JustWritingSetQuickOptions('custom')" id="just_writing_qs_custom" name="just_writing_quick_setting" value="custom" <?php if( $QuickSettings == "custom" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Custom - select your options below:");?>
+			<?php echo __("Custom") . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("Select your options below:");?></span>
 			</td>
 		</tr>
 	</table>
