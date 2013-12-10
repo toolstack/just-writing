@@ -4,7 +4,7 @@ Plugin URI: http://toolstack.com/just-writing
 Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
-Tested up to: 3.7.1
+Tested up to: 3.8.0
 Stable tag: 2.14.1
 
 Adds buttons to the Distraction Free Writing Mode for all kinds of extra functions.
