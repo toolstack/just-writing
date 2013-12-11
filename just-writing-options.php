@@ -158,12 +158,12 @@ function just_writing_user_profile_fields( $user )
 		<tr>
 			<th><label for="just_writing_enabled"><?php echo __("Enable");?></label></th>
 			<td>
-			<input type="checkbox" id="just_writing_enabled" name="just_writing_enabled" <?php if( get_the_author_meta( 'just_writing_enabled', $user->ID ) == "on" ) { echo "CHECKED"; } ?> onClick="if(!just_writing_enabled.checked){ just_writing_options_table.style.display='none'}else{just_writing_options_table.style.display=''}">
+			<input type="checkbox" id="just_writing_enabled" name="just_writing_enabled" <?php if( get_the_author_meta( 'just_writing_enabled', $user->ID ) == "on" ) { echo "CHECKED"; } ?> onClick="if(!just_writing_enabled.checked){ just_writing_options_table.style.display='none'; just_writing_quick_settings.style.display='none';}else{just_writing_options_table.style.display=''; just_writing_quick_settings.style.display='';}">
 			<?php echo __("Check to enable Just Writing (don't forget to make sure the visual editor is enabled at the top of this page)");?>
 			</td>
 		</tr>
 	</table>
-	<table class="form-table">
+	<table class="form-table" id='just_writing_quick_settings'>
 		<tr>
 			<th>Quick Options</th>
 			<td>			
