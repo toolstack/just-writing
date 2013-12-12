@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 3.8.0
-Stable tag: 2.14.1
+Stable tag: 2.14.3
 
 Adds buttons to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -96,6 +96,10 @@ If you start DFWM without moving the mouse you might hit right between when Word
 6. Administration screen.
 
 == Changelog ==
+= 2.14.2 =
+* Fixed quick settings area being displayed when Just Writing has been disabled.
+* Tested with WordPress 3.8.
+
 = 2.14.1 =
 * Bug fix for when JavaScript popups were selected but the associated button was not selected to be added to the toolbar.
 * Added some descriptive text to the quick settings options.
@@ -194,7 +198,7 @@ If you start DFWM without moving the mouse you might hit right between when Word
 * Initial release.
 
 == Upgrade Notice ==
-= 2.14.1 =
+= 2.14.2 =
 * None.
 
 == Roadmap ==
