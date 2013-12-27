@@ -121,9 +121,12 @@ if( !function_exists( 'JustWritingLoad' ) )
 				
 			// Finally, check to see if we were passed an autoload variable on the URL, which happens if the user has
 			// clicked DFWM in the post/pages list.
-			if( $_GET['JustWritingAutoLoad'] == 1 )
+			if( array_key_exists( 'JustWritingAutoLoad', $_GET ) )
 				{
-				$AutoLoad = 1;
+				if( $_GET['JustWritingAutoLoad'] == 1 )
+					{
+					$AutoLoad = 1;
+					}
 				}
 	
 			// Register and enqueue the javascript.
@@ -196,7 +199,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 
 		if( isset( $_GET['JustWritingReenableAction'] ) )
 			{
-			// If the user wants to reenabled Just Writing, get rid of the removed flag.
+			// If the user wants to re-enabled Just Writing, get rid of the removed flag.
 			delete_option( 'Just_Writing_Removed' );
 			}
 	?>
@@ -251,7 +254,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 	 */
 	function JustWritingAddSettingsMenu()
 		{
-		add_options_page( 'Just Writing', 'Just Writing', 9, basename( __FILE__ ), 'JustWritingAdminPage');
+		add_options_page( 'Just Writing', 'Just Writing', 'manage_options', basename( __FILE__ ), 'JustWritingAdminPage');
 		}
 	}
 
