@@ -1,0 +1,102 @@
+.wp_themeSkin span.mce_JustWritingSeparatorOne,
+.wp_themeSkin span.mce_JustWritingSeparatorTwo,
+.wp_themeSkin span.mce_JustWritingSeparatorThree,
+.wp_themeSkin span.mce_JustWritingSeparatorFour,
+.wp_themeSkin span.mce_JustWritingSeparatorFive,
+.wp_themeSkin span.mce_JustWritingSeparatorSix,
+.wp_themeSkin span.mce_JustWritingSeparatorSeven,
+.wp_themeSkin span.mce_JustWritingSeparatorEight { background-position:-226px 0px; background-image: url('./just-writing-icons.png?ver=20131018'); width:9px !important; height:28px !important;}
+
+.wp_themeSkin span.mce_H1 { background-position:0px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce_H1,
+.wp_themeSkin .mceButtonActive span.mce_H1,
+.wp_themeSkin .mceSplitButton:hover span.mce_H1 {background-position:0px 0}
+
+.wp_themeSkin span.mce_H2 { background-position:-20px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce_H2,
+.wp_themeSkin .mceButtonActive span.mce_H2,
+.wp_themeSkin .mceSplitButton:hover span.mce_H2 {background-position:-20px 0}
+
+.wp_themeSkin span.mce_H3 { background-position:-40px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce_H3,
+.wp_themeSkin .mceButtonActive span.mce_H3,
+.wp_themeSkin .mceSplitButton:hover span.mce_H3 {background-position:-40px 0}
+
+.wp_themeSkin span.mce_H4 { background-position:-60px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce_H4,
+.wp_themeSkin .mceButtonActive span.mce_H4,
+.wp_themeSkin .mceSplitButton:hover span.mce_H4 {background-position:-60px 0}
+
+.wp_themeSkin span.mce_H5 { background-position:-80px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce_H5,
+.wp_themeSkin .mceButtonActive span.mce_H5,
+.wp_themeSkin .mceSplitButton:hover span.mce_H5 {background-position:-80px 0}
+
+.wp_themeSkin span.mce_H6 { background-position:-100px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce_H6,
+.wp_themeSkin .mceButtonActive span.mce_H6,
+.wp_themeSkin .mceSplitButton:hover span.mce_H6 {background-position:-100px 0}
+
+.wp_themeSkin span.mce_Paragraph { background-position:-120px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce_Paragraph,
+.wp_themeSkin .mceButtonActive span.mce_Paragraph,
+.wp_themeSkin .mceSplitButton:hover span.mce_Paragraph {background-position:-120px 0}
+
+.wp_themeSkin span.mce_Address { background-position:-140px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce_Address,
+.wp_themeSkin .mceButtonActive span.mce_Address,
+.wp_themeSkin .mceSplitButton:hover span.mce_Address {background-position:-140px 0}
+
+.wp_themeSkin span.mce_Preformatted { background-position:-160px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce_Preformatted,
+.wp_themeSkin .mceButtonActive span.mce_Preformatted,
+.wp_themeSkin .mceSplitButton:hover span.mce_Preformatted {background-position:-160px 0}
+
+.wp_themeSkin span.mce_subscript { background-position:-180px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce_subscript,
+.wp_themeSkin .mceButtonActive span.mce_subscript,
+.wp_themeSkin .mceSplitButton:hover span.mce_subscript {background-position:-180px 0}
+
+.wp_themeSkin span.mce_superscript { background-position:-200px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce_superscript,
+.wp_themeSkin .mceButtonActive span.mce_superscript,
+.wp_themeSkin .mceSplitButton:hover span.mce_superscript {background-position:-200px 0}
+
+.wp_themeSkin span.mce_fontcolor { background-position:-240px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce_fontcolor,
+.wp_themeSkin .mceButtonActive span.mce_fontcolor,
+.wp_themeSkin .mceSplitButton:hover span.mce_fontcolor {background-position:-240px 0}
+
+.wp_themeSkin span.mce_backgroundcolor { background-position:-260px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce_backgroundcolor,
+.wp_themeSkin .mceButtonActive span.mce_backgroundcolor,
+.wp_themeSkin .mceSplitButton:hover span.mce_backgroundcolor {background-position:-260px 0}
+
+.wp_themeSkin span.mce_fontselector { background-position:-300px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce_fontselector,
+.wp_themeSkin .mceButtonActive span.mce_fontselector,
+.wp_themeSkin .mceSplitButton:hover span.mce_fontselector {background-position:-300px 0}
+
+.wp_themeSkin span.mce_fontsize { background-position:-280px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce_fontsize,
+.wp_themeSkin .mceButtonActive span.mce_fontsize,
+.wp_themeSkin .mceSplitButton:hover span.mce_fontsize {background-position:-280px 0}
+
+.JustWritingColorPopup {
+position: absolute;
+background-color: black;
+color: white;
+width: 150px;
+height: 300px;
+border-width: 5px;
+border-color: blue;
+border-style: solid;
+display: none;
+z-index: 300000;
+}
+
+.JustWritingColorSwatch {
+float: left; 
+width: 50px; 
+height: 50px; 
+}

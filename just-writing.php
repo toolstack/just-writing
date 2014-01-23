@@ -18,6 +18,20 @@ This software is released under the GPL v2.0, see license.txt for details
 
 if( !function_exists( 'JustWritingLoad' ) )
 	{
+	define( 'JustWritingVersion', '2.14.2' );
+
+	Function JustWritingFileVersion()
+		{
+		GLOBAL $wp_version;
+		
+		if( version_compare( $wp_version, '3.8.99', '<=' ) )
+			{
+			return '3.5';
+			}
+
+		return '3.9';
+		}
+	
 	/*
 	 	This function is called during a page/post page load that we're editing.
 	*/
@@ -63,10 +77,10 @@ if( !function_exists( 'JustWritingLoad' ) )
 	 */
 	Function JustWritingLoad( $source )
 		{
-		// Load the buttons array 
-		include_once( "just-writing-buttons.php" );
+		// Load the appropriate buttons array.
+		include_once( 'just-writing-buttons.' . JustWritingFileVersion() . '.php' );
 
-		// Get the user option to see if we're enabled
+		// Get the user option to see if we're enabled.
 		$cuid = get_current_user_id();
 		$JustWritingEnabled = get_the_author_meta( 'just_writing_enabled', $cuid );
 		
@@ -82,7 +96,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 		// If we're enabled, setup as required.
 		if( $JustWritingEnabled == "on" )
 			{
-			wp_register_style( 'justwriting_style', plugins_url( '', __FILE__ ) . '/just-writing.css' );
+			wp_register_style( 'justwriting_style', plugins_url( '', __FILE__ ) . '/just-writing.' . JustWritingFileVersion() . '.css' );
 			wp_enqueue_style( 'justwriting_style' ); 
 
 			// Get the options to pass to the javascript code
@@ -130,7 +144,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 				}
 	
 			// Register and enqueue the javascript.
-			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/just-writing.js?rtl=' . is_rtl() . '&disablefade=' . $DisableFade . '&hidewordcount=' . $HideWordCount . '&hidepreview=' . $HidePreview . '&hideborder=' . $HideBorder . '&hidemodebar=' . $HideModeBar . '&autoload=' . $AutoLoad . '&formatlistbox=' . $FormatLB . '&centertb=' . $CenterTB . '&disablejscp=' . $DisableJSCP );
+			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/just-writing.' . JustWritingFileVersion() . '.js?rtl=' . is_rtl() . '&disablefade=' . $DisableFade . '&hidewordcount=' . $HideWordCount . '&hidepreview=' . $HidePreview . '&hideborder=' . $HideBorder . '&hidemodebar=' . $HideModeBar . '&autoload=' . $AutoLoad . '&formatlistbox=' . $FormatLB . '&centertb=' . $CenterTB . '&disablejscp=' . $DisableJSCP );
 			wp_enqueue_script( 'justwriting_js' );
 	
 			// Time to add our buttons to the DFWM toolbar.
