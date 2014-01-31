@@ -7,7 +7,7 @@ Requires at least: 3.5.0
 Tested up to: 3.8.0
 Stable tag: 2.14.3
 
-Adds buttons to the Distraction Free Writing Mode for all kinds of extra functions.
+Adds buttons and features to the Distraction Free Writing Mode for all kinds of extra functions.
 
 == Description ==
 
@@ -17,31 +17,34 @@ But maybe you think there are too many buttons in DFWM, no problem you can get r
 
 Just Writing takes DFWM from a great way to write to a great way of writing posts!
 
-This plugin adds the following commands to the toolbar in DFWM:
+This plugin adds the following optional commands to the toolbar in DFWM:
 
-	* Strikethrough         * Preformatted
-	* Underline             * Proofread Writing
-	* RemoveFormat          * Insert More Tag
-	* Align Left            * Insert custom character
-	* Align Full            * Undo
-	* Align Right           * Redo
-	* Indent                * Preview
-	* Paragraph             * Superscript
-	* H1                    * Subscript
-	* H2                    * Cut
-	* H3                    * Copy
-	* H4                    * Paste
-	* H5                    * Paste as Text
-	* H6                    * Paste from Word
-	* Address               * Font
-	* Font Color			* Font Color
-	* Background Color
-	
+	* Address					* Insert More Tag
+	* Align Full				* Insert Custom Character
+	* Align Left				* Outdent
+	* Align Right				* Paragraph
+	* Background Color			* Paste
+	* Block Quotes				* Paste as Text
+	* Copy						* Paste from Word
+	* Cut						* Preformatted
+	* Font						* Preview
+	* Font Color				* Redo
+	* Font Size					* Remove Formatting
+	* H1						* Spellcheck
+	* H2						* Strikethrough
+	* H3						* Subscript
+	* H4						* Superscript	
+	* H5						* Underline
+	* H6						* Undo
+	* Indent				
+
 And there's more!
 
 	* Option to remove the fade effect and keep the toolbar visible
-	* Option to hide the border on the title/body areas
+	* Option to hide or lighten the border on the title/body areas
 	* Option to hide the word count
+	* Option to hide the editor mode bar
+	* Option to center the toolbar on screen
 	* Adds an optional Preview button to the right of the Save button
 	* Moves the exit link to the right of the new Preview 
 	  button as a real button
@@ -50,8 +53,7 @@ And there's more!
 	* Per-user preferences for which buttons to display
 	* Option to start in DFWM for new posts
 	* Option to start in DFWM when editing posts
-	* 'lighter' border option for title/body area
-	* Option to disable editor mode bar.
+	* Option to add a DFWM link to the pages/posts list to go directly to DFWM
 
 This code is released under the GPL v2, see license.txt for details.
 
@@ -96,6 +98,11 @@ If you start DFWM without moving the mouse you might hit right between when Word
 6. Administration screen.
 
 == Changelog ==
+= 2.15 =
+* Minor WordPress and PHP notices clean up when in debug mode, thanks Dave Warfel.
+* Major overhaul of code to support upcoming WordPress 3.9 release with TinyMCE 4.0.  WP3.9 support should be considered beta at this time.
+* Fixed a bug where centring the toolbar would fail if there was very little space left between the toolbar and the save/preview/exit buttons.
+
 = 2.14.2 =
 * Fixed quick settings area being displayed when Just Writing has been disabled.
 * Tested with WordPress 3.8.
@@ -198,7 +205,7 @@ If you start DFWM without moving the mouse you might hit right between when Word
 * Initial release.
 
 == Upgrade Notice ==
-= 2.14.2 =
+= 2.15 =
 * None.
 
 == Roadmap ==
