@@ -34,12 +34,6 @@
 .mce-i-Preformatted { background-position:-160px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
 .wp_themeSkin .mceButtonEnabled:hover span.mce-i-Preformatted {background-position:-160px 0}
 
-.mce-i-subscript { background-position:-180px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
-.wp_themeSkin .mceButtonEnabled:hover span.mce-i-subscript {background-position:-180px 0}
-
-.mce-i-superscript { background-position:-200px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
-.wp_themeSkin .mceButtonEnabled:hover span.mce-i-superscript {background-position:-200px 0}
-
 .mce-i-fontcolor { background-position:-240px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
 .wp_themeSkin .mceButtonEnabled:hover span.mce-i-fontcolor {background-position:-240px 0}
 
@@ -51,6 +45,10 @@
 
 .mce-i-fontsize { background-position:-280px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
 .wp_themeSkin .mceButtonEnabled:hover span.mce-i-fontsize {background-position:-280px 0}
+
+i.mce-i-pasteword:before {
+	content: '\f216';
+}
 
 .JustWritingColorPopup {
 position: absolute;

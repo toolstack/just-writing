@@ -75,7 +75,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['pasteword'] = array( 
 											// Title of the button
-											'title' => __('Paste as Text'), 
+											'title' => __('Paste as Word'), 
 											// Command to execute
 											'onclick' => "tinyMCE.execCommand('mcePasteWord');", 
 											// Show on visual AND html mode
