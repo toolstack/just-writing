@@ -811,9 +811,12 @@ function JustWritingAutoLoad()
 	// Make sure we don't conflict with the toolbar centering code
 	if( FSButton != null && JustWritingToolbarCenterID == null ) 
 		{ 
-		// click the full screen button to load DFWM.
-		FSButton.click(); 
+		// Execute full screen mode to load DFWM.
+		tinymce.execCommand('wpFullScreen');
 
+		// Resize the toolbar once it becomes visible.
+		JustWritingToolbarCenterID = setInterval( JustWritingToolbarCenterMove, 100 );
+		
 		// Since we're finished, clear our interval.
 		clearInterval( JustWritingAutoLoadIntervalID );
 		}
