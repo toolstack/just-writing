@@ -102,6 +102,7 @@ If you start DFWM without moving the mouse you might hit right between when Word
 * Minor WordPress and PHP notices clean up when in debug mode, thanks Dave Warfel.
 * Major overhaul of code to support upcoming WordPress 3.9 release with TinyMCE 4.0.  WP3.9 support should be considered beta at this time.
 * Fixed a bug where centring the toolbar would fail if there was very little space left between the toolbar and the save/preview/exit buttons.
+* Fixed incorrect description of Paste as Word button.
 
 = 2.14.2 =
 * Fixed quick settings area being displayed when Just Writing has been disabled.
