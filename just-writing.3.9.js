@@ -589,8 +589,11 @@ function JustWritingToolBarResize()
 	// Note: the 'extra' 20px in this calculation is for the padding in the parent div 
 	var Remainder = WindowSize - ( BarsWidth + IdealBorder ) - SaveSize - 20;
 
-	// If the IdealBorder is 0 or less OR there's no space left with in the window, reset the IdealBorder back to 0 and let the browser wrap the toolbar
-	if( IdealBorder < 1 || Remainder < 0 ) { IdealBorder = 0; }
+	// If the remainder is less than 0 (Remainder can be a negative number) subtract the remainder from the IdealBorder
+	if( Remainder < 0 ) { IdealBorder = IdealBorder + Remainder; }
+
+	// If the IdealBorder is 0 or less reset the IdealBorder back to 0 and let the browser wrap the toolbar
+	if( IdealBorder < 1 ) { IdealBorder = 0; }
 	
 	document.getElementById( 'wp-fullscreen-mode-bar' ).style.marginLeft = IdealBorder + "px";
 	}
