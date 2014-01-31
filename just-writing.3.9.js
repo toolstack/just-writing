@@ -100,7 +100,7 @@ function JustWriting()
 		JustWritingElementSetDisplay( 'wp-fullscreen-close', 'none' );
 
 		// Time to get the options the user has selected from the script call
-		var GSI = GetScriptIndex( 'just-writing.js' );
+		var GSI = GetScriptIndex( 'just-writing.3.9.js' );
 		var DisableFade = GetScriptVariable( GSI, 'disablefade', 0 );
 		var HideWordCount = GetScriptVariable( GSI, 'hidewordcount', 0 );
 		var HidePreview = GetScriptVariable( GSI, 'hidepreview', 0 );
