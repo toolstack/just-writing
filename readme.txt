@@ -4,8 +4,8 @@ Plugin URI: http://toolstack.com/just-writing
 Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
-Tested up to: 3.8.0
-Stable tag: 2.14.3
+Tested up to: 3.8.1
+Stable tag: 2.15
 
 Adds buttons and features to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -87,6 +87,10 @@ The fade effect is triggered by WordPress when no mouse movement is executed for
 = I've disabled the fade effect but there is a 'flicker' when DFWM comes up, what's wrong? =
 
 If you start DFWM without moving the mouse you might hit right between when WordPress starts fading but before Just Writing fires off a mousemove event, this shouldn't be an issue after the first start of DFWM.
+
+= I've added the spellcheck button to my toolbar but it doesn't do anything when I click it =
+
+As of WordPress 3.6, the spellchecker is no longer part of the core WordPress install, you need to add a plugin to get the functionality back.  I'd suggest [TinyMCE SpellChecker](http://wordpress.org/plugins/tinymce-spellcheck/) as a good option.
 
 == Screenshots ==
 
@@ -207,7 +211,7 @@ If you start DFWM without moving the mouse you might hit right between when Word
 
 == Upgrade Notice ==
 = 2.15 =
-* None.
+* WordPress 3.5-3.8 support is pretty much unchanged in this version but WP3.9 support is a completely separate branch of code so there is new code to detect the version of WordPress and load the appropirate code.  This could cause some issues but should be fine.  The 3.9 code should still be consider beta at this time.
 
 == Roadmap ==
 * Version 3.0  - add second row to toolbar, remove individual style buttons
