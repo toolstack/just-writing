@@ -220,12 +220,12 @@ if( !function_exists( 'JustWritingLoad' ) )
 <div class="wrap">
 	
 	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
-		<legend><span style="font-size: 24px; font-weight: 700;">&nbsp;User Settings&nbsp;</span></legend>
-		<p>User settings can be found in <a href="<?php echo get_edit_profile_url(get_current_user_id()); ?>">your profile page</a>, under the Just Writing heading.</p>
+		<legend><span style="font-size: 24px; font-weight: 700;">&nbsp;<?php _e('User Settings');?>&nbsp;</span></legend>
+		<p><?php echo sprintf(__('User settings can be found in %syour profile page%s, under the Just Writing heading.'), '<a href="' . get_edit_profile_url(get_current_user_id()) . '">', '</a>' );?></p>
 	</fieldset>
 
 	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
-		<legend><span style="font-size: 24px; font-weight: 700;">&nbsp;Uninstall Actions&nbsp;</span></legend>
+		<legend><span style="font-size: 24px; font-weight: 700;">&nbsp;<?php _e('Uninstall Actions'); ?>&nbsp;</span></legend>
 
 <?php 
 	if( current_user_can( 'delete_plugins' ) ) 
@@ -233,15 +233,15 @@ if( !function_exists( 'JustWritingLoad' ) )
 		if( get_option( "Just_Writing_Removed" ) != 'true' )
 			{ 
 ?>
-		<div style="font-size: 16px;">**WARNING** No further confirmation will be given after you press the delete button, make sure you REALLY want to delete all user preferences and disable Just Writing!</div>
+		<div style="font-size: 16px;"><?php _e('**WARNING** No further confirmation will be given after you press the delete button, make sure you REALLY want to delete all user preferences and disable Just Writing!');?></div>
 		<div>&nbsp;</div>
-		<div><?php _e('Remove the user preferences and disable:')?>&nbsp;<input type="button" id="JustWritingRemoveAction" name="JustWritingRemoveAction" value="<?php _e('Remove') ?> &raquo;" onclick="if( confirm('Ok, last chance, really remove the user preferences and disable?') ) { window.location = 'options-general.php?page=just-writing.php&JustWritingRemoveAction=TRUE'}"/>
+		<div><?php _e('Remove the user preferences and disable:')?>&nbsp;<input type="button" class="button" id="JustWritingRemoveAction" name="JustWritingRemoveAction" value="<?php _e('Remove') ?>" onclick="if( confirm('Ok, last chance, really remove the user preferences and disable?') ) { window.location = 'options-general.php?page=just-writing.php&JustWritingRemoveAction=TRUE'}"/>
 <?php
 			}
 		else
 			{
 ?>
-		<div><?php _e('Re-enable Just Writing:')?>&nbsp;<input type="button" id="JustWritingReenableAction" name="JustWritingReenableAction" value="<?php _e('Re-enable') ?> &raquo;" onclick="window.location = 'options-general.php?page=just-writing.php&JustWritingReenableAction=TRUE'"/>
+		<div><?php _e('Re-enable Just Writing:')?>&nbsp;<input type="button" class="button" id="JustWritingReenableAction" name="JustWritingReenableAction" value="<?php _e('Re-enable') ?>" onclick="window.location = 'options-general.php?page=just-writing.php&JustWritingReenableAction=TRUE'"/>
 <?php 
 			}
 		}
@@ -254,16 +254,15 @@ if( !function_exists( 'JustWritingLoad' ) )
 	</fieldset>
 	
 	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
-		<legend><span style="font-size: 24px; font-weight: 700;">&nbsp;About&nbsp;</span></legend>
-		<p>Just Writing</p>
-		<p>by Greg Ross</p>
+		<legend><span style="font-size: 24px; font-weight: 700;">&nbsp;<?php _e('About'); ?>&nbsp;</span></legend>
+		<h2><?php echo sprintf( __('Just Writing Version %s'), JustWritingVersion );?></h2>
+		<p><?php _e('by');?> <a href="https://profiles.wordpress.org/gregross" target=_blank>Greg Ross</a></p>
 		<p>&nbsp;</p>
-		<p>Licenced under the <a href="http://www.gnu.org/licenses/gpl-2.0.html" target=_blank>GPL Version 2</a></p>
-		<p>To find out more, please visit the <a href='http://wordpress.org/plugins/just-writing/' target=_blank>WordPress Plugin Directory page</a> or the plugin home page on <a href='http://toolstack.com/just-writing' target=_blank>ToolStack.com</a></p> 
+		<p><?php printf(__('Licenced under the %sGPL Version 2%s'), '<a href="http://www.gnu.org/licenses/gpl-2.0.html" target=_blank>', '</a>');?></p>
+		<p><?php printf(__('To find out more, please visit the %sWordPress Plugin Directory page%s or the plugin home page on %sToolStack.com%s'), '<a href="http://wordpress.org/plugins/just-writing/" target=_blank>', '</a>', '<a href="http://toolstack.com/just-writing" target=_blank>', '</a>');?></p>
 		<p>&nbsp;</p>
-		<p>Don't forget to <a href='http://wordpress.org/support/view/plugin-reviews/just-writing' target=_blank>rate and review</a> it too!</p>
-
-</fieldset>
+		<p><?php printf(__("Don't forget to %srate and review%s it too!"), '<a href="http://wordpress.org/support/view/plugin-reviews/just-writing" target=_blank>', '</a>');?></p>
+	</fieldset>
 </div>
 	<?php
 		}
