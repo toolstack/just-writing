@@ -220,6 +220,11 @@ if( !function_exists( 'JustWritingLoad' ) )
 <div class="wrap">
 	
 	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
+		<legend><span style="font-size: 24px; font-weight: 700;">&nbsp;User Settings&nbsp;</span></legend>
+		<p>User settings can be found in <a href="<?php echo get_edit_profile_url(get_current_user_id()); ?>">your profile page</a>, under the Just Writing heading.</p>
+	</fieldset>
+
+	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
 		<legend><span style="font-size: 24px; font-weight: 700;">&nbsp;Uninstall Actions&nbsp;</span></legend>
 
 <?php 
