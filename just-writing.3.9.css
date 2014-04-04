@@ -5,45 +5,45 @@
 .mce-i-JustWritingSeparatorFive,
 .mce-i-JustWritingSeparatorSix,
 .mce-i-JustWritingSeparatorSeven,
-.mce-i-JustWritingSeparatorEight { background-position:-226px 0px; background-image: url('./just-writing-icons.png?ver=20131018'); width:9px !important; height:28px !important;}
+.mce-i-JustWritingSeparatorEight { background-position:-226px 0px; background-size: auto; background-image: url('./just-writing-icons.png?ver=20131018'); width:9px !important; height:28px !important;}
 
-.mce-i-H1 { background-position:0px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.mce-i-H1 { background-position:0px -20px; background-size: auto; background-image: url('./just-writing-icons.png?ver=20131018');}
 .wp_themeSkin .mceButtonEnabled:hover span.mce-i-H1 {background-position:0px 0}
 
-.mce-i-H2 { background-position:-20px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.mce-i-H2 { background-position:-20px -20px; background-size: auto; background-image: url('./just-writing-icons.png?ver=20131018');}
 .wp_themeSkin .mceButtonEnabled:hover span.mce-i-H2 {background-position:-20px 0}
 
-.mce-i-H3 { background-position:-40px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.mce-i-H3 { background-position:-40px -20px; background-size: auto; background-image: url('./just-writing-icons.png?ver=20131018');}
 .wp_themeSkin .mceButtonEnabled:hover span.mce-i-H3 {background-position:-40px 0}
 
-.mce-i-H4 { background-position:-60px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.mce-i-H4 { background-position:-60px -20px; background-size: auto; background-image: url('./just-writing-icons.png?ver=20131018');}
 .wp_themeSkin .mceButtonEnabled:hover span.mce-i-H4 {background-position:-60px 0}
 
-.mce-i-H5 { background-position:-80px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.mce-i-H5 { background-position:-80px -20px; background-size: auto; background-image: url('./just-writing-icons.png?ver=20131018');}
 .wp_themeSkin .mceButtonEnabled:hover span.mce-i-H5 {background-position:-80px 0}
 
-.mce-i-H6 { background-position:-100px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.mce-i-H6 { background-position:-100px -20px; background-size: auto; background-image: url('./just-writing-icons.png?ver=20131018');}
 .wp_themeSkin .mceButtonEnabled:hover span.mce-i-H6 {background-position:-100px 0}
 
-.mce-i-Paragraph { background-position:-120px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.mce-i-Paragraph { background-position:-120px -20px; background-size: auto; background-image: url('./just-writing-icons.png?ver=20131018');}
 .wp_themeSkin .mceButtonEnabled:hover span.mce-i-Paragraph {background-position:-120px 0}
 
-.mce-i-Address { background-position:-140px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.mce-i-Address { background-position:-140px -20px; background-size: auto; background-image: url('./just-writing-icons.png?ver=20131018');}
 .wp_themeSkin .mceButtonEnabled:hover span.mce-i-Address {background-position:-140px 0}
 
-.mce-i-Preformatted { background-position:-160px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.mce-i-Preformatted { background-position:-160px -20px; background-size: auto; background-image: url('./just-writing-icons.png?ver=20131018');}
 .wp_themeSkin .mceButtonEnabled:hover span.mce-i-Preformatted {background-position:-160px 0}
 
-.mce-i-fontcolor { background-position:-240px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.mce-i-fontcolor { background-position:-240px -20px; background-size: auto; background-image: url('./just-writing-icons.png?ver=20131018');}
 .wp_themeSkin .mceButtonEnabled:hover span.mce-i-fontcolor {background-position:-240px 0}
 
-.mce-i-backgroundcolor { background-position:-260px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.mce-i-backgroundcolor { background-position:-260px -20px; background-size: auto; background-image: url('./just-writing-icons.png?ver=20131018');}
 .mce-i-backgroundcolor:hover { background-position:-260px 0; }
 
-.mce-i-fontselector { background-position:-300px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.mce-i-fontselector { background-position:-300px -20px; background-size: auto; background-image: url('./just-writing-icons.png?ver=20131018');}
 .wp_themeSkin .mceButtonEnabled:hover span.mce-i-fontselector {background-position:-300px 0}
 
-.mce-i-fontsize { background-position:-280px -20px; background-image: url('./just-writing-icons.png?ver=20131018');}
+.mce-i-fontsize { background-position:-280px -20px; background-size: auto; background-image: url('./just-writing-icons.png?ver=20131018');}
 .wp_themeSkin .mceButtonEnabled:hover span.mce-i-fontsize {background-position:-280px 0}
 
 i.mce-i-pasteword:before {
