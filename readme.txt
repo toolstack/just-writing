@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 3.9
-Stable tag: 2.15
+Stable tag: 2.15.1
 
 Adds buttons and features to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -102,6 +102,11 @@ As of WordPress 3.6, the spellchecker is no longer part of the core WordPress in
 6. Administration screen.
 
 == Changelog ==
+= 2.15.1 =
+* Added link to user profile page in the Just Writing settings page.
+* About page cleanup and additional translation strings.
+* Fix to remove new 'cover' background-size setting in default icon settings in WP3.9.
+
 = 2.15 =
 * Minor WordPress and PHP notices clean up when in debug mode, thanks Dave Warfel.
 * Major overhaul of code to support upcoming WordPress 3.9 release with TinyMCE 4.0.  WP3.9 support should be considered beta at this time.
