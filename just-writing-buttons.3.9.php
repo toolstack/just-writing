@@ -67,24 +67,27 @@ function JustWriting( $oldbuttons )
 											// Title of the button
 											'title' => __('Paste as Text'), 
 											// Command to execute
-											'onclick' => "tinyMCE.execCommand('mcePasteText');", 
+											'onclick' => "jQuery('.mce-i-pastetext').parent().parent().click();",
 											// Show on visual AND html mode
 											'both' => false
 							);
 		}
 
+/*
+	Paste as Word was removed in WP3.9 so it is no longer required.
+		
 	if( get_the_author_meta( 'just_writing_pasteword', $cuid ) == 'on' )
 		{
 		$buttons['pasteword'] = array( 
 											// Title of the button
 											'title' => __('Paste as Word'), 
 											// Command to execute
-											'onclick' => "tinyMCE.execCommand('mcePasteWord');", 
+											'onclick' => "jQuery('.mce-i-pasteword').parent().parent().click();",
 											// Show on visual AND html mode
 											'both' => false
 							);
 		}
-
+*/
 	if( get_the_author_meta( 'just_writing_separatortwo', $cuid ) == 'on' )
 		{
 		$buttons['JustWritingSeparatorTwo'] = array( 
@@ -550,7 +553,7 @@ function JustWriting( $oldbuttons )
 										// Title of the button
 										'title' => __('Insert custom character'),
 										// Command to execute
-										'onclick' => "tinyMCE.execCommand('mceCharMap');",
+										'onclick' => "jQuery('.mce-i-charmap').parent().parent().click();",
 										// Show on visual AND html mode
 										'both' => false
 									);
