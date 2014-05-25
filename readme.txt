@@ -4,8 +4,8 @@ Plugin URI: http://toolstack.com/just-writing
 Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
-Tested up to: 3.9
-Stable tag: 2.15.1
+Tested up to: 3.9.1
+Stable tag: 2.15.2
 
 Adds buttons and features to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -92,6 +92,10 @@ If you start DFWM without moving the mouse you might hit right between when Word
 
 As of WordPress 3.6, the spellchecker is no longer part of the core WordPress install, you need to add a plugin to get the functionality back.  I'd suggest [TinyMCE SpellChecker](http://wordpress.org/plugins/tinymce-spellcheck/) as a good option.
 
+= The "Paste as Word" button doesn't show up in WordPress 3.9, why not? =
+
+WordPress 3.9 removed the "Paste as Word" button as the functionality is built in to TinyMCE now.  Just paste your word content in to the visual editor and the formatting will be maintained.
+
 == Screenshots ==
 
 1. Pre installation DFWM.
@@ -102,6 +106,10 @@ As of WordPress 3.6, the spellchecker is no longer part of the core WordPress in
 6. Administration screen.
 
 == Changelog ==
+= 2.15.2 =
+- Fixed special characters and paste as text buttons in WP3.9
+- Removed paste as word in WP3.9
+
 = 2.15.1 =
 * Added link to user profile page in the Just Writing settings page.
 * About page cleanup and additional translation strings.
