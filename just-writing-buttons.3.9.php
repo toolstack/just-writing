@@ -274,7 +274,7 @@ function JustWriting( $oldbuttons )
 										// Title of the button
 										'title' => __('Insert/edit image (Alt + Shift + M)'), 
 										// Command to execute
-										'onclick' => "fullscreen.medialib();", 
+										'onclick' => "jQuery('#insert-media-button').click();", 
 										// Show on visual AND html mode
 										'both' => true 
 						);
