@@ -106,12 +106,15 @@ WordPress 3.9 removed the "Paste as Word" button as the functionality is built i
 6. Administration screen.
 
 == Changelog ==
-= 2.15.2 =
-- Fixed insert media button in WP3.9
+= 2.15.3 =
+* Fixed javascript popup menus not showing up on posts that were longer then the display size.
 
 = 2.15.2 =
-- Fixed special characters and paste as text buttons in WP3.9
-- Removed paste as word in WP3.9
+* Fixed insert media button in WP3.9
+
+= 2.15.2 =
+* Fixed special characters and paste as text buttons in WP3.9
+* Removed paste as word in WP3.9
 
 = 2.15.1 =
 * Added link to user profile page in the Just Writing settings page.
