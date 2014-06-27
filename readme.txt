@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 3.9.1
-Stable tag: 2.15.3
+Stable tag: 2.15.4
 
 Adds buttons and features to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -106,10 +106,10 @@ WordPress 3.9 removed the "Paste as Word" button as the functionality is built i
 6. Administration screen.
 
 == Changelog ==
-= 2.15.3 =
+= 2.15.4 =
 * Fixed javascript popup menus not showing up on posts that were longer then the display size.
 
-= 2.15.2 =
+= 2.15.3 =
 * Fixed insert media button in WP3.9
 
 = 2.15.2 =
