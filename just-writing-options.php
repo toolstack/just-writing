@@ -42,6 +42,7 @@ function just_writing_save_user_profile_fields( $user_id )
 	update_user_meta( $user_id, 'just_writing_left', just_writing_get_checked_state( $_POST['just_writing_left'] ) );
 	update_user_meta( $user_id, 'just_writing_center', just_writing_get_checked_state( $_POST['just_writing_center'] ) );
 	update_user_meta( $user_id, 'just_writing_right', just_writing_get_checked_state( $_POST['just_writing_right'] ) );
+	update_user_meta( $user_id, 'just_writing_justify', just_writing_get_checked_state( $_POST['just_writing_justify'] ) );
 	update_user_meta( $user_id, 'just_writing_outdent', just_writing_get_checked_state( $_POST['just_writing_outdent'] ) );
 	update_user_meta( $user_id, 'just_writing_indent', just_writing_get_checked_state( $_POST['just_writing_indent'] ) );
 	update_user_meta( $user_id, 'just_writing_p', just_writing_get_checked_state( $_POST['just_writing_p'] ) );
@@ -440,10 +441,14 @@ function just_writing_user_profile_fields( $user )
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td>
+			<input type="checkbox" id="just_writing_justify" name="just_writing_justify" <?php if( get_the_author_meta( 'just_writing_justify', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<?php echo __("Full Justify");?>
+			</td>
+			<td>
 			<input type="checkbox" id="just_writing_outdent" name="just_writing_outdent" <?php if( get_the_author_meta( 'just_writing_outdent', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Outdent");?>
 			</td>
-			<td colspan=2>
+			<td>
 			<input type="checkbox" id="just_writing_indent" name="just_writing_indent" <?php if( get_the_author_meta( 'just_writing_indent', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Indent");?>
 			</td>

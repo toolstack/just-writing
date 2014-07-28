@@ -29,6 +29,7 @@ if( !function_exists( 'Just_Writing_User_Setup' ) )
 		update_user_meta( $user_id, 'just_writing_left', 'on' );
 		update_user_meta( $user_id, 'just_writing_center', 'on' );
 		update_user_meta( $user_id, 'just_writing_right', 'on' );
+		update_user_meta( $user_id, 'just_writing_justify', 'off' );
 		update_user_meta( $user_id, 'just_writing_outdent', 'on' );
 		update_user_meta( $user_id, 'just_writing_indent', 'on' );
 		update_user_meta( $user_id, 'just_writing_p', 'on' );

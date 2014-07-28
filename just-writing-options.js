@@ -17,6 +17,7 @@ function JustWritingSelectAll()
 	document.getElementById( 'just_writing_left' ).checked = true;
 	document.getElementById( 'just_writing_center' ).checked = true;
 	document.getElementById( 'just_writing_right' ).checked = true;
+	document.getElementById( 'just_writing_justify' ).checked = true;
 	document.getElementById( 'just_writing_outdent' ).checked = true;
 	document.getElementById( 'just_writing_indent' ).checked = true;
 	document.getElementById( 'just_writing_f_lb' ).checked = true;
@@ -75,6 +76,7 @@ function JustWritingDeSelectAll()
 	document.getElementById( 'just_writing_left' ).checked = false;
 	document.getElementById( 'just_writing_center' ).checked = false;
 	document.getElementById( 'just_writing_right' ).checked = false;
+	document.getElementById( 'just_writing_justify' ).checked = false;
 	document.getElementById( 'just_writing_outdent' ).checked = false;
 	document.getElementById( 'just_writing_indent' ).checked = false;
 	document.getElementById( 'just_writing_f_lb' ).checked = false;
@@ -194,6 +196,7 @@ function JustWritingSetQuickOptions( optiontype )
 		document.getElementById( 'just_writing_left' ).checked = false;
 		document.getElementById( 'just_writing_center' ).checked = false;
 		document.getElementById( 'just_writing_right' ).checked = false;
+		document.getElementById( 'just_writing_justify' ).checked = false;
 		document.getElementById( 'just_writing_outdent' ).checked = false;
 		document.getElementById( 'just_writing_indent' ).checked = false;
 		document.getElementById( 'just_writing_separatorfive' ).checked = false;
@@ -259,6 +262,7 @@ function JustWritingSetQuickOptions( optiontype )
 		document.getElementById( 'just_writing_left' ).checked = false;
 		document.getElementById( 'just_writing_center' ).checked = false;
 		document.getElementById( 'just_writing_right' ).checked = false;
+		document.getElementById( 'just_writing_justify' ).checked = false;
 		document.getElementById( 'just_writing_outdent' ).checked = false;
 		document.getElementById( 'just_writing_indent' ).checked = false;
 		document.getElementById( 'just_writing_separatorfive' ).checked = false;
@@ -324,6 +328,7 @@ function JustWritingSetQuickOptions( optiontype )
 		document.getElementById( 'just_writing_left' ).checked = true;
 		document.getElementById( 'just_writing_center' ).checked = true;
 		document.getElementById( 'just_writing_right' ).checked = true;
+		document.getElementById( 'just_writing_justify' ).checked = false;
 		document.getElementById( 'just_writing_outdent' ).checked = true;
 		document.getElementById( 'just_writing_indent' ).checked = true;
 		document.getElementById( 'just_writing_separatorfive' ).checked = true;
@@ -389,6 +394,7 @@ function JustWritingSetQuickOptions( optiontype )
 		document.getElementById( 'just_writing_left' ).checked = true;
 		document.getElementById( 'just_writing_center' ).checked = true;
 		document.getElementById( 'just_writing_right' ).checked = true;
+		document.getElementById( 'just_writing_justify' ).checked = true;
 		document.getElementById( 'just_writing_outdent' ).checked = true;
 		document.getElementById( 'just_writing_indent' ).checked = true;
 		document.getElementById( 'just_writing_separatorfive' ).checked = true;
@@ -454,6 +460,7 @@ function JustWritingSetQuickOptions( optiontype )
 		document.getElementById( 'just_writing_left' ).checked = true;
 		document.getElementById( 'just_writing_center' ).checked = true;
 		document.getElementById( 'just_writing_right' ).checked = true;
+		document.getElementById( 'just_writing_justify' ).checked = true;
 		document.getElementById( 'just_writing_outdent' ).checked = true;
 		document.getElementById( 'just_writing_indent' ).checked = true;
 		document.getElementById( 'just_writing_separatorfive' ).checked = true;

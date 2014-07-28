@@ -106,6 +106,10 @@ WordPress 3.9 removed the "Paste as Word" button as the functionality is built i
 6. Administration screen.
 
 == Changelog ==
+= 2.16 =
+* Added full justification button.
+* Fixed behaviour of center justificaiton button.
+
 = 2.15.4 =
 * Fixed javascript popup menus not showing up on posts that were longer then the display size.
 

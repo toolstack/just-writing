@@ -325,11 +325,11 @@ function JustWriting( $oldbuttons )
 		
 	if( get_the_author_meta( 'just_writing_center', $cuid ) == 'on' )
 		{
-		$buttons['justifyfull'] = array(
+		$buttons['justifycenter'] = array(
 										// Title of the button
-										'title' => __('Align Full (Alt + Shift + C)'),
+										'title' => __('Align Centre (Alt + Shift + C)'),
 										// Command to execute
-										'onclick' => "tinyMCE.execCommand('justifyfull');",
+										'onclick' => "tinyMCE.execCommand('justifycenter');",
 										// Show on visual AND html mode
 										'both' => false
 									);
@@ -347,6 +347,18 @@ function JustWriting( $oldbuttons )
 									);
 		}
 		
+	if( get_the_author_meta( 'just_writing_justify', $cuid ) == 'on' )
+		{
+		$buttons['justifyfull'] = array(
+										// Title of the button
+										'title' => __('Justify'),
+										// Command to execute
+										'onclick' => "tinyMCE.execCommand('justifyfull');",
+										// Show on visual AND html mode
+										'both' => false
+									);
+		}
+
 	if( get_the_author_meta( 'just_writing_outdent', $cuid ) == 'on' )
 		{
 		$buttons['outdent'] = array(
