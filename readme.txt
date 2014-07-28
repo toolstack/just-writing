@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 3.9.1
-Stable tag: 2.15.4
+Stable tag: 2.16
 
 Adds buttons and features to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -233,8 +233,8 @@ WordPress 3.9 removed the "Paste as Word" button as the functionality is built i
 * Initial release.
 
 == Upgrade Notice ==
-= 2.15 =
-* WordPress 3.5-3.8 support is pretty much unchanged in this version but WP3.9 support is a completely separate branch of code so there is new code to detect the version of WordPress and load the appropirate code.  This could cause some issues but should be fine.  The 3.9 code should still be consider beta at this time.
+= 2.16 =
+* WordPress 3.9 code is now stable and can be considered production ready.
 
 == Roadmap ==
 * Version 3.0  - add second row to toolbar, remove individual style buttons
