@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Just Writing
-Version: 2.16
+Version: 2.17
 Plugin URI: http://toolstack.com/just-writing
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -18,7 +18,7 @@ This software is released under the GPL v2.0, see license.txt for details
 
 if( !function_exists( 'JustWritingLoad' ) )
 	{
-	define( 'JustWritingVersion', '2.16' );
+	define( 'JustWritingVersion', '2.17' );
 
 	Function JustWritingFileVersion()
 		{

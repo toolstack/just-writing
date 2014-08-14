@@ -4,8 +4,8 @@ Plugin URI: http://toolstack.com/just-writing
 Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
-Tested up to: 3.9.1
-Stable tag: 2.16
+Tested up to: 3.9.2
+Stable tag: 2.17
 
 Adds buttons and features to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -54,6 +54,7 @@ And there's more!
 	* Option to start in DFWM for new posts
 	* Option to start in DFWM when editing posts
 	* Option to add a DFWM link to the pages/posts list to go directly to DFWM
+	* Adds spell check field to the post title so your browser will spell check it for you
 
 This code is released under the GPL v2, see license.txt for details.
 
@@ -236,8 +237,8 @@ WordPress 3.9 removed the "Paste as Word" button as the functionality is built i
 * Initial release.
 
 == Upgrade Notice ==
-= 2.16 =
-* WordPress 3.9 code is now stable and can be considered production ready.
+= 2.17 =
+* None.
 
 == Roadmap ==
 * Version 3.0  - add second row to toolbar, remove individual style buttons
