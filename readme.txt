@@ -106,6 +106,9 @@ WordPress 3.9 removed the "Paste as Word" button as the functionality is built i
 6. Administration screen.
 
 == Changelog ==
+= 2.17 =
+* Added browser based spell check to the post title field, inspired by Post Title Spell Check (https://github.com/FlagshipWP/post-title-spell-check).
+
 = 2.16 =
 * Added full justification button.
 * Fixed behaviour of center justificaiton button.

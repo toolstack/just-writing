@@ -112,6 +112,8 @@ function JustWriting()
 		var CenterToolbar = GetScriptVariable( GSI, 'centertb', 0 );
 		var DisableJSPickers = GetScriptVariable( GSI, 'disablejscp', 0 );
 
+		document.getElementById( 'title' ).spellcheck = true;
+		
 		// If the user has selected to keep the toolbar visible at all times, setup a recurring function to fake a mouse move.
 		if( DisableFade == 1 )
 			{
