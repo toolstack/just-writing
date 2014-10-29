@@ -101,8 +101,7 @@ width: 50px;
 height: 50px; 
 }
 
-#wp-fullscreen-save > .wp-fullscreen-saved-message,
-#wp-fullscreen-save > .wp-fullscreen-error-message,
+#wp-fullscreen-save > .fs-saved,
 #wp-fullscreen-save > .spinner
 {
     border: none;
