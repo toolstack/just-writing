@@ -1,6 +1,7 @@
 var JustWritingAutoLoadIntervalID = null;
 var JustWritingToolbarCenterID = null;
 var JustWritingTinyMCECurrentSelection = null;
+var JustWritingBrowserFS = 0;
 
 /*
 	This function returns the index of specific JavaScript file we're looking for.
@@ -111,6 +112,9 @@ function JustWriting()
 		var rtl = GetScriptVariable( GSI, 'rtl', 0 );
 		var CenterToolbar = GetScriptVariable( GSI, 'centertb', 0 );
 		var DisableJSPickers = GetScriptVariable( GSI, 'disablejscp', 0 );
+		
+		// Set the global for if we should ask the browser for fullscreen mode or not.
+		JustWritingBrowserFS = GetScriptVariable( GSI, 'browserfs', 0 );
 
 		document.getElementById( 'title' ).spellcheck = true;
 		
@@ -277,6 +281,8 @@ function JustWriting()
 					JustWritingElementSetDisplay( 'just_writing_fontselect_menu', 'none' );
 					JustWritingElementSetDisplay( 'just_writing_fontsizeselect_menu', 'none' );
 					
+					if( JustWritingBrowserFS == 1 ) { jQuery.fullscreen.exit(); }
+
 					fullscreen.off(); 
 					return false; 
 					} )
@@ -565,7 +571,13 @@ function JustWritingToolbarCenter()
 
 		// Add our function to the onclick call, it will watch of the full screen load to complete by checking every 100ms.
 		// Also chain on the old onclick function.
-		FSButton.onclick = function() { JustWritingToolbarCenterID = setInterval( JustWritingToolbarCenterMove, 100 ); oldclick; };
+		FSButton.onclick = function() 
+			{ 
+			JustWritingToolbarCenterID = setInterval( JustWritingToolbarCenterMove, 100 ); 
+			oldclick; 
+
+			if( JustWritingBrowserFS == 1 ) { jQuery(document.body).fullscreen(); }
+			};
 		
 		// Since we've done what we needed to, stop calling this function.
 		clearInterval( JustWritingToolbarCenterID );
@@ -794,7 +806,7 @@ function JustWritingMoveMouse()
 	}
 
 /*
-	This function is called every 5 second during the initial page load if we're autoloading DFWM.
+	This function is called every .5 second during the initial page load if we're autoloading DFWM.
 */
 function JustWritingAutoLoad()
 	{

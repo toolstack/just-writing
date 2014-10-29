@@ -26,7 +26,9 @@ function just_writing_get_checked_state( $value )
 */
 function just_writing_save_user_profile_fields( $user_id )
 	{
+	// If the user cannot edit their profile, then don't save the settings
 	if ( !current_user_can( 'edit_user', $user_id ) ) { return false; }
+	
 	update_user_meta( $user_id, 'just_writing_enabled', just_writing_get_checked_state( $_POST['just_writing_enabled'] ) );
 	update_user_meta( $user_id, 'just_writing_bold', just_writing_get_checked_state( $_POST['just_writing_bold'] ) );
 	update_user_meta( $user_id, 'just_writing_italics', just_writing_get_checked_state( $_POST['just_writing_italics'] ) );
@@ -89,6 +91,7 @@ function just_writing_save_user_profile_fields( $user_id )
 	update_user_meta( $user_id, 'just_writing_c_tb', just_writing_get_checked_state( $_POST['just_writing_c_tb'] ) );
 	update_user_meta( $user_id, 'just_writing_a_l', just_writing_get_checked_state( $_POST['just_writing_a_l'] ) );
 	update_user_meta( $user_id, 'just_writing_d_jscp', just_writing_get_checked_state( $_POST['just_writing_d_jscp'] ) );
+	update_user_meta( $user_id, 'just_writing_browser_fs', just_writing_get_checked_state( $_POST['just_writing_browser_fs'] ) );
 
 	// Deal with the border options radio group
 	if( $_POST['just_writing_border_setting'] == 'hide' )
@@ -135,6 +138,9 @@ function just_writing_save_user_profile_fields( $user_id )
 */
 function just_writing_user_profile_fields( $user ) 
 	{ 
+	// If the user cannot edit posts or pages, then we don't want to display the Just Writing options as they won't be using Just Writing.
+	if ( !current_user_can( 'edit_posts', $user ) || !current_user_can( 'edit_pages', $user ) ) { return; }
+
 	// Check to see if this is the first time we've run for this user and no config
 	// has been written yet, so let's do that now.
 	if( get_the_author_meta( 'just_writing_enabled', $user->ID ) == "" )
@@ -238,6 +244,13 @@ function just_writing_user_profile_fields( $user )
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_d_fade" name="just_writing_d_fade" <?php if( get_the_author_meta( 'just_writing_d_fade', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Disable the fade out of the toolbar *May have performance impacts*");?>
+			</td>
+		</tr>
+		<tr id=JustWritingOptionGroup style='display: none;'>
+			<th></th>
+			<td colspan=3>
+			<input type="checkbox" id="just_writing_browser_fs" name="just_writing_browser_fs" <?php if( get_the_author_meta( 'just_writing_browser_fs', $user->ID ) == "on" ) { echo "CHECKED"; } ?>>
+			<?php echo __("Open DFWM in your browsers full screen mode, note this only works if you click the full screen button in the editor and not with the DFWM link or auto load functions");?>
 			</td>
 		</tr>
 		<tr id=JustWritingOptionGroup style='display: none;'>

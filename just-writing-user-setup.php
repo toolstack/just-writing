@@ -78,6 +78,7 @@ if( !function_exists( 'Just_Writing_User_Setup' ) )
 		update_user_meta( $user_id, 'just_writing_c_tb', 'on' );
 		update_user_meta( $user_id, 'just_writing_a_l', 'on' );
 		update_user_meta( $user_id, 'just_writing_d_jscp', 'off' );
+		update_user_meta( $user_id, 'just_writing_browser_fs', 'off' );
 		}
 	}
 ?>

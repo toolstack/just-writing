@@ -107,6 +107,10 @@ WordPress 3.9 removed the "Paste as Word" button as the functionality is built i
 6. Administration screen.
 
 == Changelog ==
+= 2.18 =
+* Added browser full screen option.
+* Updated profile screen to only display options if the user has edit_pages or edit_posts capability.
+
 = 2.17 =
 * Added browser based spell check to the post title field, inspired by Post Title Spell Check (https://github.com/FlagshipWP/post-title-spell-check).
 

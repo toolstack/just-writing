@@ -117,6 +117,8 @@ if( !function_exists( 'JustWritingLoad' ) )
 			if( get_the_author_meta( 'just_writing_c_tb', $cuid ) == 'on' ) { $CenterTB = 1; } 
 			$DisableJSCP = 0;
 			if( get_the_author_meta( 'just_writing_d_jscp', $cuid ) == 'on' ) { $DisableJSCP = 1; } 
+			$BrowserFS = 0;
+			if( get_the_author_meta( 'just_writing_browser_fs', $cuid ) == 'on' ) { $BrowserFS = 1; } 
 			
 			// By default, assume we're not autoloading DFWM.
 			$AutoLoad = 0;
@@ -144,8 +146,11 @@ if( !function_exists( 'JustWritingLoad' ) )
 				}
 	
 			// Register and enqueue the javascript.
-			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/just-writing.' . JustWritingFileVersion() . '.js?rtl=' . is_rtl() . '&disablefade=' . $DisableFade . '&hidewordcount=' . $HideWordCount . '&hidepreview=' . $HidePreview . '&hideborder=' . $HideBorder . '&hidemodebar=' . $HideModeBar . '&autoload=' . $AutoLoad . '&formatlistbox=' . $FormatLB . '&centertb=' . $CenterTB . '&disablejscp=' . $DisableJSCP );
+			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/just-writing.' . JustWritingFileVersion() . '.js?rtl=' . is_rtl() . '&disablefade=' . $DisableFade . '&hidewordcount=' . $HideWordCount . '&hidepreview=' . $HidePreview . '&hideborder=' . $HideBorder . '&hidemodebar=' . $HideModeBar . '&autoload=' . $AutoLoad . '&formatlistbox=' . $FormatLB . '&centertb=' . $CenterTB . '&disablejscp=' . $DisableJSCP . '&browserfs=' . $BrowserFS );
 			wp_enqueue_script( 'justwriting_js' );
+			
+			wp_register_script( 'jquery_fullscreen', plugins_url( '', __FILE__ )  . '/jquery.fullscreen-0.4.1.min.js' );
+			wp_enqueue_script( 'jquery_fullscreen' );
 	
 			// Time to add our buttons to the DFWM toolbar.
 			add_filter( 'wp_fullscreen_buttons', 'JustWriting' );
