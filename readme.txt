@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 3.9.2
-Stable tag: 2.17
+Stable tag: 2.18
 
 Adds buttons and features to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -55,6 +55,7 @@ And there's more!
 	* Option to start in DFWM when editing posts
 	* Option to add a DFWM link to the pages/posts list to go directly to DFWM
 	* Adds spell check field to the post title so your browser will spell check it for you
+	* Browser full screen mode now support
 
 This code is released under the GPL v2, see license.txt for details.
 
@@ -96,6 +97,20 @@ As of WordPress 3.6, the spellchecker is no longer part of the core WordPress in
 = The "Paste as Word" button doesn't show up in WordPress 3.9, why not? =
 
 WordPress 3.9 removed the "Paste as Word" button as the functionality is built in to TinyMCE now.  Just paste your word content in to the visual editor and the formatting will be maintained.
+
+= Browser full screen mode isn't working... =
+
+Browser full screen mode is highly dependent on the browser, it may not work for you.  For example Safari blocks keyboard input during full screen mode.
+
+If it's not working for you try another browser.
+
+= Why can't the browser full screen mode be auto loaded like DFWM =
+
+Two words for you: Browser Security.
+
+Modern browsers support full screen mode but they only activate it when a user clicks on a button, there's no way to fake it through JavaScript.  Thats so that a malicous web site doesn't try and impersonate your OS and get you to enter a password that it steal.
+
+The other issue is that full screen mode is de-activated as soon as you leave the current page, so for example Just Writing could link full screen mode to the DFWM "click" in the post list, but as soon as the browser leaves the post list to load the editor page full screen mode will be deactivated.
 
 == Screenshots ==
 
