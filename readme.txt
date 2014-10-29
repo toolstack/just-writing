@@ -109,6 +109,7 @@ WordPress 3.9 removed the "Paste as Word" button as the functionality is built i
 == Changelog ==
 = 2.18 =
 * Added browser full screen option.
+* Added css to move the spinner/saved/error messages when saving in full screen outside of the toolbar to a positional span under the buttons.
 * Updated profile screen to only display options if the user has edit_pages or edit_posts capability.
 
 = 2.17 =
