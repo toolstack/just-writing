@@ -6,14 +6,16 @@
  */
 function JustWriting( $oldbuttons )
 	{
-	$cuid = get_current_user_id();
+	GLOBAL $JustWritingUtilities;
 
-	$buttons = $oldbuttons;
-	
+	// Set the current user and load the user preferences.
+	$JustWritingUtilities->set_user_id( get_current_user_id() );
+	$JustWritingUtilities->load_user_options();
+
 	// clear out the default buttons
 	$buttons = array();
 
-	if( get_the_author_meta( 'just_writing_separatorone', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'separator_one' ) == 'on' )
 		{
 		$buttons['JustWritingSeparatorOne'] = array( 
 											// Title of the button
@@ -25,7 +27,7 @@ function JustWriting( $oldbuttons )
 							);
 		}
 
-	if( get_the_author_meta( 'just_writing_cut', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'cut' ) == 'on' )
 		{
 		$buttons['cut'] = array( 
 											// Title of the button
@@ -37,7 +39,7 @@ function JustWriting( $oldbuttons )
 							);
 		}
 		
-	if( get_the_author_meta( 'just_writing_copy', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'copy' ) == 'on' )
 		{
 		$buttons['copy'] = array( 
 											// Title of the button
@@ -49,7 +51,7 @@ function JustWriting( $oldbuttons )
 							);
 		}
 		
-	if( get_the_author_meta( 'just_writing_paste', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'paste' ) == 'on' )
 		{
 		$buttons['paste'] = array( 
 											// Title of the button
@@ -61,34 +63,31 @@ function JustWriting( $oldbuttons )
 							);
 		}
 
-	if( get_the_author_meta( 'just_writing_pastetext', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'pastetext' ) == 'on' )
 		{
 		$buttons['pastetext'] = array( 
 											// Title of the button
 											'title' => __('Paste as Text'), 
 											// Command to execute
-											'onclick' => "jQuery('.mce-i-pastetext').parent().parent().click();",
+											'onclick' => "tinyMCE.execCommand('mcePasteText');", 
 											// Show on visual AND html mode
 											'both' => false
 							);
 		}
 
-/*
-	Paste as Word was removed in WP3.9 so it is no longer required.
-		
-	if( get_the_author_meta( 'just_writing_pasteword', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'pasteword' ) == 'on' )
 		{
 		$buttons['pasteword'] = array( 
 											// Title of the button
 											'title' => __('Paste as Word'), 
 											// Command to execute
-											'onclick' => "jQuery('.mce-i-pasteword').parent().parent().click();",
+											'onclick' => "tinyMCE.execCommand('mcePasteWord');", 
 											// Show on visual AND html mode
 											'both' => false
 							);
 		}
-*/
-	if( get_the_author_meta( 'just_writing_separatortwo', $cuid ) == 'on' )
+
+	if( $JustWritingUtilities->get_user_option( 'separator_two' ) == 'on' )
 		{
 		$buttons['JustWritingSeparatorTwo'] = array( 
 										// Title of the button
@@ -100,7 +99,7 @@ function JustWriting( $oldbuttons )
 						);
 		}
 		
-	if( get_the_author_meta( 'just_writing_f_n', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'font_name' ) == 'on' )
 		{
 		$buttons['fontselector'] = array( 
 								// Title of the button
@@ -112,7 +111,7 @@ function JustWriting( $oldbuttons )
 							);
 		}
 		
-	if( get_the_author_meta( 'just_writing_f_s', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'font_size' ) == 'on' )
 		{
 		$buttons['fontsize'] = array( 
 								// Title of the button
@@ -124,7 +123,7 @@ function JustWriting( $oldbuttons )
 							);
 		}
 
-	if( get_the_author_meta( 'just_writing_f_c', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'font_color' ) == 'on' )
 		{
 		$buttons['fontcolor'] = array( 
 								// Title of the button
@@ -136,7 +135,7 @@ function JustWriting( $oldbuttons )
 							);
 		}
 
-	if( get_the_author_meta( 'just_writing_b_c', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'background_color' ) == 'on' )
 		{
 		$buttons['backgroundcolor'] = array( 
 								// Title of the button
@@ -148,7 +147,7 @@ function JustWriting( $oldbuttons )
 							);
 		}
 
-	if( get_the_author_meta( 'just_writing_bold', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'bold' ) == 'on' )
 		{
 		$buttons['bold'] = array( 
 										// Title of the button
@@ -160,7 +159,7 @@ function JustWriting( $oldbuttons )
 						);
 		}
 		
-	if( get_the_author_meta( 'just_writing_italics', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'italics' ) == 'on' )
 		{
 		$buttons['italic'] = array( 
 										// Title of the button
@@ -172,7 +171,7 @@ function JustWriting( $oldbuttons )
 						);
 		}
 		
-	if( get_the_author_meta( 'just_writing_strike', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'strike' ) == 'on' )
 		{
 		$buttons['strikethrough'] = array(
 										// Title of the button
@@ -184,7 +183,7 @@ function JustWriting( $oldbuttons )
 									);
 		}
 		
-	if( get_the_author_meta( 'just_writing_under', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'underline' ) == 'on' )
 		{
 		$buttons['underline'] = array(
 										// Title of the button
@@ -196,7 +195,7 @@ function JustWriting( $oldbuttons )
 									);
 		}
 
-	if( get_the_author_meta( 'just_writing_subscript', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'subscript' ) == 'on' )
 		{
 		$buttons['subscript'] = array(
 										// Title of the button
@@ -208,7 +207,7 @@ function JustWriting( $oldbuttons )
 									);
 		}
 
-	if( get_the_author_meta( 'just_writing_superscript', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'superscript' ) == 'on' )
 		{
 		$buttons['superscript'] = array(
 										// Title of the button
@@ -220,7 +219,7 @@ function JustWriting( $oldbuttons )
 									);
 		}
 		
-	if( get_the_author_meta( 'just_writing_remove', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'remove_format' ) == 'on' )
 		{
 		$buttons['removeformat'] = array(
 										// Title of the button
@@ -232,7 +231,7 @@ function JustWriting( $oldbuttons )
 									);
 		}
 		
-	if( get_the_author_meta( 'just_writing_separatorthree', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'separator_three' ) == 'on' )
 		{
 		$buttons['JustWritingSeparatorThree'] = array( 
 										// Title of the button
@@ -244,7 +243,7 @@ function JustWriting( $oldbuttons )
 									);
 		}
 
-	if( get_the_author_meta( 'just_writing_ul', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'ul' ) == 'on' )
 		{
 		$buttons['bullist'] = array( 
 										// Title of the button
@@ -256,7 +255,7 @@ function JustWriting( $oldbuttons )
 						);
 		}
 						
-	if( get_the_author_meta( 'just_writing_nl', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'nl' ) == 'on' )
 		{
 		$buttons['numlist'] = array( 
 										// Title of the button
@@ -268,19 +267,19 @@ function JustWriting( $oldbuttons )
 						);
 		}
 						
-	if( get_the_author_meta( 'just_writing_media', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'media' ) == 'on' )
 		{
 		$buttons['image'] = array( 
 										// Title of the button
 										'title' => __('Insert/edit image (Alt + Shift + M)'), 
 										// Command to execute
-										'onclick' => "jQuery('#insert-media-button').click();", 
+										'onclick' => "fullscreen.medialib();", 
 										// Show on visual AND html mode
 										'both' => true 
 						);
 		}
 						
-	if( get_the_author_meta( 'just_writing_link', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'link' ) == 'on' )
 		{
 		$buttons['link'] = array( 
 										// Title of the button
@@ -292,7 +291,7 @@ function JustWriting( $oldbuttons )
 						);
 		}
 						
-	if( get_the_author_meta( 'just_writing_unlink', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'unlink' ) == 'on' )
 		{
 		$buttons['unlink'] = array( 
 										// Title of the button
@@ -304,7 +303,7 @@ function JustWriting( $oldbuttons )
 						);
 		}
 
-	if( get_the_author_meta( 'just_writing_separatorfour', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'separator_four' ) == 'on' )
 		{
 		$buttons['JustWritingSeparatorFour'] = array( 
 										// Title of the button
@@ -316,9 +315,9 @@ function JustWriting( $oldbuttons )
 									);
 		}
 
-	if( get_the_author_meta( 'just_writing_left', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'left_justify' ) == 'on' )
 		{
-		$buttons['alignleft'] = array(
+		$buttons['justifyleft'] = array(
 										// Title of the button
 										'title' => __('Align Left (Alt + Shift + L)'),
 										// Command to execute
@@ -328,9 +327,9 @@ function JustWriting( $oldbuttons )
 									);
 		}
 		
-	if( get_the_author_meta( 'just_writing_center', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'center_justify' ) == 'on' )
 		{
-		$buttons['aligncenter'] = array(
+		$buttons['justifycenter'] = array(
 										// Title of the button
 										'title' => __('Align Centre (Alt + Shift + C)'),
 										// Command to execute
@@ -340,9 +339,9 @@ function JustWriting( $oldbuttons )
 									);
 		}
 		
-	if( get_the_author_meta( 'just_writing_right', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'right_justify' ) == 'on' )
 		{
-		$buttons['alignright'] = array(
+		$buttons['justifyright'] = array(
 										// Title of the button
 										'title' => __('Align Right (Alt + Shift + R)'),
 										// Command to execute
@@ -352,9 +351,9 @@ function JustWriting( $oldbuttons )
 									);
 		}
 		
-	if( get_the_author_meta( 'just_writing_justify', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'full_justify' ) == 'on' )
 		{
-		$buttons['alignjustify'] = array(
+		$buttons['justifyfull'] = array(
 										// Title of the button
 										'title' => __('Justify'),
 										// Command to execute
@@ -364,7 +363,7 @@ function JustWriting( $oldbuttons )
 									);
 		}
 
-	if( get_the_author_meta( 'just_writing_outdent', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'outdent' ) == 'on' )
 		{
 		$buttons['outdent'] = array(
 										// Title of the button
@@ -376,7 +375,7 @@ function JustWriting( $oldbuttons )
 									);
 		}
 		
-	if( get_the_author_meta( 'just_writing_indent', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'indent' ) == 'on' )
 		{
 		$buttons['indent'] = array(
 										// Title of the button
@@ -388,7 +387,7 @@ function JustWriting( $oldbuttons )
 									);
 		}
 		
-	if( get_the_author_meta( 'just_writing_separatorfive', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'separator_five' ) == 'on' )
 		{
 		$buttons['JustWritingSeparatorFive'] = array( 
 										// Title of the button
@@ -400,7 +399,7 @@ function JustWriting( $oldbuttons )
 									);
 		}
 
-	if( get_the_author_meta( 'just_writing_p', $cuid ) == 'on' || get_the_author_meta( 'just_writing_f_lb', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'p_format' ) == 'on' || $JustWritingUtilities->get_user_option( 'format_listbox' ) == 'on' )
 		{
 		$buttons['Paragraph'] = array(
 										// Title of the button
@@ -412,9 +411,9 @@ function JustWriting( $oldbuttons )
 									);
 		}
 		
-	if( get_the_author_meta( 'just_writing_f_lb', $cuid ) != 'on' )
+	if( $JustWritingUtilities->get_user_option( 'format_listbox' ) != 'on' )
 		{
-		if( get_the_author_meta( 'just_writing_h1', $cuid ) == 'on' )
+		if( $JustWritingUtilities->get_user_option( 'h1_format' ) == 'on' )
 			{
 			$buttons['H1'] = array(
 											// Title of the button
@@ -426,7 +425,7 @@ function JustWriting( $oldbuttons )
 										);
 			}
 			
-		if( get_the_author_meta( 'just_writing_h2', $cuid ) == 'on' )
+		if( $JustWritingUtilities->get_user_option( 'h2_format' ) == 'on' )
 			{
 			$buttons['H2'] = array(
 											// Title of the button
@@ -438,7 +437,7 @@ function JustWriting( $oldbuttons )
 										);
 			}
 			
-		if( get_the_author_meta( 'just_writing_h3', $cuid ) == 'on' )
+		if( $JustWritingUtilities->get_user_option( 'h3_format' ) == 'on' )
 			{
 			$buttons['H3'] = array(
 											// Title of the button
@@ -450,7 +449,7 @@ function JustWriting( $oldbuttons )
 										);
 			}
 			
-		if( get_the_author_meta( 'just_writing_h4', $cuid ) == 'on' )
+		if( $JustWritingUtilities->get_user_option( 'h4_format' ) == 'on' )
 			{
 			$buttons['H4'] = array(
 											// Title of the button
@@ -462,7 +461,7 @@ function JustWriting( $oldbuttons )
 										);
 			}
 			
-		if( get_the_author_meta( 'just_writing_h5', $cuid ) == 'on' )
+		if( $JustWritingUtilities->get_user_option( 'h5_format' ) == 'on' )
 			{
 			$buttons['H5'] = array(
 											// Title of the button
@@ -474,7 +473,7 @@ function JustWriting( $oldbuttons )
 										);
 			}
 			
-		if( get_the_author_meta( 'just_writing_h6', $cuid ) == 'on' )
+		if( $JustWritingUtilities->get_user_option( 'h6_format' ) == 'on' )
 			{
 			$buttons['H6'] = array(
 											// Title of the button
@@ -486,7 +485,7 @@ function JustWriting( $oldbuttons )
 										);
 			}
 			
-		if( get_the_author_meta( 'just_writing_quotes', $cuid ) == 'on' )
+		if( $JustWritingUtilities->get_user_option( 'quotes' ) == 'on' )
 			{
 			$buttons['blockquote'] = array( 
 											// Title of the button
@@ -498,7 +497,7 @@ function JustWriting( $oldbuttons )
 							);
 			}
 							
-		if( get_the_author_meta( 'just_writing_address', $cuid ) == 'on' )
+		if( $JustWritingUtilities->get_user_option( 'address_format' ) == 'on' )
 			{
 			$buttons['Address'] = array(
 											// Title of the button
@@ -510,7 +509,7 @@ function JustWriting( $oldbuttons )
 										);
 			}
 			
-		if( get_the_author_meta( 'just_writing_pf', $cuid ) == 'on' )
+		if( $JustWritingUtilities->get_user_option( 'pre_format' ) == 'on' )
 			{
 			$buttons['Preformatted'] = array(
 											// Title of the button
@@ -523,7 +522,7 @@ function JustWriting( $oldbuttons )
 			}
 		}
 
-	if( get_the_author_meta( 'just_writing_separatorsix', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'separator_six' ) == 'on' )
 		{
 		$buttons['JustWritingSeparatorSix'] = array( 
 										// Title of the button
@@ -535,7 +534,7 @@ function JustWriting( $oldbuttons )
 									);
 		}
 		
-	if( get_the_author_meta( 'just_writing_spell', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'spellcheck' ) == 'on' )
 		{
 		$buttons['spellchecker'] = array(
 										// Title of the button
@@ -547,7 +546,7 @@ function JustWriting( $oldbuttons )
 									);
 		}
 		
-	if( get_the_author_meta( 'just_writing_more', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'more' ) == 'on' )
 		{
 		$buttons['wp_more'] = array(
 										// Title of the button
@@ -559,19 +558,19 @@ function JustWriting( $oldbuttons )
 									);
 		}
 		
-	if( get_the_author_meta( 'just_writing_char', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'char_map' ) == 'on' )
 		{
 		$buttons['charmap'] = array(
 										// Title of the button
 										'title' => __('Insert custom character'),
 										// Command to execute
-										'onclick' => "jQuery('.mce-i-charmap').parent().parent().click();",
+										'onclick' => "tinyMCE.execCommand('mceCharMap');",
 										// Show on visual AND html mode
 										'both' => false
 									);
 		}
 		
-	if( get_the_author_meta( 'just_writing_separatorseven', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'separator_seven' ) == 'on' )
 		{
 		$buttons['JustWritingSeparatorSeven'] = array( 
 										// Title of the button
@@ -582,7 +581,7 @@ function JustWriting( $oldbuttons )
 										'both' => false
 									);
 		}
-	if( get_the_author_meta( 'just_writing_undo', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'undo' ) == 'on' )
 		{
 		$buttons['undo'] = array(
 										// Title of the button
@@ -594,7 +593,7 @@ function JustWriting( $oldbuttons )
 									);
 		}
 		
-	if( get_the_author_meta( 'just_writing_redo', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'redo' ) == 'on' )
 		{
 		$buttons['redo'] = array(
 										// Title of the button
@@ -606,7 +605,7 @@ function JustWriting( $oldbuttons )
 									);
 		}
 		
-	if( get_the_author_meta( 'just_writing_help', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'help' ) == 'on' )
 		{
 		$buttons['help'] = array( 
 										// Title of the button
@@ -618,7 +617,7 @@ function JustWriting( $oldbuttons )
 								);
 		}
 
-	if( get_the_author_meta( 'just_writing_separatoreight', $cuid ) == 'on' )
+	if( $JustWritingUtilities->get_user_option( 'separator_eight' ) == 'on' )
 		{
 		$buttons['JustWritingSeparatorEight'] = array( 
 										// Title of the button

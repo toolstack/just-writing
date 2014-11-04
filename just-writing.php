@@ -16,6 +16,8 @@ Copyright (c) 2013-14 by Greg Ross
 This software is released under the GPL v2.0, see license.txt for details
 */
 
+include_once( 'ToolStack-Utilities.class.php' );
+
 if( !function_exists( 'JustWritingLoad' ) )
 	{
 	define( 'JustWritingVersion', '2.18' );
@@ -27,6 +29,11 @@ if( !function_exists( 'JustWritingLoad' ) )
 		if( version_compare( $wp_version, '3.8.99', '<=' ) )
 			{
 			return '3.5';
+			}
+			
+		if( version_compare( $wp_version, '4.1', '>=' ) )
+			{
+			return '4.1';
 			}
 
 		return '3.9';
@@ -55,7 +62,10 @@ if( !function_exists( 'JustWritingLoad' ) )
 	*/
 	Function JustWritingLoadProfile( $user )
 		{
-		include_once( "just-writing-options.php" );
+		$file_version = JustWritingFileVersion();
+		
+		include_once( $file_version . '/just-writing-options.' . $file_version . '.php' );
+		
 		just_writing_user_profile_fields( $user );
 		}
 		
@@ -66,7 +76,10 @@ if( !function_exists( 'JustWritingLoad' ) )
 	*/
 	Function JustWritingSaveProfile( $user )
 		{
-		include_once( "just-writing-options.php" );
+		$file_version = JustWritingFileVersion();
+
+		include_once( $file_version . '/just-writing-options.' . $file_version . '.php' );
+
 		just_writing_save_user_profile_fields( $user );
 		}
 
@@ -77,48 +90,56 @@ if( !function_exists( 'JustWritingLoad' ) )
 	 */
 	Function JustWritingLoad( $source )
 		{
+		GLOBAL $JustWritingUtilities;
+
+		// Set the current user and load the user preferences.
+		$JustWritingUtilities->set_user_id();
+		$JustWritingUtilities->load_user_options();
+		
+		$file_version = JustWritingFileVersion();
+		
 		// Load the appropriate buttons array.
-		include_once( 'just-writing-buttons.' . JustWritingFileVersion() . '.php' );
+		include_once( $file_version . '/just-writing-buttons.' . $file_version . '.php' );
 
 		// Get the user option to see if we're enabled.
 		$cuid = get_current_user_id();
-		$JustWritingEnabled = get_the_author_meta( 'just_writing_enabled', $cuid );
+		$JustWritingEnabled = $JustWritingUtilities->get_user_option( 'enabled' );
 		
 		// If the enabled check returned a blank string it's because this is the first run and no config
 		// has been written yet, so let's do that now.
-		if( $JustWritingEnabled == "" )
+		if( $JustWritingEnabled == '' )
 			{
-			include_once( "just-writing-user-setup.php" );
+			include_once( $file_version . '/just-writing-user-setup.' . $file_version . '.php' );
 			Just_Writing_User_Setup( $cuid );
-			$JustWritingEnabled = "on";
+			$JustWritingEnabled = 'on';
 			}
 		
 		// If we're enabled, setup as required.
-		if( $JustWritingEnabled == "on" )
+		if( $JustWritingEnabled == 'on' )
 			{
-			wp_register_style( 'justwriting_style', plugins_url( '', __FILE__ ) . '/just-writing.' . JustWritingFileVersion() . '.css' );
+			wp_register_style( 'justwriting_style', plugins_url( '', __FILE__ ) . '/' . $file_version . '/just-writing.' . $file_version . '.css' );
 			wp_enqueue_style( 'justwriting_style' ); 
 
 			// Get the options to pass to the javascript code
 			$DisableFade = 0;
-			if( get_the_author_meta( 'just_writing_d_fade', $cuid ) == 'on' ) { $DisableFade = 1; } 
+			if( $JustWritingUtilities->get_user_option( 'disable_fade' ) == 'on' ) { $DisableFade = 1; } 
 			$HideWordCount = 0;
-			if( get_the_author_meta( 'just_writing_h_wc', $cuid ) == 'on' ) { $HideWordCount = 1; } 
+			if( $JustWritingUtilities->get_user_option( 'hide_wordcount' ) == 'on' ) { $HideWordCount = 1; } 
 			$HidePreview = 0;
-			if( get_the_author_meta( 'just_writing_h_p', $cuid ) == 'on' ) { $HidePreview = 1; } 
+			if( $JustWritingUtilities->get_user_option( 'hide_preview' ) == 'on' ) { $HidePreview = 1; } 
 			$HideBorder = 0;
-			if( get_the_author_meta( 'just_writing_h_b', $cuid ) == 'on' ) { $HideBorder = 2; } 
-			if( get_the_author_meta( 'just_writing_l_b', $cuid ) == 'on' ) { $HideBorder = 1; } 
+			if( $JustWritingUtilities->get_user_option( 'hide_border' ) == 'on' ) { $HideBorder = 2; } 
+			if( $JustWritingUtilities->get_user_option( 'lighten_border' ) == 'on' ) { $HideBorder = 1; } 
 			$HideModeBar = 0;
-			if( get_the_author_meta( 'just_writing_h_mb', $cuid ) == 'on' ) { $HideModeBar = 1; } 
+			if( $JustWritingUtilities->get_user_option( 'hide_modeselect' ) == 'on' ) { $HideModeBar = 1; } 
 			$FormatLB = 0;
-			if( get_the_author_meta( 'just_writing_f_lb', $cuid ) == 'on' ) { $FormatLB = 1; } 
+			if( $JustWritingUtilities->get_user_option( 'format_listbox' ) == 'on' ) { $FormatLB = 1; } 
 			$CenterTB = 0;
-			if( get_the_author_meta( 'just_writing_c_tb', $cuid ) == 'on' ) { $CenterTB = 1; } 
+			if( $JustWritingUtilities->get_user_option( 'center_toolbar' ) == 'on' ) { $CenterTB = 1; } 
 			$DisableJSCP = 0;
-			if( get_the_author_meta( 'just_writing_d_jscp', $cuid ) == 'on' ) { $DisableJSCP = 1; } 
+			if( $JustWritingUtilities->get_user_option( 'disable_jscp' ) == 'on' ) { $DisableJSCP = 1; } 
 			$BrowserFS = 0;
-			if( get_the_author_meta( 'just_writing_browser_fs', $cuid ) == 'on' ) { $BrowserFS = 1; } 
+			if( $JustWritingUtilities->get_user_option( 'browser_fullscreen' ) == 'on' ) { $BrowserFS = 1; } 
 			
 			// By default, assume we're not autoloading DFWM.
 			$AutoLoad = 0;
@@ -126,13 +147,13 @@ if( !function_exists( 'JustWritingLoad' ) )
 			if( $source == "new" )
 				{
 				// Check to see if we're supposed to autoload DFWM if we're creating a new post.
-				if( get_the_author_meta( 'just_writing_al_new', $cuid ) == 'on' ) { $AutoLoad = 1; } 
+				if( $JustWritingUtilities->get_user_option( 'autoload_newposts' ) == 'on' ) { $AutoLoad = 1; } 
 				}
 
 			if( $source == "edit" )
 				{
 				// Check to see if we're supposed to autoload DFWM if we're editing a post.
-				if( get_the_author_meta( 'just_writing_al_edit', $cuid ) == 'on' ) { $AutoLoad = 1; } 
+				if( $JustWritingUtilities->get_user_option( 'autoload_editposts' ) == 'on' ) { $AutoLoad = 1; } 
 				}
 				
 			// Finally, check to see if we were passed an autoload variable on the URL, which happens if the user has
@@ -146,7 +167,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 				}
 	
 			// Register and enqueue the javascript.
-			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/just-writing.' . JustWritingFileVersion() . '.js?rtl=' . is_rtl() . '&disablefade=' . $DisableFade . '&hidewordcount=' . $HideWordCount . '&hidepreview=' . $HidePreview . '&hideborder=' . $HideBorder . '&hidemodebar=' . $HideModeBar . '&autoload=' . $AutoLoad . '&formatlistbox=' . $FormatLB . '&centertb=' . $CenterTB . '&disablejscp=' . $DisableJSCP . '&browserfs=' . $BrowserFS );
+			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/' . $file_version . '/just-writing.' . $file_version . '.js?rtl=' . is_rtl() . '&disablefade=' . $DisableFade . '&hidewordcount=' . $HideWordCount . '&hidepreview=' . $HidePreview . '&hideborder=' . $HideBorder . '&hidemodebar=' . $HideModeBar . '&autoload=' . $AutoLoad . '&formatlistbox=' . $FormatLB . '&centertb=' . $CenterTB . '&disablejscp=' . $DisableJSCP . '&browserfs=' . $BrowserFS );
 			wp_enqueue_script( 'justwriting_js' );
 			
 			wp_register_script( 'jquery_fullscreen', plugins_url( '', __FILE__ )  . '/jquery.fullscreen-0.4.1.min.js' );
@@ -162,12 +183,20 @@ if( !function_exists( 'JustWritingLoad' ) )
 	 */
 	function JustWritingLinkRow( $actions, $post )
 		{
+		GLOBAL $JustWritingUtilities;
+		
+		// Set the current user and load the user preferences.
+		$JustWritingUtilities->set_user_id();
+		$JustWritingUtilities->load_user_options();
+		
+		$file_version = JustWritingFileVersion();
+		
 		$new_actions = array();
 
 		$cuid = get_current_user_id();
-		$JustWritingEnabled = get_the_author_meta( 'just_writing_enabled', $cuid );
-		$JustWritingAddLinks = get_the_author_meta( 'just_writing_a_l', $cuid );
-
+		$JustWritingEnabled = $JustWritingUtilities->get_user_option( 'enabled' );
+		$JustWritingAddLinks = $JustWritingUtilities->get_user_option( 'add_DFWM_post_pages' );
+		
 		// Only add the link if we're enabled and the user has selected the option.
 		if( $JustWritingEnabled == "on" AND $JustWritingAddLinks == "on" )
 			{
@@ -281,6 +310,15 @@ if( !function_exists( 'JustWritingLoad' ) )
 		}
 	}
 
+// Create out global utilities object.  We might be tempted to load the user options now, but that's not possible as WordPress hasn't processed the login this early yet.
+$JustWritingUtilities = new ToolStack_Utilities;
+
+// Check to see if we're installed and are the current version.
+if( get_option('just_writing_plugin_version') != JustWritingVersion ) 
+	{	
+	include_once( dirname( __FILE__ ) . '/just-writing-install.php' );
+	}
+	
 // Add the admin page to the settings menu.
 add_action( 'admin_menu', 'JustWritingAddSettingsMenu', 1 );
 
