@@ -31,7 +31,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 			return '3.5';
 			}
 			
-		if( version_compare( $wp_version, '4.1', '>=' ) )
+		if( version_compare( $wp_version, '4.0.99', '>' ) )
 			{
 			return '4.1';
 			}
@@ -207,6 +207,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 				if( $key == 'edit' )
 					{
 					$new_actions['JustWriting'] = '<a href="post.php?post=' . $post->ID . '&action=edit&JustWritingAutoLoad=1" title="Edit this item in Distraction Free Writing Mode">DFWM</a>';
+					$new_actions['Writing'] = '<a href="' . plugins_url( '', __FILE__ )  . '/' . $file_version . '/just-writing-editor.' . $file_version . '.php?post=' . $post->ID . '" title="Edit this item in Just Writing Mode">Writing</a>';
 					}
 				}
 
@@ -232,7 +233,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 				$TableName = $wpdb->prefix . "usermeta";
 
 				// Remove any user meta settings we've created, the LIKE clause will delete anything starting with "just_writing_".
-				$wpdb->get_results( "DELETE FROM " . $TableName . " WHERE meta_key LIKE 'just_writing_%'" );
+				$wpdb->get_results( "DELETE FROM " . $TableName . " WHERE meta_key LIKE 'just_writing%'" );
 				
 				// Store a temporary option to let us know we're been removed, this option will get deleted when Just Writing is uninstalled.
 				update_option( 'Just_Writing_Removed', "true" );
@@ -311,7 +312,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 	}
 
 // Create out global utilities object.  We might be tempted to load the user options now, but that's not possible as WordPress hasn't processed the login this early yet.
-$JustWritingUtilities = new ToolStack_Utilities;
+$JustWritingUtilities = new ToolStack_Utilities( 'just_writing' );
 
 // Check to see if we're installed and are the current version.
 if( get_option('just_writing_plugin_version') != JustWritingVersion ) 
