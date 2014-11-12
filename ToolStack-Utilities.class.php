@@ -21,13 +21,17 @@ class ToolStack_Utilities
 			$exp = preg_split( '_[\\\\/]_', $plugin_basename );
 
 			$this->plugin_slug = strtolower( trim( $exp[0] ) );
-			
-			if( $this->plugin_slug == '' )
-				{
-				$this->plugin_slug = 'toolstackplaceholder';
-				}
 			}
-		
+		else 
+			{
+			$this->plugin_slug = $slug;
+			}
+
+		if( $this->plugin_slug == '' )
+			{
+			$this->plugin_slug = 'toolstackplaceholder';
+			}
+			
 		// Load the options from the database
 		$this->options = get_option( $this->plugin_slug ); 
 		}
