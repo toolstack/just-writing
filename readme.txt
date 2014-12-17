@@ -11,6 +11,8 @@ Adds buttons and features to the Distraction Free Writing Mode for all kinds of 
 
 == Description ==
 
+Note: Just Writing currently does not support WordPress 4.1's new DFWM, you may install it but no features will be active until a future release.
+
 Distraction Free Writing Mode (DFWM) is a great way to focus on writing text, but have you ever found yourself wanting to do a bit more with it?  How about spell check, or change the paragraph style without dropping back to the standard post edit mode?  Now you can get all the functionality of the standard mode tools in DFWM!
 
 But maybe you think there are too many buttons in DFWM, no problem you can get rid of pretty much all of them!
@@ -111,6 +113,10 @@ Two words for you: Browser Security.
 Modern browsers support full screen mode but they only activate it when a user clicks on a button, there's no way to fake it through JavaScript.  Thats so that a malicous web site doesn't try and impersonate your OS and get you to enter a password that it steal.
 
 The other issue is that full screen mode is de-activated as soon as you leave the current page, so for example Just Writing could link full screen mode to the DFWM "click" in the post list, but as soon as the browser leaves the post list to load the editor page full screen mode will be deactivated.
+
+= I've install Just Writing but nothing changed, what's wrong? =
+
+Just Writing does not support the new DFWM in WordPress 4.1 at this time.  A future release will add support.
 
 == Screenshots ==
 
