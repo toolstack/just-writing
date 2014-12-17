@@ -4,8 +4,8 @@ Plugin URI: http://toolstack.com/just-writing
 Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
-Tested up to: 4.0
-Stable tag: 2.18
+Tested up to: 4.1
+Stable tag: 3.0
 
 Adds buttons and features to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -128,6 +128,10 @@ Just Writing does not support the new DFWM in WordPress 4.1 at this time.  A fut
 6. Administration screen.
 
 == Changelog ==
+= 3.0 =
+* Major restructuring to better support multiple WordPress versions.
+* Unified user options in to a single array instead of many individual settings in the database.
+
 = 2.18 =
 * Added browser full screen option.
 * Added css to move the spinner/saved/error messages when saving in full screen outside of the toolbar to a positional span under the buttons.

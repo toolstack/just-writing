@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Just Writing
-Version: 2.18
+Version: 3.0
 Plugin URI: http://toolstack.com/just-writing
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -20,7 +20,7 @@ include_once( 'ToolStack-Utilities.class.php' );
 
 if( !function_exists( 'JustWritingLoad' ) )
 	{
-	define( 'JustWritingVersion', '2.18' );
+	define( 'JustWritingVersion', '3.0' );
 
 	Function JustWritingFileVersion()
 		{
