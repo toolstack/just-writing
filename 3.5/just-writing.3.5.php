@@ -154,7 +154,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 				if( $key == 'edit' )
 					{
 					$new_actions['JustWriting'] = '<a href="post.php?post=' . $post->ID . '&action=edit&JustWritingAutoLoad=1" title="Edit this item in Distraction Free Writing Mode">DFWM</a>';
-					$new_actions['Writing'] = '<a href="' . plugins_url( '', __FILE__ )  . '/just-writing-editor.' . $file_version . '.php?post=' . $post->ID . '" title="Edit this item in Just Writing Mode">Writing</a>';
+					//$new_actions['Writing'] = '<a href="' . plugins_url( '', __FILE__ )  . '/just-writing-editor.' . $file_version . '.php?post=' . $post->ID . '" title="Edit this item in Just Writing Mode">Writing</a>';
 					}
 				}
 
