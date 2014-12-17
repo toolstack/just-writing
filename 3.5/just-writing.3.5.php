@@ -11,7 +11,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 		{
 		$file_version = JustWritingFileVersion();
 		
-		include_once( './just-writing-options.' . $file_version . '.php' );
+		include_once( dirname( __FILE__ ) . '/just-writing-options.' . $file_version . '.php' );
 		
 		just_writing_user_profile_fields( $user );
 		}
@@ -25,7 +25,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 		{
 		$file_version = JustWritingFileVersion();
 
-		include_once( './just-writing-options.' . $file_version . '.php' );
+		include_once( dirname( __FILE__ ) . '/just-writing-options.' . $file_version . '.php' );
 
 		just_writing_save_user_profile_fields( $user );
 		}
@@ -46,7 +46,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 		$file_version = JustWritingFileVersion();
 		
 		// Load the appropriate buttons array.
-		include_once( $file_version . '/just-writing-buttons.' . $file_version . '.php' );
+		include_once( dirname( __FILE__ ) . '/just-writing-buttons.' . $file_version . '.php' );
 
 		// Get the user option to see if we're enabled.
 		$cuid = get_current_user_id();
@@ -56,7 +56,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 		// has been written yet, so let's do that now.
 		if( $JustWritingEnabled == '' )
 			{
-			include_once( './just-writing-user-setup.' . $file_version . '.php' );
+			include_once( dirname( __FILE__ ) . '/just-writing-user-setup.' . $file_version . '.php' );
 			Just_Writing_User_Setup( $cuid );
 			$JustWritingEnabled = 'on';
 			}
@@ -64,7 +64,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 		// If we're enabled, setup as required.
 		if( $JustWritingEnabled == 'on' )
 			{
-			wp_register_style( 'justwriting_style', plugins_url( '', __FILE__ ) . '/' . $file_version . '/just-writing.' . $file_version . '.css' );
+			wp_register_style( 'justwriting_style', plugins_url( '', __FILE__ ) . '/just-writing.' . $file_version . '.css' );
 			wp_enqueue_style( 'justwriting_style' ); 
 
 			// Get the options to pass to the javascript code
@@ -114,7 +114,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 				}
 	
 			// Register and enqueue the javascript.
-			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/' . $file_version . '/just-writing.' . $file_version . '.js?rtl=' . is_rtl() . '&disablefade=' . $DisableFade . '&hidewordcount=' . $HideWordCount . '&hidepreview=' . $HidePreview . '&hideborder=' . $HideBorder . '&hidemodebar=' . $HideModeBar . '&autoload=' . $AutoLoad . '&formatlistbox=' . $FormatLB . '&centertb=' . $CenterTB . '&disablejscp=' . $DisableJSCP . '&browserfs=' . $BrowserFS );
+			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/just-writing.' . $file_version . '.js?rtl=' . is_rtl() . '&disablefade=' . $DisableFade . '&hidewordcount=' . $HideWordCount . '&hidepreview=' . $HidePreview . '&hideborder=' . $HideBorder . '&hidemodebar=' . $HideModeBar . '&autoload=' . $AutoLoad . '&formatlistbox=' . $FormatLB . '&centertb=' . $CenterTB . '&disablejscp=' . $DisableJSCP . '&browserfs=' . $BrowserFS );
 			wp_enqueue_script( 'justwriting_js' );
 			
 			wp_register_script( 'jquery_fullscreen', plugins_url( '', __FILE__ )  . '/jquery.fullscreen-0.4.1.min.js' );
@@ -154,7 +154,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 				if( $key == 'edit' )
 					{
 					$new_actions['JustWriting'] = '<a href="post.php?post=' . $post->ID . '&action=edit&JustWritingAutoLoad=1" title="Edit this item in Distraction Free Writing Mode">DFWM</a>';
-					$new_actions['Writing'] = '<a href="' . plugins_url( '', __FILE__ )  . '/' . $file_version . '/just-writing-editor.' . $file_version . '.php?post=' . $post->ID . '" title="Edit this item in Just Writing Mode">Writing</a>';
+					$new_actions['Writing'] = '<a href="' . plugins_url( '', __FILE__ )  . '/just-writing-editor.' . $file_version . '.php?post=' . $post->ID . '" title="Edit this item in Just Writing Mode">Writing</a>';
 					}
 				}
 
