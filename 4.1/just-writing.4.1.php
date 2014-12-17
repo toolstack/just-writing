@@ -11,7 +11,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 		{
 		$file_version = JustWritingFileVersion();
 		
-		//include_once( './just-writing-options.' . $file_version . '.php' );
+		//include_once( dirname( __FILE__ ) . '/just-writing-options.' . $file_version . '.php' );
 		
 		//just_writing_user_profile_fields( $user );
 		}
@@ -25,7 +25,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 		{
 		$file_version = JustWritingFileVersion();
 
-		//include_once( './just-writing-options.' . $file_version . '.php' );
+		//include_once( dirname( __FILE__ ) . '/just-writing-options.' . $file_version . '.php' );
 
 		//just_writing_save_user_profile_fields( $user );
 		}
@@ -46,7 +46,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 		$file_version = JustWritingFileVersion();
 		
 		// Load the appropriate buttons array.
-		include_once( $file_version . '/just-writing-buttons.' . $file_version . '.php' );
+		include_once( dirname( __FILE__ ) . '/just-writing-buttons.' . $file_version . '.php' );
 
 		// Get the user option to see if we're enabled.
 		$cuid = get_current_user_id();
@@ -56,7 +56,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 		// has been written yet, so let's do that now.
 		if( $JustWritingEnabled == '' )
 			{
-			include_once( './just-writing-user-setup.' . $file_version . '.php' );
+			include_once( dirname( __FILE__ ) . '/just-writing-user-setup.' . $file_version . '.php' );
 			Just_Writing_User_Setup( $cuid );
 			$JustWritingEnabled = 'on';
 			}
@@ -204,7 +204,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 	
 	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
 		<legend><span style="font-size: 24px; font-weight: 700;">&nbsp;<?php _e('User Settings');?>&nbsp;</span></legend>
-		<p><?php echo sprintf(__('User settings can be found in %syour profile page%s, under the Just Writing heading.'), '<a href="' . get_edit_profile_url(get_current_user_id()) . '">', '</a>' );?></p>
+		<p><?php echo __('WordPress 4.1 DFWM is not currently supported, there are no settings at this time that can be changed.');?></p>
 	</fieldset>
 
 	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
