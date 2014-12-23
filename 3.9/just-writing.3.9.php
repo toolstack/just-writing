@@ -167,6 +167,27 @@ if( !function_exists( 'JustWritingLoad' ) )
 		}
 
 	/*
+	 	This function is called to add the Writing menu to the post/pages menus.
+	 */
+	function JustWritingEditorMenuItem()
+		{
+		GLOBAL $JustWritingUtilities;
+
+		$post_types = (array)get_post_types( array( 'show_ui' => true ), 'object' );
+
+		foreach( $post_types as $post_type ) 
+			{
+			$path = 'edit.php';		
+			$name = $post_type->name;
+
+			if( 'post' != $name ) // edit.php?post_type=post doesn't work
+				$path .= '?post_type=' . $name;
+
+			//add_submenu_page( $path, __( 'Write' ), __( 'Write' ), $post_type->cap->edit_posts, 'JustWriting' . $name, 'JustWritingEditorPage' );
+			}
+		}
+
+	/*
 	 	This function generates the Just Writing settings page and handles the actions assocaited with it.
 	 */
 	function JustWritingAdminPage()

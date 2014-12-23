@@ -1,318 +1,132 @@
-<?php
-/**
- * Edit post administration panel.
- *
- * Manage Post actions: post, edit, delete, etc.
- *
- * @package WordPress
- * @subpackage Administration
- */
+<?php 
 
-/** WordPress Administration Bootstrap */
-require_once( dirname( __FILE__ ) . '/admin.php' );
+function JustWritingEditorPage()
+	{
+	// Enqueue the editor stylesheet.
+	wp_enqueue_style('justwriting-editor-css', plugin_dir_url(__FILE__) . 'editor.css', true, '4.1');
 
-$parent_file = 'edit.php';
-$submenu_file = 'edit.php';
+	$width = isset( $content_width ) && 800 > $content_width ? $content_width : 800;
+	$width = $width + 22; // compensate for the padding and border
+	$dfw_width = get_user_setting( 'dfw_width', $width );
 
-wp_reset_vars( array( 'action' ) );
-
-if ( isset( $_GET['post'] ) )
- 	$post_id = $post_ID = (int) $_GET['post'];
-elseif ( isset( $_POST['post_ID'] ) )
- 	$post_id = $post_ID = (int) $_POST['post_ID'];
-else
- 	$post_id = $post_ID = 0;
-
-$post = $post_type = $post_type_object = null;
-
-if ( $post_id )
-	$post = get_post( $post_id );
-
-if ( $post ) {
-	$post_type = $post->post_type;
-	$post_type_object = get_post_type_object( $post_type );
-}
-
-/**
- * Redirect to previous page.
- *
- * @param int $post_id Optional. Post ID.
- */
-function redirect_post($post_id = '') {
-	if ( isset($_POST['save']) || isset($_POST['publish']) ) {
-		$status = get_post_status( $post_id );
-
-		if ( isset( $_POST['publish'] ) ) {
-			switch ( $status ) {
-				case 'pending':
-					$message = 8;
-					break;
-				case 'future':
-					$message = 9;
-					break;
-				default:
-					$message = 6;
-			}
-		} else {
-				$message = 'draft' == $status ? 10 : 1;
+	$post_ID = 0;
+	$SaveButtonLabel = __('Save');
+	if( array_key_exists( 'post', $_GET ) ) { $post_ID = (int)$_GET['post']; $SaveButtonLabel = __('Update'); }
+	
+	if( $post_ID > 0 ) { $post = get_post($post_ID); } else { $post = get_default_post_to_edit(); }
+	$title = $post->post_title;
+	
+	$sendback = wp_get_referer();
+	if( !$sendback )
+		{
+			$sendback = admin_url( 'edit.php' );
+			$sendback .= ( ! empty( $post_type ) ) ? '?post_type=' . $post_type : '';
 		}
 
-		$location = add_query_arg( 'message', $message, get_edit_post_link( $post_id, 'url' ) );
-	} elseif ( isset($_POST['addmeta']) && $_POST['addmeta'] ) {
-		$location = add_query_arg( 'message', 2, wp_get_referer() );
-		$location = explode('#', $location);
-		$location = $location[0] . '#postcustom';
-	} elseif ( isset($_POST['deletemeta']) && $_POST['deletemeta'] ) {
-		$location = add_query_arg( 'message', 3, wp_get_referer() );
-		$location = explode('#', $location);
-		$location = $location[0] . '#postcustom';
-	} else {
-		$location = add_query_arg( 'message', 4, get_edit_post_link( $post_id, 'url' ) );
+	
+	
+	// Remove all the chrome from WordPress.
+?>
+<style>
+div#wpadminbar { display: none !important; }
+div#adminmenuwrap { display: none !important; }
+div#adminmenuback { display: none !important; }
+div#wpfooter { display: none !important; }
+div#wpcontent { margin-left: 0px !important; }
+.mce-toolbar-grp { display: none !important; }
+div#wp-justwritingeditor-editor-tools { display: none !important; }
+.mce-statusbar { display: none !important; }
+</style>
+
+<?php	
+	// Add in our menu bar
+?>
+	<div style="height: auto; min-width: auto;" id="fullscreen-topbar">
+		<div style="max-width: 100%; min-width: auto;" id="wp-fullscreen-toolbar">
+			<div id="wp-fullscreen-central-toolbar" style="width: auto;">
+
+				<div style="margin-left: 356px;" class="wp-tmce-mode" id="wp-fullscreen-mode-bar">
+					<div id="wp-fullscreen-modes" class="button-group">
+					<a class="button wp-fullscreen-mode-tinymce active" href="#" onclick="wp.editor.fullscreen.switchmode( 'tinymce' ); return false;">Visual</a>
+					<a class="button wp-fullscreen-mode-html" href="#" onclick="wp.editor.fullscreen.switchmode( 'html' ); return false;">Text</a>
+				</div>
+			</div>
+
+			<div style="width: auto;" id="wp-fullscreen-button-bar">
+				<div id="wp-fullscreen-buttons" class="mce-toolbar">
+<?php
+		$buttons = array(
+			// format: title, onclick, show in both editors
+			'bold' => array( 'title' => __('Bold (Ctrl + B)'), 'both' => false ),
+			'italic' => array( 'title' => __('Italic (Ctrl + I)'), 'both' => false ),
+			'bullist' => array( 'title' => __('Unordered list (Alt + Shift + U)'), 'both' => false ),
+			'numlist' => array( 'title' => __('Ordered list (Alt + Shift + O)'), 'both' => false ),
+			'blockquote' => array( 'title' => __('Blockquote (Alt + Shift + Q)'), 'both' => false ),
+			'wp-media-library' => array( 'title' => __('Media library (Alt + Shift + M)'), 'both' => true ),
+			'link' => array( 'title' => __('Insert/edit link (Alt + Shift + A)'), 'both' => true ),
+			'unlink' => array( 'title' => __('Unlink (Alt + Shift + S)'), 'both' => false ),
+			'help' => array( 'title' => __('Help (Alt + Shift + H)'), 'both' => false ),
+		);
+
+		/**
+		 * Filter the list of TinyMCE buttons for the fullscreen
+		 * 'Distraction-Free Writing' editor.
+		 *
+		 * @since 3.2.0
+		 *
+		 * @param array $buttons An array of TinyMCE buttons for the DFW editor.
+		 */
+		$buttons = apply_filters( 'wp_fullscreen_buttons', $buttons );
+
+		foreach ( $buttons as $button => $args ) {
+			if ( 'separator' == $args ) {
+				continue;
+			}
+
+			$onclick = ! empty( $args['onclick'] ) ? ' onclick="' . $args['onclick'] . '"' : '';
+			$title = esc_attr( $args['title'] );
+			?>
+
+			<div class="mce-widget mce-btn<?php if ( $args['both'] ) { ?> wp-fullscreen-both<?php } ?>">
+			<button type="button" aria-label="<?php echo $title; ?>" title="<?php echo $title; ?>"<?php echo $onclick; ?> id="wp_fs_<?php echo $button; ?>">
+				<i class="mce-ico mce-i-<?php echo $button; ?>"></i>
+			</button>
+			</div>
+			<?php
+		}
+?>		
+				</div>
+			</div>
+			
+			<div id="wp-fullscreen-save">
+				<a style="margin-left: 5px; margin-bottom: 8px;" class="button right" href="<?php echo esc_attr( htmlspecialchars( $sendback ) ); ?>">Exit</a>
+				<a style="margin-left: 5px;" class="button right" href="http://localhost/wordpress/blog/2014/11/01/hello-world/" target="wp-preview-1">Preview Changes</a>
+				<input title="Last edited on November 1, 2014 at 10:25 pm" class="button button-primary right" value="<?php echo $SaveButtonLabel;?>" onclick="wp.editor.fullscreen.save();" type="button">
+			</div>			
+		</div>
+	</div>	
+<?php	
+	// Output the footer
+?>
+
+
+	<div id="wp-fullscreen-statusbar">
+		<div id="wp-fullscreen-status" style="width: <?php echo $dfw_width; ?>px;">
+			<div id="wp-fullscreen-count">Word count: <span class="word-count">0</span></div>
+			<div id="wp-fullscreen-tagline">Just writing.</div>
+		</div>
+	</div>
+</div>
+<?php
+	// Output the title and create the TinyMCE instance.
+
+	
+	?>
+	<div style="padding-top: 54px; width: <?php echo $dfw_width;?>px; display: block; margin-left: auto; margin-right: auto;" id="wp-content-wrap" class="wp-core-ui wp-editor-wrap tmce-active has-dfw wp-fullscreen-wrap">
+		<input class="wp-fullscreen-title" style="border: 1px dotted rgb(204, 204, 204); width: 100%; margin-bottom: 24px;" spellcheck="true" name="post_title" size="30" id="title" autocomplete="off" type="text" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>">
+		<?php wp_editor( $post->post_content, 'justwritingeditor', array('media_buttons' => false, 'textarea_name' => 'just_writing_textarea' ) ); ?>
+	</div>
+<?php
 	}
-
-	/**
-	 * Filter the post redirect destination URL.
-	 *
-	 * @since 2.9.0
-	 *
-	 * @param string $location The destination URL.
-	 * @param int    $post_id  The post ID.
-	 */
-	wp_redirect( apply_filters( 'redirect_post_location', $location, $post_id ) );
-	exit;
-}
-
-if ( isset( $_POST['deletepost'] ) )
-	$action = 'delete';
-elseif ( isset($_POST['wp-preview']) && 'dopreview' == $_POST['wp-preview'] )
-	$action = 'preview';
-
-$sendback = wp_get_referer();
-if ( ! $sendback ||
-     strpos( $sendback, 'post.php' ) !== false ||
-     strpos( $sendback, 'post-new.php' ) !== false ) {
-	if ( 'attachment' == $post_type ) {
-		$sendback = admin_url( 'upload.php' );
-	} else {
-		$sendback = admin_url( 'edit.php' );
-		$sendback .= ( ! empty( $post_type ) ) ? '?post_type=' . $post_type : '';
-	}
-} else {
-	$sendback = remove_query_arg( array('trashed', 'untrashed', 'deleted', 'ids'), $sendback );
-}
-
-switch($action) {
-case 'post-quickdraft-save':
-	// Check nonce and capabilities
-	$nonce = $_REQUEST['_wpnonce'];
-	$error_msg = false;
-
-	// For output of the quickdraft dashboard widget
-	require_once ABSPATH . 'wp-admin/includes/dashboard.php';
-
-	if ( ! wp_verify_nonce( $nonce, 'add-post' ) )
-		$error_msg = __( 'Unable to submit this form, please refresh and try again.' );
-
-	if ( ! current_user_can( 'edit_posts' ) )
-		$error_msg = __( 'Oops, you don&#8217;t have access to add new drafts.' );
-
-	if ( $error_msg )
-		return wp_dashboard_quick_press( $error_msg );
-
-	$post = get_post( $_REQUEST['post_ID'] );
-	check_admin_referer( 'add-' . $post->post_type );
-
-	$_POST['comment_status'] = get_option( 'default_comment_status' );
-	$_POST['ping_status'] = get_option( 'default_ping_status' );
-
-	edit_post();
-	wp_dashboard_quick_press();
-	exit;
-
-case 'postajaxpost':
-case 'post':
-	check_admin_referer( 'add-' . $post_type );
-	$post_id = 'postajaxpost' == $action ? edit_post() : write_post();
-	redirect_post( $post_id );
-	exit();
-
-case 'edit':
-	$editing = true;
-
-	if ( empty( $post_id ) ) {
-		wp_redirect( admin_url('post.php') );
-		exit();
-	}
-
-	if ( ! $post )
-		wp_die( __( 'You attempted to edit an item that doesn&#8217;t exist. Perhaps it was deleted?' ) );
-
-	if ( ! $post_type_object )
-		wp_die( __( 'Unknown post type.' ) );
-
-	if ( ! current_user_can( 'edit_post', $post_id ) )
-		wp_die( __( 'You are not allowed to edit this item.' ) );
-
-	if ( 'trash' == $post->post_status )
-		wp_die( __( 'You can&#8217;t edit this item because it is in the Trash. Please restore it and try again.' ) );
-
-	if ( ! empty( $_GET['get-post-lock'] ) ) {
-		wp_set_post_lock( $post_id );
-		wp_redirect( get_edit_post_link( $post_id, 'url' ) );
-		exit();
-	}
-
-	$post_type = $post->post_type;
-	if ( 'post' == $post_type ) {
-		$parent_file = "edit.php";
-		$submenu_file = "edit.php";
-		$post_new_file = "post-new.php";
-	} elseif ( 'attachment' == $post_type ) {
-		$parent_file = 'upload.php';
-		$submenu_file = 'upload.php';
-		$post_new_file = 'media-new.php';
-	} else {
-		if ( isset( $post_type_object ) && $post_type_object->show_in_menu && $post_type_object->show_in_menu !== true )
-			$parent_file = $post_type_object->show_in_menu;
-		else
-			$parent_file = "edit.php?post_type=$post_type";
-		$submenu_file = "edit.php?post_type=$post_type";
-		$post_new_file = "post-new.php?post_type=$post_type";
-	}
-
-	if ( ! wp_check_post_lock( $post->ID ) ) {
-		$active_post_lock = wp_set_post_lock( $post->ID );
-
-		if ( 'attachment' !== $post_type )
-			wp_enqueue_script('autosave');
-	}
-
-	if ( is_multisite() ) {
-		add_action( 'admin_footer', '_admin_notice_post_locked' );
-	} else {
-		$check_users = get_users( array( 'fields' => 'ID', 'number' => 2 ) );
-
-		if ( count( $check_users ) > 1 )
-			add_action( 'admin_footer', '_admin_notice_post_locked' );
-
-		unset( $check_users );
-	}
-
-	$title = $post_type_object->labels->edit_item;
-	$post = get_post($post_id, OBJECT, 'edit');
-
-	if ( post_type_supports($post_type, 'comments') ) {
-		wp_enqueue_script('admin-comments');
-		enqueue_comment_hotkeys_js();
-	}
-
-	include( ABSPATH . 'wp-admin/edit-form-advanced.php' );
-
-	break;
-
-case 'editattachment':
-	check_admin_referer('update-post_' . $post_id);
-
-	// Don't let these be changed
-	unset($_POST['guid']);
-	$_POST['post_type'] = 'attachment';
-
-	// Update the thumbnail filename
-	$newmeta = wp_get_attachment_metadata( $post_id, true );
-	$newmeta['thumb'] = $_POST['thumb'];
-
-	wp_update_attachment_metadata( $post_id, $newmeta );
-
-case 'editpost':
-	check_admin_referer('update-post_' . $post_id);
-
-	$post_id = edit_post();
-
-	// Session cookie flag that the post was saved
-	if ( isset( $_COOKIE['wp-saving-post'] ) && $_COOKIE['wp-saving-post'] === $post_id . '-check' ) {
-		setcookie( 'wp-saving-post', $post_id . '-saved', time() + DAY_IN_SECONDS );
-	}
-
-	redirect_post($post_id); // Send user on their way while we keep working
-
-	exit();
-
-case 'trash':
-	check_admin_referer('trash-post_' . $post_id);
-
-	if ( ! $post )
-		wp_die( __( 'The item you are trying to move to the Trash no longer exists.' ) );
-
-	if ( ! $post_type_object )
-		wp_die( __( 'Unknown post type.' ) );
-
-	if ( ! current_user_can( 'delete_post', $post_id ) )
-		wp_die( __( 'You are not allowed to move this item to the Trash.' ) );
-
-	if ( $user_id = wp_check_post_lock( $post_id ) ) {
-		$user = get_userdata( $user_id );
-		wp_die( sprintf( __( 'You cannot move this item to the Trash. %s is currently editing.' ), $user->display_name ) );
-	}
-
-	if ( ! wp_trash_post( $post_id ) )
-		wp_die( __( 'Error in moving to Trash.' ) );
-
-	wp_redirect( add_query_arg( array('trashed' => 1, 'ids' => $post_id), $sendback ) );
-	exit();
-
-case 'untrash':
-	check_admin_referer('untrash-post_' . $post_id);
-
-	if ( ! $post )
-		wp_die( __( 'The item you are trying to restore from the Trash no longer exists.' ) );
-
-	if ( ! $post_type_object )
-		wp_die( __( 'Unknown post type.' ) );
-
-	if ( ! current_user_can( 'delete_post', $post_id ) )
-		wp_die( __( 'You are not allowed to move this item out of the Trash.' ) );
-
-	if ( ! wp_untrash_post( $post_id ) )
-		wp_die( __( 'Error in restoring from Trash.' ) );
-
-	wp_redirect( add_query_arg('untrashed', 1, $sendback) );
-	exit();
-
-case 'delete':
-	check_admin_referer('delete-post_' . $post_id);
-
-	if ( ! $post )
-		wp_die( __( 'This item has already been deleted.' ) );
-
-	if ( ! $post_type_object )
-		wp_die( __( 'Unknown post type.' ) );
-
-	if ( ! current_user_can( 'delete_post', $post_id ) )
-		wp_die( __( 'You are not allowed to delete this item.' ) );
-
-	$force = ! EMPTY_TRASH_DAYS;
-	if ( $post->post_type == 'attachment' ) {
-		$force = ( $force || ! MEDIA_TRASH );
-		if ( ! wp_delete_attachment( $post_id, $force ) )
-			wp_die( __( 'Error in deleting.' ) );
-	} else {
-		if ( ! wp_delete_post( $post_id, $force ) )
-			wp_die( __( 'Error in deleting.' ) );
-	}
-
-	wp_redirect( add_query_arg('deleted', 1, $sendback) );
-	exit();
-
-case 'preview':
-	check_admin_referer( 'update-post_' . $post_id );
-
-	$url = post_preview();
-
-	wp_redirect($url);
-	exit();
-
-default:
-	wp_redirect( admin_url('edit.php') );
-	exit();
-} // end switch
-include( ABSPATH . 'wp-admin/admin-footer.php' );
+	
+?>

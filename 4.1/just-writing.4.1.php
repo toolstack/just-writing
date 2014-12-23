@@ -132,7 +132,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 	function JustWritingLinkRow( $actions, $post )
 		{
 		GLOBAL $JustWritingUtilities;
-/*		
+		
 		// Set the current user and load the user preferences.
 		$JustWritingUtilities->set_user_id();
 		$JustWritingUtilities->load_user_options();
@@ -144,6 +144,12 @@ if( !function_exists( 'JustWritingLoad' ) )
 		$cuid = get_current_user_id();
 		$JustWritingEnabled = $JustWritingUtilities->get_user_option( 'enabled' );
 		$JustWritingAddLinks = $JustWritingUtilities->get_user_option( 'add_DFWM_post_pages' );
+
+		$path = 'edit.php?';		
+		$name = $post_type->name;
+
+		if( 'post' != $name && '' != $name ) // edit.php?post_type=post doesn't work
+			$path .= 'post_type=' . $name . '&';
 		
 		// Only add the link if we're enabled and the user has selected the option.
 		if( $JustWritingEnabled == "on" AND $JustWritingAddLinks == "on" )
@@ -154,16 +160,36 @@ if( !function_exists( 'JustWritingLoad' ) )
 
 				if( $key == 'edit' )
 					{
-					$new_actions['Writing'] = '<a href="' . plugins_url( '', __FILE__ )  . '/' . $file_version . '/just-writing-editor.' . $file_version . '.php?post=' . $post->ID . '" title="Edit this item in Just Writing Mode">Writing</a>';
+					$new_actions['Write'] = '<a href="' . $path . 'page=JustWritingPost&post=' . $post->ID . '&action=edit" title="Edit this item in Just Writing Mode">Write</a>';
 					}
 				}
 
 			return $new_actions;
 			}
 		else
-*/		
 			{
 			return $actions;
+			}
+		}
+
+	/*
+	 	This function is called to add the Writing menu to the post/pages menus.
+	 */
+	function JustWritingEditorMenuItem()
+		{
+		GLOBAL $JustWritingUtilities;
+
+		$post_types = (array)get_post_types( array( 'show_ui' => true ), 'object' );
+
+		foreach( $post_types as $post_type ) 
+			{
+			$path = 'edit.php';		
+			$name = $post_type->name;
+
+			if( 'post' != $name ) // edit.php?post_type=post doesn't work
+				$path .= '?post_type=' . $name;
+
+			add_submenu_page( $path, __( 'Write' ), __( 'Write' ), $post_type->cap->edit_posts, 'JustWriting' . ucwords($name), 'JustWritingEditorPage' );
 			}
 		}
 

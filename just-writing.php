@@ -58,6 +58,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 	$file_version = JustWritingFileVersion();
 	
 	include_once( $file_version . '/just-writing.' . $file_version . '.php' );
+	include_once( $file_version . '/just-writing-editor.' . $file_version . '.php' );
 	}
 
 // Create out global utilities object.  We might be tempted to load the user options now, but that's not possible as WordPress hasn't processed the login this early yet.
@@ -88,5 +89,8 @@ if( get_option( 'Just_Writing_Removed' ) != 'true' )
 	// Handle adding DFWM to the post/page rows
 	add_filter('post_row_actions', 'JustWritingLinkRow',10,2);
 	add_filter('page_row_actions', 'JustWritingLinkRow',10,2);
+	
+	// Handle adding Writing mode to the post/pages menu
+	add_action( 'admin_menu', 'JustWritingEditorMenuItem' );
 	}
 ?>
