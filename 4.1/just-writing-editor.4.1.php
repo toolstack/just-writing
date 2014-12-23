@@ -124,7 +124,7 @@ div#wp-justwritingeditor-editor-tools { display: none !important; }
 	?>
 	<div style="padding-top: 54px; width: <?php echo $dfw_width;?>px; display: block; margin-left: auto; margin-right: auto;" id="wp-content-wrap" class="wp-core-ui wp-editor-wrap tmce-active has-dfw wp-fullscreen-wrap">
 		<input class="wp-fullscreen-title" style="border: 1px dotted rgb(204, 204, 204); width: 100%; margin-bottom: 24px;" spellcheck="true" name="post_title" size="30" id="title" autocomplete="off" type="text" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>">
-		<?php wp_editor( $post->post_content, 'justwritingeditor', array('media_buttons' => false, 'textarea_name' => 'just_writing_textarea' ) ); ?>
+		<?php wp_editor( $post->post_content, 'justwritingeditor', array('media_buttons' => true, 'textarea_name' => 'just_writing_textarea' ) ); ?>
 	</div>
 <?php
 	}

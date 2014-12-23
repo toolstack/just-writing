@@ -77,21 +77,6 @@ function JustWriting( $oldbuttons )
 							);
 		}
 
-/*
-	Paste as Word was removed in WP3.9 so it is no longer required.
-		
-	if( $JustWritingUtilities->get_user_option( 'pasteword' ) == 'on' )
-		{
-		$buttons['pasteword'] = array( 
-											// Title of the button
-											'title' => __('Paste as Word'), 
-											// Command to execute
-											'onclick' => "jQuery('.mce-i-pasteword').parent().parent().click();",
-											// Show on visual AND html mode
-											'both' => false
-							);
-		}
-*/
 	if( $JustWritingUtilities->get_user_option( 'separator_two' ) == 'on' )
 		{
 		$buttons['JustWritingSeparatorTwo'] = array( 
@@ -158,7 +143,7 @@ function JustWriting( $oldbuttons )
 										// Title of the button
 										'title' => __('Bold (Ctrl + B)'), 
 										// Command to execute
-										'onclick' => 'fullscreen.b();', 
+										'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'bold');", 
 										// Show on visual AND html mode
 										'both' => false 
 						);
@@ -170,7 +155,7 @@ function JustWriting( $oldbuttons )
 										// Title of the button
 										'title' => __('Italic (Ctrl + I)'), 
 										// Command to execute
-										'onclick' => 'fullscreen.i();', 
+										'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'italic');", 
 										// Show on visual AND html mode
 										'both' => false 
 						);
@@ -254,7 +239,7 @@ function JustWriting( $oldbuttons )
 										// Title of the button
 										'title' => __('Unordered list (Alt + Shift + U)'), 
 										// Command to execute
-										'onclick' => 'fullscreen.ul();', 
+										'onclick' => "jQuery('.mce-i-bullist').parent().parent().click();", 
 										// Show on visual AND html mode
 										'both' => false 
 						);
@@ -266,7 +251,7 @@ function JustWriting( $oldbuttons )
 										// Title of the button
 										'title' => __('Ordered list (Alt + Shift + O)'),
 										// Command to execute
-										'onclick' => 'fullscreen.ol();', 
+										'onclick' => "jQuery('.mce-i-numlist').parent().parent().click();", 
 										// Show on visual AND html mode
 										'both' => false 
 						);
@@ -290,7 +275,7 @@ function JustWriting( $oldbuttons )
 										// Title of the button
 										'title' => __('Insert/edit link (Alt + Shift + A)'), 
 										// Command to execute
-										'onclick' => 'fullscreen.link();', 
+										'onclick' => "jQuery('.mce-i-link').parent().parent().click();", 
 										// Show on visual AND html mode
 										'both' => false 
 						);
@@ -302,7 +287,7 @@ function JustWriting( $oldbuttons )
 										// Title of the button
 										'title' => __('Unlink (Alt + Shift + S)'), 
 										// Command to execute
-										'onclick' => 'fullscreen.unlink();', 
+										'onclick' => "jQuery('.mce-i-unlink').parent().parent().click();", 
 										// Show on visual AND html mode
 										'both' => false 
 						);
@@ -496,7 +481,7 @@ function JustWriting( $oldbuttons )
 											// Title of the button
 											'title' => __('Blockquote (Alt + Shift + Q)'), 
 											// Command to execute
-											'onclick' => 'fullscreen.blockquote();', 
+											'onclick' => "jQuery('.mce-i-blockquote').parent().parent().click();", 
 											// Show on visual AND html mode
 											'both' => false 
 							);
@@ -616,7 +601,7 @@ function JustWriting( $oldbuttons )
 										// Title of the button
 										'title' => __('Help (Alt + Shift + H)'), 
 										// Command to execute
-										'onclick' => 'fullscreen.help();', 
+										'onclick' => "jQuery('.mce-i-wp_help').parent().parent().click();", 
 										// Show on visual AND html mode
 										'both' => false 
 								);
