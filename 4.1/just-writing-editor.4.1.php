@@ -41,18 +41,18 @@ div#wp-justwritingeditor-editor-tools { display: none !important; }
 <?php	
 	// Add in our menu bar
 ?>
-	<div style="height: auto; min-width: auto;" id="fullscreen-topbar">
+	<div style="height: auto; width: 100%;" id="fullscreen-topbar">
 		<div style="max-width: 100%; min-width: auto;" id="wp-fullscreen-toolbar">
 			<div id="wp-fullscreen-central-toolbar" style="width: auto;">
 
-				<div style="margin-left: 356px;" class="wp-tmce-mode" id="wp-fullscreen-mode-bar">
+				<div class="wp-tmce-mode" id="wp-fullscreen-mode-bar">
 					<div id="wp-fullscreen-modes" class="button-group">
 					<a class="button wp-fullscreen-mode-tinymce active" href="#" onclick="wp.editor.fullscreen.switchmode( 'tinymce' ); return false;">Visual</a>
 					<a class="button wp-fullscreen-mode-html" href="#" onclick="wp.editor.fullscreen.switchmode( 'html' ); return false;">Text</a>
 				</div>
 			</div>
 
-			<div style="width: auto;" id="wp-fullscreen-button-bar">
+			<div style="" id="wp-fullscreen-button-bar">
 				<div id="wp-fullscreen-buttons" class="mce-toolbar">
 <?php
 		$buttons = array(
@@ -99,8 +99,8 @@ div#wp-justwritingeditor-editor-tools { display: none !important; }
 			</div>
 			
 			<div id="wp-fullscreen-save">
-				<a style="margin-left: 5px; margin-bottom: 8px;" class="button right" href="<?php echo esc_attr( htmlspecialchars( $sendback ) ); ?>">Exit</a>
-				<a style="margin-left: 5px;" class="button right" href="http://localhost/wordpress/blog/2014/11/01/hello-world/" target="wp-preview-1">Preview Changes</a>
+				<a style="margin-left: 5px; margin-bottom: 8px;" class="button right" href="<?php echo esc_attr( htmlspecialchars( $sendback ) ); ?>"><?php _e('Exit');?></a>
+				<a style="margin-left: 5px;" class="button right" href="http://localhost/wordpress/blog/2014/11/01/hello-world/" target="wp-preview-1"><?php _e('Preview');?></a>
 				<input title="Last edited on November 1, 2014 at 10:25 pm" class="button button-primary right" value="<?php echo $SaveButtonLabel;?>" onclick="wp.editor.fullscreen.save();" type="button">
 			</div>			
 		</div>
