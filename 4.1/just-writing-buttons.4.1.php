@@ -24,6 +24,8 @@ function JustWriting( $oldbuttons )
 											'title' => __('Separator'), 
 											// Command to execute
 											'onclick' => "", 
+											// Define as a separator so the button class doesn't get added.
+											'type' => 'separator',
 											// Show on visual AND html mode
 											'both' => false
 							);
@@ -84,6 +86,8 @@ function JustWriting( $oldbuttons )
 										'title' => __('Separator'), 
 										// Command to execute
 										'onclick' => "", 
+										// Define as a separator so the button class doesn't get added.
+										'type' => 'separator',
 										// Show on visual AND html mode
 										'both' => false
 						);
@@ -228,6 +232,8 @@ function JustWriting( $oldbuttons )
 										'title' => __('Separator'), 
 										// Command to execute
 										'onclick' => "", 
+										// Define as a separator so the button class doesn't get added.
+										'type' => 'separator',
 										// Show on visual AND html mode
 										'both' => false
 									);
@@ -300,6 +306,8 @@ function JustWriting( $oldbuttons )
 										'title' => __('Separator'), 
 										// Command to execute
 										'onclick' => "", 
+										// Define as a separator so the button class doesn't get added.
+										'type' => 'separator',
 										// Show on visual AND html mode
 										'both' => false
 									);
@@ -384,6 +392,8 @@ function JustWriting( $oldbuttons )
 										'title' => __('Separator'), 
 										// Command to execute
 										'onclick' => "", 
+										// Define as a separator so the button class doesn't get added.
+										'type' => 'separator',
 										// Show on visual AND html mode
 										'both' => false
 									);
@@ -519,6 +529,8 @@ function JustWriting( $oldbuttons )
 										'title' => __('Separator'), 
 										// Command to execute
 										'onclick' => "", 
+										// Define as a separator so the button class doesn't get added.
+										'type' => 'separator',
 										// Show on visual AND html mode
 										'both' => false
 									);
@@ -567,6 +579,8 @@ function JustWriting( $oldbuttons )
 										'title' => __('Separator'), 
 										// Command to execute
 										'onclick' => "", 
+										// Define as a separator so the button class doesn't get added.
+										'type' => 'separator',
 										// Show on visual AND html mode
 										'both' => false
 									);
@@ -614,6 +628,8 @@ function JustWriting( $oldbuttons )
 										'title' => __('Separator'), 
 										// Command to execute
 										'onclick' => "", 
+										// Define as a separator so the button class doesn't get added.
+										'type' => 'separator',
 										// Show on visual AND html mode
 										'both' => false
 									);

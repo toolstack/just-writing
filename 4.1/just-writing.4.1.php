@@ -286,5 +286,14 @@ if( !function_exists( 'JustWritingLoad' ) )
 		{
 		add_options_page( 'Just Writing', 'Just Writing', 'manage_options', basename( __FILE__ ), 'JustWritingAdminPage');
 		}
+		
+	add_filter('tinymce_spellcheck_load_on_pages', 'JustWritingFilterTinyMCESpellCheck');
+	
+	function JustWritingFilterTinyMCESpellCheck( $pages ) 
+		{
+		$pages[] = 'edit.php';
+		
+		return $pages;
+		}
 	}
 ?>
