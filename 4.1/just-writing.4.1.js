@@ -503,5 +503,53 @@ function JustWritingMoveMouse()
 	jQuery( '#fullscreen-topbar' ).trigger( 'mouseover' );
 	}
 
+/*
+	This function saves/updates the post.
+*/
+function JustWritingAjaxSave()
+	{
+	var $hidden = jQuery('#hiddenaction'),
+		oldVal = $hidden.val(),
+		$spinner = jQuery('#wp-fullscreen-save .spinner'),
+		$saveMessage = jQuery('#wp-fullscreen-save .wp-fullscreen-saved-message'),
+		$errorMessage = jQuery('#wp-fullscreen-save .wp-fullscreen-error-message');
+
+	$spinner.show();
+	$errorMessage.hide();
+	$saveMessage.hide();
+//	$hidden.val('wp-fullscreen-save-post');
+
+	alert( jQuery('form#post').serialize() );
+	
+	jQuery.ajax( {
+			url: window.ajaxurl,
+			type: 'post',
+			data: jQuery('form#post').serialize(),
+			dataType: 'json'
+		}).done( function( response ) {
+			$spinner.hide();
+
+			if ( response && response.success ) {
+				$saveMessage.show();
+
+				setTimeout( function() {
+					$saveMessage.fadeOut(300);
+				}, 3000 );
+
+				if ( response.data && response.data.last_edited ) {
+					jQuery('#wp-fullscreen-save input').attr( 'title',  response.data.last_edited );
+				}
+			} else {
+				$errorMessage.show();
+			}
+		}).fail( function() {
+			$spinner.hide();
+			$errorMessage.show();
+		});
+
+	$hidden.val( oldVal );
+	};
+	
+	
 // Use an event listener to add the Just Writing function on a page load instead of .OnLoad as we might otherwise get overwritten by another plugin.
 window.addEventListener ? window.addEventListener( "load", JustWriting, false ) : window.attachEvent && window.attachEvent( "onload", JustWriting );

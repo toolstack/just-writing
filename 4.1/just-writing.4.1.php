@@ -146,7 +146,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 		$JustWritingAddLinks = $JustWritingUtilities->get_user_option( 'add_DFWM_post_pages' );
 
 		$path = 'edit.php?';		
-		$name = $post_type->name;
+		$name = $post->name;
 
 		if( 'post' != $name && '' != $name ) // edit.php?post_type=post doesn't work
 			$path .= 'post_type=' . $name . '&';

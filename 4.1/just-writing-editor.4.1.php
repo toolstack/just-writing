@@ -11,9 +11,26 @@ function JustWritingEditorPage()
 
 	$post_ID = 0;
 	$SaveButtonLabel = __('Save');
+	$SaveButtonDesc = $SaveButtonLabel;
+	
 	if( array_key_exists( 'post', $_GET ) ) { $post_ID = (int)$_GET['post']; $SaveButtonLabel = __('Update'); }
 	
-	if( $post_ID > 0 ) { $post = get_post($post_ID); } else { $post = get_default_post_to_edit(); }
+	if( $post_ID > 0 ) { 
+		$post = get_post($post_ID); 
+		$LastEditTime = strtotime( $post->post_modified ); 
+	
+		if ( $last_user = get_userdata( get_post_meta( $post_ID, '_edit_last', true ) ) ) {
+			$SaveButtonDesc = sprintf(__('Last edited by %1$s on %2$s at %3$s'), esc_html( $last_user->display_name ), mysql2date(get_option('date_format'), $post->post_modified), mysql2date(get_option('time_format'), $post->post_modified));
+		} else {
+			$SaveButtonDesc = sprintf(__('Last edited on %1$s at %2$s'), mysql2date(get_option('date_format'), $post->post_modified), mysql2date(get_option('time_format'), $post->post_modified));
+		}
+	} else { 
+		$post = get_default_post_to_edit(); 
+		$post_ID = $post->ID;
+	}
+
+	$nonce_action = 'update-post_' . $post_ID;
+
 	$title = $post->post_title;
 	
 	$sendback = wp_get_referer();
@@ -36,6 +53,7 @@ div#wpcontent { margin-left: 0px !important; }
 .mce-toolbar-grp { display: none !important; }
 div#wp-justwritingeditor-editor-tools { display: none !important; }
 .mce-statusbar { display: none !important; }
+div#wp-content-editor-tools { display: none !important; }
 </style>
 
 <?php	
@@ -109,7 +127,10 @@ div#wp-justwritingeditor-editor-tools { display: none !important; }
 			<div id="wp-fullscreen-save">
 				<a style="margin-left: 5px; margin-bottom: 8px;" class="button right" href="<?php echo esc_attr( htmlspecialchars( $sendback ) ); ?>"><?php _e('Exit');?></a>
 				<a style="margin-left: 5px;" class="button right" href="http://localhost/wordpress/blog/2014/11/01/hello-world/" target="wp-preview-1"><?php _e('Preview');?></a>
-				<input title="Last edited on November 1, 2014 at 10:25 pm" class="button button-primary right" value="<?php echo $SaveButtonLabel;?>" onclick="wp.editor.fullscreen.save();" type="button">
+				<input title="<?php echo $SaveButtonDesc; ?>" class="button button-primary right" value="<?php echo $SaveButtonLabel;?>" onclick="JustWritingAjaxSave();" type="button">
+				<span class="wp-fullscreen-saved-message">Updated.</span>
+				<span class="wp-fullscreen-error-message">Save failed.</span>
+				<span class="spinner"></span>
 			</div>			
 		</div>
 	</div>	
@@ -179,11 +200,26 @@ div#wp-justwritingeditor-editor-tools { display: none !important; }
 
 	
 	?>
+<form name="post" action="post.php" method="post" id="post">
+
+	<?php wp_nonce_field( $nonce_action ); echo "\n"; ?>
+	<input type="hidden" id="hiddenaction" name="action" value="editpost" />
+	<input type="hidden" id="originalaction" name="originalaction" value="editpost" />
+	<input type="hidden" id="post_author" name="post_author" value="<?php echo $post->post_author; ?>" />
+	<input type="hidden" id="post_type" name="post_type" value="<?php echo $post->post_type; ?>" />
+	<input type="hidden" id="original_post_status" name="original_post_status" value="<?php echo $post->post_status; ?>" />
+	<input type="hidden" id="referredby" name="referredby" value="http://localhost/wordpress/wp-admin/edit.php" />
+	<input type="hidden" name="_wp_original_http_referer" value="http://localhost/wordpress/wp-admin/edit.php" />
+	<input type='hidden' id='post_ID' name='post_ID' value='<?php echo $post->ID;?>' />
+	<?php wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false ); echo "\n"; ?>
+	<?php wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false ); echo "\n"; ?>
 	
 	<div style="padding-top: 54px; width: <?php echo $dfw_width;?>px; display: block; margin-left: auto; margin-right: auto;" id="wp-content-wrap" class="wp-core-ui wp-editor-wrap tmce-active has-dfw wp-fullscreen-wrap">
 		<input class="wp-fullscreen-title" style="border: 1px dotted rgb(204, 204, 204); width: 100%; margin-bottom: 24px;" spellcheck="true" name="post_title" size="30" id="title" autocomplete="off" type="text" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>">
-		<?php wp_editor( $post->post_content, 'justwritingeditor', array('media_buttons' => true, 'textarea_name' => 'just_writing_textarea' ) ); ?>
+		<?php wp_editor( $post->post_content, 'content', array('media_buttons' => true ) ); ?>
 	</div>
+
+</form>
 <?php
 	}
 	
