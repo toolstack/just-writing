@@ -95,8 +95,6 @@ function just_writing_save_user_profile_fields( $user_id )
 	$JustWritingUtilities->store_user_option( 'font_color', just_writing_get_checked_state( $_POST['just_writing_f_c'] ) );
 	$JustWritingUtilities->store_user_option( 'background_color', just_writing_get_checked_state( $_POST['just_writing_b_c'] ) );
 	$JustWritingUtilities->store_user_option( 'center_toolbar', just_writing_get_checked_state( $_POST['just_writing_c_tb'] ) );
-	$JustWritingUtilities->store_user_option( 'add_DFWM_post_pages', just_writing_get_checked_state( $_POST['just_writing_a_l'] ) );
-	$JustWritingUtilities->store_user_option( 'disable_jscp', just_writing_get_checked_state( $_POST['just_writing_d_jscp'] ) );
 	$JustWritingUtilities->store_user_option( 'browser_fullscreen', just_writing_get_checked_state( $_POST['just_writing_browser_fs'] ) );
 
 	// Deal with the border options radio group
@@ -248,41 +246,11 @@ function just_writing_user_profile_fields( $user )
 			<input type="checkbox" id="just_writing_c_tb" name="just_writing_c_tb" <?php if( $JustWritingUtilities->get_user_option( 'center_toolbar' ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Center the ToolBar on screen");?>
 			</td>
-			<td>
-			<input type="checkbox" id="just_writing_a_l" name="just_writing_a_l" <?php if( $JustWritingUtilities->get_user_option( 'add_DFWM_post_pages' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Add DFWM link to the Post/Pages lists");?>
-			</td>
-			<td>
-			<input type="checkbox" id="just_writing_d_jscp" name="just_writing_d_jscp" <?php if( $JustWritingUtilities->get_user_option( 'disable_jscp' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Disable the Javascript Pickers");?>
-			</td>
-		</tr>
-		<tr id=JustWritingOptionGroup style='display: none;'>
-			<th></th>
-			<td colspan=3>
+			<td colspan=2>
 			<input type="checkbox" id="just_writing_d_fade" name="just_writing_d_fade" <?php if( $JustWritingUtilities->get_user_option( 'disable_fade' ) == "on" ) { echo "CHECKED"; } ?>>
 			<?php echo __("Disable the fade out of the toolbar *May have performance impacts*");?>
 			</td>
-		</tr>
-		<tr id=JustWritingOptionGroup style='display: none;'>
-			<th></th>
-			<td colspan=3>
-			<input type="checkbox" id="just_writing_browser_fs" name="just_writing_browser_fs" <?php if( $JustWritingUtilities->get_user_option( 'browser_fullscreen' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Open DFWM in your browsers full screen mode, note this only works if you click the full screen button in the editor and not with the DFWM link or auto load functions");?>
-			</td>
-		</tr>
-		<tr id=JustWritingOptionGroup style='display: none;'>
-			<th></th>
-			<td colspan=3>
-			<input type="checkbox" id="just_writing_al_new" name="just_writing_al_new" <?php if( $JustWritingUtilities->get_user_option( 'autoload_newposts' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Go directly to Distraction Free Writing Mode for new posts *May have performance impacts*");?>
-			</td>
-		</tr>
-		<tr id=JustWritingOptionGroup style='display: none;'>
-			<th></th>
-			<td colspan=3>
-			<input type="checkbox" id="just_writing_al_edit" name="just_writing_al_edit" <?php if( $JustWritingUtilities->get_user_option( 'autoload_editposts' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Go directly to Distraction Free Writing Mode when editing a post *May have performance impacts*");?>
+			<td>
 			</td>
 		</tr>
 		<tr>
@@ -501,59 +469,7 @@ function just_writing_user_profile_fields( $user )
 			<th></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_f_lb" name="just_writing_f_lb" <?php if( $JustWritingUtilities->get_user_option( 'format_listbox' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Enable formats dropdown instead of buttons (this will show all formats and hide all associated buttons, ignoring the options below).");?>
-			</td>
-		</tr>
-		<tr id=JustWritingButtonGroup style='display: none;'>
-			<th></th>
-			<td>
-			<input type="checkbox" id="just_writing_p" name="just_writing_p" <?php if( $JustWritingUtilities->get_user_option( 'p_format' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Paragraph");?>
-			</td>
-			<td>
-			<input type="checkbox" id="just_writing_h1" name="just_writing_h1" <?php if( $JustWritingUtilities->get_user_option( 'h1_format' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("h1");?>
-			</td>
-			<td>
-			<input type="checkbox" id="just_writing_h2" name="just_writing_h2" <?php if( $JustWritingUtilities->get_user_option( 'h2_format' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("h2");?>
-			</td>
-		</tr>
-		<tr id=JustWritingButtonGroup style='display: none;'>
-			<th></th>
-			<td>
-			<input type="checkbox" id="just_writing_h3" name="just_writing_h3" <?php if( $JustWritingUtilities->get_user_option( 'h3_format' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("h3");?>
-			</td>
-			<td>
-			<input type="checkbox" id="just_writing_h4" name="just_writing_h4" <?php if( $JustWritingUtilities->get_user_option( 'h4_format' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("h4");?>
-			</td>
-			<td>
-			<input type="checkbox" id="just_writing_h5" name="just_writing_h5" <?php if( $JustWritingUtilities->get_user_option( 'h5_format' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("h5");?>
-			</td>
-		</tr>
-		<tr id=JustWritingButtonGroup style='display: none;'>
-			<th></th>
-			<td>
-			<input type="checkbox" id="just_writing_h6" name="just_writing_h6" <?php if( $JustWritingUtilities->get_user_option( 'h6_format' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("h6");?>
-			</td>
-			<td>
-			<input type="checkbox" id="just_writing_quotes" name="just_writing_quotes" <?php if( $JustWritingUtilities->get_user_option( 'quotes_format' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Block Quotes");?>
-			</td>
-			<td>
-			<input type="checkbox" id="just_writing_address" name="just_writing_address" <?php if( $JustWritingUtilities->get_user_option( 'address_format' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Address");?>
-			</td>
-		</tr>
-		<tr id=JustWritingButtonGroup style='display: none;'>
-			<th></th>
-			<td colspan=3>
-			<input type="checkbox" id="just_writing_pf" name="just_writing_pf" <?php if( $JustWritingUtilities->get_user_option( 'pre_format' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Preformatted");?>
+			<?php echo __("Enable formats dropdown.");?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
