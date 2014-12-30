@@ -4,7 +4,10 @@ function JustWritingEditorPage()
 	{
 	// Enqueue the editor stylesheet.
 	wp_enqueue_style('justwriting-editor-css', plugin_dir_url(__FILE__) . 'editor.css', true, '4.1');
-
+	
+	// Enqueue the tinymce plugin.
+	wp_enqueue_script('justwriting-tinymce-plugin', plugin_dir_url(__FILE__) . 'tinymce/plugin.js', array( 'tiny_mce' ) );
+		
 	$width = isset( $content_width ) && 800 > $content_width ? $content_width : 800;
 	$width = $width + 22; // compensate for the padding and border
 	$dfw_width = get_user_setting( 'dfw_width', $width );
@@ -54,6 +57,7 @@ div#wpcontent { margin-left: 0px !important; }
 .mce-statusbar { display: none !important; }
 div#wp-post_content-editor-tools { display: none !important; }
 </style>
+
 
 <?php	
 	// Add in our menu bar

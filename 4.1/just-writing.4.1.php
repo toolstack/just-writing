@@ -295,5 +295,24 @@ if( !function_exists( 'JustWritingLoad' ) )
 		
 		return $pages;
 		}
+
+	add_action( 'init', 'justwriting_tinymcebuttons' );
+	function justwriting_tinymcebuttons() 
+		{
+		add_filter( "mce_external_plugins", "justwriting_add_tinymcebuttons" );
+		add_filter( 'mce_buttons', 'justwriting_register_tinymcebuttons' );
+		}
+		
+	function justwriting_add_tinymcebuttons( $plugin_array ) 
+		{
+		$plugin_array['justwriting'] = plugins_url( '', __FILE__ ) . '/tinymce/plugin.js';
+		return $plugin_array;
+		}
+		
+	function justwriting_register_tinymcebuttons( $buttons ) 
+		{
+		array_push( $buttons, 'justwriting' ); 
+		return $buttons;
+		}
 	}
 ?>

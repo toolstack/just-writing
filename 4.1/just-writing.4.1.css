@@ -50,6 +50,15 @@ i.mce-i-pasteword:before {
 	content: '\f216';
 }
 
+.mce-justwritingtinymcebutton { 
+	background-position:0px -26px !important; 
+	background-size: auto !important; 
+	background-image: url('../JustWritingPen.png?ver=20131018') !important;
+	position: absolute;
+	top: 3px;
+	right: 36px;
+	}
+
 .JustWritingColorPopup {
 position: absolute;
 background-color: black;
