@@ -104,3 +104,5 @@ height: 50px;
 	
 	border-radius: 12px;
 }
+
+iframe#post_content_ifr { margin-bottom: 20px; }
