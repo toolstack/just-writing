@@ -200,36 +200,40 @@ function JustWriting()
 			if( JustWritingBrowserFS == 1 ) { jQuery(document.body).fullscreen(); }
 			}
 			
-		JustWritingToggleFade( 'autohide' );
-		
-		// Show/hide the toolbar when entering/leaving it on the screen.
-		jQuery('#wp-fullscreen-toolbar').on( 'mouseenter', function() {
-			JustWritingMouseInToolbar = true;
-			JustWritingToggleFade('show');
-		}).on( 'mouseleave', function() {
-			JustWritingMouseInToolbar = false;
-			JustWritingToggleFade('hide');
-		});
-
-		var fs_body = jQuery(document);
-			
-		// Show/hide the ui when a touch event happens anywhere on screen.
-		fs_body.on( 'touchstart.wpdfw', function() {
-			JustWritingToggleFade('show');
-		}).on( 'touchend', function() {
-			JustWritingToggleFade('hide');
-		});
-
-		// Show the ui when the mouse moves.
-		fs_body.on( 'mousemove.wpdfw', function() {
-				JustWritingToggleFade('peak');
-		});
-
-		// Bind to the iframe, we don't need to check if we're in the toolbar as we can't be, we're in the iframe ;)
-		var content_ifr = document.getElementById('post_content_ifr');
-		if( content_ifr != null ) 
+		// Only add the fade effect if we haven't disabled it.
+		if( DisableFade != 1 )
 			{
-			content_ifr.contentWindow.document.onmousemove = function() { JustWritingToggleFade('peak'); }
+			JustWritingToggleFade( 'autohide' );
+			
+			// Show/hide the toolbar when entering/leaving it on the screen.
+			jQuery('#wp-fullscreen-toolbar').on( 'mouseenter', function() {
+				JustWritingMouseInToolbar = true;
+				JustWritingToggleFade('show');
+			}).on( 'mouseleave', function() {
+				JustWritingMouseInToolbar = false;
+				JustWritingToggleFade('hide');
+			});
+
+			var fs_body = jQuery(document);
+				
+			// Show/hide the ui when a touch event happens anywhere on screen.
+			fs_body.on( 'touchstart.wpdfw', function() {
+				JustWritingToggleFade('show');
+			}).on( 'touchend', function() {
+				JustWritingToggleFade('hide');
+			});
+
+			// Show the ui when the mouse moves.
+			fs_body.on( 'mousemove.wpdfw', function() {
+					JustWritingToggleFade('peak');
+			});
+
+			// Bind to the iframe, we don't need to check if we're in the toolbar as we can't be, we're in the iframe ;)
+			var content_ifr = document.getElementById('post_content_ifr');
+			if( content_ifr != null ) 
+				{
+				content_ifr.contentWindow.document.onmousemove = function() { JustWritingToggleFade('peak'); }
+				}
 			}
 		}
 	}
