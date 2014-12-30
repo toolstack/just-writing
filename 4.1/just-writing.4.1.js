@@ -517,9 +517,8 @@ function JustWritingAjaxSave()
 	$spinner.show();
 	$errorMessage.hide();
 	$saveMessage.hide();
-//	$hidden.val('wp-fullscreen-save-post');
 
-	alert( jQuery('form#post').serialize() );
+	tinyMCE.triggerSave(true,true);
 	
 	jQuery.ajax( {
 			url: window.ajaxurl,
