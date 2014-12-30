@@ -163,11 +163,11 @@ function just_writing_user_profile_fields( $user )
 	// has been written yet, so let's do that now.
 	if( $JustWritingUtilities->get_user_option( 'enabled' ) == "" )
 		{
-		include_once( "just-writing-user-setup.3.9.php" );
+		include_once( "just-writing-user-setup.4.1.php" );
 		Just_Writing_User_Setup( $user->ID );
 		}
 	
-	wp_register_script( 'justwritingoptions_js', plugins_url( '', __FILE__ )  . '/just-writing-options.3.9.js' );
+	wp_register_script( 'justwritingoptions_js', plugins_url( '', __FILE__ )  . '/just-writing-options.4.1.js' );
 	wp_enqueue_script( 'justwritingoptions_js' );
 
 	?>

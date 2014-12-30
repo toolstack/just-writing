@@ -1,5 +1,7 @@
 var JustWritingTinyMCECurrentSelection = null;
 var JustWritingBrowserFS = 0;
+var JustWritingUIFade = null;
+var JustWritingMouseInToolbar = false;
 
 /*
 	This function returns the index of specific JavaScript file we're looking for.
@@ -196,6 +198,38 @@ function JustWriting()
 			{
 			JustWritingToolbarCenterMove();
 			if( JustWritingBrowserFS == 1 ) { jQuery(document.body).fullscreen(); }
+			}
+			
+		JustWritingToggleFade( 'autohide' );
+		
+		// Show/hide the toolbar when entering/leaving it on the screen.
+		jQuery('#wp-fullscreen-toolbar').on( 'mouseenter', function() {
+			JustWritingMouseInToolbar = true;
+			JustWritingToggleFade('show');
+		}).on( 'mouseleave', function() {
+			JustWritingMouseInToolbar = false;
+			JustWritingToggleFade('hide');
+		});
+
+		var fs_body = jQuery(document);
+			
+		// Show/hide the ui when a touch event happens anywhere on screen.
+		fs_body.on( 'touchstart.wpdfw', function() {
+			JustWritingToggleFade('show');
+		}).on( 'touchend', function() {
+			JustWritingToggleFade('hide');
+		});
+
+		// Show the ui when the mouse moves.
+		fs_body.on( 'mousemove.wpdfw', function() {
+				JustWritingToggleFade('peak');
+		});
+
+		// Bind to the iframe, we don't need to check if we're in the toolbar as we can't be, we're in the iframe ;)
+		var content_ifr = document.getElementById('post_content_ifr');
+		if( content_ifr != null ) 
+			{
+			content_ifr.contentWindow.document.onmousemove = function() { JustWritingToggleFade('peak'); }
 			}
 		}
 	}
@@ -548,6 +582,47 @@ function JustWritingAjaxSave()
 
 	$hidden.val( oldVal );
 	};
+	
+function JustWritingToggleFade( show ) 
+	{
+	var topBar = jQuery('#wp-fullscreen-toolbar');
+	var statusBar = jQuery('#wp-fullscreen-statusbar');
+	
+	clearTimeout( JustWritingUIFade );
+
+	switch( show )
+		{
+		case 'show':
+			topBar.fadeIn( 200 );
+			statusBar.fadeIn( 200 );
+		
+			break;
+		case 'autohide':
+			topBar.fadeOut( 200 );
+			statusBar.fadeOut( 200 );
+		
+			break;
+		case 'peak':
+			topBar.fadeIn( 200 );
+			statusBar.fadeIn( 200 );
+		
+		default:
+			if( JustWritingMouseInToolbar == false ) {
+				JustWritingUIFade = setTimeout( JustWritingHideUI, 2000 );
+			}
+		
+			break;
+		}
+	}
+	
+function JustWritingHideUI() 
+	{
+	var topBar = jQuery('#wp-fullscreen-toolbar');
+	var statusBar = jQuery('#wp-fullscreen-statusbar');
+
+	topBar.fadeOut( 200 );
+	statusBar.fadeOut( 200 );
+	}
 	
 	
 // Use an event listener to add the Just Writing function on a page load instead of .OnLoad as we might otherwise get overwritten by another plugin.
