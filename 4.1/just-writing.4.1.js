@@ -255,7 +255,7 @@ function JustWritingElementSetDisplay( PopupID, DisplayMode )
 	PopupID = html ID of the popup to track.
 	ButtonID = html ID of the button used to active the popup.
 */
-function JustWritingPopupClickHandler( PopupID, ButtonID )
+function JustWritingPopupClickHandler( PopupID, ButtonID, event )
 	{
 	var Popup = document.getElementById( PopupID );
 
@@ -265,11 +265,14 @@ function JustWritingPopupClickHandler( PopupID, ButtonID )
 		var Button = document.getElementById( ButtonID ).parentElement;
 		
 		// Check to make sure we have a real click event.
-		if( typeof window.event == 'undefined' ) { return; }
+		if( typeof window.event == 'undefined' && typeof event == 'undefined') { return; }
+		
+		// Some browsers (IE) have a global event variable, others (Firefox) don't, handle both cases.
+		if( typeof window.event != 'undefined' ) { event = window.event; }
 		
 		// This is the position of the mouse click.
-		posx = window.event.clientX;
-        posy = window.event.clientY;
+		posx = event.clientX;
+        	posy = event.clientY;
 		
 		// First check to see if we're outside of the popup on the x axis.
 		if( posx < Popup.offsetLeft || posx > Popup.offsetLeft + Popup.offsetWidth )
@@ -324,7 +327,7 @@ function JustWritingFormatDropDown()
 	JustWritingElementSetDisplay( 'just_writing_fontsizeselect_menu', 'none' );
 
 	// Setup the click handler so that if the user click's outside of the popup it will be closed.
-	jQuery( 'body' ).on( 'click', function () { JustWritingPopupClickHandler( 'just_writing_formatselect_menu', 'wp_fs_Paragraph' ); } );
+	jQuery( 'body' ).on( 'click', function (event) { JustWritingPopupClickHandler( 'just_writing_formatselect_menu', 'wp_fs_Paragraph', event ); } );
 	
 	// Show/hide the popup
 	jQuery('#just_writing_formatselect_menu').toggle();
@@ -349,7 +352,7 @@ function JustWritingFontDropDown()
 	JustWritingElementSetDisplay( 'just_writing_fontsizeselect_menu', 'none' );
 
 	// Setup the click handler so that if the user click's outside of the popup it will be closed.
-	jQuery( 'body' ).on( 'click', function () { JustWritingPopupClickHandler( 'just_writing_fontselect_menu', 'wp_fs_fontselector' ); } );
+	jQuery( 'body' ).on( 'click', function (event) { JustWritingPopupClickHandler( 'just_writing_fontselect_menu', 'wp_fs_fontselector', event ); } );
 
 	// Show/hide the popup
 	jQuery('#just_writing_fontselect_menu').toggle();
@@ -374,7 +377,7 @@ function JustWritingFontSizeDropDown()
 	JustWritingElementSetDisplay( 'just_writing_fontselect_menu', 'none' );
 
 	// Setup the click handler so that if the user click's outside of the popup it will be closed.
-	jQuery( 'body' ).on( 'click', function () { JustWritingPopupClickHandler( 'just_writing_fontsizeselect_menu', 'wp_fs_fontsize' ); } );
+	jQuery( 'body' ).on( 'click', function (event) { JustWritingPopupClickHandler( 'just_writing_fontsizeselect_menu', 'wp_fs_fontsize', event ); } );
 
 	// Show/hide the popup
 	jQuery('#just_writing_fontsizeselect_menu').toggle();
@@ -399,7 +402,7 @@ function JustWritingFontColor()
 	JustWritingElementSetDisplay( 'just_writing_fontsizeselect_menu', 'none' );
 	
 	// Setup the click handler so that if the user click's outside of the popup it will be closed.
-	jQuery( 'body' ).on( 'click', function () { JustWritingPopupClickHandler( 'JustWritingFontColorPopup', 'wp_fs_fontcolor' ); } );
+	jQuery( 'body' ).on( 'click', function (event) { JustWritingPopupClickHandler( 'JustWritingFontColorPopup', 'wp_fs_fontcolor', event ); } );
 
 	// Show/hide the popup
 	jQuery('#JustWritingFontColorPopup').toggle();
@@ -424,7 +427,7 @@ function JustWritingBackgroundColor()
 	JustWritingElementSetDisplay( 'just_writing_fontsizeselect_menu', 'none' );
 	
 	// Setup the click handler so that if the user click's outside of the popup it will be closed.
-	jQuery( 'body' ).on( 'click', function () { JustWritingPopupClickHandler( 'JustWritingBackgroundColorPopup', 'wp_fs_backgroundcolor' ); } );
+	jQuery( 'body' ).on( 'click', function (event) { JustWritingPopupClickHandler( 'JustWritingBackgroundColorPopup', 'wp_fs_backgroundcolor', event ); } );
 
 	// Show/hide the popup
 	jQuery('#JustWritingBackgroundColorPopup').toggle();
