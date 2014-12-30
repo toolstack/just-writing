@@ -51,9 +51,8 @@ div#adminmenuback { display: none !important; }
 div#wpfooter { display: none !important; }
 div#wpcontent { margin-left: 0px !important; }
 .mce-toolbar-grp { display: none !important; }
-div#wp-justwritingeditor-editor-tools { display: none !important; }
 .mce-statusbar { display: none !important; }
-div#wp-content-editor-tools { display: none !important; }
+div#wp-post_content-editor-tools { display: none !important; }
 </style>
 
 <?php	
@@ -103,7 +102,10 @@ div#wp-content-editor-tools { display: none !important; }
 
 			if( !array_key_exists( 'type', $args ) ) { $args['type'] = 'button'; }
 			
+			$style = '';
+			$class = '';
 			$outerclass = 'mce-widget';
+			
 			if( 'separator' != $args['type'] ) { $outerclass .= ' mce-btn'; }
 			if( $args['both'] ) { $outerclass .= ' wp-fullscreen-both'; }
 			
@@ -203,7 +205,7 @@ div#wp-content-editor-tools { display: none !important; }
 <form name="post" action="post.php" method="post" id="post">
 
 	<?php wp_nonce_field( $nonce_action ); echo "\n"; ?>
-	<input type="hidden" id="hiddenaction" name="action" value="editpost" />
+	<input type="hidden" id="hiddenaction" name="action" value="wp-fullscreen-save-post" />
 	<input type="hidden" id="originalaction" name="originalaction" value="editpost" />
 	<input type="hidden" id="post_author" name="post_author" value="<?php echo $post->post_author; ?>" />
 	<input type="hidden" id="post_type" name="post_type" value="<?php echo $post->post_type; ?>" />
@@ -216,7 +218,7 @@ div#wp-content-editor-tools { display: none !important; }
 	
 	<div style="padding-top: 54px; width: <?php echo $dfw_width;?>px; display: block; margin-left: auto; margin-right: auto;" id="wp-content-wrap" class="wp-core-ui wp-editor-wrap tmce-active has-dfw wp-fullscreen-wrap">
 		<input class="wp-fullscreen-title" style="border: 1px dotted rgb(204, 204, 204); width: 100%; margin-bottom: 24px;" spellcheck="true" name="post_title" size="30" id="title" autocomplete="off" type="text" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>">
-		<?php wp_editor( $post->post_content, 'content', array('media_buttons' => true ) ); ?>
+		<?php wp_editor( $post->post_content, 'post_content', array('media_buttons' => true ) ); ?>
 	</div>
 
 </form>
