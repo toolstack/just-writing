@@ -4,6 +4,7 @@ function JustWritingEditorPage()
 	{
 	// Enqueue the editor stylesheet.
 	wp_enqueue_style('justwriting-editor-css', plugin_dir_url(__FILE__) . 'editor.css', true, '4.1');
+	wp_enqueue_style('justwriting-custom-editor-css', plugin_dir_url(__FILE__) . 'just-writing-editor.4.1.css', true, '4.1');
 	
 	// Enqueue the tinymce plugin.
 	wp_enqueue_script('justwriting-tinymce-plugin', plugin_dir_url(__FILE__) . 'tinymce/plugin.js', array( 'tiny_mce' ) );
@@ -43,23 +44,6 @@ function JustWritingEditorPage()
 			$sendback .= ( ! empty( $post_type ) ) ? '?post_type=' . $post_type : '';
 		}
 
-	
-	
-	// Remove all the chrome from WordPress.
-?>
-<style>
-div#wpadminbar { display: none !important; }
-div#adminmenuwrap { display: none !important; }
-div#adminmenuback { display: none !important; }
-div#wpfooter { display: none !important; }
-div#wpcontent { margin-left: 0px !important; }
-.mce-toolbar-grp { display: none !important; }
-.mce-statusbar { display: none !important; }
-div#wp-post_content-editor-tools { display: none !important; }
-</style>
-
-
-<?php	
 	// Add in our menu bar
 ?>
 	<div style="height: auto; width: 100%;" id="fullscreen-topbar">
@@ -217,8 +201,8 @@ div#wp-post_content-editor-tools { display: none !important; }
 	<input type="hidden" id="referredby" name="referredby" value="http://localhost/wordpress/wp-admin/edit.php" />
 	<input type="hidden" name="_wp_original_http_referer" value="http://localhost/wordpress/wp-admin/edit.php" />
 	<input type='hidden' id='post_ID' name='post_ID' value='<?php echo $post->ID;?>' />
-	<?php wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false ); echo "\n"; ?>
-	<?php wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false ); echo "\n"; ?>
+	<?php //wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false ); echo "\n"; ?>
+	<?php //wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false ); echo "\n"; ?>
 	
 	<div style="padding-top: 54px; width: <?php echo $dfw_width;?>px; display: block; margin-left: auto; margin-right: auto;" id="wp-content-wrap" class="wp-core-ui wp-editor-wrap tmce-active has-dfw wp-fullscreen-wrap">
 		<input class="wp-fullscreen-title" style="border: 1px dotted rgb(204, 204, 204); width: 100%; margin-bottom: 24px;" spellcheck="true" name="post_title" size="30" id="title" autocomplete="off" type="text" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>">

@@ -79,42 +79,11 @@ if( !function_exists( 'JustWritingLoad' ) )
 			if( $JustWritingUtilities->get_user_option( 'lighten_border' ) == 'on' ) { $HideBorder = 1; } 
 			$HideModeBar = 0;
 			if( $JustWritingUtilities->get_user_option( 'hide_modeselect' ) == 'on' ) { $HideModeBar = 1; } 
-			$FormatLB = 0;
-			if( $JustWritingUtilities->get_user_option( 'format_listbox' ) == 'on' ) { $FormatLB = 1; } 
 			$CenterTB = 0;
 			if( $JustWritingUtilities->get_user_option( 'center_toolbar' ) == 'on' ) { $CenterTB = 1; } 
-			$DisableJSCP = 0;
-			if( $JustWritingUtilities->get_user_option( 'disable_jscp' ) == 'on' ) { $DisableJSCP = 1; } 
-			$BrowserFS = 0;
-			if( $JustWritingUtilities->get_user_option( 'browser_fullscreen' ) == 'on' ) { $BrowserFS = 1; } 
 			
-			// By default, assume we're not autoloading DFWM.
-			$AutoLoad = 0;
-			
-			if( $source == "new" )
-				{
-				// Check to see if we're supposed to autoload DFWM if we're creating a new post.
-				if( $JustWritingUtilities->get_user_option( 'autoload_newposts' ) == 'on' ) { $AutoLoad = 1; } 
-				}
-
-			if( $source == "edit" )
-				{
-				// Check to see if we're supposed to autoload DFWM if we're editing a post.
-				if( $JustWritingUtilities->get_user_option( 'autoload_editposts' ) == 'on' ) { $AutoLoad = 1; } 
-				}
-				
-			// Finally, check to see if we were passed an autoload variable on the URL, which happens if the user has
-			// clicked DFWM in the post/pages list.
-			if( array_key_exists( 'JustWritingAutoLoad', $_GET ) )
-				{
-				if( $_GET['JustWritingAutoLoad'] == 1 )
-					{
-					$AutoLoad = 1;
-					}
-				}
-	
 			// Register and enqueue the javascript.
-			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/just-writing.' . $file_version . '.js?rtl=' . is_rtl() . '&disablefade=' . $DisableFade . '&hidewordcount=' . $HideWordCount . '&hidepreview=' . $HidePreview . '&hideborder=' . $HideBorder . '&hidemodebar=' . $HideModeBar . '&autoload=' . $AutoLoad . '&formatlistbox=' . $FormatLB . '&centertb=' . $CenterTB . '&disablejscp=' . $DisableJSCP . '&browserfs=' . $BrowserFS );
+			wp_register_script( 'justwriting_js', plugins_url( '', __FILE__ )  . '/just-writing.' . $file_version . '.js?rtl=' . is_rtl() . '&disablefade=' . $DisableFade . '&hidewordcount=' . $HideWordCount . '&hidepreview=' . $HidePreview . '&hideborder=' . $HideBorder . '&hidemodebar=' . $HideModeBar . '&centertb=' . $CenterTB );
 			wp_enqueue_script( 'justwriting_js' );
 			
 			wp_register_script( 'jquery_fullscreen', plugins_url( '', __FILE__ )  . '/../jquery.fullscreen-0.4.1.min.js' );
@@ -143,7 +112,6 @@ if( !function_exists( 'JustWritingLoad' ) )
 
 		$cuid = get_current_user_id();
 		$JustWritingEnabled = $JustWritingUtilities->get_user_option( 'enabled' );
-		$JustWritingAddLinks = $JustWritingUtilities->get_user_option( 'add_DFWM_post_pages' );
 
 		$path = 'edit.php?';		
 		$name = $post->name;
@@ -152,7 +120,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 			$path .= 'post_type=' . $name . '&';
 		
 		// Only add the link if we're enabled and the user has selected the option.
-		if( $JustWritingEnabled == "on" AND $JustWritingAddLinks == "on" )
+		if( $JustWritingEnabled == "on" )
 			{
 			foreach( $actions as $key => $value )
 				{
@@ -181,23 +149,32 @@ if( !function_exists( 'JustWritingLoad' ) )
 
 		$post_types = (array)get_post_types( array( 'show_ui' => true ), 'object' );
 
-		foreach( $post_types as $post_type ) 
+		// Set the current user and load the user preferences.
+		$JustWritingUtilities->set_user_id();
+		$JustWritingUtilities->load_user_options();
+
+		$JustWritingEnabled = $JustWritingUtilities->get_user_option( 'enabled' );
+
+		if( $JustWritingEnabled == "on" )
 			{
-			$path = 'edit.php';		
-			$name = $post_type->name;
+			foreach( $post_types as $post_type ) 
+				{
+				$path = 'edit.php';		
+				$name = $post_type->name;
 
-			if( 'post' != $name ) // edit.php?post_type=post doesn't work
-				$path .= '?post_type=' . $name;
+				if( 'post' != $name ) // edit.php?post_type=post doesn't work
+					$path .= '?post_type=' . $name;
 
-			$page_id = add_submenu_page( $path, __( 'Write' ), __( 'Write' ), $post_type->cap->edit_posts, 'JustWriting' . ucwords($name), 'JustWritingEditorPage' );
-			
-			// Make sure we load the Just Writing code for each page type.
-			add_action( 'admin_head-' . $page_id, 'JustWritingLoadEdit' );
+				$page_id = add_submenu_page( $path, __( 'Write' ), __( 'Write' ), $post_type->cap->edit_posts, 'JustWriting' . ucwords($name), 'JustWritingEditorPage' );
+				
+				// Make sure we load the Just Writing code for each page type.
+				add_action( 'admin_head-' . $page_id, 'JustWritingLoadEdit' );
+				}
 			}
 		}
 
 	/*
-	 	This function generates the Just Writing settings page and handles the actions assocaited with it.
+	 	This function generates the Just Writing settings page and handles the actions associated with it.
 	 */
 	function JustWritingAdminPage()
 		{

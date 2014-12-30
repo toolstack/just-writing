@@ -104,7 +104,6 @@ function JustWriting()
 		var HidePreview = GetScriptVariable( GSI, 'hidepreview', 0 );
 		var HideBorder = GetScriptVariable( GSI, 'hideborder', 0 );
 		var HideModeBar = GetScriptVariable( GSI, 'hidemodebar', 0 );
-		var FormatLB = GetScriptVariable( GSI, 'formatlistbox', 0 );
 		var rtl = GetScriptVariable( GSI, 'rtl', 0 );
 		var CenterToolbar = GetScriptVariable( GSI, 'centertb', 0 );
 		
@@ -144,15 +143,11 @@ function JustWriting()
 			JustWritingElementSetDisplay( 'wp-fullscreen-mode-bar', 'none' );
 			}
 
-		// Add the format JavaScript popup.
-		if( FormatLB == 1 )
+		FormatButton = document.getElementById( 'wp_fs_Paragraph' );
+		
+		if( FormatButton != null )
 			{
-			FormatButton = document.getElementById( 'wp_fs_Paragraph' );
-			
-			if( FormatButton != null )
-				{
-				FormatButton.onclick = JustWritingFormatDropDown;
-				}
+			FormatButton.onclick = JustWritingFormatDropDown;
 			}
 			
 		// Add the font JavaScript popup.
