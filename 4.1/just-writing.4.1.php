@@ -264,13 +264,20 @@ if( !function_exists( 'JustWritingLoad' ) )
 		add_options_page( 'Just Writing', 'Just Writing', 'manage_options', basename( __FILE__ ), 'JustWritingAdminPage');
 		}
 		
-	add_filter('tinymce_spellcheck_load_on_pages', 'JustWritingFilterTinyMCESpellCheck');
+	add_filter('atd_load_scripts', 'JustWritingFilterTinyMCESpellCheck');
 	
 	function JustWritingFilterTinyMCESpellCheck( $pages ) 
 		{
-		$pages[] = 'edit.php';
-		
-		return $pages;
+		global $pagenow, $current_screen;
+
+		if ( $pagenow == 'edit.php' ) {
+			if ( isset( $current_screen->post_type ) && $current_screen->post_type ) {
+				return post_type_supports( $current_screen->post_type, 'editor' );
+			}
+			return true;
+		}
+
+		return false;
 		}
 
 	add_action( 'init', 'justwriting_tinymcebuttons' );
