@@ -130,7 +130,7 @@ function JustWriting()
 		if( HideBorder > 0 )
 			{
 			var SubjectBorder = jQuery( '#title' );
-			var BodyBorder = jQuery( '#wp-content-editor-container' );
+			var BodyBorder = jQuery( '#wp-post_content-editor-container' );
 			var BorderStyle = 'none';
 
 			if( HideBorder == 1 ) { BorderStyle = '1px dotted #CCCCCC'; }

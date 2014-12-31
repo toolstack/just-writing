@@ -108,8 +108,24 @@ div#wpcontent { margin-left: 0px !important; }
 .mce-toolbar-grp { display: none !important; }
 .mce-statusbar { display: none !important; }
 div#wp-post_content-editor-tools { display: none !important; }
+body { background: #fff; }
+div#wp-fullscreen-statusbar {
+	background: #f8f8f8;
+	border-top: 1px solid #eee;
+}
 
 /* make sure the text in the textarea is set to black */
 .wp-editor-area {
     color: #000 !important;
+}
+
+/* Add the border to the title/content */
+div#wp-post_content-wrap {
+	border-radius: 0px;
+	border: 1px dashed #CCC;
+}
+
+.wp-fullscreen-title {
+	border-radius: 0px;
+	border: 1px dashed #CCC !important;
 }
