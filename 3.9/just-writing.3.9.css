@@ -51,7 +51,7 @@ i.mce-i-pasteword:before {
 }
 
 .JustWritingColorPopup {
-position: absolute;
+position: fixed;
 background-color: black;
 color: white;
 width: 150px;

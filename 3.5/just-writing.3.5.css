@@ -83,7 +83,7 @@
 .wp_themeSkin .mceSplitButton:hover span.mce_fontsize {background-position:-280px 0}
 
 .JustWritingColorPopup {
-position: absolute;
+position: fixed;
 background-color: black;
 color: white;
 width: 150px;
