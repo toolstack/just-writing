@@ -2,6 +2,13 @@
 
 function JustWritingEditorPage()
 	{
+	GLOBAL $JustWritingUtilities;
+	
+	// Set the current user and load the user preferences.
+	$JustWritingUtilities->set_user_id( get_current_user_id() );
+	$JustWritingUtilities->load_user_options();
+
+	// Load the editor javascript and features.
 	JustWritingLoadEditor();
 	
 	// Enqueue the editor stylesheet.
@@ -9,7 +16,7 @@ function JustWritingEditorPage()
 	wp_enqueue_style('justwriting-custom-editor-css', plugin_dir_url(__FILE__) . 'just-writing-editor.4.1.css', true, '4.1');
 	
 	//Enqueue the javascript.
-	wp_enqueue_script('justwriting-editor-js', plugin_dir_url(__FILE__) . 'just-writing-editor.4.1.js' );
+	//wp_enqueue_script('justwriting-editor-js', plugin_dir_url(__FILE__) . 'just-writing-editor.4.1.js' );
 	
 	// Enqueue the tinymce plugin.
 	wp_enqueue_script('justwriting-tinymce-plugin', plugin_dir_url(__FILE__) . 'tinymce/plugin.js', array( 'tiny_mce' ) );
@@ -65,47 +72,80 @@ function JustWritingEditorPage()
 			<div style="" id="wp-fullscreen-button-bar">
 				<div id="wp-fullscreen-buttons" class="mce-toolbar">
 <?php
-		$buttons = array(
-			// format: title, onclick, show in both editors
-			'bold' => array( 'title' => __('Bold (Ctrl + B)'), 'type' => 'button', 'both' => false ),
-			'italic' => array( 'title' => __('Italic (Ctrl + I)'), 'type' => 'button', 'both' => false ),
-			'bullist' => array( 'title' => __('Unordered list (Alt + Shift + U)'), 'type' => 'button', 'both' => false ),
-			'numlist' => array( 'title' => __('Ordered list (Alt + Shift + O)'), 'type' => 'button', 'both' => false ),
-			'blockquote' => array( 'title' => __('Blockquote (Alt + Shift + Q)'), 'type' => 'button', 'both' => false ),
-			'wp-media-library' => array( 'title' => __('Media library (Alt + Shift + M)'), 'type' => 'button', 'both' => true ),
-			'link' => array( 'title' => __('Insert/edit link (Alt + Shift + A)'), 'type' => 'button', 'both' => true ),
-			'unlink' => array( 'title' => __('Unlink (Alt + Shift + S)'), 'type' => 'button', 'both' => false ),
-			'help' => array( 'title' => __('Help (Alt + Shift + H)'), 'type' => 'button', 'both' => false ),
-		);
 
-		/**
-		 * Filter the list of TinyMCE buttons for the fullscreen
-		 * 'Distraction-Free Writing' editor.
-		 *
-		 * @since 3.2.0
-		 *
-		 * @param array $buttons An array of TinyMCE buttons for the DFW editor.
-		 */
-		$buttons = apply_filters( 'wp_fullscreen_buttons', $buttons );
+	// Setup the buttons
+	// format: title, onclick, type (separator or button), both (show in both editors), class, style
+	$buttons = array();
+	if( $JustWritingUtilities->get_user_option( 'separator_one' ) == 'on' ) 	{ $buttons['JustWritingSeparatorOne'] = array( 'title' => __('Separator'), 'onclick' => "", 'type' => 'separator', 'both' => false ); }
+	if( $JustWritingUtilities->get_user_option( 'cut' ) == 'on' ) 				{ $buttons['cut'] = array( 'title' => __('Cut (Ctrl + X)'),'onclick' => "tinyMCE.execCommand('cut');",'both' => true); }
+	if( $JustWritingUtilities->get_user_option( 'copy' ) == 'on' ) 				{ $buttons['copy'] = array( 'title' => __('Copy (Ctrl + C)'), 'onclick' => "tinyMCE.execCommand('copy');", 'both' => true ); }
+	if( $JustWritingUtilities->get_user_option( 'paste' ) == 'on' ) 			{ $buttons['paste'] = array( 'title' => __('Paste (Ctrl + V)'), 'onclick' => "tinyMCE.execCommand('paste');", 'both' => true ); }
+	if( $JustWritingUtilities->get_user_option( 'pastetext' ) == 'on' ) 		{ $buttons['pastetext'] = array( 'title' => __('Paste as Text'), 'onclick' => "jQuery('.mce-i-pastetext').parent().parent().click();",'both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'separator_two' ) == 'on' ) 	{ $buttons['JustWritingSeparatorTwo'] = array( 'title' => __('Separator'), 'onclick' => "", 'type' => 'separator','both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'font_name' ) == 'on' ) 		{ $buttons['fontselector'] = array( 'title' => __('Font'), 'onclick' => "tinyMCE.execCommand('FontName', false, 'Arial Black');",'both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'font_size' ) == 'on' ) 		{ $buttons['fontsize'] = array( 'title' => __('Font size'), 'onclick' => "tinyMCE.execCommand('FontSize', false, '32');",'both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'font_color' ) == 'on' ) 		{ $buttons['fontcolor'] = array( 'title' => __('Font color'), 'onclick' => "",'both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'background_color' ) == 'on' ) 	{ $buttons['backgroundcolor'] = array( 'title' => __('Background Color'), 'onclick' => "",'both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'bold' ) == 'on' ) 				{ $buttons['bold'] = array( 'title' => __('Bold (Ctrl + B)'), 'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'bold');", 'both' => false ); }
+	if( $JustWritingUtilities->get_user_option( 'italics' ) == 'on' ) 			{ $buttons['italic'] = array( 'title' => __('Italic (Ctrl + I)'), 'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'italic');", 'both' => false ); }
+	if( $JustWritingUtilities->get_user_option( 'strike' ) == 'on' ) 			{ $buttons['strikethrough'] = array('title' => __('Strikethrough (Alt + Shift + D)'),'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'strikethrough');",'both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'underline' ) == 'on' ) 		{ $buttons['underline'] = array('title' => __('Underline (Alt + Shift + U)'),'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'underline');",'both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'subscript' ) == 'on' ) 		{ $buttons['subscript'] = array('title' => __('Subscript'),'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'subscript');",'both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'superscript' ) == 'on' ) 		{ $buttons['superscript'] = array('title' => __('Superscript'),'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'superscript');",'both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'remove_format' ) == 'on' ) 	{ $buttons['removeformat'] = array('title' => __('Remove Format (Alt + Shift + O)'),'onclick' => "tinyMCE.execCommand('removeformat');",'both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'separator_three' ) == 'on' ) 	{ $buttons['JustWritingSeparatorThree'] = array( 'title' => __('Separator'), 'onclick' => "", 'type' => 'separator','both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'ul' ) == 'on' ) 				{ $buttons['bullist'] = array( 'title' => __('Unordered list (Alt + Shift + U)'), 'onclick' => "jQuery('.mce-i-bullist').parent().parent().click();", 'both' => false ); }
+	if( $JustWritingUtilities->get_user_option( 'nl' ) == 'on' ) 				{ $buttons['numlist'] = array( 'title' => __('Ordered list (Alt + Shift + O)'),'onclick' => "jQuery('.mce-i-numlist').parent().parent().click();", 'both' => false ); }
+	if( $JustWritingUtilities->get_user_option( 'media' ) == 'on' ) 			{ $buttons['image'] = array( 'title' => __('Insert/edit image (Alt + Shift + M)'), 'onclick' => "jQuery('#insert-media-button').click();", 'both' => true ); }
+	if( $JustWritingUtilities->get_user_option( 'link' ) == 'on' ) 				{ $buttons['link'] = array( 'title' => __('Insert/edit link (Alt + Shift + A)'), 'onclick' => "jQuery('.mce-i-link').parent().parent().click();", 'both' => false ); }
+	if( $JustWritingUtilities->get_user_option( 'unlink' ) == 'on' ) 			{ $buttons['unlink'] = array( 'title' => __('Unlink (Alt + Shift + S)'), 'onclick' => "jQuery('.mce-i-unlink').parent().parent().click();", 'both' => false ); }
+	if( $JustWritingUtilities->get_user_option( 'separator_four' ) == 'on' ) 	{ $buttons['JustWritingSeparatorFour'] = array( 'title' => __('Separator'), 'onclick' => "", 'type' => 'separator','both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'left_justify' ) == 'on' ) 		{ $buttons['alignleft'] = array('title' => __('Align Left (Alt + Shift + L)'),'onclick' => "tinyMCE.execCommand('justifyleft');",'both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'center_justify' ) == 'on' ) 	{ $buttons['aligncenter'] = array('title' => __('Align Centre (Alt + Shift + C)'),'onclick' => "tinyMCE.execCommand('justifycenter');",'both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'right_justify' ) == 'on' ) 	{ $buttons['alignright'] = array('title' => __('Align Right (Alt + Shift + R)'),'onclick' => "tinyMCE.execCommand('justifyright');",'both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'full_justify' ) == 'on' ) 		{ $buttons['alignjustify'] = array('title' => __('Justify'),'onclick' => "tinyMCE.execCommand('justifyfull');",'both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'outdent' ) == 'on' ) 			{ $buttons['outdent'] = array('title' => __('Outdent'),'onclick' => "tinyMCE.execCommand('outdent');",'both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'indent' ) == 'on' ) 			{ $buttons['indent'] = array('title' => __('Indent'),'onclick' => "tinyMCE.execCommand('indent');",'both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'separator_five' ) == 'on' ) 	{ $buttons['JustWritingSeparatorFive'] = array( 'title' => __('Separator'), 'onclick' => "", 'type' => 'separator','both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'format_listbox' ) == 'on' ) 	{ $buttons['Paragraph'] = array('title' => __('Paragraph'),'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'p');",'both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'separator_six' ) == 'on' ) 	{ $buttons['JustWritingSeparatorSix'] = array( 'title' => __('Separator'), 'onclick' => "", 'type' => 'separator','both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'spellcheck' ) == 'on' ) 		{ $buttons['spellchecker'] = array('title' => __('Proofread Writing'),'onclick' => "tinyMCE.execCommand('mceWritingImprovementTool');",'both' => true); }
+	if( $JustWritingUtilities->get_user_option( 'more' ) == 'on' ) 				{ $buttons['wp_more'] = array('title' => __('Insert More Tag (Alt + Shift + T)'),'onclick' => "tinyMCE.execCommand('WP_More');",'both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'char_map' ) == 'on' ) 			{ $buttons['charmap'] = array('title' => __('Insert custom character'),'onclick' => "jQuery('.mce-i-charmap').parent().parent().click();",'both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'separator_seven' ) == 'on' ) 	{ $buttons['JustWritingSeparatorSeven'] = array( 'title' => __('Separator'), 'onclick' => "", 'type' => 'separator','both' => false); }
+	if( $JustWritingUtilities->get_user_option( 'undo' ) == 'on' ) 				{ $buttons['undo'] = array('title' => __('Undo (Ctrl + Z)'),'onclick' => "tinyMCE.execCommand('undo');",'both' => true); }
+	if( $JustWritingUtilities->get_user_option( 'redo' ) == 'on' ) 				{ $buttons['redo'] = array('title' => __('Redo (Ctrl + Y)'),'onclick' => "tinyMCE.execCommand('redo');",'both' => true); }
+	if( $JustWritingUtilities->get_user_option( 'help' ) == 'on' )				{ $buttons['help'] = array( 'title' => __('Help (Alt + Shift + H)'), 'onclick' => "jQuery('.mce-i-wp_help').parent().parent().click();", 'both' => false ); }
+	if( $JustWritingUtilities->get_user_option( 'separator_eight' ) == 'on' ) 	{ $buttons['JustWritingSeparatorEight'] = array( 'title' => __('Separator'), 'onclick' => "", 'type' => 'separator','both' => false); }
 
-		foreach ( $buttons as $button => $args ) {
-			if ( 'separator' == $args ) {
-				continue;
-			}
+	/**
+	 * Filter the list of TinyMCE buttons for the fullscreen
+	 * 'Distraction-Free Writing' editor.
+	 *
+	 * @since 3.2.0
+	 *
+	 * @param array $buttons An array of TinyMCE buttons for the DFW editor.
+	 */
+	$buttons = apply_filters( 'wp_fullscreen_buttons', $buttons );
 
-			if( !array_key_exists( 'type', $args ) ) { $args['type'] = 'button'; }
-			
-			$style = '';
-			$class = '';
-			$outerclass = 'mce-widget';
-			
-			if( 'separator' != $args['type'] ) { $outerclass .= ' mce-btn'; }
-			if( $args['both'] ) { $outerclass .= ' wp-fullscreen-both'; }
-			
-			$onclick = ! empty( $args['onclick'] ) ? ' onclick="' . $args['onclick'] . '"' : '';
-			$title = esc_attr( $args['title'] );
-			if( array_key_exists( 'style', $args ) ) { $style = ' style="' . $args['style'] . '"'; }
-			if( array_key_exists( 'class', $args ) ) { $style = ' class="' . $args['class'] . '"'; }
+	foreach ( $buttons as $button => $args ) {
+		if ( 'separator' == $args ) {
+			continue;
+		}
+
+		if( !array_key_exists( 'type', $args ) ) { $args['type'] = 'button'; }
+		
+		$style = '';
+		$class = '';
+		$outerclass = 'mce-widget';
+		
+		if( 'separator' != $args['type'] ) { $outerclass .= ' mce-btn'; }
+		if( $args['both'] ) { $outerclass .= ' wp-fullscreen-both'; }
+		
+		$onclick = ! empty( $args['onclick'] ) ? ' onclick="' . $args['onclick'] . '"' : '';
+		$title = esc_attr( $args['title'] );
+		if( array_key_exists( 'style', $args ) ) { $style = ' style="' . $args['style'] . '"'; }
+		if( array_key_exists( 'class', $args ) ) { $style = ' class="' . $args['class'] . '"'; }
 			?>
 
 			<div class="<?php echo $outerclass; ?>">
