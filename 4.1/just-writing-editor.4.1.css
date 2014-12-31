@@ -51,7 +51,7 @@ i.mce-i-pasteword:before {
 	}
 
 .JustWritingColorPopup {
-	position: absolute;
+	position: fixed;
 	background-color: black;
 	color: white;
 	width: 150px;
@@ -108,3 +108,8 @@ div#wpcontent { margin-left: 0px !important; }
 .mce-toolbar-grp { display: none !important; }
 .mce-statusbar { display: none !important; }
 div#wp-post_content-editor-tools { display: none !important; }
+
+/* make sure the text in the textarea is set to black */
+.wp-editor-area {
+    color: #000 !important;
+}

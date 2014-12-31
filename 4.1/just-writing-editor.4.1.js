@@ -2,6 +2,8 @@ var JustWritingTinyMCECurrentSelection = null;
 var JustWritingBrowserFS = 0;
 var JustWritingUIFade = null;
 var JustWritingMouseInToolbar = false;
+var JustWrritingAjaxSaving = false;
+var JustWritingChanged = false;
 
 /*
 	This function returns the index of specific JavaScript file we're looking for.
@@ -110,14 +112,14 @@ function JustWriting()
 		// Set the global for if we should ask the browser for fullscreen mode or not.
 		JustWritingBrowserFS = GetScriptVariable( GSI, 'browserfs', 0 );
 
+		// Monitor the title for changes
+		jQuery('#title').on( 'change', function() { JustWritingChanged = true; } );
+		
+		// Monitor the textarea for changes
+		jQuery('#post_content').on( 'change', function() { JustWritingChanged = true; } );
+
 		document.getElementById( 'title' ).spellcheck = true;
 		
-		// If the user has selected to keep the toolbar visible at all times, setup a recurring function to fake a mouse move.
-		if( DisableFade == 1 )
-			{
-			setInterval( JustWritingMoveMouse, 1500 );
-			}
-
 		// Hide the word count div if we've been asked to.
 		if( HideWordCount == 1 )
 			{
@@ -530,16 +532,6 @@ function JustWritingOnResizeDocument()
 	}
 	
 /*
-	This function is called every 1.5 seconds to fake a mouse move if the user has selected to disable the toolbar fade.
-	
-	1.5 seconds is used as WordPress waits 3 seconds from the last mouse move before executing the toolbar fade.
-*/
-function JustWritingMoveMouse()
-	{
-	jQuery( '#fullscreen-topbar' ).trigger( 'mouseover' );
-	}
-
-/*
 	This function saves/updates the post.
 */
 function JustWritingAjaxSave()
@@ -556,6 +548,8 @@ function JustWritingAjaxSave()
 
 	tinyMCE.triggerSave(true,true);
 	
+	JustWrritingAjaxSaving = true;
+	
 	jQuery.ajax( {
 			url: window.ajaxurl,
 			type: 'post',
@@ -563,7 +557,8 @@ function JustWritingAjaxSave()
 			dataType: 'json'
 		}).done( function( response ) {
 			$spinner.hide();
-
+			JustWrritingAjaxSaving = false;
+			
 			if ( response && response.success ) {
 				$saveMessage.show();
 
@@ -579,6 +574,7 @@ function JustWritingAjaxSave()
 			}
 		}).fail( function() {
 			$spinner.hide();
+			JustWrritingAjaxSaving = false;
 			$errorMessage.show();
 		});
 
@@ -626,6 +622,39 @@ function JustWritingHideUI()
 	statusBar.fadeOut( 200 );
 	}
 	
+function JustWritingExit( url )
+	{
+	var t_content = tinyMCE.get('post_content').getContent();
+	var a_content = jQuery('#post_content').val().trim();
+	
+	if( a_content != t_content || JustWritingChanged == true )
+		{
+		jQuery( "#dialog-save-before-exit" ).dialog( {
+			resizable: false,
+			modal: true,
+			buttons: {
+				"Save": function() {
+					jQuery( this ).dialog( "close" );
+					JustWritingAjaxSave();
+					
+					setInterval( function(){if( JustWrritingAjaxSaving == false ) { window.location.href = url; } }, 500)
+					
+					},
+				"Exit": function() {
+					jQuery( this ).dialog( "close" );
+					window.location.href = url;
+					},
+				"Cancel": function() {
+					jQuery( this ).dialog( "close" );
+					}
+				}
+			});
+		}
+	else 
+		{
+		window.location.href = url;
+		}
+	}
 	
 // Use an event listener to add the Just Writing function on a page load instead of .OnLoad as we might otherwise get overwritten by another plugin.
 window.addEventListener ? window.addEventListener( "load", JustWriting, false ) : window.attachEvent && window.attachEvent( "onload", JustWriting );

@@ -14,12 +14,17 @@ function JustWritingEditorPage()
 	// Enqueue the editor stylesheet.
 	wp_enqueue_style('justwriting-editor-css', plugin_dir_url(__FILE__) . 'editor.css', true, '4.1');
 	wp_enqueue_style('justwriting-custom-editor-css', plugin_dir_url(__FILE__) . 'just-writing-editor.4.1.css', true, '4.1');
+	wp_enqueue_style('jquery-ui-dialog', includes_url() . 'css/jquery-ui-dialog.css');
 	
 	//Enqueue the javascript.
 	//wp_enqueue_script('justwriting-editor-js', plugin_dir_url(__FILE__) . 'just-writing-editor.4.1.js' );
 	
 	// Enqueue the tinymce plugin.
 	wp_enqueue_script('justwriting-tinymce-plugin', plugin_dir_url(__FILE__) . 'tinymce/plugin.js', array( 'tiny_mce' ) );
+		
+	// Enqueue jQuery UI
+	wp_enqueue_script( 'jquery-ui' );
+	wp_enqueue_script( 'jquery-ui-dialog' );
 		
 	$width = isset( $content_width ) && 800 > $content_width ? $content_width : 800;
 	$width = $width + 22; // compensate for the padding and border
@@ -64,8 +69,8 @@ function JustWritingEditorPage()
 
 				<div class="wp-tmce-mode" id="wp-fullscreen-mode-bar">
 					<div id="wp-fullscreen-modes" class="button-group">
-					<a class="button wp-fullscreen-mode-tinymce active" href="#" onclick="wp.editor.fullscreen.switchmode( 'tinymce' ); return false;">Visual</a>
-					<a class="button wp-fullscreen-mode-html" href="#" onclick="wp.editor.fullscreen.switchmode( 'html' ); return false;">Text</a>
+					<a class="button wp-fullscreen-mode-tinymce active" href="#" onclick="tinyMCE.get('post_content').show(); jQuery('.wp-fullscreen-mode-tinymce').addClass('active'); jQuery('.wp-fullscreen-mode-html').removeClass('active'); return false;">Visual</a>
+					<a class="button wp-fullscreen-mode-html" href="#" onclick="tinyMCE.triggerSave(true, true); tinyMCE.get('post_content').hide(); jQuery('.wp-fullscreen-mode-html').addClass('active'); jQuery('.wp-fullscreen-mode-tinymce').removeClass('active'); return false;">Text</a>
 				</div>
 			</div>
 
@@ -160,7 +165,7 @@ function JustWritingEditorPage()
 			</div>
 			
 			<div id="wp-fullscreen-save">
-				<a style="margin-left: 5px; margin-bottom: 8px;" class="button right" href="<?php echo esc_attr( htmlspecialchars( $sendback ) ); ?>"><?php _e('Exit');?></a>
+				<a style="margin-left: 5px; margin-bottom: 8px;" class="button right" onclick="JustWritingExit('<?php echo esc_attr( htmlspecialchars( $sendback ) ); ?>')"><?php _e('Exit');?></a>
 				<a style="margin-left: 5px;" class="button right" href="http://localhost/wordpress/blog/2014/11/01/hello-world/" target="wp-preview-1"><?php _e('Preview');?></a>
 				<input title="<?php echo $SaveButtonDesc; ?>" class="button button-primary right" value="<?php echo $SaveButtonLabel;?>" onclick="JustWritingAjaxSave();" type="button">
 				<span class="wp-fullscreen-saved-message">Updated.</span>
@@ -231,7 +236,7 @@ function JustWritingEditorPage()
 <div class="JustWritingColorPopup" id="JustWritingFontColorPopup"><div class="JustWritingColorSwatch" style="background-color: #000000;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect('#000000')"></div><div class="JustWritingColorSwatch" style="background-color: #0000FF;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect('#0000FF')"></div><div class="JustWritingColorSwatch" style="background-color: #0000A0;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect('#0000A0')"></div><div class="JustWritingColorSwatch" style="background-color: #ADD8E6;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect('#ADD8E6')"></div><div class="JustWritingColorSwatch" style="background-color: #A52A2A;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect('#A52A2A')"></div><div class="JustWritingColorSwatch" style="background-color: #00FFFF;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect('#00FFFF')"></div><div class="JustWritingColorSwatch" style="background-color: #008000;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect('#008000')"></div><div class="JustWritingColorSwatch" style="background-color: #808080;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect('#808080')"></div><div class="JustWritingColorSwatch" style="background-color: #00FF00;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect('#00FF00')"></div><div class="JustWritingColorSwatch" style="background-color: #FF00FF;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect('#FF00FF')"></div><div class="JustWritingColorSwatch" style="background-color: #800000;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect('#800000')"></div><div class="JustWritingColorSwatch" style="background-color: #808000;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect('#808000')"></div><div class="JustWritingColorSwatch" style="background-color: #FFA500;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect('#FFA500')"></div><div class="JustWritingColorSwatch" style="background-color: #800080;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect('#800080')"></div><div class="JustWritingColorSwatch" style="background-color: #FF0000;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect('#FF0000')"></div><div class="JustWritingColorSwatch" style="background-color: #C0C0C0;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect('#C0C0C0')"></div><div class="JustWritingColorSwatch" style="background-color: #FFFFFF;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect('#FFFFFF')"></div><div class="JustWritingColorSwatch" style="background-color: #FFFF00;" onmouseover="JustWritingColorHover()" onclick="JustWritingFontColorSelect('#FFFF00')"></div></div>
 <div class="JustWritingColorPopup" id="JustWritingBackgroundColorPopup"><div class="JustWritingColorSwatch" style="background-color: #000000;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect('#000000')"></div><div class="JustWritingColorSwatch" style="background-color: #0000FF;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect('#0000FF')"></div><div class="JustWritingColorSwatch" style="background-color: #0000A0;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect('#0000A0')"></div><div class="JustWritingColorSwatch" style="background-color: #ADD8E6;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect('#ADD8E6')"></div><div class="JustWritingColorSwatch" style="background-color: #A52A2A;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect('#A52A2A')"></div><div class="JustWritingColorSwatch" style="background-color: #00FFFF;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect('#00FFFF')"></div><div class="JustWritingColorSwatch" style="background-color: #008000;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect('#008000')"></div><div class="JustWritingColorSwatch" style="background-color: #808080;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect('#808080')"></div><div class="JustWritingColorSwatch" style="background-color: #00FF00;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect('#00FF00')"></div><div class="JustWritingColorSwatch" style="background-color: #FF00FF;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect('#FF00FF')"></div><div class="JustWritingColorSwatch" style="background-color: #800000;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect('#800000')"></div><div class="JustWritingColorSwatch" style="background-color: #808000;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect('#808000')"></div><div class="JustWritingColorSwatch" style="background-color: #FFA500;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect('#FFA500')"></div><div class="JustWritingColorSwatch" style="background-color: #800080;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect('#800080')"></div><div class="JustWritingColorSwatch" style="background-color: #FF0000;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect('#FF0000')"></div><div class="JustWritingColorSwatch" style="background-color: #C0C0C0;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect('#C0C0C0')"></div><div class="JustWritingColorSwatch" style="background-color: #FFFFFF;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect('#FFFFFF')"></div><div class="JustWritingColorSwatch" style="background-color: #FFFF00;" onmouseover="JustWritingColorHover()" onclick="JustWritingBackgroundColorSelect('#FFFF00')"></div></div>
 
-<div id="dialog-save-before-exit" title="Save changes before exiting?" style="display: none;">
+<div id="dialog-save-before-exit" title="Save changes?" style="display: none;">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Changes have been made, would you like to save them before exiting?</p>
 </div>
 <?php
