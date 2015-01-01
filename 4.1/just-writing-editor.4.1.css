@@ -104,11 +104,12 @@ div#wpadminbar { display: none !important; }
 div#adminmenuwrap { display: none !important; }
 div#adminmenuback { display: none !important; }
 div#wpfooter { display: none !important; }
-div#wpcontent { margin-left: 0px !important; }
+div#wpcontent { margin-left: 0px !important; background: #fff; }
 .mce-toolbar-grp { display: none !important; }
 .mce-statusbar { display: none !important; }
 div#wp-post_content-editor-tools { display: none !important; }
 body { background: #fff; }
+
 div#wp-fullscreen-statusbar {
 	background: #f8f8f8;
 	border-top: 1px solid #eee;
@@ -120,7 +121,7 @@ div#wp-fullscreen-statusbar {
 }
 
 /* Add the border to the title/content */
-div#wp-post_content-wrap {
+div#wp-post_content-editor-container {
 	border-radius: 0px;
 	border: 1px dashed #CCC;
 }
