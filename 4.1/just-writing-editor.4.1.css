@@ -109,6 +109,7 @@ div#wpcontent { margin-left: 0px !important; background: #fff; }
 .mce-statusbar { display: none !important; }
 div#wp-post_content-editor-tools { display: none !important; }
 body { background: #fff; }
+html { background: #fff; }
 
 div#wp-fullscreen-statusbar {
 	background: #f8f8f8;
