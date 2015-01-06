@@ -4,6 +4,7 @@ var JustWritingUIFade = null;
 var JustWritingMouseInToolbar = false;
 var JustWrritingAjaxSaving = false;
 var JustWritingChanged = false;
+var JustWritingEditor = 'html';
 
 /*
 	This function returns the index of specific JavaScript file we're looking for.
@@ -232,6 +233,9 @@ function JustWriting()
 				content_ifr.contentWindow.document.onmousemove = function() { JustWritingToggleFade('peak'); }
 				}
 			}
+
+		// Trigger an inital save from TinyMCE so we can compare the content when the user hits 'exit' properly (it will strip out the <p> marks, etc.).
+		tinyMCE.triggerSave(true,true);
 		}
 	}
 
@@ -549,6 +553,7 @@ function JustWritingAjaxSave()
 	tinyMCE.triggerSave(true,true);
 	
 	JustWrritingAjaxSaving = true;
+	JustWritingChanged = false;
 	
 	jQuery.ajax( {
 			url: window.ajaxurl,
@@ -624,8 +629,12 @@ function JustWritingHideUI()
 	
 function JustWritingExit( url )
 	{
-	var t_content = tinyMCE.get('post_content').getContent();
 	var a_content = jQuery('#post_content').val().trim();
+
+	tinyMCE.triggerSave(true,true);
+	
+	var t_content = jQuery('#post_content').val().trim();
+
 	
 	if( a_content != t_content || JustWritingChanged == true )
 		{
@@ -653,6 +662,29 @@ function JustWritingExit( url )
 	else 
 		{
 		window.location.href = url;
+		}
+	}
+
+function JustWritingSwitchEditor( mode )
+	{
+	if( JustWritingEditor == mode ) { return; }
+	
+	JustWritingEditor = mode;
+	
+	if( mode == 'html' )
+		{
+		tinyMCE.get('post_content').show(); 
+		tinyMCE.get('post_content').setContent( jQuery('#post_content').text() );
+		jQuery('.wp-fullscreen-mode-tinymce').addClass('active'); 
+		jQuery('.wp-fullscreen-mode-html').removeClass('active'); 
+		}
+	else
+		{
+		var temp = tinyMCE.get('post_content').getContent({format : 'raw'});
+		jQuery('#post_content').text( temp ); 
+		tinyMCE.get('post_content').hide(); 
+		jQuery('.wp-fullscreen-mode-html').addClass('active'); 
+		jQuery('.wp-fullscreen-mode-tinymce').removeClass('active'); 
 		}
 	}
 	

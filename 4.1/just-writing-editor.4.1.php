@@ -46,7 +46,8 @@ function JustWritingEditorPage()
 			$SaveButtonDesc = sprintf(__('Last edited on %1$s at %2$s'), mysql2date(get_option('date_format'), $post->post_modified), mysql2date(get_option('time_format'), $post->post_modified));
 		}
 	} else { 
-		$post = get_default_post_to_edit(); 
+		if( array_key_exists( 'page', $_GET ) ) { $post_type = strtolower( str_replace( 'JustWriting', '', $_GET['page'] ) ); } else { $post_type = 'post'; }
+		$post = get_default_post_to_edit( $post_type, true); 
 		$post_ID = $post->ID;
 	}
 
@@ -69,8 +70,8 @@ function JustWritingEditorPage()
 
 				<div class="wp-tmce-mode" id="wp-fullscreen-mode-bar">
 					<div id="wp-fullscreen-modes" class="button-group">
-					<a class="button wp-fullscreen-mode-tinymce active" href="#" onclick="tinyMCE.get('post_content').show(); jQuery('.wp-fullscreen-mode-tinymce').addClass('active'); jQuery('.wp-fullscreen-mode-html').removeClass('active'); return false;">Visual</a>
-					<a class="button wp-fullscreen-mode-html" href="#" onclick="tinyMCE.triggerSave(true, true); tinyMCE.get('post_content').hide(); jQuery('.wp-fullscreen-mode-html').addClass('active'); jQuery('.wp-fullscreen-mode-tinymce').removeClass('active'); return false;">Text</a>
+					<a class="button wp-fullscreen-mode-tinymce active" href="#" onclick="JustWritingSwitchEditor('html');">Visual</a>
+					<a class="button wp-fullscreen-mode-html" href="#" onclick="JustWritingSwitchEditor('text');">Text</a>
 				</div>
 			</div>
 
