@@ -550,7 +550,7 @@ function JustWritingAjaxSave()
 	$errorMessage.hide();
 	$saveMessage.hide();
 
-	tinyMCE.triggerSave(true,true);
+	if( JustWritingEditor == 'html' ) { tinyMCE.triggerSave(true,true); }
 	
 	JustWrritingAjaxSaving = true;
 	JustWritingChanged = false;
@@ -669,22 +669,43 @@ function JustWritingSwitchEditor( mode )
 	{
 	if( JustWritingEditor == mode ) { return; }
 	
+	var ButtonBar = jQuery( '#wp-fullscreen-button-bar' );
+	
 	JustWritingEditor = mode;
 	
 	if( mode == 'html' )
 		{
+		var temp = jQuery('#post_content').text();
+		
+		// Now we have to grab the raw content from the textarea to update tinyMCE with.
+		tinyMCE.get('post_content').setContent( temp );
+		
+		// First show the tinyMCE editor.
 		tinyMCE.get('post_content').show(); 
-		tinyMCE.get('post_content').setContent( jQuery('#post_content').text() );
+		
+		// Deal with the classes.
 		jQuery('.wp-fullscreen-mode-tinymce').addClass('active'); 
 		jQuery('.wp-fullscreen-mode-html').removeClass('active'); 
+		
+		// Show the button bar and resize it just in case.
+		ButtonBar.show();
+		JustWritingToolBarResize();
 		}
 	else
 		{
+		// Get the content from tinyMCE, we need it in raw format, and update the textarea.
 		var temp = tinyMCE.get('post_content').getContent({format : 'raw'});
 		jQuery('#post_content').text( temp ); 
+		
+		// Hide tinyMCE.
 		tinyMCE.get('post_content').hide(); 
+		
+		// Deal with the classes.
 		jQuery('.wp-fullscreen-mode-html').addClass('active'); 
 		jQuery('.wp-fullscreen-mode-tinymce').removeClass('active'); 
+		
+		// Hide the button bar, note we don't resize the toolbar so the editor buttons stay in the same place.
+		ButtonBar.hide();
 		}
 	}
 	
