@@ -70,8 +70,8 @@ function JustWritingEditorPage()
 
 				<div class="wp-tmce-mode" id="wp-fullscreen-mode-bar">
 					<div id="wp-fullscreen-modes" class="button-group">
-					<a class="button wp-fullscreen-mode-tinymce active" href="#" onclick="JustWritingSwitchEditor('html');">Visual</a>
-					<a class="button wp-fullscreen-mode-html" href="#" onclick="JustWritingSwitchEditor('text');">Text</a>
+					<a class="button wp-fullscreen-mode-tinymce active" href="#" onclick="JustWritingSwitchEditor('html');" style="display:none;">Visual</a>
+					<a class="button wp-fullscreen-mode-html" href="#" onclick="JustWritingSwitchEditor('text');" style="display:none;">Text</a>
 				</div>
 			</div>
 
