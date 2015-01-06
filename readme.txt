@@ -11,7 +11,7 @@ Adds buttons and features to the Distraction Free Writing Mode for all kinds of 
 
 == Description ==
 
-Note: Just Writing now has beta support WordPress 4.1, this does not change the WordPress DFWM but instead adds a new "Writing" mode that closely matches the old DFWM.
+Note: Just Writing now has beta support WordPress 4.1, please see further down this page for more details.
 
 Distraction Free Writing Mode (DFWM) is a great way to focus on writing text, but have you ever found yourself wanting to do a bit more with it?  How about spell check, or change the paragraph style without dropping back to the standard post edit mode?  Now you can get all the functionality of the standard mode tools in DFWM!
 
@@ -19,6 +19,7 @@ But maybe you think there are too many buttons in DFWM, no problem you can get r
 
 Just Writing takes DFWM from a great way to write to a great way of writing posts!
 
+= New Commands =
 This plugin adds the following optional commands to the toolbar in DFWM:
 
 	* Address					* Insert More Tag
@@ -40,7 +41,7 @@ This plugin adds the following optional commands to the toolbar in DFWM:
 	* H6						* Undo
 	* Indent				
 
-And there's more!
+= More Features =
 
 	* Option to remove the fade effect and keep the toolbar visible
 	* Option to hide or lighten the border on the title/body areas
@@ -59,6 +60,21 @@ And there's more!
 	* Adds spell check field to the post title so your browser will spell check it for you
 	* Browser full screen mode now support
 
+= WordPress 4.1 Beta Support =
+
+DFWM in WP4.1 is a completely different than previous versions and Just Writing takes a completely different approch to it.  Instead of adding buttons and features to WordPress's built in DFWM, Just Writing adds a new "Writing" mode to WordPress.
+
+"Writing" mode closely matches the old DFWM from previous version of WordPress but has all the features of Just Writing.
+
+However being beta there are a few things to be aware of:
+
+	* There is no text mode editor at this time.  Most of the code is in place to support it but at the moment switching between them corrupts the post so it has been disabled.
+	* Switching between the edit page and writing mode, unlike the old DFWM, requires a full page load.
+	* There are a few hard coded pieces around, so there may be some weird effects with non-english languages.
+	* At the moment, only editing the post title and body are supported, however the rest of the post meta data will be added over the next few releases after the base code is stabilized.
+	
+= License =
+	
 This code is released under the GPL v2, see license.txt for details.
 
 == Installation ==
