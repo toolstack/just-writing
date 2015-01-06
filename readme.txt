@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 4.1
-Stable tag: 3.0
+Stable tag: 3.5
 
 Adds buttons and features to the Distraction Free Writing Mode for all kinds of extra functions.
 
