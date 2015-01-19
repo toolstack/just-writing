@@ -179,7 +179,7 @@ function JustWritingEditorPage()
 			
 			<div id="wp-fullscreen-save">
 				<a style="margin-left: 5px; margin-bottom: 8px;" class="button right" onclick="JustWritingExit('<?php echo esc_attr( htmlspecialchars( $sendback ) ); ?>')"><?php _e('Exit');?></a>
-				<a style="margin-left: 5px;" class="button right" href="http://localhost/wordpress/blog/2014/11/01/hello-world/" target="wp-preview-1"><?php _e('Preview');?></a>
+				<a style="margin-left: 5px;" class="button right" href="<?php echo get_permalink( $post_ID )?>" target="wp-preview-1"><?php _e('Preview');?></a>
 				<input title="<?php echo $SaveButtonDesc; ?>" class="button button-primary right" value="<?php echo $SaveButtonLabel;?>" onclick="JustWritingAjaxSave();" type="button">
 				<span class="wp-fullscreen-saved-message">Updated.</span>
 				<span class="wp-fullscreen-error-message">Save failed.</span>
@@ -462,8 +462,8 @@ do_meta_boxes(null, 'advanced', $post);
 	<input type="hidden" id="post_author" name="post_author" value="<?php echo $post->post_author; ?>" />
 	<input type="hidden" id="post_type" name="post_type" value="<?php echo $post->post_type; ?>" />
 	<input type="hidden" id="original_post_status" name="original_post_status" value="<?php echo $post->post_status; ?>" />
-	<input type="hidden" id="referredby" name="referredby" value="http://localhost/wordpress/wp-admin/edit.php" />
-	<input type="hidden" name="_wp_original_http_referer" value="http://localhost/wordpress/wp-admin/edit.php" />
+	<input type="hidden" id="referredby" name="referredby" value="<?php echo admin_url(); ?>edit.php" />
+	<input type="hidden" name="_wp_original_http_referer" value="<?php echo admin_url(); ?>edit.php" />
 	<input type='hidden' id='post_ID' name='post_ID' value='<?php echo $post->ID;?>' />
 	<?php //wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false ); echo "\n"; ?>
 	<?php //wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false ); echo "\n"; ?>

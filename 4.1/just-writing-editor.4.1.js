@@ -6,8 +6,9 @@ var JustWrritingAjaxSaving = false;
 var JustWritingChanged = false;
 var JustWritingEditor = 'html';
 
+// When we add the postboxes the containers are hidden in the collapsed div, which incorrectly creates an empty postbox area used to identify the column for drag and drop actions, so remove it.
 jQuery(document).ready(function(){
-	postboxes.add_postbox_toggles(pagenow);
+	jQuery('#side-sortables').removeClass('empty-container');
 });
 
 /*
