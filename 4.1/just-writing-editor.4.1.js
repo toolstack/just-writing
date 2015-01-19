@@ -6,6 +6,10 @@ var JustWrritingAjaxSaving = false;
 var JustWritingChanged = false;
 var JustWritingEditor = 'html';
 
+jQuery(document).ready(function(){
+	postboxes.add_postbox_toggles(pagenow);
+});
+
 /*
 	This function returns the index of specific JavaScript file we're looking for.
 	
@@ -706,6 +710,22 @@ function JustWritingSwitchEditor( mode )
 		
 		// Hide the button bar, note we don't resize the toolbar so the editor buttons stay in the same place.
 		ButtonBar.hide();
+		}
+	}
+
+function JustWritingToggleMetaEditor()
+	{
+	var metadiv = jQuery('#jw-meta-editor');
+
+	if( metadiv.is(':visible') ) 
+		{
+		metadiv.fadeOut(200);
+		}
+	else
+		{
+		metadiv.fadeIn(200);
+		// Since we don't know how the height of the control area (and auto doesn't seem to work with postboxes) we have to manually account for it here.
+		metadiv.height( jQuery('#post-body-content').height()  + 40);
 		}
 	}
 	

@@ -15,6 +15,7 @@ function JustWritingEditorPage()
 	wp_enqueue_style('justwriting-editor-css', plugin_dir_url(__FILE__) . 'editor.css', true, '4.1');
 	wp_enqueue_style('justwriting-custom-editor-css', plugin_dir_url(__FILE__) . 'just-writing-editor.4.1.css', true, '4.1');
 	wp_enqueue_style('jquery-ui-dialog', includes_url() . 'css/jquery-ui-dialog.css');
+	wp_enqueue_style('dashicons');
 	
 	//Enqueue the javascript.
 	//wp_enqueue_script('justwriting-editor-js', plugin_dir_url(__FILE__) . 'just-writing-editor.4.1.js' );
@@ -25,6 +26,12 @@ function JustWritingEditorPage()
 	// Enqueue jQuery UI
 	wp_enqueue_script( 'jquery-ui' );
 	wp_enqueue_script( 'jquery-ui-dialog' );
+
+	// Load the postbox script that provides the widget style boxes.
+	wp_enqueue_script('postbox');
+	
+	// Include the meta boxes.
+	require_once( ABSPATH . 'wp-admin/includes/meta-boxes.php' );
 		
 	$width = isset( $content_width ) && 800 > $content_width ? $content_width : 800;
 	$width = $width + 22; // compensate for the padding and border
@@ -38,8 +45,9 @@ function JustWritingEditorPage()
 	
 	if( $post_ID > 0 ) { 
 		$post = get_post($post_ID); 
+		$post_type = $post->post_type;
 		$LastEditTime = strtotime( $post->post_modified ); 
-	
+
 		if ( $last_user = get_userdata( get_post_meta( $post_ID, '_edit_last', true ) ) ) {
 			$SaveButtonDesc = sprintf(__('Last edited by %1$s on %2$s at %3$s'), esc_html( $last_user->display_name ), mysql2date(get_option('date_format'), $post->post_modified), mysql2date(get_option('time_format'), $post->post_modified));
 		} else {
@@ -82,6 +90,7 @@ function JustWritingEditorPage()
 	// Setup the buttons
 	// format: title, onclick, type (separator or button), both (show in both editors), class, style
 	$buttons = array();
+	$buttons['meta_editor'] = array( 'title' => __('Meta Editor'), 'onclick' => "JustWritingToggleMetaEditor();", 'both' => false );
 	if( $JustWritingUtilities->get_user_option( 'separator_one' ) == 'on' ) 	{ $buttons['JustWritingSeparatorOne'] = array( 'title' => __('Separator'), 'onclick' => "", 'type' => 'separator', 'both' => false ); }
 	if( $JustWritingUtilities->get_user_option( 'cut' ) == 'on' ) 				{ $buttons['cut'] = array( 'title' => __('Cut (Ctrl + X)'),'onclick' => "tinyMCE.execCommand('cut');",'both' => true); }
 	if( $JustWritingUtilities->get_user_option( 'copy' ) == 'on' ) 				{ $buttons['copy'] = array( 'title' => __('Copy (Ctrl + C)'), 'onclick' => "tinyMCE.execCommand('copy');", 'both' => true ); }
@@ -173,8 +182,11 @@ function JustWritingEditorPage()
 				<span class="wp-fullscreen-error-message">Save failed.</span>
 				<span class="spinner"></span>
 			</div>			
+
 		</div>
+	
 	</div>	
+
 <?php	
 	// Output the footer as well as the JavaScript popup div's.
 ?>
@@ -185,6 +197,201 @@ function JustWritingEditorPage()
 			<div id="wp-fullscreen-tagline">Just Writing.</div>
 		</div>
 	</div>
+</div>
+
+<?php
+// Setup the meta boxes.
+
+if ( post_type_supports($post_type, 'revisions') && 'auto-draft' != $post->post_status ) {
+	$revisions = wp_get_post_revisions( $post_ID );
+
+	// We should aim to show the revisions metabox only when there are revisions.
+	if ( count( $revisions ) > 1 ) {
+		reset( $revisions ); // Reset pointer for key()
+		$publish_callback_args = array( 'revisions_count' => count( $revisions ), 'revision_id' => key( $revisions ) );
+		add_meta_box('revisionsdiv', __('Revisions'), 'post_revisions_meta_box', null, 'normal', 'core');
+	}
+}
+
+if ( 'attachment' == $post_type ) {
+	wp_enqueue_script( 'image-edit' );
+	wp_enqueue_style( 'imgareaselect' );
+	add_meta_box( 'submitdiv', __('Save'), 'attachment_submit_meta_box', null, 'side', 'core' );
+	add_action( 'edit_form_after_title', 'edit_form_image_editor' );
+
+	if ( 0 === strpos( $post->post_mime_type, 'audio/' ) ) {
+		add_meta_box( 'attachment-id3', __( 'Metadata' ), 'attachment_id3_data_meta_box', null, 'normal', 'core' );
+	}
+} else {
+	add_meta_box( 'submitdiv', __( 'Publish' ), 'post_submit_meta_box', null, 'side', 'core', $publish_callback_args );
+}
+
+
+if ( current_theme_supports( 'post-formats' ) && post_type_supports( $post_type, 'post-formats' ) )
+	add_meta_box( 'formatdiv', _x( 'Format', 'post format' ), 'post_format_meta_box', null, 'side', 'core' );
+
+// all taxonomies
+foreach ( get_object_taxonomies( $post ) as $tax_name ) {
+	$taxonomy = get_taxonomy( $tax_name );
+	if ( ! $taxonomy->show_ui || false === $taxonomy->meta_box_cb )
+		continue;
+
+	$label = $taxonomy->labels->name;
+
+	if ( ! is_taxonomy_hierarchical( $tax_name ) )
+		$tax_meta_box_id = 'tagsdiv-' . $tax_name;
+	else
+		$tax_meta_box_id = $tax_name . 'div';
+
+	add_meta_box( $tax_meta_box_id, $label, $taxonomy->meta_box_cb, null, 'side', 'core', array( 'taxonomy' => $tax_name ) );
+}
+
+if ( post_type_supports($post_type, 'page-attributes') )
+	add_meta_box('pageparentdiv', 'page' == $post_type ? __('Page Attributes') : __('Attributes'), 'page_attributes_meta_box', null, 'side', 'core');
+
+if ( $thumbnail_support && current_user_can( 'upload_files' ) )
+	add_meta_box('postimagediv', __('Featured Image'), 'post_thumbnail_meta_box', null, 'side', 'low');
+
+if ( post_type_supports($post_type, 'excerpt') )
+	add_meta_box('postexcerpt', __('Excerpt'), 'post_excerpt_meta_box', null, 'normal', 'core');
+
+if ( post_type_supports($post_type, 'trackbacks') )
+	add_meta_box('trackbacksdiv', __('Send Trackbacks'), 'post_trackback_meta_box', null, 'normal', 'core');
+
+if ( post_type_supports($post_type, 'custom-fields') )
+	add_meta_box('postcustom', __('Custom Fields'), 'post_custom_meta_box', null, 'normal', 'core');
+
+/**
+ * Fires in the middle of built-in meta box registration.
+ *
+ * @since 2.1.0
+ * @deprecated 3.7.0 Use 'add_meta_boxes' instead.
+ *
+ * @param WP_Post $post Post object.
+ */
+do_action( 'dbx_post_advanced', $post );
+
+if ( post_type_supports($post_type, 'comments') )
+	add_meta_box('commentstatusdiv', __('Discussion'), 'post_comment_status_meta_box', null, 'normal', 'core');
+
+if ( ( 'publish' == get_post_status( $post ) || 'private' == get_post_status( $post ) ) && post_type_supports($post_type, 'comments') )
+	add_meta_box('commentsdiv', __('Comments'), 'post_comment_meta_box', null, 'normal', 'core');
+
+if ( ! ( 'pending' == get_post_status( $post ) && ! current_user_can( $post_type_object->cap->publish_posts ) ) )
+	add_meta_box('slugdiv', __('Slug'), 'post_slug_meta_box', null, 'normal', 'core');
+
+if ( post_type_supports($post_type, 'author') ) {
+	if ( is_super_admin() || current_user_can( $post_type_object->cap->edit_others_posts ) )
+		add_meta_box('authordiv', __('Author'), 'post_author_meta_box', null, 'normal', 'core');
+}
+
+/**
+ * Fires after all built-in meta boxes have been added.
+ *
+ * @since 3.0.0
+ *
+ * @param string  $post_type Post type.
+ * @param WP_Post $post      Post object.
+ */
+do_action( 'add_meta_boxes', $post_type, $post );
+
+/**
+ * Fires after all built-in meta boxes have been added, contextually for the given post type.
+ *
+ * The dynamic portion of the hook, $post_type, refers to the post type of the post.
+ *
+ * @since 3.0.0
+ *
+ * @param WP_Post $post Post object.
+ */
+do_action( 'add_meta_boxes_' . $post_type, $post );
+
+/**
+ * Fires after meta boxes have been added.
+ *
+ * Fires once for each of the default meta box contexts: normal, advanced, and side.
+ *
+ * @since 3.0.0
+ *
+ * @param string  $post_type Post type of the post.
+ * @param string  $context   string  Meta box context.
+ * @param WP_Post $post      Post object.
+ */
+do_action( 'do_meta_boxes', $post_type, 'normal', $post );
+/** This action is documented in wp-admin/edit-form-advanced.php */
+do_action( 'do_meta_boxes', $post_type, 'advanced', $post );
+/** This action is documented in wp-admin/edit-form-advanced.php */
+do_action( 'do_meta_boxes', $post_type, 'side', $post );
+?>
+<form name="post" action="post.php" method="post" id="post">
+
+
+<div id="jw-meta-editor" class="jw-meta-editor">
+<div id="poststuff">
+<div id="post-body" class="metabox-holder columns-2">
+<div id="post-body-content">
+	<div id="postbox-container-1" class="postbox-container">
+<?php
+if ( 'page' == $post_type ) {
+	/**
+	 * Fires before meta boxes with 'side' context are output for the 'page' post type.
+	 *
+	 * The submitpage box is a meta box with 'side' context, so this hook fires just before it is output.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @param WP_Post $post Post object.
+	 */
+	do_action( 'submitpage_box', $post );
+}
+else {
+	/**
+	 * Fires before meta boxes with 'side' context are output for all post types other than 'page'.
+	 *
+	 * The submitpost box is a meta box with 'side' context, so this hook fires just before it is output.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @param WP_Post $post Post object.
+	 */
+	do_action( 'submitpost_box', $post );
+}
+
+do_meta_boxes(null, 'side', $post);
+?>
+	</div>
+	<div id="postbox-container-2" class="postbox-container">
+<?php
+do_meta_boxes(null, 'normal', $post);
+
+if ( 'page' == $post_type ) {
+	/**
+	 * Fires after 'normal' context meta boxes have been output for the 'page' post type.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param WP_Post $post Post object.
+	 */
+	do_action( 'edit_page_form', $post );
+}
+else {
+	/**
+	 * Fires after 'normal' context meta boxes have been output for all post types other than 'page'.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param WP_Post $post Post object.
+	 */
+	do_action( 'edit_form_advanced', $post );
+}
+
+do_meta_boxes(null, 'advanced', $post);
+?>
+	</div>
+	
+</div>
+</div>
+</div>		
 </div>
 
 <div id="just_writing_formatselect_menu" class="mce-container mce-panel mce-floatpanel mce-menu mce-menu-align" hidefocus="1" tabindex="-1" style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; left: 24px; top: 295px; width: 131px; z-index: 300000; display: none; position: fixed;" role="menu"> 
@@ -245,8 +452,7 @@ function JustWritingEditorPage()
 
 	
 	?>
-<form name="post" action="post.php" method="post" id="post">
-
+<div id="jw-editor-container" class="jw-editor-container">
 	<?php wp_nonce_field( $nonce_action ); echo "\n"; ?>
 	<input type="hidden" id="hiddenaction" name="action" value="wp-fullscreen-save-post" />
 	<input type="hidden" id="originalaction" name="originalaction" value="editpost" />
@@ -263,6 +469,7 @@ function JustWritingEditorPage()
 		<input class="wp-fullscreen-title" style="width: 100%; margin-bottom: 24px;" spellcheck="true" name="post_title" size="30" id="title" autocomplete="off" type="text" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>">
 		<?php wp_editor( $post->post_content, 'post_content', array('media_buttons' => true, 'tinymce' => array( 'wp_autoresize_on' => true ) ) ); ?>
 	</div>
+</div>
 
 </form>
 <?php

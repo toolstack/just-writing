@@ -50,6 +50,11 @@ i.mce-i-pasteword:before {
 	content: '\f216';
 	}
 
+.mce-i-meta_editor:before {
+	font-family: "dashicons"; 
+	content: "\f333";
+}	
+	
 .JustWritingColorPopup {
 	position: fixed;
 	background-color: black;
@@ -104,7 +109,7 @@ div#wpadminbar { display: none !important; }
 div#adminmenuwrap { display: none !important; }
 div#adminmenuback { display: none !important; }
 div#wpfooter { display: none !important; }
-div#wpcontent { margin-left: 0px !important; background: #fff; }
+div#wpcontent { margin-left: 0px !important; background: #fff; padding-left: 0px !important; width: 100%;}
 .mce-toolbar-grp { display: none !important; }
 .mce-statusbar { display: none !important; }
 div#wp-post_content-editor-tools { display: none !important; }
@@ -130,4 +135,28 @@ div#wp-post_content-editor-container {
 .wp-fullscreen-title {
 	border-radius: 0px;
 	border: 1px dashed #CCC !important;
+}
+
+.jw-meta-editor {
+	width: 100%;
+	height: 1300px;
+	background: #777;
+	display: none;
+	position: relative;
+}
+
+.jw-editor-container {
+	position: relative;
+}
+
+#poststuff #post-body.columns-2 {
+    margin-right: 340px !important;
+}
+
+#post-body.columns-2 #postbox-container-1 {
+	margin-right: -px !important;
+}
+
+#post-body-content {
+	padding: 20px !important;
 }
