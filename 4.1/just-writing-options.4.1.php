@@ -248,7 +248,7 @@ function just_writing_user_profile_fields( $user )
 			</td>
 			<td colspan=2>
 			<input type="checkbox" id="just_writing_d_fade" name="just_writing_d_fade" <?php if( $JustWritingUtilities->get_user_option( 'disable_fade' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Disable the fade out of the toolbar *May have performance impacts*");?>
+			<?php echo __("Disable the fade out of the toolbar");?>
 			</td>
 			<td>
 			</td>
