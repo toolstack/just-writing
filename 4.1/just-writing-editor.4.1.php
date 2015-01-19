@@ -29,7 +29,10 @@ function JustWritingEditorPage()
 
 	// Load the postbox script that provides the widget style boxes.
 	wp_enqueue_script('postbox');
-	
+
+	// Load the post meta box script.
+	wp_enqueue_script('post');
+		
 	// Include the meta boxes.
 	require_once( ABSPATH . 'wp-admin/includes/meta-boxes.php' );
 		
