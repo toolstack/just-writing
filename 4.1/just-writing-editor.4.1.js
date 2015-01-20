@@ -11,7 +11,7 @@ jQuery(document).ready(function(){
 	jQuery('#side-sortables').removeClass('empty-container');
 
 	// We kind of assume we start in visual mode, but if not, reset to text mode.
-	if( tinyMCE.activeEditor == null || tinyMCE.activeEditor.isHidden() != false ) 
+	if( jQuery('#wp-post_content-wrap').hasClass('tmce-active') == false ) 
 		{
 		JustWritingEditor = 'text';
 
