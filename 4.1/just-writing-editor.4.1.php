@@ -2,7 +2,7 @@
 
 function JustWritingEditorPage()
 	{
-	GLOBAL $JustWritingUtilities;
+	GLOBAL $JustWritingUtilities, $post;
 	
 	// Set the current user and load the user preferences.
 	$JustWritingUtilities->set_user_id( get_current_user_id() );
@@ -69,13 +69,22 @@ function JustWritingEditorPage()
 
 	$title = $post->post_title;
 	
+	// Normally the sendback url is just fine, but if we're referring to ourselves we can never leave writing mode so check for it at the same time as we're checking for an empty sendback.
+	$jw_page = admin_url('edit.php?page=JustWriting');
 	$sendback = wp_get_referer();
-	if( !$sendback )
+	if( !$sendback || substr( $sendback, 0, strlen($jw_page) ) == $jw_page )
 		{
 			$sendback = admin_url( 'edit.php' );
 			$sendback .= ( ! empty( $post_type ) ) ? '?post_type=' . $post_type : '';
 		}
 
+	// Check to see if we just trashed a post, if so, go directly back to the page/post list.
+	if( array_key_exists( 'trashed', $_GET ) ) {
+		// This is a bit of a hack, WordPress can do a wp_redirect as it has it's own .php file for the page, but since we don't we have to use JavaScript to do the redirect for us.
+		echo "<script>window.location.href = '$sendback';</script>";
+		return;
+	}
+		
 	// Add in our menu bar
 ?>
 	<div style="height: auto; width: 100%;" id="fullscreen-topbar">
