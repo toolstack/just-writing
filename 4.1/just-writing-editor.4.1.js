@@ -680,13 +680,17 @@ function JustWritingSwitchEditor( mode )
 	
 	if( mode == 'html' )
 		{
+		// First grab the text from the content area.
 		var temp = jQuery('#post_content').text();
 		
-		// Now we have to grab the raw content from the textarea to update tinyMCE with.
-		tinyMCE.get('post_content').setContent( temp );
-		
-		// First show the tinyMCE editor.
+		// Now show the tinyMCE editor, we have to do this before setting the content or it will be replace with what is in the textarea.
 		tinyMCE.get('post_content').show(); 
+		
+		// Add the paragraph tags back in using WordPress's JavaScript.
+		temp = switchEditors.wpautop( temp );
+		
+		// Now we have to update tinyMCE with our updated text.
+		tinyMCE.get('post_content').setContent( temp );
 		
 		// Deal with the classes.
 		jQuery('.wp-fullscreen-mode-tinymce').addClass('active'); 
@@ -698,9 +702,11 @@ function JustWritingSwitchEditor( mode )
 		}
 	else
 		{
-		// Get the content from tinyMCE, we need it in raw format, and update the textarea.
-		var temp = tinyMCE.get('post_content').getContent({format : 'raw'});
-		jQuery('#post_content').text( temp ); 
+		// Get the content from tinyMCE, we need it in raw format.
+		var temp = tinyMCE.get('post_content').getContent();
+		
+		// Update the textarea.
+		jQuery('#post_content').html( temp ); 
 		
 		// Hide tinyMCE.
 		tinyMCE.get('post_content').hide(); 
@@ -717,16 +723,19 @@ function JustWritingSwitchEditor( mode )
 function JustWritingToggleMetaEditor()
 	{
 	var metadiv = jQuery('#jw-meta-editor');
+	var metabutton = jQuery('#wp_fs_meta_editor').parent();
 
 	if( metadiv.is(':visible') ) 
 		{
 		metadiv.fadeOut(200);
+		metabutton.removeClass('mce-active');
 		}
 	else
 		{
 		metadiv.fadeIn(200);
 		// Since we don't know how the height of the control area (and auto doesn't seem to work with postboxes) we have to manually account for it here.
 		metadiv.height( jQuery('#post-body-content').height()  + 40);
+		metabutton.addClass('mce-active');
 		}
 	}
 	

@@ -32,7 +32,10 @@ function JustWritingEditorPage()
 
 	// Load the post meta box script.
 	wp_enqueue_script('post');
-		
+
+	// Load the editor script.
+	wp_enqueue_script('editor');
+	
 	// Include the meta boxes.
 	require_once( ABSPATH . 'wp-admin/includes/meta-boxes.php' );
 		
@@ -81,8 +84,8 @@ function JustWritingEditorPage()
 
 				<div class="wp-tmce-mode" id="wp-fullscreen-mode-bar">
 					<div id="wp-fullscreen-modes" class="button-group">
-					<a class="button wp-fullscreen-mode-tinymce active" href="#" onclick="JustWritingSwitchEditor('html');" style="display:none;">Visual</a>
-					<a class="button wp-fullscreen-mode-html" href="#" onclick="JustWritingSwitchEditor('text');" style="display:none;">Text</a>
+					<a class="button wp-fullscreen-mode-tinymce active" href="#" onclick="JustWritingSwitchEditor('html');">Visual</a>
+					<a class="button wp-fullscreen-mode-html" href="#" onclick="JustWritingSwitchEditor('text');">Text</a>
 				</div>
 			</div>
 
