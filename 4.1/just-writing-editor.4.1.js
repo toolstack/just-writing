@@ -9,6 +9,22 @@ var JustWritingEditor = 'html';
 // When we add the postboxes the containers are hidden in the collapsed div, which incorrectly creates an empty postbox area used to identify the column for drag and drop actions, so remove it.
 jQuery(document).ready(function(){
 	jQuery('#side-sortables').removeClass('empty-container');
+
+	// We kind of assume we start in visual mode, but if not, reset to text mode.
+	if( tinyMCE.activeEditor == null || tinyMCE.activeEditor.isHidden() != false ) 
+		{
+		JustWritingEditor = 'text';
+
+		// Deal with the classes.
+		jQuery('.wp-fullscreen-mode-html').addClass('active'); 
+		jQuery('.wp-fullscreen-mode-tinymce').removeClass('active'); 
+		
+		// Hide the button bar, note we don't resize the toolbar so the editor buttons stay in the same place.
+		var ButtonBar = jQuery( '#wp-fullscreen-button-bar' );
+		ButtonBar.hide();
+		JustWritingToolBarResize();
+		}	
+
 });
 
 /*
@@ -683,14 +699,26 @@ function JustWritingSwitchEditor( mode )
 		// First grab the text from the content area.
 		var temp = jQuery('#post_content').text();
 		
-		// Now show the tinyMCE editor, we have to do this before setting the content or it will be replace with what is in the textarea.
-		tinyMCE.get('post_content').show(); 
+		// Check to see if tinyMCE has been activated yet, if not, do so now.
+		if( tinyMCE.activeEditor == null ) 
+			{
+			// Add the paragraph tags back in using WordPress's JavaScript.
+			jQuery('#post_content').val( switchEditors.wpautop( temp ) );
+
+			// Now init the tinyMCE editor, we have to do this before setting the content or it will be replace with what is in the textarea.
+			tinyMCE.init( tinyMCEPreInit.mceInit['post_content'] );
+			}
+		else
+			{
+			// Now show the tinyMCE editor, we have to do this before setting the content or it will be replace with what is in the textarea.
+			tinyMCE.get('post_content').show(); 
+
+			// Add the paragraph tags back in using WordPress's JavaScript.
+			temp = switchEditors.wpautop( temp );
 		
-		// Add the paragraph tags back in using WordPress's JavaScript.
-		temp = switchEditors.wpautop( temp );
-		
-		// Now we have to update tinyMCE with our updated text.
-		tinyMCE.get('post_content').setContent( temp );
+			// Now we have to update tinyMCE with our updated text.
+			tinyMCE.get('post_content').setContent( temp );
+			}
 		
 		// Deal with the classes.
 		jQuery('.wp-fullscreen-mode-tinymce').addClass('active'); 
@@ -699,6 +727,11 @@ function JustWritingSwitchEditor( mode )
 		// Show the button bar and resize it just in case.
 		ButtonBar.show();
 		JustWritingToolBarResize();
+		
+		// Depending on how long the client takes to update the classes and run the WordPress JavaScript we may get the wrong toolbar position on the above call to JustWritingToolBarResize().
+		// So let's set a timeout event to resize in, once at .5 seconds and again at 1.5 seconds just to be sure.
+		setTimeout( 'JustWritingToolBarResize();', 500 );
+		setTimeout( 'JustWritingToolBarResize();', 1500 );
 		}
 	else
 		{
