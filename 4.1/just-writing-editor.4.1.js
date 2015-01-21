@@ -9,22 +9,6 @@ var JustWritingEditor = 'html';
 // When we add the postboxes the containers are hidden in the collapsed div, which incorrectly creates an empty postbox area used to identify the column for drag and drop actions, so remove it.
 jQuery(document).ready(function(){
 	jQuery('#side-sortables').removeClass('empty-container');
-
-	// We kind of assume we start in visual mode, but if not, reset to text mode.
-	if( jQuery('#wp-post_content-wrap').hasClass('tmce-active') == false ) 
-		{
-		JustWritingEditor = 'text';
-
-		// Deal with the classes.
-		jQuery('.wp-fullscreen-mode-html').addClass('active'); 
-		jQuery('.wp-fullscreen-mode-tinymce').removeClass('active'); 
-		
-		// Hide the button bar, note we don't resize the toolbar so the editor buttons stay in the same place.
-		var ButtonBar = jQuery( '#wp-fullscreen-button-bar' );
-		ButtonBar.hide();
-		JustWritingToolBarResize();
-		}	
-
 });
 
 /*
@@ -254,10 +238,32 @@ function JustWriting()
 				content_ifr.contentWindow.document.onmousemove = function() { JustWritingToggleFade('peak'); }
 				}
 			}
-
-		// Trigger an inital save from TinyMCE so we can compare the content when the user hits 'exit' properly (it will strip out the <p> marks, etc.).
-		tinyMCE.triggerSave(true,true);
 		}
+
+		// We kind of assume we start in visual mode, but if not, reset to text mode.
+		if( jQuery('#wp-post_content-wrap').hasClass('tmce-active') == false ) 
+			{
+			JustWritingEditor = 'text';
+
+			// Deal with the classes.
+			jQuery('.wp-fullscreen-mode-html').addClass('active'); 
+			jQuery('.wp-fullscreen-mode-tinymce').removeClass('active'); 
+			
+			// Hide the button bar, note we don't resize the toolbar so the editor buttons stay in the same place.
+			var ButtonBar = jQuery( '#wp-fullscreen-button-bar' );
+			ButtonBar.hide();
+			JustWritingToolBarResize();
+			}	
+		else {
+			// Trigger an inital save from TinyMCE so we can compare the content when the user hits 'exit' properly (it will strip out the <p> marks, etc.).
+			tinyMCE.triggerSave(true,true);
+		}
+
+		// We need to override the Publish button, so do that now.
+		var publishButton = jQuery('#publish');
+		publishButton.prop( 'type', 'button' );
+		publishButton.click( function() { JustWritingAjaxPublish();	});
+		
 	}
 
 /*
@@ -770,6 +776,16 @@ function JustWritingToggleMetaEditor()
 		metadiv.height( jQuery('#post-body-content').height()  + 40);
 		metabutton.addClass('mce-active');
 		}
+	}
+	
+/*
+	This function saves/updates the post.
+*/
+function JustWritingAjaxPublish()
+	{
+		alert('here!');
+		
+		window.location.href = url;
 	}
 	
 // Use an event listener to add the Just Writing function on a page load instead of .OnLoad as we might otherwise get overwritten by another plugin.
