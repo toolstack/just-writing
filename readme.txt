@@ -62,16 +62,19 @@ This plugin adds the following optional commands to the toolbar in DFWM:
 
 = WordPress 4.1 Beta Support =
 
-DFWM in WP4.1 is a completely different than previous versions and Just Writing takes a completely different approch to it.  Instead of adding buttons and features to WordPress's built in DFWM, Just Writing adds a new "Writing" mode to WordPress.
+DFWM in WP4.1 is a completely different than previous versions and Just Writing takes a completely different approach to it.  Instead of adding buttons and features to WordPress's built in DFWM, Just Writing adds a new "Writing" mode to WordPress.
 
 "Writing" mode closely matches the old DFWM from previous version of WordPress but has all the features of Just Writing.
 
+New in this release:
+
+    * Support for full meta data editing inside of Writing mode.
+	* The text mode editor is back and functional!
+
 However being beta there are a few things to be aware of:
 
-	* There is no text mode editor at this time.  Most of the code is in place to support it but at the moment switching between them corrupts the post so it has been disabled.
 	* Switching between the edit page and writing mode, unlike the old DFWM, requires a full page load.
 	* There are a few hard coded pieces around, so there may be some weird effects with non-english languages.
-	* At the moment, only editing the post title and body are supported, however the rest of the post meta data will be added over the next few releases after the base code is stabilized.
 	
 = License =
 	
@@ -144,6 +147,11 @@ Just Writing is currently in beta for WordPress 4.1, please open a thread on the
 6. Administration screen.
 
 == Changelog ==
+= 3.6 =
+* Added meta data editing is now supported in Writing mode.
+* Fixed toolbar resizing would sometimes be incorrect due to the browser lagging behind showing various UI objects.
+* Updated preview button to check for modifications and notify the user before opening the preview window.
+
 = 3.5 =
 * Beta support for WordPress 4.1
 * Fixed bug with Firefox that would not dismiss the JavaScript popup correctly.
