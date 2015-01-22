@@ -5,6 +5,7 @@ var JustWritingMouseInToolbar = false;
 var JustWrritingAjaxSaving = false;
 var JustWritingChanged = false;
 var JustWritingEditor = 'html';
+var JustWritingPreviewInterval = false;
 
 // When we add the postboxes the containers are hidden in the collapsed div, which incorrectly creates an empty postbox area used to identify the column for drag and drop actions, so remove it.
 jQuery(document).ready(function(){
@@ -709,22 +710,30 @@ function JustWritingPreview(url, post_id)
 			resizable: false,
 			modal: true,
 			buttons: {
-				"Save": function() {
+				"Yes": function() {
 					jQuery( this ).dialog( "close" );
 					JustWritingAjaxSave();
 					
-					setInterval( function(){if( JustWrritingAjaxSaving == false ) { window.open(url,'wp-preview-' + post_id); } }, 500)
-					
+					JustWritingPreviewInterval = setInterval( function()
+						{
+						if( JustWrritingAjaxSaving == false ) 
+							{ 
+							clearInterval( JustWritingPreviewInterval );
+							JustWritingPreviewInterval = false;
+							window.open(url,'wp-preview-' + post_id); 
+							} 
+						}, 500);
 					},
-				"Cancel": function() {
+				"No": function() {
 					jQuery( this ).dialog( "close" );
+					window.open(url,'wp-preview-' + post_id); 
 					}
 				}
 			});
 		}
 	else 
 		{
-		window.location.href = url;
+		window.open(url,'wp-preview-' + post_id); 
 		}
 	}
 
