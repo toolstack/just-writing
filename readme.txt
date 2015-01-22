@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 4.1
-Stable tag: 3.6
+Stable tag: 3.6.1
 
 Adds buttons and features to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -149,6 +149,9 @@ Just Writing is currently in beta for WordPress 4.1, please open a thread on the
 6. Administration screen.
 
 == Changelog ==
+= 3.6.1 =
+* Fixed an incorrect JavaScript function definition that broke IE.
+
 = 3.6 =
 * Added meta data editing is now supported in Writing mode.
 * Fixed toolbar resizing would sometimes be incorrect due to the browser lagging behind showing various UI objects.
