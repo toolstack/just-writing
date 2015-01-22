@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 4.1
-Stable tag: 3.5
+Stable tag: 3.6
 
 Adds buttons and features to the Distraction Free Writing Mode for all kinds of extra functions.
 
@@ -75,6 +75,8 @@ However being beta there are a few things to be aware of:
 
 	* Switching between the edit page and writing mode, unlike the old DFWM, requires a full page load.
 	* There are a few hard coded pieces around, so there may be some weird effects with non-english languages.
+	* The meta edit button cannot be disabled at this time.
+	* Closing and re-arranging postboxes in the meta area are not saved between sessions.
 	
 = License =
 	
