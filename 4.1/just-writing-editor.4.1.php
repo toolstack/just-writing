@@ -191,8 +191,8 @@ function JustWritingEditorPage()
 			
 			<div id="wp-fullscreen-save">
 				<a style="margin-left: 5px; margin-bottom: 8px;" class="button right" onclick="JustWritingExit('<?php echo esc_attr( htmlspecialchars( $sendback ) ); ?>')"><?php _e('Exit');?></a>
-				<a style="margin-left: 5px;" class="button right" href="<?php echo get_permalink( $post_ID )?>" target="wp-preview-1"><?php _e('Preview');?></a>
-				<input title="<?php echo $SaveButtonDesc; ?>" class="button button-primary right" value="<?php echo $SaveButtonLabel;?>" onclick="JustWritingAjaxSave();" type="button">
+				<a style="margin-left: 5px;" class="button right" onclick="JustWritingPreview('<?php echo get_permalink( $post_ID ); ?>','<?php echo $post_ID; ?>');"><?php _e('Preview');?></a>
+				<input title="<?php echo $SaveButtonDesc; ?>" id="jw-update-button" class="button button-primary right" value="<?php echo $SaveButtonLabel;?>" onclick="JustWritingAjaxSave();" type="button">
 				<span class="wp-fullscreen-saved-message">Updated.</span>
 				<span class="wp-fullscreen-error-message">Save failed.</span>
 				<span class="spinner"></span>
@@ -461,6 +461,9 @@ do_meta_boxes(null, 'advanced', $post);
 
 <div id="dialog-save-before-exit" title="Save changes?" style="display: none;">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Changes have been made, would you like to save them before exiting?</p>
+</div>
+<div id="dialog-save-before-preview" title="Save changes?" style="display: none;">
+	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Changes have been made, would you like to save them before loading the preview page?</p>
 </div>
 <?php
 	// Output the title and create the TinyMCE instance.

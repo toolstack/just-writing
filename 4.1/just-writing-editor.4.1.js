@@ -565,7 +565,7 @@ function JustWritingOnResizeDocument()
 /*
 	This function saves/updates the post.
 */
-function JustWritingAjaxSave()
+function JustWritingAjaxSave(reload=false)
 	{
 	var $hidden = jQuery('#hiddenaction'),
 		oldVal = $hidden.val(),
@@ -601,6 +601,10 @@ function JustWritingAjaxSave()
 				if ( response.data && response.data.last_edited ) {
 					jQuery('#wp-fullscreen-save input').attr( 'title',  response.data.last_edited );
 				}
+				
+				// If we've hit the pubish button, reload the page just in case.
+				if( reload ) { 	window.location.href = window.location.href; }
+
 			} else {
 				$errorMessage.show();
 			}
@@ -662,7 +666,6 @@ function JustWritingExit( url )
 	
 	var t_content = jQuery('#post_content').val().trim();
 
-	
 	if( a_content != t_content || JustWritingChanged == true )
 		{
 		jQuery( "#dialog-save-before-exit" ).dialog( {
@@ -679,6 +682,39 @@ function JustWritingExit( url )
 				"Exit": function() {
 					jQuery( this ).dialog( "close" );
 					window.location.href = url;
+					},
+				"Cancel": function() {
+					jQuery( this ).dialog( "close" );
+					}
+				}
+			});
+		}
+	else 
+		{
+		window.location.href = url;
+		}
+	}
+
+function JustWritingPreview(url, post_id)
+	{
+	var a_content = jQuery('#post_content').val().trim();
+
+	tinyMCE.triggerSave(true,true);
+	
+	var t_content = jQuery('#post_content').val().trim();
+
+	if( a_content != t_content || JustWritingChanged == true )
+		{
+		jQuery( "#dialog-save-before-preview" ).dialog( {
+			resizable: false,
+			modal: true,
+			buttons: {
+				"Save": function() {
+					jQuery( this ).dialog( "close" );
+					JustWritingAjaxSave();
+					
+					setInterval( function(){if( JustWrritingAjaxSaving == false ) { window.open(url,'wp-preview-' + post_id); } }, 500)
+					
 					},
 				"Cancel": function() {
 					jQuery( this ).dialog( "close" );
@@ -783,9 +819,29 @@ function JustWritingToggleMetaEditor()
 */
 function JustWritingAjaxPublish()
 	{
-		alert('here!');
+	//Check to see what status we currently are.
+	CurrentStatus = jQuery('#hidden_post_status').val();
+	
+	switch( CurrentStatus ) 
+		{
+		case 'future':
+		case 'private':
+		case 'publish':
+			JustWritingAjaxSave(false);
 		
-		window.location.href = url;
+			break;
+		default:
+			jQuery('#post-status-display').html('Published');
+			jQuery('#hidden_post_status').val('publish');
+			jQuery('#original_post_status').val('publish');
+			jQuery('#post_status').prepend('<option value="publish">Published</option>');
+			jQuery('#post_status').val('publish');
+			jQuery('#publish').val( jQuery('#jw-update-button').val() );
+		
+			JustWritingAjaxSave(true);
+
+			break;
+		}
 	}
 	
 // Use an event listener to add the Just Writing function on a page load instead of .OnLoad as we might otherwise get overwritten by another plugin.
