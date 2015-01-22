@@ -566,7 +566,7 @@ function JustWritingOnResizeDocument()
 /*
 	This function saves/updates the post.
 */
-function JustWritingAjaxSave(reload=false)
+function JustWritingAjaxSave(reload)
 	{
 	var $hidden = jQuery('#hiddenaction'),
 		oldVal = $hidden.val(),
@@ -604,7 +604,7 @@ function JustWritingAjaxSave(reload=false)
 				}
 				
 				// If we've hit the pubish button, reload the page just in case.
-				if( reload ) { 	window.location.href = window.location.href; }
+				if( reload == true ) { 	window.location.href = window.location.href; }
 
 			} else {
 				$errorMessage.show();
