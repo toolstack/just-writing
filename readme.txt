@@ -6,6 +6,7 @@ Tags: admin posts writing
 Requires at least: 3.5.0
 Tested up to: 4.1
 Stable tag: 3.6.1
+License: GPLv2
 
 Adds buttons and features to the Distraction Free Writing Mode for all kinds of extra functions.
 
