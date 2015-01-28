@@ -2,10 +2,10 @@
 Contributors: GregRoss
 Plugin URI: http://toolstack.com/just-writing
 Author URI: http://toolstack.com
-Tags: admin posts writing
+Tags: admin posts writing DFW
 Requires at least: 3.5.0
 Tested up to: 4.1
-Stable tag: 3.6.1
+Stable tag: 3.6.2
 License: GPLv2
 
 Adds buttons and features to the Distraction Free Writing Mode for all kinds of extra functions.
@@ -150,6 +150,9 @@ Just Writing is currently in beta for WordPress 4.1, please open a thread on the
 6. Administration screen.
 
 == Changelog ==
+= 3.6.2 = 
+* Update utility class to avoid re-declaration errors.
+
 = 3.6.1 =
 * Fixed an incorrect JavaScript function definition that broke IE.
 
