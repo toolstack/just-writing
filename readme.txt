@@ -4,7 +4,7 @@ Plugin URI: http://toolstack.com/just-writing
 Author URI: http://toolstack.com
 Tags: admin posts writing DFW
 Requires at least: 3.5.0
-Tested up to: 4.1
+Tested up to: 4.2
 Stable tag: 3.6.2
 License: GPLv2
 
