@@ -228,7 +228,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 	
 	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
 		<legend><span style="font-size: 24px; font-weight: 700;">&nbsp;<?php _e('User Settings');?>&nbsp;</span></legend>
-		<p><?php echo __('WordPress 4.1 DFWM is not currently supported, there are no settings at this time that can be changed.');?></p>
+		<p><?php echo sprintf(__('User settings can be found in %syour profile page%s, under the Just Writing heading.'), '<a href="' . get_edit_profile_url(get_current_user_id()) . '">', '</a>' );?>
 	</fieldset>
 
 	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
