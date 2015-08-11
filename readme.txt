@@ -1,11 +1,12 @@
 === Just Writing ===
 Contributors: GregRoss
+Donate link: http://toolstack.com/donate
 Plugin URI: http://toolstack.com/just-writing
 Author URI: http://toolstack.com
 Tags: admin posts writing DFW
 Requires at least: 3.5.0
-Tested up to: 4.2
-Stable tag: 3.6.2
+Tested up to: 4.3
+Stable tag: 3.7
 License: GPLv2
 
 Adds buttons and features to the Distraction Free Writing Mode for all kinds of extra functions.
@@ -14,14 +15,14 @@ Adds buttons and features to the Distraction Free Writing Mode for all kinds of 
 
 Note: Just Writing now has beta support WordPress 4.1, please see further down this page for more details.
 
-Distraction Free Writing Mode (DFWM) is a great way to focus on writing text, but have you ever found yourself wanting to do a bit more with it?  How about spell check, or change the paragraph style without dropping back to the standard post edit mode?  Now you can get all the functionality of the standard mode tools in DFWM!
+Distraction Free Writing (DFW) Mode is a great way to focus on writing text, but have you ever found yourself wanting to do a bit more with it?  How about spell check, or change the paragraph style without dropping back to the standard post edit mode?  Now you can get all the functionality of the standard mode tools in DFW!
 
-But maybe you think there are too many buttons in DFWM, no problem you can get rid of pretty much all of them!
+But maybe you think there are too many buttons in DFW, no problem you can get rid of pretty much all of them!
 
-Just Writing takes DFWM from a great way to write to a great way of writing posts!
+Just Writing takes DFW from a great way to write to a great way of writing posts!
 
 = New Commands =
-This plugin adds the following optional commands to the toolbar in DFWM:
+This plugin adds the following optional commands to the toolbar in DFW:
 
 	* Address					* Insert More Tag
 	* Align Full				* Insert Custom Character
@@ -55,28 +56,23 @@ This plugin adds the following optional commands to the toolbar in DFWM:
 	* Re-orders the button list to make more sense
 	* Per-user preferences for enabling Just Writing
 	* Per-user preferences for which buttons to display
-	* Option to start in DFWM for new posts
-	* Option to start in DFWM when editing posts
-	* Option to add a DFWM link to the pages/posts list to go directly to DFWM
+	* Option to start in DFW for new posts
+	* Option to start in DFW when editing posts
+	* Option to add a DFW link to the pages/posts list to go directly to DFW
 	* Adds spell check field to the post title so your browser will spell check it for you
 	* Browser full screen mode now support
 
-= WordPress 4.1 Beta Support =
+= WordPress 4.1+ Support =
 
-DFWM in WP4.1 is a completely different than previous versions and Just Writing takes a completely different approach to it.  Instead of adding buttons and features to WordPress's built in DFWM, Just Writing adds a new "Writing" mode to WordPress.
+DFW in WP4.1 is a completely different than previous versions and Just Writing takes a completely different approach to it.  Instead of adding buttons and features to WordPress's built in DFW, Just Writing adds a new "Writing" mode to WordPress.
 
-"Writing" mode closely matches the old DFWM from previous version of WordPress but has all the features of Just Writing.
+"Writing" mode closely matches the old DFW from previous version of WordPress but has all the features of Just Writing.
 
-New in this release:
+There are a few differences however:
 
-    * Support for full meta data editing inside of Writing mode.
-	* The text mode editor is back and functional!
-
-However being beta there are a few things to be aware of:
-
-	* Switching between the edit page and writing mode, unlike the old DFWM, requires a full page load.
+	* Switching between the edit page and writing mode, unlike the old DFW, requires a full page load.
 	* There are a few hard coded pieces around, so there may be some weird effects with non-english languages.
-	* The meta edit button cannot be disabled at this time.
+    * Support for full meta data editing inside of Writing mode.
 	* Closing and re-arranging postboxes in the meta area are not saved between sessions.
 	
 = License =
@@ -110,9 +106,9 @@ For admin users it can be found under "Users"->"Your Profile".
 
 The fade effect is triggered by WordPress when no mouse movement is executed for 2 seconds, the only (without changing some of the WordPress sources files at least) way to disable it is to execute a mousemove event every 1.5 seconds.  This shouldn't be an issue in any modern browser, but if your having performance issues, simply re-enable the fade effect.
 
-= I've disabled the fade effect but there is a 'flicker' when DFWM comes up, what's wrong? =
+= I've disabled the fade effect but there is a 'flicker' when DFW comes up, what's wrong? =
 
-If you start DFWM without moving the mouse you might hit right between when WordPress starts fading but before Just Writing fires off a mousemove event, this shouldn't be an issue after the first start of DFWM.
+If you start DFW without moving the mouse you might hit right between when WordPress starts fading but before Just Writing fires off a mousemove event, this shouldn't be an issue after the first start of DFW.
 
 = I've added the spellcheck button to my toolbar but it doesn't do anything when I click it =
 
@@ -128,28 +124,28 @@ Browser full screen mode is highly dependent on the browser, it may not work for
 
 If it's not working for you try another browser.
 
-= Why can't the browser full screen mode be auto loaded like DFWM =
+= Why can't the browser full screen mode be auto loaded like DFW =
 
 Two words for you: Browser Security.
 
 Modern browsers support full screen mode but they only activate it when a user clicks on a button, there's no way to fake it through JavaScript.  Thats so that a malicous web site doesn't try and impersonate your OS and get you to enter a password that it steal.
 
-The other issue is that full screen mode is de-activated as soon as you leave the current page, so for example Just Writing could link full screen mode to the DFWM "click" in the post list, but as soon as the browser leaves the post list to load the editor page full screen mode will be deactivated.
-
-= I'm using WordPress 4.1 and something isn't working right with Just Writing =
-
-Just Writing is currently in beta for WordPress 4.1, please open a thread on the WordPress support forum with your problem so it can be addressed.
+The other issue is that full screen mode is de-activated as soon as you leave the current page, so for example Just Writing could link full screen mode to the DFW "click" in the post list, but as soon as the browser leaves the post list to load the editor page full screen mode will be deactivated.
 
 == Screenshots ==
 
-1. Pre installation DFWM.
-2. Post installation DFWM.
+1. Pre installation DFW.
+2. Post installation DFW.
 3. User preferences screen.
 4. Advanced user preferences options.
-5. A real DFWM!
+5. A real DFW!
 6. Administration screen.
 
 == Changelog ==
+= 3.7 =
+* Release date: August 11, 2015
+* Update to support WordPress 4.3.
+
 = 3.6.2 = 
 * Release date: January 28, 2015
 * Update utility class to avoid re-declaration errors.
@@ -253,12 +249,12 @@ Just Writing is currently in beta for WordPress 4.1, please open a thread on the
 
 = 2.12.1 =
 * Release date: November 11, 2013
-* Fixed a bug in the DFWM link code which ALWAYS included the linked regardless of the user preference setting.
+* Fixed a bug in the DFW link code which ALWAYS included the linked regardless of the user preference setting.
 
 = 2.12 =
 * Release date: November 11, 2013
 * Fixed a bug between the center toolbar and autoload code.
-* Added option to add a DFWM link to the post and pages list.
+* Added option to add a DFW link to the post and pages list.
 
 = 2.11 =
 * Release date: November 11, 2013
@@ -270,7 +266,7 @@ Just Writing is currently in beta for WordPress 4.1, please open a thread on the
 
 = 2.9 =
 * Release date: November 4, 2013
-* Fixed issue with auto load of DFWM being triggered every time a post was updated or published
+* Fixed issue with auto load of DFW being triggered every time a post was updated or published
 * Fixed issue with new installs, users would get a blank screen if they did not save their profile settings before editing a post
 
 = 2.8 =
@@ -303,8 +299,8 @@ Just Writing is currently in beta for WordPress 4.1, please open a thread on the
 * Release date: October 26, 2013
 * Added rate and review reminder in the user profile page
 * Added reminder to make sure the Visual Editor is enabled in the user profile page
-* Added option to start in DFWM for new posts
-* Added option to start in DFWM when editing posts
+* Added option to start in DFW for new posts
+* Added option to start in DFW when editing posts
 * Added 'lighter' border option for title/body area
 * Cleaned up the De/Select All code in the user profile page, should work with all 
   browsers now

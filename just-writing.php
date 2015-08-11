@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Just Writing
-Version: 3.6.2
+Version: 3.7
 Plugin URI: http://toolstack.com/just-writing
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -11,7 +11,7 @@ Compatible with WordPress 3.5+.
 
 Read the accompanying readme.txt file for instructions and documentation.
 
-Copyright (c) 2013-14 by Greg Ross
+Copyright (c) 2013-15 by Greg Ross
 
 This software is released under the GPL v2.0, see license.txt for details
 */
@@ -20,7 +20,7 @@ include_once( 'ToolStack-Utilities.class.php' );
 
 if( !function_exists( 'JustWritingLoad' ) )
 	{
-	define( 'JustWritingVersion', '3.6.2' );
+	define( 'JustWritingVersion', '3.7' );
 
 	Function JustWritingFileVersion()
 		{
