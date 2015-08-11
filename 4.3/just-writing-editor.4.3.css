@@ -1,0 +1,166 @@
+.mce-i-JustWritingSeparatorOne,
+.mce-i-JustWritingSeparatorTwo,
+.mce-i-JustWritingSeparatorThree,
+.mce-i-JustWritingSeparatorFour,
+.mce-i-JustWritingSeparatorFive,
+.mce-i-JustWritingSeparatorSix,
+.mce-i-JustWritingSeparatorSeven,
+.mce-i-JustWritingSeparatorEight { background-position:-226px 0px; background-size: auto; background-image: url('../just-writing-icons.png?ver=20131018'); width:9px !important; height:28px !important;}
+
+.mce-i-H1 { background-position:0px -20px; background-size: auto; background-image: url('../just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce-i-H1 {background-position:0px 0}
+
+.mce-i-H2 { background-position:-20px -20px; background-size: auto; background-image: url('../just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce-i-H2 {background-position:-20px 0}
+
+.mce-i-H3 { background-position:-40px -20px; background-size: auto; background-image: url('../just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce-i-H3 {background-position:-40px 0}
+
+.mce-i-H4 { background-position:-60px -20px; background-size: auto; background-image: url('../just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce-i-H4 {background-position:-60px 0}
+
+.mce-i-H5 { background-position:-80px -20px; background-size: auto; background-image: url('../just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce-i-H5 {background-position:-80px 0}
+
+.mce-i-H6 { background-position:-100px -20px; background-size: auto; background-image: url('../just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce-i-H6 {background-position:-100px 0}
+
+.mce-i-Paragraph { background-position:-120px -20px; background-size: auto; background-image: url('../just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce-i-Paragraph {background-position:-120px 0}
+
+.mce-i-Address { background-position:-140px -20px; background-size: auto; background-image: url('../just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce-i-Address {background-position:-140px 0}
+
+.mce-i-Preformatted { background-position:-160px -20px; background-size: auto; background-image: url('../just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce-i-Preformatted {background-position:-160px 0}
+
+.mce-i-fontcolor { background-position:-240px -20px; background-size: auto; background-image: url('../just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce-i-fontcolor {background-position:-240px 0}
+
+.mce-i-backgroundcolor { background-position:-260px -20px; background-size: auto; background-image: url('../just-writing-icons.png?ver=20131018');}
+.mce-i-backgroundcolor:hover { background-position:-260px 0; }
+
+.mce-i-fontselector { background-position:-300px -20px; background-size: auto; background-image: url('../just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce-i-fontselector {background-position:-300px 0}
+
+.mce-i-fontsize { background-position:-280px -20px; background-size: auto; background-image: url('../just-writing-icons.png?ver=20131018');}
+.wp_themeSkin .mceButtonEnabled:hover span.mce-i-fontsize {background-position:-280px 0}
+
+i.mce-i-pasteword:before {
+	content: '\f216';
+	}
+
+.mce-i-meta_editor:before {
+	font-family: "dashicons"; 
+	content: "\f333";
+}	
+	
+.JustWritingColorPopup {
+	position: fixed;
+	background-color: black;
+	color: white;
+	width: 150px;
+	height: 300px;
+	border-width: 5px;
+	border-color: blue;
+	border-style: solid;
+	display: none;
+	z-index: 300000;
+	}
+
+.JustWritingColorSwatch {
+	float: left; 
+	width: 50px; 
+	height: 50px; 
+	}
+
+#wp-fullscreen-save > .wp-fullscreen-saved-message,
+#wp-fullscreen-save > .wp-fullscreen-error-message,
+#wp-fullscreen-save > .spinner
+	{
+    border: none;
+    position: fixed;
+    left: 100%;
+    top: 0%;
+    background-color: rgba( 11,11,11,.8);
+    z-index: 100;
+
+    height: 100px;
+    margin-top: 50px;
+
+    width: 175px;
+    margin-left: -185px;
+	
+	text-align: center;
+	color: white;
+	line-height: 100px;
+	font-size: 35px;
+	
+	background-position:center;
+	
+	border-radius: 12px;
+	}
+
+/* Add a margin to the bottom of the TinyMCE iframe to ensure the status bar doesn't obscure it.*/
+iframe#post_content_ifr { margin-bottom: 20px; }
+
+/* Remove all the chrome from WordPress. */
+div#wpadminbar { display: none !important; }
+div#adminmenuwrap { display: none !important; }
+div#adminmenuback { display: none !important; }
+div#wpfooter { display: none !important; }
+div#wpcontent { margin-left: 0px !important; background: #fff; padding-left: 0px !important; width: 100%;}
+.mce-toolbar-grp { display: none !important; }
+.mce-statusbar { display: none !important; }
+div#wp-post_content-editor-tools { display: none !important; }
+body { background: #fff; }
+html { background: #fff; }
+
+div#wp-fullscreen-statusbar {
+	background: #f8f8f8;
+	border-top: 1px solid #eee;
+}
+
+/* make sure the text in the textarea is set to black */
+.wp-editor-area {
+    color: #000 !important;
+}
+
+/* Add the border to the title/content */
+div#wp-post_content-editor-container {
+	border-radius: 0px;
+	border: 1px dashed #CCC;
+}
+
+.wp-fullscreen-title {
+	border-radius: 0px;
+	border: 1px dashed #CCC !important;
+}
+
+.jw-meta-editor {
+	width: 100%;
+	height: 1300px;
+	background: #777;
+	display: none;
+	position: relative;
+}
+
+.jw-editor-container {
+	position: relative;
+}
+
+#poststuff #post-body.columns-2 {
+    margin-right: 340px !important;
+}
+
+#post-body.columns-2 #postbox-container-1 {
+	margin-right: -px !important;
+}
+
+#post-body-content {
+	padding: 20px !important;
+}
+
+div#minor-publishing-actions {
+	display: none !important;
+}

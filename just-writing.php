@@ -26,17 +26,24 @@ if( !function_exists( 'JustWritingLoad' ) )
 		{
 		GLOBAL $wp_version;
 		
-		if( version_compare( $wp_version, '3.8.99', '<=' ) )
+		if( version_compare( $wp_version, '3.9', '<' ) )
 			{
 			return '3.5';
 			}
 			
-		if( version_compare( $wp_version, '4.0.99', '>' ) )
+		// We compare against 4.0.99 in the second version compare to ensure we use the right version for beta/rc versions of WP.
+		if( version_compare( $wp_version, '3.9', '>=' ) && version_compare( $wp_version, '4.0.99', '<=') )
+			{
+			return '3.9';
+			}
+
+		// We compare against 4.2.99 in the second version compare to ensure we use the right version for beta/rc versions of WP.
+		if( version_compare( $wp_version, '4.1', '>=' ) && version_compare( $wp_version, '4.2.99', '<=') )
 			{
 			return '4.1';
 			}
 
-		return '3.9';
+		return '4.3';
 		}
 	
 	/*
