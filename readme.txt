@@ -6,7 +6,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing DFW
 Requires at least: 3.5.0
 Tested up to: 4.3
-Stable tag: 3.7
+Stable tag: 3.8
 License: GPLv2
 
 Adds buttons and features to the Distraction Free Writing Mode for all kinds of extra functions.
@@ -142,6 +142,13 @@ The other issue is that full screen mode is de-activated as soon as you leave th
 6. Administration screen.
 
 == Changelog ==
+= 3.8 =
+* Release date: September 18, 2015
+* Added Writing button to the text mode post/page editor.
+* Update utility class.
+* Updated the settings page, adding tabs and better about format.
+* Fixed some WP_DEBUG warnings.
+
 = 3.7 =
 * Release date: August 11, 2015
 * Update to support WordPress 4.3.
@@ -342,5 +349,4 @@ The other issue is that full screen mode is de-activated as soon as you leave th
 * None.
 
 == Roadmap ==
-* Version 3.0  - add second row to toolbar, remove individual style buttons
-               - update how preferences are stored to reduce database calls
+* add second row to toolbar, remove individual style buttons
