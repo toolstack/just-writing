@@ -21,6 +21,13 @@ function just_writing_get_checked_state( $value )
 		}
 	}
 
+function just_writing_validate_post_value( $array, $key, $default = null )
+	{
+	if( !is_array( $array ) || !array_key_exists( $key, $array ) ) { return $default; }
+	
+	return $array[$key];
+	}
+	
 /*
  	This function is called to save the user profile settings for Just Writing.
 */
@@ -35,75 +42,75 @@ function just_writing_save_user_profile_fields( $user_id )
 	$JustWritingUtilities->set_user_id( $user_id );
 	$JustWritingUtilities->load_user_options();
 
-	$JustWritingUtilities->store_user_option( 'enabled', just_writing_get_checked_state( $_POST['just_writing_enabled'] ) );
-	$JustWritingUtilities->store_user_option( 'bold', just_writing_get_checked_state( $_POST['just_writing_bold'] ) );
-	$JustWritingUtilities->store_user_option( 'italics', just_writing_get_checked_state( $_POST['just_writing_italics'] ) );
-	$JustWritingUtilities->store_user_option( 'ul', just_writing_get_checked_state( $_POST['just_writing_ul'] ) );
-	$JustWritingUtilities->store_user_option( 'nl', just_writing_get_checked_state( $_POST['just_writing_nl'] ) );
-	$JustWritingUtilities->store_user_option( 'quotes', just_writing_get_checked_state( $_POST['just_writing_quotes'] ) );
-	$JustWritingUtilities->store_user_option( 'media', just_writing_get_checked_state( $_POST['just_writing_media'] ) );
-	$JustWritingUtilities->store_user_option( 'link', just_writing_get_checked_state( $_POST['just_writing_link'] ) );
-	$JustWritingUtilities->store_user_option( 'unlink', just_writing_get_checked_state( $_POST['just_writing_unlink'] ) );
-	$JustWritingUtilities->store_user_option( 'strike', just_writing_get_checked_state( $_POST['just_writing_strike'] ) );
-	$JustWritingUtilities->store_user_option( 'underline', just_writing_get_checked_state( $_POST['just_writing_under'] ) );
-	$JustWritingUtilities->store_user_option( 'remove_format', just_writing_get_checked_state( $_POST['just_writing_remove'] ) );
-	$JustWritingUtilities->store_user_option( 'left_justify', just_writing_get_checked_state( $_POST['just_writing_left'] ) );
-	$JustWritingUtilities->store_user_option( 'center_justify', just_writing_get_checked_state( $_POST['just_writing_center'] ) );
-	$JustWritingUtilities->store_user_option( 'right_justify', just_writing_get_checked_state( $_POST['just_writing_right'] ) );
-	$JustWritingUtilities->store_user_option( 'full_justify', just_writing_get_checked_state( $_POST['just_writing_justify'] ) );
-	$JustWritingUtilities->store_user_option( 'outdent', just_writing_get_checked_state( $_POST['just_writing_outdent'] ) );
-	$JustWritingUtilities->store_user_option( 'indent', just_writing_get_checked_state( $_POST['just_writing_indent'] ) );
-	$JustWritingUtilities->store_user_option( 'p_format', just_writing_get_checked_state( $_POST['just_writing_p'] ) );
-	$JustWritingUtilities->store_user_option( 'h1_format', just_writing_get_checked_state( $_POST['just_writing_h1'] ) );
-	$JustWritingUtilities->store_user_option( 'h2_format', just_writing_get_checked_state( $_POST['just_writing_h2'] ) );
-	$JustWritingUtilities->store_user_option( 'h3_format', just_writing_get_checked_state( $_POST['just_writing_h3'] ) );
-	$JustWritingUtilities->store_user_option( 'h4_format', just_writing_get_checked_state( $_POST['just_writing_h4'] ) );
-	$JustWritingUtilities->store_user_option( 'h5_format', just_writing_get_checked_state( $_POST['just_writing_h5'] ) );
-	$JustWritingUtilities->store_user_option( 'h6_format', just_writing_get_checked_state( $_POST['just_writing_h6'] ) );
-	$JustWritingUtilities->store_user_option( 'address_format', just_writing_get_checked_state( $_POST['just_writing_address'] ) );
-	$JustWritingUtilities->store_user_option( 'pre_format', just_writing_get_checked_state( $_POST['just_writing_pf'] ) );
-	$JustWritingUtilities->store_user_option( 'spellcheck', just_writing_get_checked_state( $_POST['just_writing_spell'] ) );
-	$JustWritingUtilities->store_user_option( 'more', just_writing_get_checked_state( $_POST['just_writing_more'] ) );
-	$JustWritingUtilities->store_user_option( 'char_map', just_writing_get_checked_state( $_POST['just_writing_char'] ) );
-	$JustWritingUtilities->store_user_option( 'undo', just_writing_get_checked_state( $_POST['just_writing_undo'] ) );
-	$JustWritingUtilities->store_user_option( 'redo', just_writing_get_checked_state( $_POST['just_writing_redo'] ) );
-	$JustWritingUtilities->store_user_option( 'help', just_writing_get_checked_state( $_POST['just_writing_help'] ) );
-	$JustWritingUtilities->store_user_option( 'disable_fade', just_writing_get_checked_state( $_POST['just_writing_d_fade'] ) );
-	$JustWritingUtilities->store_user_option( 'hide_wordcount', just_writing_get_checked_state( $_POST['just_writing_h_wc'] ) );
-	$JustWritingUtilities->store_user_option( 'hide_preview', just_writing_get_checked_state( $_POST['just_writing_h_p'] ) );
-	$JustWritingUtilities->store_user_option( 'hide_modeselect', just_writing_get_checked_state( $_POST['just_writing_h_mb'] ) );
-	$JustWritingUtilities->store_user_option( 'autoload_newposts', just_writing_get_checked_state( $_POST['just_writing_al_new'] ) );
-	$JustWritingUtilities->store_user_option( 'autoload_editposts', just_writing_get_checked_state( $_POST['just_writing_al_edit'] ) );
-	$JustWritingUtilities->store_user_option( 'format_listbox', just_writing_get_checked_state( $_POST['just_writing_f_lb'] ) );
-	$JustWritingUtilities->store_user_option( 'superscript', just_writing_get_checked_state( $_POST['just_writing_superscript'] ) );
-	$JustWritingUtilities->store_user_option( 'subscript', just_writing_get_checked_state( $_POST['just_writing_subscript'] ) );
-	$JustWritingUtilities->store_user_option( 'cut', just_writing_get_checked_state( $_POST['just_writing_cut'] ) );
-	$JustWritingUtilities->store_user_option( 'copy', just_writing_get_checked_state( $_POST['just_writing_copy'] ) );
-	$JustWritingUtilities->store_user_option( 'paste', just_writing_get_checked_state( $_POST['just_writing_paste'] ) );
-	$JustWritingUtilities->store_user_option( 'pastetext', just_writing_get_checked_state( $_POST['just_writing_pastetext'] ) );
-	$JustWritingUtilities->store_user_option( 'pasteword', just_writing_get_checked_state( $_POST['just_writing_pasteword'] ) );
-	$JustWritingUtilities->store_user_option( 'separator_one', just_writing_get_checked_state( $_POST['just_writing_separatorone'] ) );
-	$JustWritingUtilities->store_user_option( 'separator_two', just_writing_get_checked_state( $_POST['just_writing_separatortwo'] ) );
-	$JustWritingUtilities->store_user_option( 'separator_three', just_writing_get_checked_state( $_POST['just_writing_separatorthree'] ) );
-	$JustWritingUtilities->store_user_option( 'separator_four', just_writing_get_checked_state( $_POST['just_writing_separatorfour'] ) );
-	$JustWritingUtilities->store_user_option( 'separator_five', just_writing_get_checked_state( $_POST['just_writing_separatorfive'] ) );
-	$JustWritingUtilities->store_user_option( 'separator_six', just_writing_get_checked_state( $_POST['just_writing_separatorsix'] ) );
-	$JustWritingUtilities->store_user_option( 'separator_seven', just_writing_get_checked_state( $_POST['just_writing_separatorseven'] ) );
-	$JustWritingUtilities->store_user_option( 'separator_eight', just_writing_get_checked_state( $_POST['just_writing_separatoreight'] ) );
-	$JustWritingUtilities->store_user_option( 'font_name', just_writing_get_checked_state( $_POST['just_writing_f_n'] ) );
-	$JustWritingUtilities->store_user_option( 'font_size', just_writing_get_checked_state( $_POST['just_writing_f_s'] ) );
-	$JustWritingUtilities->store_user_option( 'font_color', just_writing_get_checked_state( $_POST['just_writing_f_c'] ) );
-	$JustWritingUtilities->store_user_option( 'background_color', just_writing_get_checked_state( $_POST['just_writing_b_c'] ) );
-	$JustWritingUtilities->store_user_option( 'center_toolbar', just_writing_get_checked_state( $_POST['just_writing_c_tb'] ) );
-	$JustWritingUtilities->store_user_option( 'browser_fullscreen', just_writing_get_checked_state( $_POST['just_writing_browser_fs'] ) );
+	$JustWritingUtilities->store_user_option( 'enabled', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_enabled' ) ) );
+	$JustWritingUtilities->store_user_option( 'bold', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_bold' ) ) );
+	$JustWritingUtilities->store_user_option( 'italics', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_italics' ) ) );
+	$JustWritingUtilities->store_user_option( 'ul', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_ul' ) ) );
+	$JustWritingUtilities->store_user_option( 'nl', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_nl' ) ) );
+	$JustWritingUtilities->store_user_option( 'quotes', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_quotes' ) ) );
+	$JustWritingUtilities->store_user_option( 'media', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_media' ) ) );
+	$JustWritingUtilities->store_user_option( 'link', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_link' ) ) );
+	$JustWritingUtilities->store_user_option( 'unlink', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_unlink' ) ) );
+	$JustWritingUtilities->store_user_option( 'strike', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_strike' ) ) );
+	$JustWritingUtilities->store_user_option( 'underline', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_under' ) ) );
+	$JustWritingUtilities->store_user_option( 'remove_format', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_remove' ) ) );
+	$JustWritingUtilities->store_user_option( 'left_justify', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_left' ) ) );
+	$JustWritingUtilities->store_user_option( 'center_justify', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_center' ) ) );
+	$JustWritingUtilities->store_user_option( 'right_justify', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_right' ) ) );
+	$JustWritingUtilities->store_user_option( 'full_justify', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_justify' ) ) );
+	$JustWritingUtilities->store_user_option( 'outdent', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_outdent' ) ) );
+	$JustWritingUtilities->store_user_option( 'indent', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_indent' ) ) );
+	$JustWritingUtilities->store_user_option( 'p_format', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_p' ) ) );
+	$JustWritingUtilities->store_user_option( 'h1_format', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_h1' ) ) );
+	$JustWritingUtilities->store_user_option( 'h2_format', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_h2' ) ) );
+	$JustWritingUtilities->store_user_option( 'h3_format', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_h3' ) ) );
+	$JustWritingUtilities->store_user_option( 'h4_format', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_h4' ) ) );
+	$JustWritingUtilities->store_user_option( 'h5_format', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_h5' ) ) );
+	$JustWritingUtilities->store_user_option( 'h6_format', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_h6' ) ) );
+	$JustWritingUtilities->store_user_option( 'address_format', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_address' ) ) );
+	$JustWritingUtilities->store_user_option( 'pre_format', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_pf' ) ) );
+	$JustWritingUtilities->store_user_option( 'spellcheck', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_spell' ) ) );
+	$JustWritingUtilities->store_user_option( 'more', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_more' ) ) );
+	$JustWritingUtilities->store_user_option( 'char_map', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_char' ) ) );
+	$JustWritingUtilities->store_user_option( 'undo', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_undo' ) ) );
+	$JustWritingUtilities->store_user_option( 'redo', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_redo' ) ) );
+	$JustWritingUtilities->store_user_option( 'help', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_help' ) ) );
+	$JustWritingUtilities->store_user_option( 'disable_fade', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_d_fade' ) ) );
+	$JustWritingUtilities->store_user_option( 'hide_wordcount', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_h_wc' ) ) );
+	$JustWritingUtilities->store_user_option( 'hide_preview', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_h_p' ) ) );
+	$JustWritingUtilities->store_user_option( 'hide_modeselect', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_h_mb' ) ) );
+	$JustWritingUtilities->store_user_option( 'autoload_newposts', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_al_new' ) ) );
+	$JustWritingUtilities->store_user_option( 'autoload_editposts', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_al_edit' ) ) );
+	$JustWritingUtilities->store_user_option( 'format_listbox', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_f_lb' ) ) );
+	$JustWritingUtilities->store_user_option( 'superscript', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_superscript' ) ) );
+	$JustWritingUtilities->store_user_option( 'subscript', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_subscript' ) ) );
+	$JustWritingUtilities->store_user_option( 'cut', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_cut' ) ) );
+	$JustWritingUtilities->store_user_option( 'copy', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_copy' ) ) );
+	$JustWritingUtilities->store_user_option( 'paste', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_paste' ) ) );
+	$JustWritingUtilities->store_user_option( 'pastetext', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_pastetext' ) ) );
+	$JustWritingUtilities->store_user_option( 'pasteword', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_pasteword' ) ) );
+	$JustWritingUtilities->store_user_option( 'separator_one', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_separatorone' ) ) );
+	$JustWritingUtilities->store_user_option( 'separator_two', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_separatortwo' ) ) );
+	$JustWritingUtilities->store_user_option( 'separator_three', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_separatorthree' ) ) );
+	$JustWritingUtilities->store_user_option( 'separator_four', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_separatorfour' ) ) );
+	$JustWritingUtilities->store_user_option( 'separator_five', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_separatorfive' ) ) );
+	$JustWritingUtilities->store_user_option( 'separator_six', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_separatorsix' ) ) );
+	$JustWritingUtilities->store_user_option( 'separator_seven', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_separatorseven' ) ) );
+	$JustWritingUtilities->store_user_option( 'separator_eight', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_separatoreight' ) ) );
+	$JustWritingUtilities->store_user_option( 'font_name', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_f_n' ) ) );
+	$JustWritingUtilities->store_user_option( 'font_size', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_f_s' ) ) );
+	$JustWritingUtilities->store_user_option( 'font_color', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_f_c' ) ) );
+	$JustWritingUtilities->store_user_option( 'background_color', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_b_c' ) ) );
+	$JustWritingUtilities->store_user_option( 'center_toolbar', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_c_tb' ) ) );
+	$JustWritingUtilities->store_user_option( 'browser_fullscreen', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_browser_fs' ) ) );
 
 	// Deal with the border options radio group
-	if( $_POST['just_writing_border_setting'] == 'hide' )
+	if( just_writing_validate_post_value( $_POST, 'just_writing_border_setting' ) == 'hide' )
 		{
 		$JustWritingUtilities->store_user_option( 'hide_border', 'on' );
 		$JustWritingUtilities->store_user_option( 'lighten_border', 'off' );
 		}
-	elseif( $_POST['just_writing_border_setting'] == 'light' )
+	elseif( just_writing_validate_post_value( $_POST, 'just_writing_border_setting' ) == 'light' )
 		{
 		$JustWritingUtilities->store_user_option( 'hide_border', 'off' );
 		$JustWritingUtilities->store_user_option( 'lighten_border', 'on' );
@@ -115,7 +122,7 @@ function just_writing_save_user_profile_fields( $user_id )
 		}
 
 	// Deal with the quick settings option radio group
-	switch( $_POST['just_writing_quick_setting'] )
+	switch( just_writing_validate_post_value( $_POST, 'just_writing_quick_setting' ) )
 		{
 		case 'minimal':
 			$JustWritingUtilities->store_user_option( 'quick_setting', 'minimal' );

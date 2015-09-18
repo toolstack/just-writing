@@ -50,6 +50,9 @@ if( !function_exists( 'JustWritingLoad' ) )
 		
 			wp_register_style( 'justwriting_style', plugins_url( '', __FILE__ ) . '/just-writing.' . $file_version . '.css' );
 			wp_enqueue_style( 'justwriting_style' ); 
+
+			wp_register_script( 'justwriting_script', plugins_url( '', __FILE__ ) . '/just-writing.' . $file_version . '.js' );
+			wp_enqueue_script( 'justwriting_script' ); 
 			}
 		}
 		

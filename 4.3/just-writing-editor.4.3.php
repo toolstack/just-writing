@@ -220,6 +220,8 @@ function JustWritingEditorPage()
 <?php
 // Setup the meta boxes.
 
+if( !isset( $publish_callback_args ) ) { $publish_callback_args = array(); }
+
 if ( post_type_supports($post_type, 'revisions') && 'auto-draft' != $post->post_status ) {
 	$revisions = wp_get_post_revisions( $post_ID );
 
@@ -266,6 +268,8 @@ foreach ( get_object_taxonomies( $post ) as $tax_name ) {
 
 if ( post_type_supports($post_type, 'page-attributes') )
 	add_meta_box('pageparentdiv', 'page' == $post_type ? __('Page Attributes') : __('Attributes'), 'page_attributes_meta_box', null, 'side', 'core');
+
+if( !isset( $thumbnail_support ) ) { $thumbnail_support = false; }
 
 if ( $thumbnail_support && current_user_can( 'upload_files' ) )
 	add_meta_box('postimagediv', __('Featured Image'), 'post_thumbnail_meta_box', null, 'side', 'low');
