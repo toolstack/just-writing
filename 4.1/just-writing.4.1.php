@@ -50,6 +50,9 @@ if( !function_exists( 'JustWritingLoad' ) )
 		
 			wp_register_style( 'justwriting_style', plugins_url( '', __FILE__ ) . '/just-writing.' . $file_version . '.css' );
 			wp_enqueue_style( 'justwriting_style' ); 
+
+			wp_register_script( 'justwriting_script', plugins_url( '', __FILE__ ) . '/just-writing.' . $file_version . '.js' );
+			wp_enqueue_script( 'justwriting_script' ); 
 			}
 		}
 		
@@ -198,6 +201,15 @@ if( !function_exists( 'JustWritingLoad' ) )
 		{
 		global $wpdb;
 
+		wp_enqueue_script('jquery');
+		wp_enqueue_script('jquery-ui-core');
+		wp_enqueue_script('jquery-ui-tabs');
+		
+		wp_register_style("jquery-ui-css", plugin_dir_url(__FILE__) . "../css/jquery-ui-1.10.4.custom.css");
+		wp_enqueue_style("jquery-ui-css");
+		wp_register_style("jquery-ui-tabs-css", plugin_dir_url(__FILE__) . "../css/jquery-ui-tabs.css");
+		wp_enqueue_style("jquery-ui-tabs-css");
+
 		if( isset( $_GET['JustWritingRemoveAction'] ) )
 			{
 			if( current_user_can( 'delete_plugins' ) ) 
@@ -225,14 +237,20 @@ if( !function_exists( 'JustWritingLoad' ) )
 			}
 	?>
 <div class="wrap">
+	<script type="text/javascript">jQuery(document).ready(function() { jQuery("#tabs").tabs(); jQuery("#tabs").tabs("option", "active",0);} );</script>
+	<h2><?php _e('Just Writing Settings');?></h2>
 	
-	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
-		<legend><span style="font-size: 24px; font-weight: 700;">&nbsp;<?php _e('User Settings');?>&nbsp;</span></legend>
-		<p><?php echo sprintf(__('User settings can be found in %syour profile page%s, under the Just Writing heading.'), '<a href="' . get_edit_profile_url(get_current_user_id()) . '">', '</a>' );?>
-	</fieldset>
+	<div id="tabs">
+		<ul>
+			<li><a href="#fragment-0"><span><?php _e('Options');?></span></a></li>
+			<li><a href="#fragment-1"><span><?php _e('About');?></span></a></li>
+		</ul>
 
-	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
-		<legend><span style="font-size: 24px; font-weight: 700;">&nbsp;<?php _e('Uninstall Actions'); ?>&nbsp;</span></legend>
+		<div id="fragment-0">
+			<h3><?php _e('User Settings');?></h3>
+			<p><?php echo sprintf(__('User settings can be found in %syour profile page%s, under the Just Writing heading.'), '<a href="' . get_edit_profile_url(get_current_user_id()) . '">', '</a>' );?>
+
+			<h3><?php _e('Uninstall Actions'); ?></h3>
 
 <?php 
 	if( current_user_can( 'delete_plugins' ) ) 
@@ -240,15 +258,15 @@ if( !function_exists( 'JustWritingLoad' ) )
 		if( get_option( "Just_Writing_Removed" ) != 'true' )
 			{ 
 ?>
-		<div style="font-size: 16px;"><?php _e('**WARNING** No further confirmation will be given after you press the delete button, make sure you REALLY want to delete all user preferences and disable Just Writing!');?></div>
-		<div>&nbsp;</div>
-		<div><?php _e('Remove the user preferences and disable:')?>&nbsp;<input type="button" class="button" id="JustWritingRemoveAction" name="JustWritingRemoveAction" value="<?php _e('Remove') ?>" onclick="if( confirm('Ok, last chance, really remove the user preferences and disable?') ) { window.location = 'options-general.php?page=just-writing.php&JustWritingRemoveAction=TRUE'}"/>
+				<div style="font-size: 16px;"><?php _e('**WARNING** No further confirmation will be given after you press the delete button, make sure you REALLY want to delete all user preferences and disable Just Writing!');?></div>
+				<div>&nbsp;</div>
+				<div><?php _e('Remove the user preferences and disable:')?>&nbsp;<input type="button" class="button" id="JustWritingRemoveAction" name="JustWritingRemoveAction" value="<?php _e('Remove') ?>" onclick="if( confirm('Ok, last chance, really remove the user preferences and disable?') ) { window.location = 'options-general.php?page=just-writing.php&JustWritingRemoveAction=TRUE'}"/>
 <?php
 			}
 		else
 			{
 ?>
-		<div><?php _e('Re-enable Just Writing:')?>&nbsp;<input type="button" class="button" id="JustWritingReenableAction" name="JustWritingReenableAction" value="<?php _e('Re-enable') ?>" onclick="window.location = 'options-general.php?page=just-writing.php&JustWritingReenableAction=TRUE'"/>
+				<div><?php _e('Re-enable Just Writing:')?>&nbsp;<input type="button" class="button" id="JustWritingReenableAction" name="JustWritingReenableAction" value="<?php _e('Re-enable') ?>" onclick="window.location = 'options-general.php?page=just-writing.php&JustWritingReenableAction=TRUE'"/>
 <?php 
 			}
 		}
@@ -258,19 +276,67 @@ if( !function_exists( 'JustWritingLoad' ) )
 		}
 ?>
 		
-	</fieldset>
+			</div>
+		
+		</div>
 	
-	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
-		<legend><span style="font-size: 24px; font-weight: 700;">&nbsp;<?php _e('About'); ?>&nbsp;</span></legend>
-		<h2><?php echo sprintf( __('Just Writing Version %s'), JustWritingVersion );?></h2>
-		<p><?php _e('by');?> <a href="https://profiles.wordpress.org/gregross" target=_blank>Greg Ross</a></p>
-		<p>&nbsp;</p>
-		<p><?php printf(__('Licenced under the %sGPL Version 2%s'), '<a href="http://www.gnu.org/licenses/gpl-2.0.html" target=_blank>', '</a>');?></p>
-		<p><?php printf(__('To find out more, please visit the %sWordPress Plugin Directory page%s or the plugin home page on %sToolStack.com%s'), '<a href="http://wordpress.org/plugins/just-writing/" target=_blank>', '</a>', '<a href="http://toolstack.com/just-writing" target=_blank>', '</a>');?></p>
-		<p>&nbsp;</p>
-		<p><?php printf(__("Don't forget to %srate and review%s it too!"), '<a href="http://wordpress.org/support/view/plugin-reviews/just-writing" target=_blank>', '</a>');?></p>
-	</fieldset>
-</div>
+		<div id="fragment-1">
+			<table class="form-table">
+				<tbody>
+					<tr valign="top">
+						<td scope="row" align="center"><img src="<?php echo plugins_url('just-writing/images/logo-250.png'); ?>"></td>
+					</tr>
+
+					<tr valign="top">
+						<td scope="row" align="center"><h2><?php echo sprintf(__('Just Writing V%s'), JustWritingVersion); ?></h2></td>
+					</tr>
+
+					<tr valign="top">
+						<td scope="row" align="center"><p>by <a href="https://toolstack.com">Greg Ross</a></p></td>
+					</tr>
+
+					<tr valign="top">
+						<td scope="row" align="center"><hr /></td>
+					</tr>
+
+					<tr valign="top">
+						<td scope="row" colspan="2"><h2><?php _e('Rate and Review at WordPress.org'); ?></h2></td>
+					</tr>
+					
+					<tr valign="top">
+						<td scope="row" colspan="2"><?php _e('Thanks for installing Just Writing, I encourage you to submit a ');?> <a href="http://wordpress.org/support/view/plugin-reviews/just-writing" target="_blank"><?php _e('rating and review'); ?></a> <?php _e('over at WordPress.org.  Your feedback is greatly appreciated!');?></td>
+					</tr>
+					
+					<tr valign="top">
+						<td scope="row" colspan="2"><h2><?php _e('Support'); ?></h2></td>
+					</tr>
+
+					<tr valign="top">
+						<td scope="row" colspan="2">
+							<p><?php _e("Here are a few things to do submitting a support request:"); ?></p>
+
+							<ul style="list-style-type: disc; list-style-position: inside; padding-left: 25px;">
+								<li><?php echo sprintf( __('Have you read the %s?' ), '<a title="' . __('FAQs') . '" href="https://wordpress.org/plugins/just-writing/faq/" target="_blank">' . __('FAQs'). '</a>');?></li>
+								<li><?php echo sprintf( __('Have you search the %s for a similar issue?' ), '<a href="http://wordpress.org/support/plugin/just-writing" target="_blank">' . __('support forum') . '</a>');?></li>
+								<li><?php _e('Have you search the Internet for any error messages you are receiving?' );?></li>
+								<li><?php _e('Make sure you have access to your PHP error logs.' );?></li>
+							</ul>
+
+							<p><?php _e('And a few things to double-check:' );?></p>
+
+							<ul style="list-style-type: disc; list-style-position: inside; padding-left: 25px;">
+								<li><?php _e('Have you double checked the plugin settings?' );?></li>
+								<li><?php _e('Are you getting a blank or incomplete page displayed in your browser?  Did you view the source for the page and check for any fatal errors?' );?></li>
+								<li><?php _e('Have you checked your PHP and web server error logs?' );?></li>
+							</ul>
+
+							<p><?php _e('Still not having any luck?' );?> <?php echo sprintf(__('Then please open a new thread on the %s.' ), '<a href="http://wordpress.org/support/plugin/just-writing" target="_blank">' . __('WordPress.org support forum') . '</a>');?></p>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
 	<?php
 		}
 		
