@@ -16,7 +16,7 @@ Copyright (c) 2013-15 by Greg Ross
 This software is released under the GPL v2.0, see license.txt for details
 */
 
-include_once( 'ToolStack-Utilities.class.php' );
+include_once( dirname( __FILE__ ) . '/ToolStack-WP-Utilities.class.php' );
 
 if( !function_exists( 'JustWritingLoad' ) )
 	{
@@ -69,7 +69,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 	}
 
 // Create out global utilities object.  We might be tempted to load the user options now, but that's not possible as WordPress hasn't processed the login this early yet.
-$JustWritingUtilities = new ToolStack_Utilities( 'just_writing' );
+$JustWritingUtilities = new ToolStack_WP_Utilities_V2_4( 'just_writing' );
 
 // Check to see if we're installed and are the current version.
 if( get_option('just_writing_plugin_version') != JustWritingVersion ) 
