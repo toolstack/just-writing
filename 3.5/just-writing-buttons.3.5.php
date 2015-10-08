@@ -19,7 +19,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['JustWritingSeparatorOne'] = array( 
 											// Title of the button
-											'title' => __('Separator'), 
+											'title' => __('Separator', 'just-writing'), 
 											// Command to execute
 											'onclick' => "", 
 											// Show on visual AND html mode
@@ -31,7 +31,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['cut'] = array( 
 											// Title of the button
-											'title' => __('Cut (Ctrl + X)'), 
+											'title' => __('Cut (Ctrl + X)', 'just-writing'), 
 											// Command to execute
 											'onclick' => "tinyMCE.execCommand('cut');", 
 											// Show on visual AND html mode
@@ -43,7 +43,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['copy'] = array( 
 											// Title of the button
-											'title' => __('Copy (Ctrl + C)'), 
+											'title' => __('Copy (Ctrl + C)', 'just-writing'), 
 											// Command to execute
 											'onclick' => "tinyMCE.execCommand('copy');", 
 											// Show on visual AND html mode
@@ -55,7 +55,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['paste'] = array( 
 											// Title of the button
-											'title' => __('Paste (Ctrl + V)'), 
+											'title' => __('Paste (Ctrl + V)', 'just-writing'), 
 											// Command to execute
 											'onclick' => "tinyMCE.execCommand('paste');", 
 											// Show on visual AND html mode
@@ -67,7 +67,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['pastetext'] = array( 
 											// Title of the button
-											'title' => __('Paste as Text'), 
+											'title' => __('Paste as Text', 'just-writing'), 
 											// Command to execute
 											'onclick' => "tinyMCE.execCommand('mcePasteText');", 
 											// Show on visual AND html mode
@@ -79,7 +79,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['pasteword'] = array( 
 											// Title of the button
-											'title' => __('Paste as Word'), 
+											'title' => __('Paste as Word', 'just-writing'), 
 											// Command to execute
 											'onclick' => "tinyMCE.execCommand('mcePasteWord');", 
 											// Show on visual AND html mode
@@ -91,7 +91,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['JustWritingSeparatorTwo'] = array( 
 										// Title of the button
-										'title' => __('Separator'), 
+										'title' => __('Separator', 'just-writing'), 
 										// Command to execute
 										'onclick' => "", 
 										// Show on visual AND html mode
@@ -103,7 +103,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['fontselector'] = array( 
 								// Title of the button
-								'title' => __('Font'), 
+								'title' => __('Font', 'just-writing'), 
 								// Command to execute
 								'onclick' => "tinyMCE.execCommand('FontName', false, 'Arial Black');",
 								// Show on visual AND html mode
@@ -115,7 +115,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['fontsize'] = array( 
 								// Title of the button
-								'title' => __('Font size'), 
+								'title' => __('Font size', 'just-writing'), 
 								// Command to execute
 								'onclick' => "tinyMCE.execCommand('FontSize', false, '32');",
 								// Show on visual AND html mode
@@ -127,7 +127,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['fontcolor'] = array( 
 								// Title of the button
-								'title' => __('Font color'), 
+								'title' => __('Font color', 'just-writing'), 
 								// Command to execute
 								'onclick' => "",
 								// Show on visual AND html mode
@@ -139,7 +139,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['backgroundcolor'] = array( 
 								// Title of the button
-								'title' => __('Background Color'), 
+								'title' => __('Background Color', 'just-writing'), 
 								// Command to execute
 								'onclick' => "",
 								// Show on visual AND html mode
@@ -151,7 +151,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['bold'] = array( 
 										// Title of the button
-										'title' => __('Bold (Ctrl + B)'), 
+										'title' => __('Bold (Ctrl + B)', 'just-writing'), 
 										// Command to execute
 										'onclick' => 'fullscreen.b();', 
 										// Show on visual AND html mode
@@ -163,7 +163,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['italic'] = array( 
 										// Title of the button
-										'title' => __('Italic (Ctrl + I)'), 
+										'title' => __('Italic (Ctrl + I)', 'just-writing'), 
 										// Command to execute
 										'onclick' => 'fullscreen.i();', 
 										// Show on visual AND html mode
@@ -175,7 +175,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['strikethrough'] = array(
 										// Title of the button
-										'title' => __('Strikethrough (Alt + Shift + D)'),
+										'title' => __('Strikethrough (Alt + Shift + D)', 'just-writing'),
 										// Command to execute
 										'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'strikethrough');",
 										// Show on visual AND html mode
@@ -187,7 +187,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['underline'] = array(
 										// Title of the button
-										'title' => __('Underline (Alt + Shift + U)'),
+										'title' => __('Underline (Alt + Shift + U)', 'just-writing'),
 										// Command to execute
 										'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'underline');",
 										// Show on visual AND html mode
@@ -199,7 +199,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['subscript'] = array(
 										// Title of the button
-										'title' => __('Subscript'),
+										'title' => __('Subscript', 'just-writing'),
 										// Command to execute
 										'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'subscript');",
 										// Show on visual AND html mode
@@ -211,7 +211,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['superscript'] = array(
 										// Title of the button
-										'title' => __('Superscript'),
+										'title' => __('Superscript', 'just-writing'),
 										// Command to execute
 										'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'superscript');",
 										// Show on visual AND html mode
@@ -223,7 +223,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['removeformat'] = array(
 										// Title of the button
-										'title' => __('Remove Format (Alt + Shift + O)'),
+										'title' => __('Remove Format (Alt + Shift + O)', 'just-writing'),
 										// Command to execute
 										'onclick' => "tinyMCE.execCommand('removeformat');",
 										// Show on visual AND html mode
@@ -235,7 +235,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['JustWritingSeparatorThree'] = array( 
 										// Title of the button
-										'title' => __('Separator'), 
+										'title' => __('Separator', 'just-writing'), 
 										// Command to execute
 										'onclick' => "", 
 										// Show on visual AND html mode
@@ -247,7 +247,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['bullist'] = array( 
 										// Title of the button
-										'title' => __('Unordered list (Alt + Shift + U)'), 
+										'title' => __('Unordered list (Alt + Shift + U)', 'just-writing'), 
 										// Command to execute
 										'onclick' => 'fullscreen.ul();', 
 										// Show on visual AND html mode
@@ -259,7 +259,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['numlist'] = array( 
 										// Title of the button
-										'title' => __('Ordered list (Alt + Shift + O)'),
+										'title' => __('Ordered list (Alt + Shift + O)', 'just-writing'),
 										// Command to execute
 										'onclick' => 'fullscreen.ol();', 
 										// Show on visual AND html mode
@@ -271,7 +271,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['image'] = array( 
 										// Title of the button
-										'title' => __('Insert/edit image (Alt + Shift + M)'), 
+										'title' => __('Insert/edit image (Alt + Shift + M)', 'just-writing'), 
 										// Command to execute
 										'onclick' => "fullscreen.medialib();", 
 										// Show on visual AND html mode
@@ -283,7 +283,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['link'] = array( 
 										// Title of the button
-										'title' => __('Insert/edit link (Alt + Shift + A)'), 
+										'title' => __('Insert/edit link (Alt + Shift + A)', 'just-writing'), 
 										// Command to execute
 										'onclick' => 'fullscreen.link();', 
 										// Show on visual AND html mode
@@ -295,7 +295,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['unlink'] = array( 
 										// Title of the button
-										'title' => __('Unlink (Alt + Shift + S)'), 
+										'title' => __('Unlink (Alt + Shift + S)', 'just-writing'), 
 										// Command to execute
 										'onclick' => 'fullscreen.unlink();', 
 										// Show on visual AND html mode
@@ -307,7 +307,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['JustWritingSeparatorFour'] = array( 
 										// Title of the button
-										'title' => __('Separator'), 
+										'title' => __('Separator', 'just-writing'), 
 										// Command to execute
 										'onclick' => "", 
 										// Show on visual AND html mode
@@ -319,7 +319,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['justifyleft'] = array(
 										// Title of the button
-										'title' => __('Align Left (Alt + Shift + L)'),
+										'title' => __('Align Left (Alt + Shift + L)', 'just-writing'),
 										// Command to execute
 										'onclick' => "tinyMCE.execCommand('justifyleft');",
 										// Show on visual AND html mode
@@ -331,7 +331,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['justifycenter'] = array(
 										// Title of the button
-										'title' => __('Align Centre (Alt + Shift + C)'),
+										'title' => __('Align Centre (Alt + Shift + C)', 'just-writing'),
 										// Command to execute
 										'onclick' => "tinyMCE.execCommand('justifycenter');",
 										// Show on visual AND html mode
@@ -343,7 +343,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['justifyright'] = array(
 										// Title of the button
-										'title' => __('Align Right (Alt + Shift + R)'),
+										'title' => __('Align Right (Alt + Shift + R)', 'just-writing'),
 										// Command to execute
 										'onclick' => "tinyMCE.execCommand('justifyright');",
 										// Show on visual AND html mode
@@ -355,7 +355,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['justifyfull'] = array(
 										// Title of the button
-										'title' => __('Justify'),
+										'title' => __('Justify', 'just-writing'),
 										// Command to execute
 										'onclick' => "tinyMCE.execCommand('justifyfull');",
 										// Show on visual AND html mode
@@ -367,7 +367,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['outdent'] = array(
 										// Title of the button
-										'title' => __('Outdent'),
+										'title' => __('Outdent', 'just-writing'),
 										// Command to execute
 										'onclick' => "tinyMCE.execCommand('outdent');",
 										// Show on visual AND html mode
@@ -379,7 +379,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['indent'] = array(
 										// Title of the button
-										'title' => __('Indent'),
+										'title' => __('Indent', 'just-writing'),
 										// Command to execute
 										'onclick' => "tinyMCE.execCommand('indent');",
 										// Show on visual AND html mode
@@ -391,7 +391,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['JustWritingSeparatorFive'] = array( 
 										// Title of the button
-										'title' => __('Separator'), 
+										'title' => __('Separator', 'just-writing'), 
 										// Command to execute
 										'onclick' => "", 
 										// Show on visual AND html mode
@@ -403,7 +403,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['Paragraph'] = array(
 										// Title of the button
-										'title' => __('Paragraph'),
+										'title' => __('Paragraph', 'just-writing'),
 										// Command to execute
 										'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'p');",
 										// Show on visual AND html mode
@@ -417,7 +417,7 @@ function JustWriting( $oldbuttons )
 			{
 			$buttons['H1'] = array(
 											// Title of the button
-											'title' => __('H1'),
+											'title' => __('H1', 'just-writing'),
 											// Command to execute
 											'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'h1');",
 											// Show on visual AND html mode
@@ -429,7 +429,7 @@ function JustWriting( $oldbuttons )
 			{
 			$buttons['H2'] = array(
 											// Title of the button
-											'title' => __('H2'),
+											'title' => __('H2', 'just-writing'),
 											// Command to execute
 											'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'h2');",
 											// Show on visual AND html mode
@@ -441,7 +441,7 @@ function JustWriting( $oldbuttons )
 			{
 			$buttons['H3'] = array(
 											// Title of the button
-											'title' => __('H3'),
+											'title' => __('H3', 'just-writing'),
 											// Command to execute
 											'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'h3');",
 											// Show on visual AND html mode
@@ -453,7 +453,7 @@ function JustWriting( $oldbuttons )
 			{
 			$buttons['H4'] = array(
 											// Title of the button
-											'title' => __('H4'),
+											'title' => __('H4', 'just-writing'),
 											// Command to execute
 											'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'h4');",
 											// Show on visual AND html mode
@@ -465,7 +465,7 @@ function JustWriting( $oldbuttons )
 			{
 			$buttons['H5'] = array(
 											// Title of the button
-											'title' => __('H5'),
+											'title' => __('H5', 'just-writing'),
 											// Command to execute
 											'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'h5');",
 											// Show on visual AND html mode
@@ -477,7 +477,7 @@ function JustWriting( $oldbuttons )
 			{
 			$buttons['H6'] = array(
 											// Title of the button
-											'title' => __('H6'),
+											'title' => __('H6', 'just-writing'),
 											// Command to execute
 											'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'h6');",
 											// Show on visual AND html mode
@@ -489,7 +489,7 @@ function JustWriting( $oldbuttons )
 			{
 			$buttons['blockquote'] = array( 
 											// Title of the button
-											'title' => __('Blockquote (Alt + Shift + Q)'), 
+											'title' => __('Blockquote (Alt + Shift + Q)', 'just-writing'), 
 											// Command to execute
 											'onclick' => 'fullscreen.blockquote();', 
 											// Show on visual AND html mode
@@ -501,7 +501,7 @@ function JustWriting( $oldbuttons )
 			{
 			$buttons['Address'] = array(
 											// Title of the button
-											'title' => __('Address'),
+											'title' => __('Address', 'just-writing'),
 											// Command to execute
 											'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'address');",
 											// Show on visual AND html mode
@@ -513,7 +513,7 @@ function JustWriting( $oldbuttons )
 			{
 			$buttons['Preformatted'] = array(
 											// Title of the button
-											'title' => __('Preformatted'),
+											'title' => __('Preformatted', 'just-writing'),
 											// Command to execute
 											'onclick' => "tinyMCE.execCommand('FormatBlock', false, 'pre');",
 											// Show on visual AND html mode
@@ -526,7 +526,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['JustWritingSeparatorSix'] = array( 
 										// Title of the button
-										'title' => __('Separator'), 
+										'title' => __('Separator', 'just-writing'), 
 										// Command to execute
 										'onclick' => "", 
 										// Show on visual AND html mode
@@ -538,7 +538,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['spellchecker'] = array(
 										// Title of the button
-										'title' => __('Proofread Writing'),
+										'title' => __('Proofread Writing', 'just-writing'),
 										// Command to execute
 										'onclick' => "tinyMCE.execCommand('mceWritingImprovementTool');",
 										// Show on visual AND html mode
@@ -550,7 +550,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['wp_more'] = array(
 										// Title of the button
-										'title' => __('Insert More Tag (Alt + Shift + T)'),
+										'title' => __('Insert More Tag (Alt + Shift + T)', 'just-writing'),
 										// Command to execute
 										'onclick' => "tinyMCE.execCommand('WP_More');",
 										// Show on visual AND html mode
@@ -562,7 +562,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['charmap'] = array(
 										// Title of the button
-										'title' => __('Insert custom character'),
+										'title' => __('Insert custom character', 'just-writing'),
 										// Command to execute
 										'onclick' => "tinyMCE.execCommand('mceCharMap');",
 										// Show on visual AND html mode
@@ -574,7 +574,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['JustWritingSeparatorSeven'] = array( 
 										// Title of the button
-										'title' => __('Separator'), 
+										'title' => __('Separator', 'just-writing'), 
 										// Command to execute
 										'onclick' => "", 
 										// Show on visual AND html mode
@@ -585,7 +585,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['undo'] = array(
 										// Title of the button
-										'title' => __('Undo (Ctrl + Z)'),
+										'title' => __('Undo (Ctrl + Z)', 'just-writing'),
 										// Command to execute
 										'onclick' => "tinyMCE.execCommand('undo');",
 										// Show on visual AND html mode
@@ -597,7 +597,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['redo'] = array(
 										// Title of the button
-										'title' => __('Redo (Ctrl + Y)'),
+										'title' => __('Redo (Ctrl + Y)', 'just-writing'),
 										// Command to execute
 										'onclick' => "tinyMCE.execCommand('redo');",
 										// Show on visual AND html mode
@@ -609,7 +609,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['help'] = array( 
 										// Title of the button
-										'title' => __('Help (Alt + Shift + H)'), 
+										'title' => __('Help (Alt + Shift + H)', 'just-writing'), 
 										// Command to execute
 										'onclick' => 'fullscreen.help();', 
 										// Show on visual AND html mode
@@ -621,7 +621,7 @@ function JustWriting( $oldbuttons )
 		{
 		$buttons['JustWritingSeparatorEight'] = array( 
 										// Title of the button
-										'title' => __('Separator'), 
+										'title' => __('Separator', 'just-writing'), 
 										// Command to execute
 										'onclick' => "", 
 										// Show on visual AND html mode
@@ -632,7 +632,7 @@ function JustWriting( $oldbuttons )
 	// This is a 'fake' button we're use during the JavaScript code to get the current translation of "Exit".
 	$buttons['JustWritingExit'] = array( 
 									// Title of the button
-									'title' => __('Exit'), 
+									'title' => __('Exit', 'just-writing'), 
 									// Command to execute
 									'onclick' => "",
 									// Show on visual AND html mode

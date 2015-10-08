@@ -5,6 +5,8 @@ Version: 3.8
 Plugin URI: http://toolstack.com/just-writing
 Author: Greg Ross
 Author URI: http://toolstack.com
+Text Domain: just-writing
+Domain Path: /languages/
 Description: Adds more buttons to the distraction free writing mode command bar.
 
 Compatible with WordPress 3.5+.
@@ -18,10 +20,25 @@ This software is released under the GPL v2.0, see license.txt for details
 
 include_once( dirname( __FILE__ ) . '/ToolStack-WP-Utilities.class.php' );
 
+GLOBAL $JustWritingUtilities;
+
+// Create out global utilities object.  We might be tempted to load the user options now, but that's not possible as WordPress hasn't processed the login this early yet.
+$JustWritingUtilities = new ToolStack_WP_Utilities_V2_5( 'just_writing', __FILE__ );
+
 if( !function_exists( 'JustWritingLoad' ) )
 	{
 	define( 'JustWritingVersion', '3.8' );
 
+	// Load the translation code.
+	function just_writing_language() {
+		load_plugin_textdomain('just-writing', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/');
+		__('Just Writing', 'just-writing');
+		__('Adds more buttons to the distraction free writing mode command bar.', 'just-writing');
+	}
+
+	// Add translation action.
+	add_action('plugins_loaded', 'just_writing_language');
+	
 	Function JustWritingFileVersion()
 		{
 		GLOBAL $wp_version;
@@ -67,9 +84,6 @@ if( !function_exists( 'JustWritingLoad' ) )
 	include_once( $file_version . '/just-writing.' . $file_version . '.php' );
 	include_once( $file_version . '/just-writing-editor.' . $file_version . '.php' );
 	}
-
-// Create out global utilities object.  We might be tempted to load the user options now, but that's not possible as WordPress hasn't processed the login this early yet.
-$JustWritingUtilities = new ToolStack_WP_Utilities_V2_4( 'just_writing' );
 
 // Check to see if we're installed and are the current version.
 if( get_option('just_writing_plugin_version') != JustWritingVersion ) 

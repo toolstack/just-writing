@@ -177,14 +177,14 @@ function just_writing_user_profile_fields( $user )
 		<tr>
 			<th></th>
 			<td>
-			<span class="description"><?php echo __("Just Writing allows you to customize the Distraction Free Writing Mode in WordPress in several different ways to enable you to write the way you want to.  To find out more, please visit the ") . "<a href='http://wordpress.org/plugins/just-writing/' target=_blank>WordPress Plugin Directory page</a> " . __("or plugin home page on") . " <a href='http://toolstack.com/just-writing' target=_blank>ToolStack.com</a>.<br><br>" . __("And don't forget to ") . "<a href='http://wordpress.org/support/view/plugin-reviews/just-writing' target=_blank>" . __("rate and review") . "</a>" . __(" it too!");?></span>
+			<span class="description"><?php echo __("Just Writing allows you to customize the Distraction Free Writing Mode in WordPress in several different ways to enable you to write the way you want to.  To find out more, please visit the ", 'just-writing') . "<a href='http://wordpress.org/plugins/just-writing/' target=_blank>" . __('WordPress Plugin Directory page', 'just-writing') . "</a> " . __("or plugin home page on", 'just-writing') . " <a href='http://toolstack.com/just-writing' target=_blank>ToolStack.com</a>.<br><br>" . __("And don't forget to ", 'just-writing') . "<a href='http://wordpress.org/support/view/plugin-reviews/just-writing' target=_blank>" . __("rate and review", 'just-writing') . "</a>" . __(" it too!", 'just-writing');?></span>
 			</td>
 		</tr>
 		<tr>
-			<th><label for="just_writing_enabled"><?php echo __("Enable");?></label></th>
+			<th><label for="just_writing_enabled"><?php echo __("Enable", 'just-writing');?></label></th>
 			<td>
 			<input type="checkbox" id="just_writing_enabled" name="just_writing_enabled" <?php if( $JustWritingUtilities->get_user_option( 'enabled' ) == "on" ) { echo "CHECKED"; } ?> onClick="if(!just_writing_enabled.checked){ just_writing_options_table.style.display='none'; just_writing_quick_settings.style.display='none';}else{just_writing_options_table.style.display=''; just_writing_quick_settings.style.display='';}">
-			<?php echo __("Check to enable Just Writing (don't forget to make sure the visual editor is enabled at the top of this page)");?>
+			<?php echo __("Check to enable Just Writing (don't forget to make sure the visual editor is enabled at the top of this page)", 'just-writing');?>
 			</td>
 		</tr>
 	</table>
@@ -192,25 +192,25 @@ function just_writing_user_profile_fields( $user )
 		<tr>
 			<th>Quick Options</th>
 			<td>			
-			<?php echo __("Use the following quick settings:"); $QuickSettings = $JustWritingUtilities->get_user_option( 'quick_setting' ); if( $QuickSettings == "" ) { $QuickSettings = "custom"; }?><br>
+			<?php echo __("Use the following quick settings:", 'just-writing'); $QuickSettings = $JustWritingUtilities->get_user_option( 'quick_setting' ); if( $QuickSettings == "" ) { $QuickSettings = "custom"; }?><br>
 			<input type="radio" onclick="JustWritingSetQuickOptions('minimal')" id="just_writing_qs_mininal" name="just_writing_quick_setting" value="minimal" <?php if( $QuickSettings == "minimal" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Minimal") . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("Nothing but Save and Exit and real DFWM!");?></span><br>
+			<?php echo __("Minimal", 'just-writing') . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("Nothing but Save and Exit and real DFWM!", 'just-writing');?></span><br>
 			<input type="radio" onclick="JustWritingSetQuickOptions('wpdefault')" id="just_writing_qs_wpdefault" name="just_writing_quick_setting" value="wpdefault" <?php if( $QuickSettings == "wpdefault" ) { echo "CHECKED"; } ?>>
-			<?php echo __("WordPress Default") . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("Just center the toolbar and move the exit button to the right hand side.");?></span><br>
+			<?php echo __("WordPress Default", 'just-writing') . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("Just center the toolbar and move the exit button to the right hand side.", 'just-writing');?></span><br>
 			<input type="radio" onclick="JustWritingSetQuickOptions('jwdefault')" id="just_writing_qs_jwdefault" name="just_writing_quick_setting" value="jwdefault" <?php if( $QuickSettings == "jwdefault" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Just Writing Default") . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("A balanced toolbar that should work on all browsers.");?></span><br>
+			<?php echo __("Just Writing Default", 'just-writing') . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("A balanced toolbar that should work on all browsers.", 'just-writing');?></span><br>
 			<input type="radio" onclick="JustWritingSetQuickOptions('advanced')" id="just_writing_qs_advanced" name="just_writing_quick_setting" value="advanced" <?php if( $QuickSettings == "advanced" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Advanced") . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("Unlock the real power of DFWM!");?></span><br>
+			<?php echo __("Advanced", 'just-writing') . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("Unlock the real power of DFWM!", 'just-writing');?></span><br>
 			<input type="radio" onclick="JustWritingSetQuickOptions('full')" id="just_writing_qs_advanced" name="just_writing_quick_setting" value="full" <?php if( $QuickSettings == "full" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Full") . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("All buttons and many of the options enabled.");?></span><br>
+			<?php echo __("Full", 'just-writing') . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("All buttons and many of the options enabled.", 'just-writing');?></span><br>
 			<input type="radio" onclick="JustWritingSetQuickOptions('custom')" id="just_writing_qs_custom" name="just_writing_quick_setting" value="custom" <?php if( $QuickSettings == "custom" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Custom") . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("Select your options below:");?></span>
+			<?php echo __("Custom", 'just-writing') . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("Select your options below:", 'just-writing');?></span>
 			</td>
 		</tr>
 	</table>
 	<table class="form-table" id='just_writing_options_table' <?php if( $JustWritingUtilities->get_user_option( 'enabled' ) != "on" ) { echo "style='display:none;'"; } ?>>	
 		<tr>
-			<th><label for="just_writing_options"><?php echo __("Advanced Options");?></label></th>
+			<th><label for="just_writing_options"><?php echo __("Advanced Options", 'just-writing');?></label></th>
 			<td colspan=3>
 			<span class='description' style='font-size: 75%;'><a href=#JustWriting onClick="JustWritingToggleOptionGroups()">Show/Hide</a></span>
 			</td>
@@ -218,408 +218,408 @@ function just_writing_user_profile_fields( $user )
 		<tr id=JustWritingOptionGroup style='display: none;'>
 			<th></th>
 			<td colspan=3>
-			<?php echo __("Border on the title/body areas options:");?><br>
+			<?php echo __("Border on the title/body areas options:", 'just-writing');?><br>
 			<input type="radio" id="just_writing_s_b" name="just_writing_border_setting" value="show" <?php if( $JustWritingUtilities->get_user_option( 'lighten_border' ) != "on" && $JustWritingUtilities->get_user_option( 'hide_border' ) != "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Show");?><br>
+			<?php echo __("Show", 'just-writing');?><br>
 			<input type="radio" id="just_writing_l_b" name="just_writing_border_setting" value="light" <?php if( $JustWritingUtilities->get_user_option( 'lighten_border' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Lighten");?><br>
+			<?php echo __("Lighten", 'just-writing');?><br>
 			<input type="radio" id="just_writing_h_b" name="just_writing_border_setting" value="hide" <?php if( $JustWritingUtilities->get_user_option( 'hide_border' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Hide");?>
+			<?php echo __("Hide", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingOptionGroup style='display: none;'>
 			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_h_p" name="just_writing_h_p" <?php if( $JustWritingUtilities->get_user_option( 'hide_preview' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Hide the preview button");?>
+			<?php echo __("Hide the preview button", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_h_wc" name="just_writing_h_wc" <?php if( $JustWritingUtilities->get_user_option( 'hide_wordcount' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Hide the word count");?>
+			<?php echo __("Hide the word count", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_h_mb" name="just_writing_h_mb" <?php if( $JustWritingUtilities->get_user_option( 'hide_modeselect' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Hide the editor mode selector");?>
+			<?php echo __("Hide the editor mode selector", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingOptionGroup style='display: none;'>
 			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_c_tb" name="just_writing_c_tb" <?php if( $JustWritingUtilities->get_user_option( 'center_toolbar' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Center the ToolBar on screen");?>
+			<?php echo __("Center the ToolBar on screen", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_a_l" name="just_writing_a_l" <?php if( $JustWritingUtilities->get_user_option( 'add_DFWM_post_pages' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Add DFWM link to the Post/Pages lists");?>
+			<?php echo __("Add DFWM link to the Post/Pages lists", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_d_jscp" name="just_writing_d_jscp" <?php if( $JustWritingUtilities->get_user_option( 'disable_jscp' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Disable the Javascript Pickers");?>
+			<?php echo __("Disable the Javascript Pickers", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingOptionGroup style='display: none;'>
 			<th></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_d_fade" name="just_writing_d_fade" <?php if( $JustWritingUtilities->get_user_option( 'disable_fade' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Disable the fade out of the toolbar *May have performance impacts*");?>
+			<?php echo __("Disable the fade out of the toolbar *May have performance impacts*", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingOptionGroup style='display: none;'>
 			<th></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_browser_fs" name="just_writing_browser_fs" <?php if( $JustWritingUtilities->get_user_option( 'browser_fullscreen' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Open DFWM in your browsers full screen mode, note this only works if you click the full screen button in the editor and not with the DFWM link or auto load functions");?>
+			<?php echo __("Open DFWM in your browsers full screen mode, note this only works if you click the full screen button in the editor and not with the DFWM link or auto load functions", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingOptionGroup style='display: none;'>
 			<th></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_al_new" name="just_writing_al_new" <?php if( $JustWritingUtilities->get_user_option( 'autoload_newposts' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Go directly to Distraction Free Writing Mode for new posts *May have performance impacts*");?>
+			<?php echo __("Go directly to Distraction Free Writing Mode for new posts *May have performance impacts*", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingOptionGroup style='display: none;'>
 			<th></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_al_edit" name="just_writing_al_edit" <?php if( $JustWritingUtilities->get_user_option( 'autoload_editposts' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Go directly to Distraction Free Writing Mode when editing a post *May have performance impacts*");?>
+			<?php echo __("Go directly to Distraction Free Writing Mode when editing a post *May have performance impacts*", 'just-writing');?>
 			</td>
 		</tr>
 		<tr>
-			<th><label for="just_writing_options"><?php echo __("Advanced Buttons");?></label></th>
+			<th><label for="just_writing_options"><?php echo __("Advanced Buttons", 'just-writing');?></label></th>
 			<td colspan=3>
-			<span class='description' style='font-size: 75%;'><a href=#JustWriting onClick="JustWritingToggleButtonGroups()">Show/Hide</a></span>
+			<span class='description' style='font-size: 75%;'><a href=#JustWriting onClick="JustWritingToggleButtonGroups()"><?php _e('Show/Hide', 'just-writing');?></a></span>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td colspan=3>
-			<b><?php echo __("Cut/Copy/Paste *Will not work in all browsers*");?></b>
+			<b><?php echo __("Cut/Copy/Paste *Will not work in all browsers*", 'just-writing');?></b>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_separatorone" name="just_writing_separatorone" <?php if( $JustWritingUtilities->get_user_option( 'separator_one' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Add a separator before this group");?>
+			<?php echo __("Add a separator before this group", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_cut" name="just_writing_cut" <?php if( $JustWritingUtilities->get_user_option( 'cut' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Cut");?>
+			<?php echo __("Cut", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_copy" name="just_writing_copy" <?php if( $JustWritingUtilities->get_user_option( 'copy' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Copy");?>
+			<?php echo __("Copy", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_paste" name="just_writing_paste" <?php if( $JustWritingUtilities->get_user_option( 'paste' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Paste");?>
+			<?php echo __("Paste", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_pastetext" name="just_writing_pastetext" <?php if( $JustWritingUtilities->get_user_option( 'pastetext' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Paste as Text");?>
+			<?php echo __("Paste as Text", 'just-writing');?>
 			</td>
 			<td colspan=2>
 			<input type="checkbox" id="just_writing_pasteword" name="just_writing_pasteword" <?php if( $JustWritingUtilities->get_user_option( 'pasteword' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Paste from Word");?>
+			<?php echo __("Paste from Word", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td colspan=3>
-			<b><?php echo __("Text Decorations");?></b>
+			<b><?php echo __("Text Decorations", 'just-writing');?></b>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_separatortwo" name="just_writing_separatortwo" <?php if( $JustWritingUtilities->get_user_option( 'separator_two' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Add a separator before this group");?>
+			<?php echo __("Add a separator before this group", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_f_n" name="just_writing_f_n" <?php if( $JustWritingUtilities->get_user_option( 'font_name' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Font");?>
+			<?php echo __("Font", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_f_s" name="just_writing_f_s" <?php if( $JustWritingUtilities->get_user_option( 'font_size' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Font Size");?>
+			<?php echo __("Font Size", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_f_c" name="just_writing_f_c" <?php if( $JustWritingUtilities->get_user_option( 'font_color' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Font Color");?>
+			<?php echo __("Font Color", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_b_c" name="just_writing_b_c" <?php if( $JustWritingUtilities->get_user_option( 'background_color' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Background Color");?>
+			<?php echo __("Background Color", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_bold" name="just_writing_bold" <?php if( $JustWritingUtilities->get_user_option( 'bold' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Bold");?>
+			<?php echo __("Bold", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_italics" name="just_writing_italics" <?php if( $JustWritingUtilities->get_user_option( 'italics' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Italics");?>
+			<?php echo __("Italics", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_strike" name="just_writing_strike" <?php if( $JustWritingUtilities->get_user_option( 'strike' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Strikethrough");?>
+			<?php echo __("Strikethrough", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_under" name="just_writing_under" <?php if( $JustWritingUtilities->get_user_option( 'underline' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Underline");?>
+			<?php echo __("Underline", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_superscript" name="just_writing_superscript" <?php if( $JustWritingUtilities->get_user_option( 'superscript' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Superscript");?>
+			<?php echo __("Superscript", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_subscript" name="just_writing_subscript" <?php if( $JustWritingUtilities->get_user_option( 'subscript' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Subscript");?>
+			<?php echo __("Subscript", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_remove" name="just_writing_remove" <?php if( $JustWritingUtilities->get_user_option( 'remove_format' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Remove Formating");?>
+			<?php echo __("Remove Formating", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td colspan=3>
-			<b><?php echo __("Lists, Media and Links");?></b>
+			<b><?php echo __("Lists, Media and Links", 'just-writing');?></b>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_separatorthree" name="just_writing_separatorthree" <?php if( $JustWritingUtilities->get_user_option( 'separator_three' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Add a separator before this group");?>
+			<?php echo __("Add a separator before this group", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_ul" name="just_writing_ul" <?php if( $JustWritingUtilities->get_user_option( 'ul' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Unordered List");?>
+			<?php echo __("Unordered List", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_nl" name="just_writing_nl" <?php if( $JustWritingUtilities->get_user_option( 'nl' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Ordered List");?>
+			<?php echo __("Ordered List", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_media" name="just_writing_media" <?php if( $JustWritingUtilities->get_user_option( 'media' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Add Media");?>
+			<?php echo __("Add Media", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_link" name="just_writing_link" <?php if( $JustWritingUtilities->get_user_option( 'link' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Link");?>
+			<?php echo __("Link", 'just-writing');?>
 			</td>
 			<td colspan=2>
 			<input type="checkbox" id="just_writing_unlink" name="just_writing_unlink" <?php if( $JustWritingUtilities->get_user_option( 'unlink' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Unlink");?>
+			<?php echo __("Unlink", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td colspan=3>
-			<b><?php echo __("Alignment");?></b>
+			<b><?php echo __("Alignment", 'just-writing');?></b>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_separatorfour" name="just_writing_separatorfour" <?php if( $JustWritingUtilities->get_user_option( 'separator_four' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Add a separator before this group");?>
+			<?php echo __("Add a separator before this group", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_left" name="just_writing_left" <?php if( $JustWritingUtilities->get_user_option( 'left_justify' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Align Left");?>
+			<?php echo __("Align Left", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_center" name="just_writing_center" <?php if( $JustWritingUtilities->get_user_option( 'center_justify' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Align Center");?>
+			<?php echo __("Align Center", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_right" name="just_writing_right" <?php if( $JustWritingUtilities->get_user_option( 'right_justify' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Align Right");?>
+			<?php echo __("Align Right", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_justify" name="just_writing_justify" <?php if( $JustWritingUtilities->get_user_option( 'full_justify' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Full Justify");?>
+			<?php echo __("Full Justify", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_outdent" name="just_writing_outdent" <?php if( $JustWritingUtilities->get_user_option( 'outdent' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Outdent");?>
+			<?php echo __("Outdent", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_indent" name="just_writing_indent" <?php if( $JustWritingUtilities->get_user_option( 'indent' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Indent");?>
+			<?php echo __("Indent", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td colspan=3>
-			<b><?php echo __("Paragraph Formats");?></b>
+			<b><?php echo __("Paragraph Formats", 'just-writing');?></b>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_separatorfive" name="just_writing_separatorfive" <?php if( $JustWritingUtilities->get_user_option( 'separator_five' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Add a separator before this group");?>
+			<?php echo __("Add a separator before this group", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_f_lb" name="just_writing_f_lb" <?php if( $JustWritingUtilities->get_user_option( 'format_listbox' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Enable formats dropdown instead of buttons (this will show all formats and hide all associated buttons, ignoring the options below).");?>
+			<?php echo __("Enable formats dropdown instead of buttons (this will show all formats and hide all associated buttons, ignoring the options below).", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_p" name="just_writing_p" <?php if( $JustWritingUtilities->get_user_option( 'p_format' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Paragraph");?>
+			<?php echo __("Paragraph", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_h1" name="just_writing_h1" <?php if( $JustWritingUtilities->get_user_option( 'h1_format' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("h1");?>
+			<?php echo __("h1", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_h2" name="just_writing_h2" <?php if( $JustWritingUtilities->get_user_option( 'h2_format' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("h2");?>
+			<?php echo __("h2", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_h3" name="just_writing_h3" <?php if( $JustWritingUtilities->get_user_option( 'h3_format' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("h3");?>
+			<?php echo __("h3", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_h4" name="just_writing_h4" <?php if( $JustWritingUtilities->get_user_option( 'h4_format' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("h4");?>
+			<?php echo __("h4", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_h5" name="just_writing_h5" <?php if( $JustWritingUtilities->get_user_option( 'h5_format' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("h5");?>
+			<?php echo __("h5", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_h6" name="just_writing_h6" <?php if( $JustWritingUtilities->get_user_option( 'h6_format' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("h6");?>
+			<?php echo __("h6", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_quotes" name="just_writing_quotes" <?php if( $JustWritingUtilities->get_user_option( 'quotes_format' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Block Quotes");?>
+			<?php echo __("Block Quotes", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_address" name="just_writing_address" <?php if( $JustWritingUtilities->get_user_option( 'address_format' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Address");?>
+			<?php echo __("Address", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_pf" name="just_writing_pf" <?php if( $JustWritingUtilities->get_user_option( 'pre_format' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Preformatted");?>
+			<?php echo __("Preformatted", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td colspan=3>
-			<b><?php echo __("Actions");?></b>
+			<b><?php echo __("Actions", 'just-writing');?></b>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_separatorsix" name="just_writing_separatorsix" <?php if( $JustWritingUtilities->get_user_option( 'separator_six' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Add a separator before this group");?>
+			<?php echo __("Add a separator before this group", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_spell" name="just_writing_spell" <?php if( $JustWritingUtilities->get_user_option( 'spellcheck' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Spellcheck");?>
+			<?php echo __("Spellcheck", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_more" name="just_writing_more" <?php if( $JustWritingUtilities->get_user_option( 'more' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Insert More Tag");?>
+			<?php echo __("Insert More Tag", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_char" name="just_writing_char" <?php if( $JustWritingUtilities->get_user_option( 'char_map' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Insert custom character");?>
+			<?php echo __("Insert custom character", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_separatorseven" name="just_writing_separatorseven" <?php if( $JustWritingUtilities->get_user_option( 'separator_seven' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Add a separator before this group");?>
+			<?php echo __("Add a separator before this group", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td>
 			<input type="checkbox" id="just_writing_undo" name="just_writing_undo" <?php if( $JustWritingUtilities->get_user_option( 'undo' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Undo");?>
+			<?php echo __("Undo", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_redo" name="just_writing_redo" <?php if( $JustWritingUtilities->get_user_option( 'redo' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Redo");?>
+			<?php echo __("Redo", 'just-writing');?>
 			</td>
 			<td>
 			<input type="checkbox" id="just_writing_help" name="just_writing_help" <?php if( $JustWritingUtilities->get_user_option( 'help' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Help");?>
+			<?php echo __("Help", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td colspan=3>
 			<input type="checkbox" id="just_writing_separatoreight" name="just_writing_separatoreight" <?php if( $JustWritingUtilities->get_user_option( 'separator_eight' ) == "on" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Add a separator after this group");?>
+			<?php echo __("Add a separator after this group", 'just-writing');?>
 			</td>
 		</tr>
 		<tr id=JustWritingButtonGroup style='display: none;'>
 			<th></th>
 			<td>
-			<a onClick='JustWritingSelectAll()'><?php echo __("Select All");?></a>
+			<a onClick='JustWritingSelectAll()'><?php echo __("Select All", 'just-writing');?></a>
 			</td>
 			<td>
-			<a onClick='JustWritingDeSelectAll()'><?php echo __("Deselect All");?></a>
+			<a onClick='JustWritingDeSelectAll()'><?php echo __("Deselect All", 'just-writing');?></a>
 			</td>
 			<td>
 			</td>
