@@ -60,7 +60,13 @@ if( !function_exists( 'JustWritingLoad' ) )
 			return '4.1';
 			}
 
-		return '4.3';
+		// We compare against 4.4.99 in the second version compare to ensure we use the right version for beta/rc versions of WP.
+		if( version_compare( $wp_version, '4.3', '>=' ) && version_compare( $wp_version, '4.4.99', '<=') )
+			{
+			return '4.3';
+			}
+
+		return '4.5';
 		}
 	
 	/*
