@@ -132,6 +132,10 @@ Modern browsers support full screen mode but they only activate it when a user c
 
 The other issue is that full screen mode is de-activated as soon as you leave the current page, so for example Just Writing could link full screen mode to the DFW "click" in the post list, but as soon as the browser leaves the post list to load the editor page full screen mode will be deactivated.
 
+= I'm using the "Avia Layout Builder" and when I use Just Writing my chnages don't get published, what's wrong? =
+
+Unfortunately the "Avia Layout Builder" is incompatible with Just Writing.
+
 == Screenshots ==
 
 1. Pre installation DFW.
