@@ -196,8 +196,8 @@ function JustWritingEditorPage()
 				<a style="margin-left: 5px; margin-bottom: 8px;" class="button right" onclick="JustWritingExit('<?php echo esc_attr( htmlspecialchars( $sendback ) ); ?>')"><?php _e('Exit', 'just-writing');?></a>
 				<a style="margin-left: 5px;" class="button right" onclick="JustWritingPreview('<?php echo get_permalink( $post_ID ); ?>','<?php echo $post_ID; ?>');"><?php _e('Preview', 'just-writing');?></a>
 				<input title="<?php echo $SaveButtonDesc; ?>" id="jw-update-button" class="button button-primary right" value="<?php echo $SaveButtonLabel;?>" onclick="JustWritingAjaxSave();" type="button">
-				<span class="wp-fullscreen-saved-message">Updated.</span>
-				<span class="wp-fullscreen-error-message">Save failed.</span>
+				<span class="wp-fullscreen-saved-message"><?php _e( 'Updated.', 'just-writing' ); ?></span>
+				<span class="wp-fullscreen-error-message"><?php _e( 'Save failed.', 'just-writing' ); ?></span>
 				<span class="spinner"></span>
 			</div>			
 
@@ -211,7 +211,7 @@ function JustWritingEditorPage()
 
 	<div id="wp-fullscreen-statusbar" class="wp-fullscreen-active">
 		<div id="wp-fullscreen-status" style="width: <?php echo $dfw_width; ?>px;">
-			<div id="wp-word-count">Word count: <span class="word-count">0</span></div>
+			<div id="wp-word-count"><?php _e( 'Word count: ', 'just-writing'); ?><span class="word-count">0</span></div>
 			<div id="wp-fullscreen-tagline">Just Writing.</div>
 		</div>
 	</div>
