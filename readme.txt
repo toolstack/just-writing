@@ -5,8 +5,8 @@ Plugin URI: http://toolstack.com/just-writing
 Author URI: http://toolstack.com
 Tags: admin posts writing DFW
 Requires at least: 3.5.0
-Tested up to: 4.3
-Stable tag: 3.8
+Tested up to: 4.5.3
+Stable tag: 3.9
 License: GPLv2
 
 Adds buttons and features to the Distraction Free Writing Mode for all kinds of extra functions.
@@ -146,6 +146,12 @@ Unfortunately the "Avia Layout Builder" is incompatible with Just Writing.
 6. Administration screen.
 
 == Changelog ==
+= 3.9 =
+* Release date: July 4, 2016
+* Added text domain for translation support.
+* Added support for WordPress 4.5.
+* Fixed broken link button, thanks barbosalm!
+
 = 3.8 =
 * Release date: September 18, 2015
 * Added Writing button to the text mode post/page editor.

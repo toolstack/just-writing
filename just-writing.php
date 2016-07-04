@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Just Writing
-Version: 3.8
+Version: 3.9
 Plugin URI: http://toolstack.com/just-writing
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -27,7 +27,7 @@ $JustWritingUtilities = new ToolStack_WP_Utilities_V2_5( 'just_writing', __FILE_
 
 if( !function_exists( 'JustWritingLoad' ) )
 	{
-	define( 'JustWritingVersion', '3.8' );
+	define( 'JustWritingVersion', '3.9' );
 
 	// Load the translation code.
 	function just_writing_language() {
