@@ -146,6 +146,10 @@ Unfortunately the "Avia Layout Builder" is incompatible with Just Writing.
 6. Administration screen.
 
 == Changelog ==
+= 3.9.1 =
+* Release date: August 17, 2020
+* Fixed warnings with PHP 7.4.
+
 = 3.9 =
 * Release date: July 4, 2016
 * Added text domain for translation support.
