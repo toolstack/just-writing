@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Just Writing
-Version: 3.9
+Version: 3.9.1
 Plugin URI: http://toolstack.com/just-writing
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -13,7 +13,7 @@ Compatible with WordPress 3.5+.
 
 Read the accompanying readme.txt file for instructions and documentation.
 
-Copyright (c) 2013-16 by Greg Ross
+Copyright (c) 2013-2020 by Greg Ross
 
 This software is released under the GPL v2.0, see license.txt for details
 */
@@ -23,11 +23,11 @@ include_once( dirname( __FILE__ ) . '/ToolStack-WP-Utilities.class.php' );
 GLOBAL $JustWritingUtilities;
 
 // Create out global utilities object.  We might be tempted to load the user options now, but that's not possible as WordPress hasn't processed the login this early yet.
-$JustWritingUtilities = new ToolStack_WP_Utilities_V2_5( 'just_writing', __FILE__ );
+$JustWritingUtilities = new ToolStack_WP_Utilities_V2_7( 'just_writing', __FILE__ );
 
 if( !function_exists( 'JustWritingLoad' ) )
 	{
-	define( 'JustWritingVersion', '3.9' );
+	define( 'JustWritingVersion', '3.9.1' );
 
 	// Load the translation code.
 	function just_writing_language() {

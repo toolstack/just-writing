@@ -6,7 +6,7 @@ Author URI: http://toolstack.com
 Tags: admin posts writing DFW
 Requires at least: 3.5.0
 Tested up to: 5.4
-Stable tag: 3.9
+Stable tag: 3.9.1
 License: GPLv2
 
 Adds buttons and features to the Distraction Free Writing Mode for all kinds of extra functions.
