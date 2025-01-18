@@ -1,0 +1,11 @@
+.jw-prev-post, .jw-next-post {
+	margin-right: 10px !important;
+}
+
+#editor > div.edit-post-layout.is-mode-visual.is-sidebar-opened.has-fixed-toolbar.interface-interface-skeleton.has-footer > div.interface-interface-skeleton__editor > div.interface-interface-skeleton__body > div.interface-interface-skeleton__sidebar > div > div.components-panel > div.components-panel__body.just-writing-wordcount-setting-panel > h2 > button > svg {
+	display: none;
+}
+
+#editor > div.edit-post-layout.is-mode-visual.is-sidebar-opened.has-fixed-toolbar.interface-interface-skeleton.has-footer > div.interface-interface-skeleton__editor > div.interface-interface-skeleton__body > div.interface-interface-skeleton__sidebar > div > div.components-panel > div.components-panel__body.just-writing-wordcount-setting-panel > h2 > button > span > svg {
+	display: none;
+}

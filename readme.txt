@@ -364,4 +364,3 @@ Unfortunately the "Avia Layout Builder" is incompatible with Just Writing.
 
 == Roadmap ==
 * add second row to toolbar, remove individual style buttons
-

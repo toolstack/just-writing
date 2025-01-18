@@ -27,27 +27,27 @@ $JustWritingUtilities = new ToolStack_WP_Utilities_V2_7( 'just_writing', __FILE_
 
 if( !function_exists( 'JustWritingLoad' ) )
 	{
-	define( 'JustWritingVersion', '3.9.1' );
+	define( 'JustWritingVersion', '4.0' );
 
 	// Load the translation code.
 	function just_writing_language() {
 		load_plugin_textdomain('just-writing', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/');
 		__('Just Writing', 'just-writing');
-		__('Adds more buttons to the distraction free writing mode command bar.', 'just-writing');
+		__('Add on for distraction free writing mode and more, including Gutenberg!', 'just-writing');
 	}
 
 	// Add translation action.
 	add_action('init', 'just_writing_language');
-	
+
 	Function JustWritingFileVersion()
 		{
 		GLOBAL $wp_version;
-		
+
 		if( version_compare( $wp_version, '3.9', '<' ) )
 			{
 			return '3.5';
 			}
-			
+
 		// We compare against 4.0.99 in the second version compare to ensure we use the right version for beta/rc versions of WP.
 		if( version_compare( $wp_version, '3.9', '>=' ) && version_compare( $wp_version, '4.0.99', '<=') )
 			{
@@ -92,17 +92,19 @@ if( !function_exists( 'JustWritingLoad' ) )
 		}
 
 	$file_version = JustWritingFileVersion();
-	
+
 	include_once( $file_version . '/just-writing.' . $file_version . '.php' );
 	include_once( $file_version . '/just-writing-editor.' . $file_version . '.php' );
+
+	include_once( 'gutenberg/gutenberg.php' );
 	}
 
 // Check to see if we're installed and are the current version.
-if( get_option('just_writing_plugin_version') != JustWritingVersion ) 
-	{	
+if( get_option('just_writing_plugin_version') != JustWritingVersion )
+	{
 	include_once( dirname( __FILE__ ) . '/just-writing-install.php' );
 	}
-	
+
 // Add the admin page to the settings menu.
 add_action( 'admin_menu', 'JustWritingAddSettingsMenu', 1 );
 
@@ -112,18 +114,24 @@ if( get_option( 'Just_Writing_Removed' ) != 'true' )
 	// Handle the post screens
 	add_action( 'admin_head-post-new.php', 'JustWritingLoadNew' );
 	add_action( 'admin_head-post.php', 'JustWritingLoadEdit' );
-	
+
+	add_action( 'admin_head-post-new.php', 'JustWritingGutenbergEditor' );
+	add_action( 'admin_head-post.php', 'JustWritingGutenbergEditor' );
+
 	// Handle the user profile items
 	add_action( 'show_user_profile', 'JustWritingLoadProfile' );
 	add_action( 'edit_user_profile', 'JustWritingLoadProfile' );
 	add_action( 'personal_options_update', 'JustWritingSaveProfile' );
 	add_action( 'edit_user_profile_update', 'JustWritingSaveProfile' );
-	
+
 	// Handle adding DFWM to the post/page rows
 	add_filter('post_row_actions', 'JustWritingLinkRow',10,2);
 	add_filter('page_row_actions', 'JustWritingLinkRow',10,2);
-	
+
 	// Handle adding Writing mode to the post/pages menu
 	add_action( 'admin_menu', 'JustWritingEditorMenuItem' );
+
+	// Handle the Gutenberg preferences
+	add_filter( 'block_editor_settings_all', 'JustWritingGutenbergSettings', null, 2 );
 	}
 ?>
