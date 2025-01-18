@@ -37,7 +37,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 	}
 
 	// Add translation action.
-	add_action('plugins_loaded', 'just_writing_language');
+	add_action('init', 'just_writing_language');
 	
 	Function JustWritingFileVersion()
 		{
