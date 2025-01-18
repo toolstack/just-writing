@@ -66,9 +66,15 @@ if( !function_exists( 'JustWritingLoad' ) )
 			return '4.3';
 			}
 
-		return '4.5';
+		// We compare against 5.6.99 in the second version compare to ensure we use the right version for beta/rc versions of WP.
+		if( version_compare( $wp_version, '4.5', '>=' ) && version_compare( $wp_version, '5.6.99', '<=') )
+			{
+			return '4.5';
+			}
+
+		return '5.7';
 		}
-	
+
 	/*
 	 	This function is called during a page/post page load that we're editing.
 	*/
@@ -76,7 +82,7 @@ if( !function_exists( 'JustWritingLoad' ) )
 		{
 		JustWritingLoad( 'edit' );
 		}
-		
+
 	/*
 	 	This function is called during a new page/post page.
 	*/

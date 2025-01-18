@@ -143,6 +143,10 @@ function just_writing_save_user_profile_fields( $user_id )
 			$JustWritingUtilities->store_user_option( 'quick_setting', 'custom' );
 		}
 
+	// Handle the Gutenberg options.
+	$JustWritingUtilities->store_user_option( 'gutenberg_prev_next', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_g_p_n' ) ) );
+	$JustWritingUtilities->store_user_option( 'gutenberg_prev_next_location', just_writing_get_checked_state( just_writing_validate_post_value( $_POST, 'just_writing_g_p_n_l' ) ) );
+
 	// Write them to the database.
 	$JustWritingUtilities->save_user_options();
 	
@@ -195,26 +199,28 @@ function just_writing_user_profile_fields( $user )
 			</td>
 		</tr>
 	</table>
+
 	<table class="form-table" id='just_writing_quick_settings'>
 		<tr>
 			<th>Quick Options</th>
 			<td>			
 			<?php echo __("Use the following quick settings:", 'just-writing'); $QuickSettings = $JustWritingUtilities->get_user_option( 'quick_setting' ); if( $QuickSettings == "" ) { $QuickSettings = "custom"; }?><br>
 			<input type="radio" onclick="JustWritingSetQuickOptions('minimal')" id="just_writing_qs_mininal" name="just_writing_quick_setting" value="minimal" <?php if( $QuickSettings == "minimal" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Minimal", 'just-writing') . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("Nothing but Save and Exit and real DFWM!", 'just-writing');?></span><br>
+			<label for="just_writing_qs_mininal"><?php echo __("Minimal", 'just-writing') . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("Nothing but Save and Exit and real DFWM!", 'just-writing');?></span></label><br>
 			<input type="radio" onclick="JustWritingSetQuickOptions('wpdefault')" id="just_writing_qs_wpdefault" name="just_writing_quick_setting" value="wpdefault" <?php if( $QuickSettings == "wpdefault" ) { echo "CHECKED"; } ?>>
-			<?php echo __("WordPress Default", 'just-writing') . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("Just center the toolbar and move the exit button to the right hand side.", 'just-writing');?></span><br>
+			<label for="just_writing_qs_wpdefault"><?php echo __("WordPress Default", 'just-writing') . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("Just center the toolbar and move the exit button to the right hand side.", 'just-writing');?></span></label><br>
 			<input type="radio" onclick="JustWritingSetQuickOptions('jwdefault')" id="just_writing_qs_jwdefault" name="just_writing_quick_setting" value="jwdefault" <?php if( $QuickSettings == "jwdefault" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Just Writing Default", 'just-writing') . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("A balanced toolbar that should work on all browsers.", 'just-writing');?></span><br>
+			<label for="just_writing_qs_jwdefault"><?php echo __("Just Writing Default", 'just-writing') . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("A balanced toolbar that should work on all browsers.", 'just-writing');?></span></label><br>
 			<input type="radio" onclick="JustWritingSetQuickOptions('advanced')" id="just_writing_qs_advanced" name="just_writing_quick_setting" value="advanced" <?php if( $QuickSettings == "advanced" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Advanced", 'just-writing') . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("Unlock the real power of DFWM!", 'just-writing');?></span><br>
+			<label for="just_writing_qs_advanced"><?php echo __("Advanced", 'just-writing') . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("Unlock the real power of DFWM!", 'just-writing');?></span></label><br>
 			<input type="radio" onclick="JustWritingSetQuickOptions('full')" id="just_writing_qs_advanced" name="just_writing_quick_setting" value="full" <?php if( $QuickSettings == "full" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Full", 'just-writing') . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("All buttons and many of the options enabled.", 'just-writing');?></span><br>
+			<label for="just_writing_qs_advanced"><?php echo __("Full", 'just-writing') . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("All buttons and many of the options enabled.", 'just-writing');?></span></label><br>
 			<input type="radio" onclick="JustWritingSetQuickOptions('custom')" id="just_writing_qs_custom" name="just_writing_quick_setting" value="custom" <?php if( $QuickSettings == "custom" ) { echo "CHECKED"; } ?>>
-			<?php echo __("Custom", 'just-writing') . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("Select your options below:", 'just-writing');?></span>
+			<label for="just_writing_qs_custom"><?php echo __("Custom", 'just-writing') . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='description'>" . __("Select your options below:", 'just-writing');?></span></label>
 			</td>
 		</tr>
 	</table>
+
 	<table class="form-table" id='just_writing_options_table' <?php if( $JustWritingUtilities->get_user_option( 'enabled' ) != "on" ) { echo "style='display:none;'"; } ?>>	
 		<tr>
 			<th><label for="just_writing_options"><?php echo __("Advanced Options", 'just-writing');?></label></th>
@@ -262,6 +268,7 @@ function just_writing_user_profile_fields( $user )
 			<td>
 			</td>
 		</tr>
+
 		<tr>
 			<th><label for="just_writing_options"><?php echo __("Advanced Buttons", 'just-writing');?></label></th>
 			<td colspan=3>
@@ -549,7 +556,29 @@ function just_writing_user_profile_fields( $user )
 			<td>
 			</td>
 		</tr>
+
+		<tr>
+			<th><label for="just_writing_options"><?php echo __("Gutenberg Options", 'just-writing');?></label></th>
+			<td colspan=3>
+			<span class='description' style='font-size: 75%;'><a href=#JustWriting onClick="JustWritingToggleGutenbergGroups()">Show/Hide</a></span>
+			</td>
+		</tr>
+		<tr id=JustWritingGutenbergGroup style='display: none;'>
+			<th></th>
+			<td colspan=3>
+			<input type="checkbox" id="just_writing_g_p_n" name="just_writing_g_p_n" <?php if( $JustWritingUtilities->get_user_option( 'gutenberg_prev_next' ) == "on" ) { echo "CHECKED"; } ?>>
+			<label for="just_writing_g_p_n"><?php echo __("Add Prev/Next post buttons to the header bar", 'just-writing'); ?></label>
+			</td>
+		</tr>
+		<tr id=JustWritingGutenbergGroup style='display: none;'>
+			<th></th>
+			<td colspan=3>
+			<input type="checkbox" id="just_writing_g_p_n_l" name="just_writing_g_p_n_l" <?php if( $JustWritingUtilities->get_user_option( 'gutenberg_prev_next_location' ) == "on" ) { echo "CHECKED"; } ?>>
+			<label for="just_writing_g_p_n_l"><?php echo __("Place the Prev/Next post buttons to the left of the 'Switch to draft' button", 'just-writing'); ?></label>
+			</td>
+		</tr>
 	</table>
+
 <?php 
 	}
 ?>
