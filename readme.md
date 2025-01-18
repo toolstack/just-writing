@@ -5,8 +5,8 @@
 **Author URI:** http://toolstack.com  
 **Tags:** admin posts writing DFW  
 **Requires at least:** 3.5.0  
-**Tested up to:** 6.1.1  
-**Stable tag:** 3.9.1  
+**Tested up to:** 6.7.1  
+**Stable tag:** 4.0  
 **License:** GPLv2  
 
 Adds buttons and features to the Distraction Free Writing Mode for all kinds of extra functions.
@@ -38,10 +38,10 @@ This plugin adds the following optional commands to the toolbar in DFW:
 	* H1						* Spellcheck
 	* H2						* Strikethrough
 	* H3						* Subscript
-	* H4						* Superscript	
+	* H4						* Superscript
 	* H5						* Underline
 	* H6						* Undo
-	* Indent				
+	* Indent
 
 ### More Features ###
 
@@ -51,7 +51,7 @@ This plugin adds the following optional commands to the toolbar in DFW:
 	* Option to hide the editor mode bar
 	* Option to center the toolbar on screen
 	* Adds an optional Preview button to the right of the Save button
-	* Moves the exit link to the right of the new Preview 
+	* Moves the exit link to the right of the new Preview
 	  button as a real button
 	* Re-orders the button list to make more sense
 	* Per-user preferences for enabling Just Writing
@@ -74,9 +74,9 @@ There are a few differences however:
 	* There are a few hard coded pieces around, so there may be some weird effects with non-english languages.
     * Support for full meta data editing inside of Writing mode.
 	* Closing and re-arranging postboxes in the meta area are not saved between sessions.
-	
+
 ### License ###
-	
+
 This code is released under the GPL v2, see license.txt for details.
 
 ## Installation ##
@@ -158,6 +158,11 @@ Unfortunately the "Avia Layout Builder" is incompatible with Just Writing.
 
 
 ## Changelog ##
+### 4.0 ###
+* Release date: January 18, 2025
+* Fixed warnings with language text domain loading.
+* Added support for WordPress 5.7+.
+
 ### 3.9.1 ###
 * Release date: August 17, 2020
 * Fixed warnings with PHP 7.4.
@@ -327,7 +332,7 @@ Unfortunately the "Avia Layout Builder" is incompatible with Just Writing.
 * Release date: October 27, 2013
 * Added option to use a listbox instead of individual buttons
 * Fixed bug in border option selector which would not allow you to save the hide option
- 
+
 ### 2.3 ###
 * Release date: October 26, 2013
 * Added rate and review reminder in the user profile page
@@ -335,7 +340,7 @@ Unfortunately the "Avia Layout Builder" is incompatible with Just Writing.
 * Added option to start in DFW for new posts
 * Added option to start in DFW when editing posts
 * Added 'lighter' border option for title/body area
-* Cleaned up the De/Select All code in the user profile page, should work with all 
+* Cleaned up the De/Select All code in the user profile page, should work with all
   browsers now
 
 ### 2.2 ###
@@ -376,4 +381,3 @@ Unfortunately the "Avia Layout Builder" is incompatible with Just Writing.
 
 ## Roadmap ##
 * add second row to toolbar, remove individual style buttons
-
